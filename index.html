@@ -32,7 +32,6 @@
             scroll-behavior: smooth;
         }
 
-        /* immersive cosmic background with animated grid */
         .cosmic-backdrop {
             position: fixed;
             top: 0;
@@ -103,7 +102,6 @@
             right: -10%;
         }
 
-        /* header */
         .fusion-header {
             display: flex;
             justify-content: space-between;
@@ -115,6 +113,8 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
         .brand {
             font-size: 1.9rem;
@@ -132,17 +132,32 @@
             background: none;
             -webkit-background-clip: unset;
         }
-        .lang-nav a {
-            color: #ddd;
-            margin-left: 1.2rem;
-            text-decoration: none;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            transition: 0.2s;
+        .lang-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.4rem 1rem;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 217, 0, 0.25);
         }
-        .lang-nav a:hover { color: var(--primary); }
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: #ccccdd;
+            cursor: pointer;
+            padding: 0.25rem 0.8rem;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: 0.2s;
+            font-size: 0.8rem;
+        }
+        .lang-btn.active {
+            background: rgba(255, 217, 0, 0.25);
+            color: var(--primary);
+            border: 1px solid rgba(255, 217, 0, 0.6);
+        }
 
-        /* hero section – fusion of AI banner + runtime statement */
         .hero-fusion {
             min-height: 90vh;
             display: flex;
@@ -204,6 +219,7 @@
             transition: 0.2s;
             text-decoration: none;
             backdrop-filter: blur(4px);
+            display: inline-block;
         }
         .btn-fusion:hover {
             background: var(--primary);
@@ -220,7 +236,6 @@
             box-shadow: 0 0 12px var(--secondary-glow);
         }
         
-        /* interactive earth + neural sphere (banner elements) */
         .floating-tech {
             position: absolute;
             right: 6%;
@@ -295,7 +310,6 @@
             text-shadow: 0 0 18px cyan;
         }
 
-        /* Core capabilities section (cosmic runtime) */
         .section-dark {
             padding: 5rem 6%;
             background: rgba(0,0,0,0.4);
@@ -342,7 +356,6 @@
             color: #bcbcd0;
         }
 
-        /* Three-layer ecosystem */
         .layers-container {
             display: flex;
             flex-wrap: wrap;
@@ -364,7 +377,6 @@
             font-size: 1.5rem;
         }
 
-        /* Data streams + typed events */
         .streams-row {
             display: flex;
             flex-wrap: wrap;
@@ -380,7 +392,6 @@
             border-left: 3px solid var(--primary);
         }
 
-        /* Target audience */
         .audience-flex {
             display: flex;
             flex-wrap: wrap;
@@ -396,7 +407,6 @@
             border: 1px solid rgba(0,200,255,0.3);
         }
 
-        /* CTA form with futuristic touch */
         .cta-cosmic {
             background: linear-gradient(145deg, #03030e, #000000);
             padding: 3rem 5%;
@@ -442,7 +452,6 @@
             color: #888;
         }
 
-        /* responsiveness */
         @media (max-width: 1000px) {
             .hero-inner { max-width: 80%; }
             .floating-tech, .neural-node { transform: scale(0.8); right: 2%; }
@@ -473,31 +482,29 @@
 <header class="fusion-header">
     <div class="brand">T.E.R.S.A.<span>N</span>.E.S.I. ⬩ AI RUNTIME</div>
     <div class="lang-nav">
-        <a href="#">EN</a>
-        <a href="#">TR</a>
-        <a href="#">RU</a>
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="tr">TR</button>
+        <button class="lang-btn" data-lang="ru">RU</button>
+        <button class="lang-btn" data-lang="es">ES</button>
+        <button class="lang-btn" data-lang="zh">中文</button>
     </div>
 </header>
 
-<!-- Hero fusion section combining both visions -->
 <section class="hero-fusion">
     <div class="hero-inner">
-        <h1 class="hero-title">T.E.R.S.A.N.E.S.I.<br>Cosmic AI‑Native Runtime</h1>
-        <div class="hero-tag">✦ INTELLIGENCE THAT TRANSFORMS · INFRASTRUCTURE THAT SCALES ✦</div>
-        <p class="hero-desc">Versatile Engineering for MMO strategy, metaverse worlds & multi-agent orchestration. AI-native kernel with typed event fabric, real-time elasticity, and infinite scalability.</p>
+        <h1 class="hero-title" data-key="hero_title">T.E.R.S.A.N.E.S.I.<br>Cosmic AI‑Native Runtime</h1>
+        <div class="hero-tag" data-key="hero_tag">✦ INTELLIGENCE THAT TRANSFORMS · INFRASTRUCTURE THAT SCALES ✦</div>
+        <p class="hero-desc" data-key="hero_desc">Versatile Engineering for MMO strategy, metaverse worlds & multi-agent orchestration. AI-native kernel with typed event fabric, real-time elasticity, and infinite scalability.</p>
         <div class="cta-group">
-            <a href="#" class="btn-fusion">⚡ Initiate Runtime</a>
-            <a href="#" class="btn-fusion btn-ai">⟡ Explore AI Core</a>
+            <a href="#" class="btn-fusion" data-key="btn_initiate">⚡ Initiate Runtime</a>
+            <a href="#" class="btn-fusion btn-ai" data-key="btn_explore">⟡ Explore AI Core</a>
         </div>
-        <div style="margin-top: 1rem; font-size: 0.8rem; color: #aaf0ff;">v.Orbit.3 · dynamic agent fabric + generative intelligence</div>
+        <div style="margin-top: 1rem; font-size: 0.8rem; color: #aaf0ff;" data-key="version">v.Orbit.3 · dynamic agent fabric + generative intelligence</div>
     </div>
-
-    <!-- floating earth banner element (AI banner style) -->
     <div class="floating-tech">
         <div class="earth-globe"></div>
         <div class="ring-orbit"></div>
     </div>
-    <!-- neural sphere (Psi intelligence) -->
     <div class="neural-node">
         <div class="core-sphere">
             <div class="psi-symbol">Ψ</div>
@@ -505,32 +512,29 @@
     </div>
 </section>
 
-<!-- Core Capabilities (blend of product & advanced AI) -->
 <section class="section-dark">
-    <h2 class="section-title">⟡ Core Capabilities ⟡</h2>
+    <h2 class="section-title" data-key="cap_title">⟡ Core Capabilities ⟡</h2>
     <div class="cap-grid">
-        <div class="cap-card"><div class="cap-icon">🌌</div><h3>Cosmic Scalability</h3><p>From agent swarms to persistent worlds — infinite horizon.</p></div>
-        <div class="cap-card"><div class="cap-icon">🤖</div><h3>AI-Native Integration</h3><p>LLM decision flows, generative narratives & adaptive agents.</p></div>
-        <div class="cap-card"><div class="cap-icon">🎮</div><h3>MMO Strategy Core</h3><p>Low-latency events, real-time economy, browser-native depth.</p></div>
-        <div class="cap-card"><div class="cap-icon">🕸️</div><h3>Multi-Agent Orchestration</h3><p>Typed state, feedback loops, swarm coordination.</p></div>
-        <div class="cap-card"><div class="cap-icon">⚙️</div><h3>Predictive AI & Security</h3><p>Quantum-ready cybersecurity & advanced analytics.</p></div>
+        <div class="cap-card"><div class="cap-icon">🌌</div><h3 data-key="cap1_title">Cosmic Scalability</h3><p data-key="cap1_desc">From agent swarms to persistent worlds — infinite horizon.</p></div>
+        <div class="cap-card"><div class="cap-icon">🤖</div><h3 data-key="cap2_title">AI-Native Integration</h3><p data-key="cap2_desc">LLM decision flows, generative narratives & adaptive agents.</p></div>
+        <div class="cap-card"><div class="cap-icon">🎮</div><h3 data-key="cap3_title">MMO Strategy Core</h3><p data-key="cap3_desc">Low-latency events, real-time economy, browser-native depth.</p></div>
+        <div class="cap-card"><div class="cap-icon">🕸️</div><h3 data-key="cap4_title">Multi-Agent Orchestration</h3><p data-key="cap4_desc">Typed state, feedback loops, swarm coordination.</p></div>
+        <div class="cap-card"><div class="cap-icon">⚙️</div><h3 data-key="cap5_title">Predictive AI & Security</h3><p data-key="cap5_desc">Quantum-ready cybersecurity & advanced analytics.</p></div>
     </div>
 </section>
 
-<!-- Three-layer ecosystem (TERSANESI · Cavibara · Wellamatores) -->
 <section style="padding: 3rem 6%; text-align: center;">
-    <h2 class="section-title">✦ THREE-LAYER COSMIC ECOSYSTEM ✦</h2>
+    <h2 class="section-title" data-key="eco_title">✦ THREE-LAYER COSMIC ECOSYSTEM ✦</h2>
     <div class="layers-container">
-        <div class="layer-card"><h4>🏛️ TERSANESI</h4><p>Conceptual Runtime · Agent orchestration kernel · AI-native fabric</p></div>
-        <div class="layer-card"><h4>🎮 Cavibara</h4><p>Implementation Layer · UI/API/WebSocket · Economy logic & dashboard</p></div>
-        <div class="layer-card"><h4>🌌 Wellamatores</h4><p>Narrative Universe · Lore, factions, ARG puzzles, WebGL worlds</p></div>
+        <div class="layer-card"><h4>🏛️ TERSANESI</h4><p data-key="layer1">Conceptual Runtime · Agent orchestration kernel · AI-native fabric</p></div>
+        <div class="layer-card"><h4>🎮 Cavibara</h4><p data-key="layer2">Implementation Layer · UI/API/WebSocket · Economy logic & dashboard</p></div>
+        <div class="layer-card"><h4>🌌 Wellamatores</h4><p data-key="layer3">Narrative Universe · Lore, factions, ARG puzzles, WebGL worlds</p></div>
     </div>
-    <p style="color: #bbbbdd;">Typed Data Streams: AgentEvent → FactionState ↔ EconomicTx ⟡ ARGClue</p>
+    <p style="color: #bbbbdd;" data-key="streams_note">Typed Data Streams: AgentEvent → FactionState ↔ EconomicTx ⟡ ARGClue</p>
 </section>
 
-<!-- Data Streams Section (bridge between AI and runtime) -->
 <section class="section-dark">
-    <h2 class="section-title">📡 Typed Event Streams & AI Feedback</h2>
+    <h2 class="section-title" data-key="streams_title">📡 Typed Event Streams & AI Feedback</h2>
     <div class="streams-row">
         <div class="stream-badge">🤖 AgentEvent → directives</div>
         <div class="stream-badge">🏛️ FactionState → alignment</div>
@@ -538,82 +542,403 @@
         <div class="stream-badge">🕵️ ARGClue → narrative expansion</div>
         <div class="stream-badge">🧠 LLM Inference → generative events</div>
     </div>
-    <p style="text-align: center; margin-top: 2rem; font-size: 0.9rem;">strict schemas · deterministic propagation · adaptive feedback loops</p>
+    <p style="text-align: center; margin-top: 2rem; font-size: 0.9rem;" data-key="schemas_strict">strict schemas · deterministic propagation · adaptive feedback loops</p>
 </section>
 
-<!-- Scalability & advanced mission -->
 <section style="padding: 3rem 6%; background: rgba(0,0,0,0.3);">
     <div style="max-width: 900px; margin: 0 auto; text-align: center;">
-        <div style="font-size: 2rem; color: var(--primary);">∞ Infinity‑Ready Infrastructure</div>
-        <p style="margin: 1rem 0;">Dynamic horizontal expansion · real-time elasticity · AI‑first orchestration for metaverse and browser MMO strategy. Native support for React, WebSockets, FastAPI, Three.js & Go.</p>
+        <div style="font-size: 2rem; color: var(--primary);" data-key="infra_title">∞ Infinity‑Ready Infrastructure</div>
+        <p style="margin: 1rem 0;" data-key="infra_desc">Dynamic horizontal expansion · real-time elasticity · AI‑first orchestration for metaverse and browser MMO strategy. Native support for React, WebSockets, FastAPI, Three.js & Go.</p>
         <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.2rem; margin-top: 1rem;">
-            <span style="background: rgba(0,0,0,0.6); padding: 0.4rem 1.2rem; border-radius: 40px;">🧠 AI-First Kernel</span>
-            <span style="background: rgba(0,0,0,0.6); padding: 0.4rem 1.2rem; border-radius: 40px;">✨ Multi-Versal Ready</span>
-            <span style="background: rgba(0,0,0,0.6); padding: 0.4rem 1.2rem; border-radius: 40px;">⚡ Reactive Agents</span>
-            <span style="background: rgba(0,0,0,0.6); padding: 0.4rem 1.2rem; border-radius: 40px;">🔒 Ciberseguridad Cuántica</span>
+            <span style="background: rgba(0,0,0,0.6); padding: 0.4rem 1.2rem; border-radius: 40px;" data-key="badge1">🧠 AI-First Kernel</span>
+            <span style="background: rgba(0,0,0,0.6); padding: 0.4rem 1.2rem; border-radius: 40px;" data-key="badge2">✨ Multi-Versal Ready</span>
+            <span style="background: rgba(0,0,0,0.6); padding: 0.4rem 1.2rem; border-radius: 40px;" data-key="badge3">⚡ Reactive Agents</span>
+            <span style="background: rgba(0,0,0,0.6); padding: 0.4rem 1.2rem; border-radius: 40px;" data-key="badge4">🔒 Quantum Cybersecurity</span>
         </div>
     </div>
 </section>
 
-<!-- Target Audience & Tech Stack -->
 <section class="section-dark">
-    <h2 class="section-title">🎯 Prime Constructs — Target Audience</h2>
+    <h2 class="section-title" data-key="audience_title">🎯 Prime Constructs — Target Audience</h2>
     <div class="audience-flex">
-        <div class="audience-tag">AI Application Developers</div>
-        <div class="audience-tag">Metaverse Architects</div>
-        <div class="audience-tag">MMO Strategy Specialists</div>
-        <div class="audience-tag">Multi-Agent Designers</div>
-        <div class="audience-tag">Web3 Worldbuilders</div>
-        <div class="audience-tag">Space-Tech Engineers</div>
+        <div class="audience-tag" data-key="aud1">AI Application Developers</div>
+        <div class="audience-tag" data-key="aud2">Metaverse Architects</div>
+        <div class="audience-tag" data-key="aud3">MMO Strategy Specialists</div>
+        <div class="audience-tag" data-key="aud4">Multi-Agent Designers</div>
+        <div class="audience-tag" data-key="aud5">Web3 Worldbuilders</div>
+        <div class="audience-tag" data-key="aud6">Space-Tech Engineers</div>
     </div>
     <div style="text-align: center; margin-top: 2.5rem;">
-        <h3 style="color: var(--secondary);">⚙️ Technology Stack</h3>
+        <h3 style="color: var(--secondary);" data-key="tech_stack_title">⚙️ Technology Stack</h3>
         <div style="display: flex; justify-content: center; gap: 1.8rem; flex-wrap: wrap; margin: 1rem 0;">
             <span>⚛️ React</span> <span>🔌 WebSocket</span> <span>🐍 FastAPI</span> <span>🌐 Three.js</span> <span>✨ WebGL</span> <span>🦫 Python/Go</span>
         </div>
-        <p style="color: #aaa;">Runtime layer agnostic — cloud, edge, or local swarm.</p>
+        <p style="color: #aaa;" data-key="runtime_agnostic">Runtime layer agnostic — cloud, edge, or local swarm.</p>
     </div>
 </section>
 
-<!-- Mission & Commitment cards from AI banner style -->
 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; padding: 2rem 6%; background: radial-gradient(circle at 20% 30%, rgba(0,0,0,0.8), #000);">
     <div style="flex:1; min-width: 240px; background: rgba(0,0,0,0.65); backdrop-filter: blur(12px); border-radius: 28px; padding: 1.5rem; border-left: 4px solid var(--primary);">
-        <h3 style="color: #FFD966;">✦ MISIÓN ESTRATÉGICA</h3>
-        <p style="color: #ddd;">Potenciamos organizaciones mediante inteligencia artificial, deep learning y analítica de próxima generación. Innovación que redefine los límites del runtime cosmológico.</p>
+        <h3 style="color: #FFD966;" data-key="mission_title">✦ STRATEGIC MISSION</h3>
+        <p style="color: #ddd;" data-key="mission_text">Empowering organizations with next-gen AI, deep learning, and advanced analytics. Redefining cosmic runtime boundaries.</p>
     </div>
     <div style="flex:1; min-width: 240px; background: rgba(0,0,0,0.65); backdrop-filter: blur(12px); border-radius: 28px; padding: 1.5rem; border-left: 4px solid var(--secondary);">
-        <h3 style="color: var(--secondary);">✦ COMPROMISO ABSOLUTO</h3>
-        <p style="color: #ddd;">Seguridad cuántica, excelencia tecnológica y ética aplicada. Impulsamos el éxito con integridad, vanguardia y resiliencia digital.</p>
+        <h3 style="color: var(--secondary);" data-key="commit_title">✦ ABSOLUTE COMMITMENT</h3>
+        <p style="color: #ddd;" data-key="commit_text">Quantum security, tech excellence, and applied ethics. Driving success with integrity and digital resilience.</p>
     </div>
 </div>
 
-<!-- CTA Section (Engage the Nexus) -->
 <section class="cta-cosmic">
-    <h2 class="section-title" style="margin-bottom: 0.5rem;">⟡ Engage the Nexus ⟡</h2>
-    <p>Join the AI-native frontier · Pioneer multi-agent orchestration & cosmic simulations</p>
+    <h2 class="section-title" style="margin-bottom: 0.5rem;" data-key="contact_title">⟡ Engage the Nexus ⟡</h2>
+    <p data-key="contact_sub">Join the AI-native frontier · Pioneer multi-agent orchestration & cosmic simulations</p>
     <form class="form-fusion" id="nexusForm">
-        <input type="text" placeholder="Cosmonaut / Studio Name" id="name" required>
-        <input type="email" placeholder="Quantum address (email)" id="email" required>
-        <textarea placeholder="Describe your MMO strategy, metaverse world or AI project..." rows="2" id="projectDesc" required></textarea>
-        <button type="submit">🚀 Deploy Intelligence Query</button>
+        <input type="text" id="name" data-key-placeholder="name_placeholder" placeholder="Cosmonaut / Studio Name" required>
+        <input type="email" id="email" data-key-placeholder="email_placeholder" placeholder="Quantum address (email)" required>
+        <textarea rows="2" id="projectDesc" data-key-placeholder="msg_placeholder" placeholder="Describe your MMO strategy, metaverse world or AI project..." required></textarea>
+        <button type="submit" data-key="submit_btn">🚀 Deploy Intelligence Query</button>
     </form>
-    <p style="margin-top: 1.5rem; font-size: 0.8rem;">⚡ Three layers · Typed schemas · AI runtime ready</p>
+    <p style="margin-top: 1.5rem; font-size: 0.8rem;" data-key="footer_note">⚡ Three layers · Typed schemas · AI runtime ready</p>
 </section>
 
 <footer>
-    <p>© 2026 T.E.R.S.A.N.E.S.I. — Versatile Engineering Runtime for Cosmic Engineering Lifecycles | Advanced AI Intelligence Division</p>
-    <p>🏛️ TERSANESI → 🎮 Cavibara → 🌌 Wellamatores &nbsp; • AI-native orchestration • Metaverse MMO Infrastructure</p>
+    <p data-key="footer1">© 2026 T.E.R.S.A.N.E.S.I. — Versatile Engineering Runtime for Cosmic Engineering Lifecycles | TerraTrampilleraVerse Holding Advanced AI Intelligence Division</p>
+    <p data-key="footer2">🏛️ TERSANESI → 🎮 Cavibara → 🌌 Wellamatores World Universe 🌍🪐 • AI-native orchestration • Metaverse MMO • Powered by VERCEL.APP Infrastructure</p>
     <div style="margin-top: 0.6rem;">
-        <a href="#" style="color: #aaa; margin: 0 0.5rem;">Runtime Whitepaper</a>
-        <a href="#" style="color: #aaa; margin: 0 0.5rem;">Agent SDK</a>
-        <a href="#" style="color: #aaa; margin: 0 0.5rem;">Cosmic Status</a>
+        <a href="#" style="color: #aaa; margin: 0 0.5rem;" data-key="whitepaper">Runtime Whitepaper</a>
+        <a href="#" style="color: #aaa; margin: 0 0.5rem;" data-key="sdk">Agent SDK</a>
+        <a href="#" style="color: #aaa; margin: 0 0.5rem;" data-key="cosmic_status">Cosmic Status</a>
     </div>
 </footer>
 
 <canvas id="particleOverlay"></canvas>
 
 <script>
-    // Particle system for cosmic data flow (combining both aesthetics)
+    // ======================= MULTILINGUAL DATABASE (EN, TR, RU, ES, ZH) =======================
+    const translations = {
+        en: {
+            hero_title: "T.E.R.S.A.N.E.S.I.<br>Cosmic AI‑Native Runtime",
+            hero_tag: "✦ INTELLIGENCE THAT TRANSFORMS · INFRASTRUCTURE THAT SCALES ✦",
+            hero_desc: "Versatile Engineering for MMO strategy, metaverse worlds & multi-agent orchestration. AI-native kernel with typed event fabric, real-time elasticity, and infinite scalability.",
+            btn_initiate: "⚡ Initiate Runtime",
+            btn_explore: "⟡ Explore AI Core",
+            version: "v.Orbit.3 · dynamic agent fabric + generative intelligence",
+            cap_title: "⟡ Core Capabilities ⟡",
+            cap1_title: "Cosmic Scalability",
+            cap1_desc: "From agent swarms to persistent worlds — infinite horizon.",
+            cap2_title: "AI-Native Integration",
+            cap2_desc: "LLM decision flows, generative narratives & adaptive agents.",
+            cap3_title: "MMO Strategy Core",
+            cap3_desc: "Low-latency events, real-time economy, browser-native depth.",
+            cap4_title: "Multi-Agent Orchestration",
+            cap4_desc: "Typed state, feedback loops, swarm coordination.",
+            cap5_title: "Predictive AI & Security",
+            cap5_desc: "Quantum-ready cybersecurity & advanced analytics.",
+            eco_title: "✦ THREE-LAYER COSMIC ECOSYSTEM ✦",
+            layer1: "Conceptual Runtime · Agent orchestration kernel · AI-native fabric",
+            layer2: "Implementation Layer · UI/API/WebSocket · Economy logic & dashboard",
+            layer3: "Narrative Universe · Lore, factions, ARG puzzles, WebGL worlds",
+            streams_note: "Typed Data Streams: AgentEvent → FactionState ↔ EconomicTx ⟡ ARGClue",
+            streams_title: "📡 Typed Event Streams & AI Feedback",
+            schemas_strict: "strict schemas · deterministic propagation · adaptive feedback loops",
+            infra_title: "∞ Infinity‑Ready Infrastructure",
+            infra_desc: "Dynamic horizontal expansion · real-time elasticity · AI‑first orchestration for metaverse and browser MMO strategy. Native support for React, WebSockets, FastAPI, Three.js & Go.",
+            badge1: "🧠 AI-First Kernel",
+            badge2: "✨ Multi-Versal Ready",
+            badge3: "⚡ Reactive Agents",
+            badge4: "🔒 Quantum Cybersecurity",
+            audience_title: "🎯 Prime Constructs — Target Audience",
+            aud1: "AI Application Developers",
+            aud2: "Metaverse Architects",
+            aud3: "MMO Strategy Specialists",
+            aud4: "Multi-Agent Designers",
+            aud5: "Web3 Worldbuilders",
+            aud6: "Space-Tech Engineers",
+            tech_stack_title: "⚙️ Technology Stack",
+            runtime_agnostic: "Runtime layer agnostic — cloud, edge, or local swarm.",
+            mission_title: "✦ STRATEGIC MISSION",
+            mission_text: "Empowering organizations with next-gen AI, deep learning, and advanced analytics. Redefining cosmic runtime boundaries.",
+            commit_title: "✦ ABSOLUTE COMMITMENT",
+            commit_text: "Quantum security, tech excellence, and applied ethics. Driving success with integrity and digital resilience.",
+            contact_title: "⟡ Engage the Nexus ⟡",
+            contact_sub: "Join the AI-native frontier · Pioneer multi-agent orchestration & cosmic simulations",
+            name_placeholder: "Cosmonaut / Studio Name",
+            email_placeholder: "Quantum address (email)",
+            msg_placeholder: "Describe your MMO strategy, metaverse world or AI project...",
+            submit_btn: "🚀 Deploy Intelligence Query",
+            footer_note: "⚡ Three layers · Typed schemas · AI runtime ready",
+            footer1: "© 2026 T.E.R.S.A.N.E.S.I. — Versatile Engineering Runtime for Cosmic Engineering Lifecycles | TerraTrampilleraVerse Holding Advanced AI Intelligence Division",
+            footer2: "🏛️ TERSANESI → 🎮 Cavibara → 🌌 Wellamatores World Universe 🌍🪐 • AI-native orchestration • Metaverse MMO • Powered by VERCEL.APP Infrastructure",
+            whitepaper: "Runtime Whitepaper",
+            sdk: "Agent SDK",
+            cosmic_status: "Cosmic Status"
+        },
+        tr: {
+            hero_title: "T.E.R.S.A.N.E.S.I.<br>Kozmik AI Yerli Çalışma Zamanı",
+            hero_tag: "✦ DÖNÜŞTÜREN ZEKA · ÖLÇEKLENEN ALTYAPI ✦",
+            hero_desc: "MMO strateji, metaverse dünyaları ve çoklu-ajan orkestrasyonu için çok yönlü mühendislik.",
+            btn_initiate: "⚡ Runtime Başlat",
+            btn_explore: "⟡ AI Çekirdeğini Keşfet",
+            version: "v.Orbit.3 · dinamik ajan dokusu + üretken zeka",
+            cap_title: "⟡ Temel Yetenekler ⟡",
+            cap1_title: "Kozmik Ölçeklenebilirlik",
+            cap1_desc: "Ajan sürülerinden kalıcı dünyalara — sonsuz ufuk.",
+            cap2_title: "AI Yerli Entegrasyon",
+            cap2_desc: "LLM karar akışları, üretken anlatılar ve uyarlanabilir ajanlar.",
+            cap3_title: "MMO Strateji Çekirdeği",
+            cap3_desc: "Düşük gecikmeli olaylar, gerçek zamanlı ekonomi, tarayıcı derinliği.",
+            cap4_title: "Çoklu-Ajan Orkestrasyonu",
+            cap4_desc: "Tipli durum, geri bildirim döngüleri, sürü koordinasyonu.",
+            cap5_title: "Tahmine Dayalı AI ve Güvenlik",
+            cap5_desc: "Kuantum hazır siber güvenlik ve gelişmiş analitik.",
+            eco_title: "✦ ÜÇ KATMANLI KOZMIK EKOSISTEM ✦",
+            layer1: "Kavramsal Runtime · Ajan Orkestrasyon çekirdeği · AI-native dokusu",
+            layer2: "Uygulama Katmanı · UI/API/WebSocket · Ekonomi mantığı ve paneli",
+            layer3: "Anlatı Evreni · Irklar, ARG bulmacaları, WebGL dünyaları",
+            streams_note: "Tipli Veri Akışları: AgentEvent → FactionState ↔ EconomicTx ⟡ ARGClue",
+            streams_title: "📡 Tipli Olay Akışları ve AI Geri Bildirimi",
+            schemas_strict: "katı şemalar · deterministik yayılım · uyarlamalı döngüler",
+            infra_title: "∞ Sonsuzluk-Hazır Altyapı",
+            infra_desc: "Dinamik yatay genişleme · gerçek zamanlı esneklik · metaverse ve tarayıcı MMO stratejisi için AI-first orkestrasyon.",
+            badge1: "🧠 AI-Öncül Çekirdek",
+            badge2: "✨ Çok-Evren Hazır",
+            badge3: "⚡ Reaktif Ajanlar",
+            badge4: "🔒 Kuantum Siber Güvenlik",
+            audience_title: "🎯 Hedef Kitle",
+            aud1: "AI Geliştiricileri",
+            aud2: "Metaverse Mimarları",
+            aud3: "MMO Strateji Uzmanları",
+            aud4: "Çoklu-Ajan Tasarımcıları",
+            aud5: "Web3 Dünya Kurucuları",
+            aud6: "Uzay Teknolojisi Mühendisleri",
+            tech_stack_title: "⚙️ Teknoloji Yığını",
+            runtime_agnostic: "Runtime katmanı agnostik — bulut, edge veya yerel sürü.",
+            mission_title: "✦ STRATEJİK MİSYON",
+            mission_text: "Kurumları yeni nesil AI, derin öğrenme ve gelişmiş analitikle güçlendirmek. Kozmik runtime sınırlarını yeniden tanımlamak.",
+            commit_title: "✦ MUTLAK BAĞLILIK",
+            commit_text: "Kuantum güvenliği, teknoloji mükemmelliği ve uygulamalı etik. Bütünlük ve dijital dirençlilikle başarıyı yönlendirmek.",
+            contact_title: "⟡ Nexus'a Katıl ⟡",
+            contact_sub: "AI-öncül sınıra katılın · çoklu-ajan orkestrasyonu ve kozmik simülasyonlara öncülük edin",
+            name_placeholder: "Kozmonot / Stüdyo Adı",
+            email_placeholder: "Kuantum adresi (e-posta)",
+            msg_placeholder: "MMO stratejini, metaverse dünyanı veya AI projeni anlat...",
+            submit_btn: "🚀 Sorguyu Dağıt",
+            footer_note: "⚡ Üç katman · Tipli şemalar · AI runtime hazır",
+            footer1: "© 2026 T.E.R.S.A.N.E.S.I. — Kozmik Mühendislik Yaşam Döngüleri için Çok Yönlü Mühendislik Runtime | TerraTrampilleraVerse İleri AI Zeka Bölümü",
+            footer2: "🏛️ TERSANESI → 🎮 Cavibara → 🌌 Wellamatores Evreni 🌍🪐 • AI-native orkestrasyon • Metaverse MMO • VERCEL.APP Altyapısı ile desteklenmektedir",
+            whitepaper: "Runtime Teknik Dokümanı",
+            sdk: "Ajan SDK",
+            cosmic_status: "Kozmik Durum"
+        },
+        ru: {
+            hero_title: "T.E.R.S.A.N.E.S.I.<br>Космический AI-Рантайм",
+            hero_tag: "✦ ИНТЕЛЛЕКТ, КОТОРЫЙ ТРАНСФОРМИРУЕТ · ИНФРАСТРУКТУРА, КОТОРАЯ МАСШТАБИРУЕТСЯ ✦",
+            hero_desc: "Многоцелевая инженерия для MMO стратегий, метавселенных и мультиагентных систем.",
+            btn_initiate: "⚡ Запустить Runtime",
+            btn_explore: "⟡ Исследовать AI-Ядро",
+            version: "v.Orbit.3 · динамическая ткань агентов + генеративный интеллект",
+            cap_title: "⟡ Ключевые возможности ⟡",
+            cap1_title: "Космическая масштабируемость",
+            cap1_desc: "От роев агентов до постоянных миров — бесконечный горизонт.",
+            cap2_title: "AI-нативная интеграция",
+            cap2_desc: "Потоки решений LLM, генеративные нарративы, адаптивные агенты.",
+            cap3_title: "Ядро MMO стратегии",
+            cap3_desc: "Низкая задержка, реальная экономика, нативная глубина браузера.",
+            cap4_title: "Мультиагентная оркестрация",
+            cap4_desc: "Типизированное состояние, петли обратной связи, координация роев.",
+            cap5_title: "Прогностический AI и безопасность",
+            cap5_desc: "Квантово-готовая кибербезопасность и аналитика.",
+            eco_title: "✦ ТРЁХСЛОЙНАЯ КОСМИЧЕСКАЯ ЭКОСИСТЕМА ✦",
+            layer1: "Концептуальный рантайм · ядро оркестрации агентов · AI-native ткань",
+            layer2: "Слой реализации · UI/API/WebSocket · Экономическая логика и панель",
+            layer3: "Нарративная вселенная · Лор, фракции, ARG головоломки, WebGL миры",
+            streams_note: "Типизированные потоки: AgentEvent → FactionState ↔ EconomicTx ⟡ ARGClue",
+            streams_title: "📡 Типизированные потоки событий и AI фидбэк",
+            schemas_strict: "строгие схемы · детерминированная передача · адаптивные петли",
+            infra_title: "∞ Готовая к бесконечности инфраструктура",
+            infra_desc: "Динамическое горизонтальное расширение · эластичность в реальном времени · AI-first оркестрация для метавселенной и браузерных MMO стратегий.",
+            badge1: "🧠 AI-Первое Ядро",
+            badge2: "✨ Готовность к Мультивселенной",
+            badge3: "⚡ Реактивные Агенты",
+            badge4: "🔒 Квантовая Кибербезопасность",
+            audience_title: "🎯 Целевая аудитория",
+            aud1: "AI разработчики",
+            aud2: "Архитекторы метавселенных",
+            aud3: "Специалисты MMO стратегий",
+            aud4: "Дизайнеры мультиагентных систем",
+            aud5: "Создатели Web3 миров",
+            aud6: "Инженеры космических технологий",
+            tech_stack_title: "⚙️ Технологический стек",
+            runtime_agnostic: "Независимость от слоя рантайма — облако, edge или локальный рой.",
+            mission_title: "✦ СТРАТЕГИЧЕСКАЯ МИССИЯ",
+            mission_text: "Расширение возможностей организаций с помощью AI нового поколения, глубокого обучения и передовой аналитики.",
+            commit_title: "✦ АБСОЛЮТНОЕ ОБЯЗАТЕЛЬСТВО",
+            commit_text: "Квантовая безопасность, техническое совершенство и прикладная этика.",
+            contact_title: "⟡ Взаимодействуйте с Нексусом ⟡",
+            contact_sub: "Присоединяйтесь к AI-передовому рубежу · Будьте пионером в мультиагентной оркестрации",
+            name_placeholder: "Космонавт / Имя студии",
+            email_placeholder: "Квантовый адрес (email)",
+            msg_placeholder: "Опишите вашу MMO стратегию, метавселенную или AI проект...",
+            submit_btn: "🚀 Отправить запрос интеллекта",
+            footer_note: "⚡ Три слоя · Типизированные схемы · AI рантайм готов",
+            footer1: "© 2026 T.E.R.S.A.N.E.S.I. — Универсальный инжиниринговый рантайм для космических инженерных циклов | TerraTrampilleraVerse Подразделение передового AI интеллекта",
+            footer2: "🏛️ TERSANESI → 🎮 Cavibara → 🌌 Wellamatores Вселенная 🌍🪐 • AI-native оркестрация • Metaverse MMO • На базе VERCEL.APP инфраструктуры",
+            whitepaper: "Технический документ Runtime",
+            sdk: "SDK агентов",
+            cosmic_status: "Космический статус"
+        },
+        es: {
+            hero_title: "T.E.R.S.A.N.E.S.I.<br>Runtime Cósmico Nativo de IA",
+            hero_tag: "✦ INTELIGENCIA QUE TRANSFORMA · INFRAESTRUCTURA QUE ESCALA ✦",
+            hero_desc: "Ingeniería versátil para estrategia MMO, mundos metaverso y orquestación multiagente.",
+            btn_initiate: "⚡ Iniciar Runtime",
+            btn_explore: "⟡ Explorar Núcleo IA",
+            version: "v.Orbit.3 · tejido dinámico de agentes + inteligencia generativa",
+            cap_title: "⟡ Capacidades Centrales ⟡",
+            cap1_title: "Escalabilidad Cósmica",
+            cap1_desc: "Desde enjambres de agentes hasta mundos persistentes — horizonte infinito.",
+            cap2_title: "Integración Nativa de IA",
+            cap2_desc: "Flujos de decisión LLM, narrativas generativas y agentes adaptativos.",
+            cap3_title: "Núcleo MMO Estratégico",
+            cap3_desc: "Eventos de baja latencia, economía en tiempo real, profundidad nativa del navegador.",
+            cap4_title: "Orquestación Multiagente",
+            cap4_desc: "Estado tipado, bucles de retroalimentación, coordinación de enjambres.",
+            cap5_title: "IA Predictiva y Seguridad",
+            cap5_desc: "Ciberseguridad preparada para quantum y analítica avanzada.",
+            eco_title: "✦ ECOSISTEMA CÓSMICO DE TRES CAPAS ✦",
+            layer1: "Runtime Conceptual · Kernel de orquestación de agentes · tejido nativo de IA",
+            layer2: "Capa de Implementación · UI/API/WebSocket · Lógica económica y panel",
+            layer3: "Universo Narrativo · Lore, facciones, acertijos ARG, mundos WebGL",
+            streams_note: "Flujos tipados: AgentEvent → FactionState ↔ EconomicTx ⟡ ARGClue",
+            streams_title: "📡 Flujos de Eventos Tipados y Retroalimentación IA",
+            schemas_strict: "esquemas estrictos · propagación determinista · bucles adaptativos",
+            infra_title: "∞ Infraestructura Lista para el Infinito",
+            infra_desc: "Expansión horizontal dinámica · elasticidad en tiempo real · orquestación AI-first para metaverso y estrategia MMO en navegador.",
+            badge1: "🧠 Núcleo AI-First",
+            badge2: "✨ Listo para Multiverso",
+            badge3: "⚡ Agentes Reactivos",
+            badge4: "🔒 Ciberseguridad Cuántica",
+            audience_title: "🎯 Audiencia Objetivo",
+            aud1: "Desarrolladores de IA",
+            aud2: "Arquitectos de Metaverso",
+            aud3: "Especialistas en MMO Estratégico",
+            aud4: "Diseñadores Multiagente",
+            aud5: "Creadores de Mundos Web3",
+            aud6: "Ingenieros de Tecnología Espacial",
+            tech_stack_title: "⚙️ Pila Tecnológica",
+            runtime_agnostic: "Agnóstico de capa runtime — nube, edge o enjambre local.",
+            mission_title: "✦ MISIÓN ESTRATÉGICA",
+            mission_text: "Potenciar organizaciones con IA de próxima generación, aprendizaje profundo y analítica avanzada. Redefiniendo los límites del runtime cósmico.",
+            commit_title: "✦ COMPROMISO ABSOLUTO",
+            commit_text: "Seguridad cuántica, excelencia tecnológica y ética aplicada. Impulsando el éxito con integridad y resiliencia digital.",
+            contact_title: "⟡ Conecta con el Nexus ⟡",
+            contact_sub: "Únete a la frontera nativa de IA · Pionero en orquestación multiagente y simulaciones cósmicas",
+            name_placeholder: "Cosmonauta / Nombre del Estudio",
+            email_placeholder: "Dirección cuántica (email)",
+            msg_placeholder: "Describe tu estrategia MMO, mundo metaverso o proyecto IA...",
+            submit_btn: "🚀 Desplegar Consulta de Inteligencia",
+            footer_note: "⚡ Tres capas · Esquemas tipados · Runtime IA listo",
+            footer1: "© 2026 T.E.R.S.A.N.E.S.I. — Runtime de Ingeniería Versátil para Ciclos de Ingeniería Cósmica | División de Inteligencia AI Avanzada de TerraTrampilleraVerse",
+            footer2: "🏛️ TERSANESI → 🎮 Cavibara → 🌌 Wellamatores Universo 🌍🪐 • Orquestación nativa de IA • Metaverse MMO • Potenciado por infraestructura VERCEL.APP",
+            whitepaper: "Libro Blanco del Runtime",
+            sdk: "SDK de Agentes",
+            cosmic_status: "Estado Cósmico"
+        },
+        zh: {
+            hero_title: "T.E.R.S.A.N.E.S.I.<br>宇宙级AI原生运行时",
+            hero_tag: "✦ 变革性智能 · 无限扩展的基础设施 ✦",
+            hero_desc: "为MMO策略游戏、元宇宙世界和多智能体系统打造的通用工程平台。",
+            btn_initiate: "⚡ 启动运行时",
+            btn_explore: "⟡ 探索AI核心",
+            version: "v.Orbit.3 · 动态智能体结构 + 生成式智能",
+            cap_title: "⟡ 核心能力 ⟡",
+            cap1_title: "宇宙级可扩展性",
+            cap1_desc: "从智能体集群到持久世界 — 无限边界。",
+            cap2_title: "AI原生集成",
+            cap2_desc: "LLM决策流、生成式叙事与自适应智能体。",
+            cap3_title: "MMO策略核心",
+            cap3_desc: "低延迟事件、实时经济、浏览器原生深度。",
+            cap4_title: "多智能体编排",
+            cap4_desc: "类型化状态、反馈循环、集群协调。",
+            cap5_title: "预测性AI与安全",
+            cap5_desc: "量子就绪网络安全与高级分析。",
+            eco_title: "✦ 三层宇宙生态系统 ✦",
+            layer1: "概念运行时 · 智能体编排内核 · AI原生结构",
+            layer2: "实现层 · UI/API/WebSocket · 经济逻辑与仪表板",
+            layer3: "叙事宇宙 · 传说、派系、ARG谜题、WebGL世界",
+            streams_note: "类型化数据流: AgentEvent → FactionState ↔ EconomicTx ⟡ ARGClue",
+            streams_title: "📡 类型化事件流与AI反馈",
+            schemas_strict: "严格模式 · 确定性传播 · 自适应反馈回路",
+            infra_title: "∞ 无限就绪基础设施",
+            infra_desc: "动态水平扩展 · 实时弹性 · 为元宇宙和浏览器MMO策略提供的AI优先编排。",
+            badge1: "🧠 AI优先内核",
+            badge2: "✨ 多元宇宙就绪",
+            badge3: "⚡ 响应式智能体",
+            badge4: "🔒 量子网络安全",
+            audience_title: "🎯 目标受众",
+            aud1: "AI应用开发者",
+            aud2: "元宇宙架构师",
+            aud3: "MMO策略专家",
+            aud4: "多智能体设计师",
+            aud5: "Web3世界构建者",
+            aud6: "太空技术工程师",
+            tech_stack_title: "⚙️ 技术栈",
+            runtime_agnostic: "运行时层无关 — 云、边缘或本地集群。",
+            mission_title: "✦ 战略使命",
+            mission_text: "用下一代AI、深度学习和高级分析赋能组织。重新定义宇宙运行时边界。",
+            commit_title: "✦ 绝对承诺",
+            commit_text: "量子安全、技术卓越与应用伦理。以诚信和数字韧性驱动成功。",
+            contact_title: "⟡ 连接枢纽 ⟡",
+            contact_sub: "加入AI原生前沿 · 开创多智能体编排与宇宙模拟",
+            name_placeholder: "宇航员/工作室名称",
+            email_placeholder: "量子地址（邮箱）",
+            msg_placeholder: "描述您的MMO策略、元宇宙项目或AI应用...",
+            submit_btn: "🚀 部署智能查询",
+            footer_note: "⚡ 三层架构 · 类型化模式 · AI运行时就绪",
+            footer1: "© 2026 T.E.R.S.A.N.E.S.I. — 宇宙工程生命周期的通用工程运行时 | TerraTrampilleraVerse 高级AI智能部门",
+            footer2: "🏛️ TERSANESI → 🎮 Cavibara → 🌌 Wellamatores 世界宇宙 🌍🪐 • AI原生编排 • 元宇宙MMO • 由VERCEL.APP基础设施提供支持",
+            whitepaper: "运行时白皮书",
+            sdk: "智能体SDK",
+            cosmic_status: "宇宙状态"
+        }
+    };
+
+    let currentLang = 'en';
+    
+    function applyLanguage(lang) {
+        if (!translations[lang]) return;
+        currentLang = lang;
+        const t = translations[lang];
+        
+        document.querySelectorAll('[data-key]').forEach(el => {
+            const key = el.dataset.key;
+            if (t[key] !== undefined) {
+                if (el.classList.contains('hero-title') || key === 'hero_title') {
+                    el.innerHTML = t[key];
+                } else {
+                    el.textContent = t[key];
+                }
+            }
+        });
+        
+        document.querySelectorAll('[data-key-placeholder]').forEach(el => {
+            const key = el.dataset.keyPlaceholder;
+            if (t[key] !== undefined) {
+                el.placeholder = t[key];
+            }
+        });
+        
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+    });
+    
+    applyLanguage('en');
+
+    // Particle system
     const canvas = document.getElementById('particleOverlay');
     const ctx = canvas.getContext('2d');
     let width = window.innerWidth, height = window.innerHeight;
@@ -677,7 +1002,7 @@
     initParticlesFlow(150);
     animateFlow();
 
-    // form handler fusion
+    // Form handler
     const form = document.getElementById('nexusForm');
     if (form) {
         form.addEventListener('submit', (e) => {
@@ -694,11 +1019,7 @@
         });
     }
 
-    // interactive hover glow enhancements
-    document.querySelectorAll('.cap-card, .layer-card, .audience-tag').forEach(el => {
-        el.addEventListener('mouseenter', () => el.style.transition = '0.2s');
-    });
-    console.log('T.E.R.S.A.N.E.S.I. • Cosmic AI Runtime & Agent Fabric Online');
+    console.log('T.E.R.S.A.N.E.S.I. • Cosmic AI Runtime & Agent Fabric Online • Multi-lingual ready');
 </script>
 </body>
 </html>
