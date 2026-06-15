@@ -4,384 +4,364 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>T.E.R.S.A.N.E.S.I. | AI-Native Cosmic Engineering Platform</title>
-    <meta name="description" content="T.E.R.S.A.N.E.S.I. - Versatile Engineering Runtime for Cosmic Engineering Lifecycles. Build AI-native MMO strategies, metaverse worlds, and multi-agent systems at scale.">
+    <meta name="description" content="T.E.R.S.A.N.E.S.I. — AI-native runtime for MMO strategies, metaverse worlds, and multi-agent systems.">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg:#010105;
+            --panel:rgba(8,12,26,.78);
+            --panel2:rgba(5,10,22,.62);
+            --line:rgba(0,255,255,.22);
+            --cyan:#0ff;
+            --blue:#2ad4ff;
+            --text:#eef5ff;
+            --muted:#b8c7ff;
+            --accent:#ffa500;
         }
-
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
         body {
-            font-family: 'Inter', 'Segoe UI', 'Poppins', system-ui, -apple-system, 'Roboto', sans-serif;
-            background: radial-gradient(circle at 10% 20%, #0a0a1a, #010105);
-            color: #eef5ff;
-            line-height: 1.5;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
+            font-family:'Inter','Segoe UI',Poppins,system-ui,-apple-system,Roboto,sans-serif;
+            background: radial-gradient(circle at 10% 20%, #0a0a1a, var(--bg));
+            color:var(--text);
+            line-height:1.55;
+            overflow-x:hidden;
         }
-
-        /* cosmic animated background overlay */
+        .cosmic-bg,.grid-overlay {
+            position:fixed;
+            inset:0;
+            pointer-events:none;
+            z-index:0;
+        }
         .cosmic-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(2px 2px at 20px 30px, #0ff, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 40px 70px, #fa0, rgba(0,0,0,0)),
+            background-image:
+                radial-gradient(2px 2px at 20px 30px, #0ff, transparent),
+                radial-gradient(1px 1px at 40px 70px, #fa0, transparent),
                 radial-gradient(3px 3px at 80px 160px, #fff5, transparent);
-            background-size: 200px 200px, 300px 300px, 400px 400px;
-            background-repeat: no-repeat;
-            opacity: 0.25;
-            pointer-events: none;
-            z-index: 0;
-            animation: drift 60s linear infinite;
+            background-size:200px 200px,300px 300px,400px 400px;
+            opacity:.24;
+            animation:drift 60s linear infinite;
         }
-
         @keyframes drift {
-            0% { background-position: 0 0, 0 0, 0 0; }
-            100% { background-position: 300px 300px, 500px 400px, 700px 600px; }
+            0% { background-position:0 0,0 0,0 0; }
+            100% { background-position:300px 300px,500px 400px,700px 600px; }
         }
-
         .grid-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(#0ff1 1px, transparent 1px),
                 linear-gradient(90deg, #0ff1 1px, transparent 1px);
-            background-size: 48px 48px;
-            pointer-events: none;
-            z-index: 0;
+            background-size:48px 48px;
         }
-
         .container {
-            position: relative;
-            z-index: 2;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
+            position:relative;
+            z-index:2;
+            max-width:1400px;
+            margin:0 auto;
+            padding:0 2rem;
         }
-
-        /* glassmorphism */
-        .glass {
-            background: rgba(10, 15, 27, 0.65);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            border-radius: 2rem;
-        }
-
         nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 2rem;
-            background: rgba(5, 7, 18, 0.7);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:1rem;
+            flex-wrap:wrap;
+            padding:1.2rem 2rem;
+            background:rgba(5,7,18,.72);
+            backdrop-filter:blur(16px);
+            border-bottom:1px solid var(--line);
+            position:sticky;
+            top:0;
+            z-index:100;
         }
-
         .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #aaffff, #2ad4ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: 2px;
-            text-shadow: 0 0 15px cyan;
+            font-size:1.8rem;
+            font-weight:800;
+            letter-spacing:2px;
+            background:linear-gradient(135deg,#aaffff,var(--blue));
+            -webkit-background-clip:text;
+            background-clip:text;
+            color:transparent;
         }
-
         .logo span {
-            font-size: 1rem;
-            font-weight: 400;
-            color: #ffb347;
-            background: none;
-            -webkit-background-clip: unset;
-            background-clip: unset;
-            letter-spacing: 1px;
+            font-size:1rem;
+            font-weight:400;
+            color:#ffb347;
         }
-
         .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
+            display:flex;
+            gap:2.2rem;
+            list-style:none;
         }
-
         .nav-links a {
-            color: #c0e0ff;
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.2s;
-            font-size: 1rem;
-            position: relative;
+            color:#c0e0ff;
+            text-decoration:none;
+            font-weight:500;
+            position:relative;
         }
-
         .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            left: 0;
-            width: 0%;
-            height: 2px;
-            background: cyan;
-            transition: width 0.3s;
+            content:'';
+            position:absolute;
+            left:0;
+            bottom:-6px;
+            width:0;
+            height:2px;
+            background:var(--cyan);
+            transition:width .25s;
         }
-
         .nav-links a:hover {
-            color: cyan;
+            color:var(--cyan);
         }
-
         .nav-links a:hover::after {
-            width: 100%;
+            width:100%;
         }
-
-        /* hero */
+        .lang-switch {
+            display:flex;
+            gap:.5rem;
+            background:rgba(0,0,0,.4);
+            padding:.3rem .8rem;
+            border-radius:40px;
+            border:1px solid rgba(0,255,255,.2);
+        }
+        .lang-btn {
+            background:transparent;
+            border:none;
+            color:#aac8ff;
+            cursor:pointer;
+            padding:.3rem .6rem;
+            border-radius:30px;
+        }
+        .lang-btn.active {
+            background:rgba(0,255,255,.2);
+            color:var(--cyan);
+            border:1px solid rgba(0,255,255,.4);
+        }
         .hero {
-            padding: 6rem 0 8rem;
-            text-align: center;
+            padding:6rem 0 7rem;
+            text-align:center;
         }
-
         .badge {
-            display: inline-block;
-            background: rgba(0, 255, 255, 0.12);
-            border: 1px solid cyan;
-            border-radius: 40px;
-            padding: 0.4rem 1.2rem;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            backdrop-filter: blur(4px);
-            margin-bottom: 2rem;
-            color: #0ff;
+            display:inline-block;
+            margin-bottom:1.8rem;
+            padding:.4rem 1.2rem;
+            border:1px solid var(--cyan);
+            border-radius:40px;
+            background:rgba(0,255,255,.12);
+            color:var(--cyan);
+            letter-spacing:2px;
+            font-size:.8rem;
         }
-
         .hero h1 {
-            font-size: clamp(3rem, 8vw, 5.5rem);
-            font-weight: 800;
-            background: linear-gradient(125deg, #ffffff, #2ad4ff, #ffb347);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 30px rgba(0,255,200,0.3);
+            font-size:clamp(3rem,8vw,5.5rem);
+            font-weight:800;
+            background:linear-gradient(125deg,#fff,var(--blue),#ffb347);
+            -webkit-background-clip:text;
+            background-clip:text;
+            color:transparent;
         }
-
         .hero h2 {
-            font-size: 1.6rem;
-            font-weight: 400;
-            color: #bbd9ff;
-            margin-bottom: 1.2rem;
+            margin-top:.8rem;
+            font-size:1.55rem;
+            font-weight:400;
+            color:#bbd9ff;
         }
-
-        .hero .tagline {
-            font-size: 1.2rem;
-            max-width: 720px;
-            margin: 1.5rem auto;
-            color: #b8c7ff;
+        .tagline {
+            max-width:760px;
+            margin:1.4rem auto 0;
+            font-size:1.08rem;
+            color:var(--muted);
         }
-
         .btn-group {
-            display: flex;
-            gap: 1.2rem;
-            justify-content: center;
-            flex-wrap: wrap;
+            display:flex;
+            gap:1rem;
+            justify-content:center;
+            flex-wrap:wrap;
+            margin-top:2rem;
         }
-
+        .btn-primary,.btn-outline {
+            text-decoration:none;
+            display:inline-block;
+            padding:.9rem 2.2rem;
+            border-radius:60px;
+            font-weight:700;
+        }
         .btn-primary {
-            background: linear-gradient(95deg, cyan, #ffa500);
-            padding: 0.9rem 2.4rem;
-            border-radius: 60px;
-            font-weight: bold;
-            border: none;
-            color: #0a0c1a;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            box-shadow: 0 0 20px rgba(0,255,255,0.4);
-            text-decoration: none;
-            display: inline-block;
+            background:linear-gradient(95deg,var(--cyan),var(--accent));
+            color:#0a0c1a;
+            box-shadow:0 0 20px rgba(0,255,255,.35);
         }
-
         .btn-outline {
-            background: transparent;
-            border: 1.5px solid cyan;
-            padding: 0.9rem 2.4rem;
-            border-radius: 60px;
-            font-weight: bold;
-            color: cyan;
-            cursor: pointer;
-            transition: 0.3s;
-            text-decoration: none;
+            border:1.5px solid var(--cyan);
+            color:var(--cyan);
         }
-
-        .btn-primary:hover {
-            transform: scale(1.03);
-            box-shadow: 0 0 32px cyan;
+        .section { padding:2rem 0; }
+        .section-title {
+            text-align:center;
+            font-size:2rem;
+            margin-bottom:1rem;
         }
-
-        .btn-outline:hover {
-            background: rgba(0,255,255,0.1);
-            box-shadow: 0 0 16px cyan;
+        .section-sub {
+            text-align:center;
+            color:#aac8ff;
+            margin-bottom:1.5rem;
         }
-
-        /* features grid */
         .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin: 4rem 0;
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            gap:1.5rem;
+            margin:2rem 0;
         }
-
+        .feature-card,.about-card,.contact-section,.ecosystem-layer,.schema-card,.journey-wrap {
+            background:var(--panel);
+            border:1px solid var(--line);
+            backdrop-filter:blur(8px);
+        }
         .feature-card {
-            background: rgba(8, 12, 26, 0.75);
-            backdrop-filter: blur(8px);
-            border-radius: 2rem;
-            padding: 2rem 1.8rem;
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border-radius:1.8rem;
+            padding:1.8rem;
+            transition:.3s;
         }
-
         .feature-card:hover {
-            border-color: cyan;
-            transform: translateY(-8px);
-            background: rgba(10, 20, 40, 0.85);
-            box-shadow: 0 20px 30px -15px rgba(0,255,255,0.2);
+            transform:translateY(-6px);
+            border-color:var(--cyan);
+            box-shadow:0 20px 30px -15px rgba(0,255,255,.2);
         }
-
         .feature-icon {
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
+            font-size:2.6rem;
+            margin-bottom:.8rem;
         }
-
         .feature-card h3 {
-            font-size: 1.7rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(145deg, #eef5ff, #2ad4ff);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
+            font-size:1.4rem;
+            margin-bottom:.7rem;
+            background:linear-gradient(145deg,#eef5ff,var(--blue));
+            -webkit-background-clip:text;
+            background-clip:text;
+            color:transparent;
         }
-
-        .feature-card p {
-            color: #c7d6f0;
-            line-height: 1.5;
+        .feature-card p { color:#c7d6f0; }
+        .ecosystem-grid,.data-schema-grid { display:grid; gap:1rem; }
+        .ecosystem-grid {
+            grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+            margin:1.5rem 0 2.5rem;
         }
-
-        /* stats / cosmic pillars */
-        .cosmic-pillars {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 2rem;
-            margin: 5rem 0;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 3rem;
-            padding: 3rem 2rem;
-            border: 1px solid rgba(0,255,200,0.2);
+        .ecosystem-layer {
+            border-radius:1.4rem;
+            padding:1.4rem;
+            border-left:4px solid var(--cyan);
         }
-
+        .ecosystem-layer h3 { margin:.5rem 0; }
+        .data-schema-grid {
+            grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+            margin:1.5rem 0 2rem;
+        }
+        .schema-card {
+            border-radius:1.2rem;
+            padding:1rem;
+            text-align:center;
+        }
+        .journey-wrap {
+            border-radius:2rem;
+            padding:2rem;
+            margin:2rem 0;
+        }
+        .journey-steps {
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:.8rem;
+        }
+        .step {
+            background:rgba(0,30,50,.72);
+            border-radius:2rem;
+            padding:.8rem 1.1rem;
+            min-width:120px;
+            text-align:center;
+        }
+        .pillars {
+            display:flex;
+            flex-wrap:wrap;
+            gap:1.5rem;
+            justify-content:space-between;
+            background:rgba(0,0,0,.4);
+            border:1px solid rgba(0,255,200,.2);
+            border-radius:3rem;
+            padding:2rem;
+            margin:2.5rem 0;
+        }
         .pillar {
-            text-align: center;
-            flex: 1;
+            flex:1;
+            text-align:center;
+            min-width:180px;
         }
-
         .pillar .number {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: cyan;
+            font-size:2.4rem;
+            font-weight:800;
+            color:var(--cyan);
         }
-
-        /* about section */
-        .about-section {
-            padding: 4rem 0;
-            text-align: center;
-        }
-
+        .about-section { padding:2.5rem 0; }
         .about-card {
-            background: rgba(8, 12, 28, 0.7);
-            border-radius: 2.5rem;
-            padding: 2.5rem;
-            max-width: 900px;
-            margin: 0 auto;
-            border: 1px solid rgba(0,255,255,0.2);
+            max-width:920px;
+            margin:0 auto;
+            border-radius:2rem;
+            padding:2rem;
+            text-align:center;
         }
-
         .about-card h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(120deg, #fff, #0ff);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
+            font-size:2rem;
+            margin-bottom:1rem;
+            background:linear-gradient(120deg,#fff,var(--cyan));
+            -webkit-background-clip:text;
+            background-clip:text;
+            color:transparent;
         }
-
-        .about-card p {
-            font-size: 1.1rem;
-            line-height: 1.7;
+        .tags,.audience,.tech-stack {
+            display:flex;
+            flex-wrap:wrap;
+            gap:1rem;
+            justify-content:center;
         }
-
+        .tag,.tech-tag,.audience span {
+            background:rgba(10,16,37,.67);
+            padding:.55rem 1.1rem;
+            border-radius:999px;
+            border:1px solid rgba(0,255,255,.22);
+        }
         .contact-section {
-            margin: 5rem 0 3rem;
-            border-radius: 2rem;
-            background: rgba(0, 0, 0, 0.45);
-            backdrop-filter: blur(12px);
-            padding: 3rem 2rem;
-            border: 1px solid rgba(0,255,255,0.2);
+            margin:3rem 0 2rem;
+            border-radius:2rem;
+            padding:2.2rem 1.8rem;
         }
-
         .contact-form {
-            max-width: 550px;
-            margin: 2rem auto 0;
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
+            max-width:560px;
+            margin:1.6rem auto 0;
+            display:flex;
+            flex-direction:column;
+            gap:1rem;
         }
-
-        .contact-form input, .contact-form textarea {
-            background: rgba(20, 26, 45, 0.9);
-            border: 1px solid #2a4a7a;
-            padding: 1rem;
-            border-radius: 2rem;
-            font-size: 1rem;
-            color: white;
-            transition: all 0.2s;
+        .contact-form input,.contact-form textarea {
+            background:rgba(20,26,45,.92);
+            border:1px solid #2a4a7a;
+            color:#fff;
+            border-radius:1.4rem;
+            padding:1rem;
+            font-size:1rem;
         }
-
-        .contact-form input:focus, .contact-form textarea:focus {
-            outline: none;
-            border-color: cyan;
-            box-shadow: 0 0 10px rgba(0,255,255,0.3);
+        .contact-form input:focus,.contact-form textarea:focus {
+            outline:none;
+            border-color:var(--cyan);
+            box-shadow:0 0 10px rgba(0,255,255,.25);
         }
-
         footer {
-            text-align: center;
-            padding: 2rem 1rem;
-            border-top: 1px solid rgba(0,255,255,0.2);
-            margin-top: 3rem;
-            color: #7f8fa4;
+            text-align:center;
+            padding:2rem 1rem;
+            border-top:1px solid rgba(0,255,255,.2);
+            color:#7f8fa4;
+            margin-top:3rem;
         }
-
-        @media (max-width: 780px) {
-            .container {
-                padding: 0 1.5rem;
-            }
-            .nav-links {
-                display: none;
-            }
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-            .cosmic-pillars {
-                flex-direction: column;
-                gap: 2rem;
-            }
+        @media (max-width:780px){
+            .container{padding:0 1.2rem}
+            .nav-links{display:none}
+            .hero{padding:4.5rem 0 5.5rem}
+            nav{justify-content:center}
+            .pillars{border-radius:2rem}
         }
     </style>
 </head>
@@ -390,186 +370,297 @@
 <div class="grid-overlay"></div>
 
 <nav>
-    <div class="logo">T.E.R.S.A.N.E.S.I.<span> ⬩  Cosmic Runtime</span></div>
-    <ul class="nav-links">
-        <li><a href="#features">Capabilities</a></li>
-        <li><a href="#about">Vision</a></li>
-        <li><a href="#contact">Connect</a></li>
-    </ul>
+  <div class="logo">T.E.R.S.A.N.E.S.I.<span> ⬩ Cosmic Runtime</span></div>
+  <ul class="nav-links">
+    <li><a href="#features" data-key="nav_features">Capabilities</a></li>
+    <li><a href="#ecosystem" data-key="nav_ecosystem">Ecosystem</a></li>
+    <li><a href="#about" data-key="nav_vision">Vision</a></li>
+    <li><a href="#contact" data-key="nav_connect">Connect</a></li>
+  </ul>
+  <div class="lang-switch">
+    <button class="lang-btn active" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="tr">TR</button>
+    <button class="lang-btn" data-lang="ru">RU</button>
+  </div>
 </nav>
 
 <main>
-    <div class="container">
-        <section class="hero">
-            <div class="badge">✦ VERSATILE ENGINEERING RUNTIME ✦</div>
-            <h1>T.E.R.S.A.N.E.S.I.</h1>
-            <h2>Tersanesi Engineering</h2>
-            <div class="tagline">
-                <strong>Cosmic Engineering Lifecycles</strong> — AI-native orchestration for metaverse worlds, MMO strategies & multi-agent systems.
-            </div>
-            <div class="btn-group">
-                <a href="#contact" class="btn-primary">⚡ Initiate Runtime</a>
-                <a href="#features" class="btn-outline">⟡ Explore Infrastructure</a>
-            </div>
-        </section>
+  <div class="container">
+    <section class="hero">
+      <div class="badge" data-key="hero_badge">✦ AI-NATIVE ENGINEERING RUNTIME ✦</div>
+      <h1>T.E.R.S.A.N.E.S.I.</h1>
+      <h2 data-key="hero_subtitle">Tersanesi Engineering</h2>
+      <div class="tagline" data-key="hero_tagline">
+        <strong>AI-native orchestration</strong> for browser MMO strategy games, metaverse worlds, and multi-agent systems.
+      </div>
+      <div class="btn-group">
+        <a href="#contact" class="btn-primary" data-key="btn_initiate">⚡ Initiate Runtime</a>
+        <a href="#features" class="btn-outline" data-key="btn_explore">⟡ Explore Infrastructure</a>
+      </div>
+    </section>
 
-        <!-- FEATURES SECTION matching description -->
-        <section id="features">
-            <div class="features">
-                <div class="feature-card">
-                    <div class="feature-icon">🌌</div>
-                    <h3>Cosmic Scalability</h3>
-                    <p>Runtime infrastructure engineered for complex cosmic engineering lifecycles. Scale from multi-agent swarms to galactic strategy simulations with zero friction.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
-                    <h3>AI-Native Integration</h3>
-                    <p>Native LLM orchestration, intelligent agents, and AI-coordinated workflows that embed intelligence directly into the development lifecycle.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎮</div>
-                    <h3>MMO Strategy Core</h3>
-                    <p>Browser-based MMO backend ready: real-time events, agent-driven NPC economies, and massive concurrent player coordination with low-latency architecture.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🕸️</div>
-                    <h3>Multi-Agent Orchestration</h3>
-                    <p>Orchestrate thousands of autonomous agents across distributed runtimes. Built-in consensus, swarm logic, and meta-learning pipelines.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌐</div>
-                    <h3>Metaverse Foundations</h3>
-                    <p>Interoperable metaverse project toolkit — persistent universes, ARG-like narrative engines, and spatial computing ready.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⚙️</div>
-                    <h3>Versatile Infrastructure</h3>
-                    <p>Flexible deployment: cloud-edge hybrid, browser-native runtime, and advanced dev tooling for space-tech & engineering pioneers.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- cosmic engineering metrics / advantages -->
-        <div class="cosmic-pillars">
-            <div class="pillar">
-                <div class="number">∞</div>
-                <div>Scalability Ceiling</div>
-                <small>dynamic horizontal expansion</small>
-            </div>
-            <div class="pillar">
-                <div class="number">AI-First</div>
-                <div>Native Intelligence</div>
-                <small>embedded agentic workflows</small>
-            </div>
-            <div class="pillar">
-                <div class="number">✦</div>
-                <div>Multi-versal Ready</div>
-                <small>metaverse & MMO</small>
-            </div>
+    <section id="features" class="section">
+      <h2 class="section-title" data-key="features_title">Core Capabilities</h2>
+      <p class="section-sub" data-key="features_sub">A tighter product story with fewer claims and clearer modules.</p>
+      <div class="features">
+        <div class="feature-card">
+          <div class="feature-icon">🌌</div>
+          <h3 data-key="feat1_title">Cosmic Scalability</h3>
+          <p data-key="feat1_desc">Scale from small agent swarms to large world simulations without changing the core runtime pattern.</p>
         </div>
-
-        <!-- About section with detailed platform description -->
-        <section id="about">
-            <div class="about-section">
-                <div class="about-card">
-                    <h2>⟡ T.E.R.S.A.N.E.S.I. Runtime ⟡</h2>
-                    <p><strong>Versatile Engineering Runtime for Cosmic Engineering Lifecycles</strong> — the next-generation advanced engineering platform specifically designed for building AI-native applications. Engineered for developers crafting browser-based MMO strategy games, metaverse projects, and multi-agent system orchestration platforms. <br><br>
-                    T.E.R.S.A.N.E.S.I. provides the fundamental runtime infrastructure necessary for scaling cosmic engineering lifecycles. From native AI integration into development pipelines to flexible infrastructure that adapts to galactic demands — we empower engineers working on space technologies, metaverse frontiers, and complex AI collectives. Our platform dramatically simplifies complex engineering system development, offering ready-made tools for ambitious cosmic-scale initiatives.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Advantages / platform benefits listing (visual) -->
-        <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; margin: 3rem 0;">
-            <div style="background: #0a1025aa; padding: 0.8rem 1.6rem; border-radius: 60px; border-left: 3px solid cyan;">🚀 Versatility of Engineering</div>
-            <div style="background: #0a1025aa; padding: 0.8rem 1.6rem; border-radius: 60px; border-left: 3px solid cyan;">🧠 Native AI Support</div>
-            <div style="background: #0a1025aa; padding: 0.8rem 1.6rem; border-radius: 60px; border-left: 3px solid cyan;">⚡ Flexible Infrastructure</div>
-            <div style="background: #0a1025aa; padding: 0.8rem 1.6rem; border-radius: 60px; border-left: 3px solid cyan;">📈 Dynamic Scalability</div>
+        <div class="feature-card">
+          <div class="feature-icon">🤖</div>
+          <h3 data-key="feat2_title">AI-Native Integration</h3>
+          <p data-key="feat2_desc">Embed LLM-driven workflows, decision logic, and agent coordination directly into the platform.</p>
         </div>
-
-        <!-- TARGET AUDIENCE - succinct display -->
-        <div style="background: rgba(0, 20, 40, 0.5); border-radius: 2rem; padding: 2rem; margin: 2rem 0; text-align: center; border: 1px solid #0ff2;">
-            <h3 style="color: #0ff; margin-bottom: 1rem;">🎯 Prime Constructs — Target Audience</h3>
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.2rem;">
-                <span style="background: #0a102f; padding: 0.5rem 1.2rem; border-radius: 3rem;">AI Application Developers</span>
-                <span style="background: #0a102f; padding: 0.5rem 1.2rem; border-radius: 3rem;">Metaverse Architects</span>
-                <span style="background: #0a102f; padding: 0.5rem 1.2rem; border-radius: 3rem;">MMO Strategy Specialists</span>
-                <span style="background: #0a102f; padding: 0.5rem 1.2rem; border-radius: 3rem;">Space-Tech Engineers</span>
-                <span style="background: #0a102f; padding: 0.5rem 1.2rem; border-radius: 3rem;">Multi-agent System Designers</span>
-            </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎮</div>
+          <h3 data-key="feat3_title">MMO Strategy Core</h3>
+          <p data-key="feat3_desc">Support real-time events, economy logic, and browser-based strategy gameplay with low-latency architecture.</p>
         </div>
+        <div class="feature-card">
+          <div class="feature-icon">🕸️</div>
+          <h3 data-key="feat4_title">Multi-Agent Orchestration</h3>
+          <p data-key="feat4_desc">Coordinate autonomous agents across services using typed events, shared state, and feedback loops.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌐</div>
+          <h3 data-key="feat5_title">Metaverse Foundations</h3>
+          <p data-key="feat5_desc">Build persistent worlds, narrative systems, and ARG-like layers on top of the same runtime backbone.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚙️</div>
+          <h3 data-key="feat6_title">Versatile Infrastructure</h3>
+          <p data-key="feat6_desc">Deploy as a browser-first stack with React, WebSocket, API services, and WebGL-ready front ends.</p>
+        </div>
+      </div>
+    </section>
 
-        <!-- Contact section -->
-        <section id="contact">
-            <div class="contact-section">
-                <h2 style="text-align: center; font-size: 2.2rem; margin-bottom: 0.5rem;">⟡ Engage the Nexus ⟡</h2>
-                <p style="text-align: center; margin-bottom: 1rem;">Join the early access of cosmic engineering runtime</p>
-                <form class="contact-form" id="demoForm">
-                    <input type="text" placeholder="Cosmonaut / Studio Name" required id="nameInput">
-                    <input type="email" placeholder="Quantum address (email)" required id="emailInput">
-                    <textarea rows="4" placeholder="Describe your project: MMO strategy, metaverse world, or multi-agent swarm..." id="messageInput"></textarea>
-                    <button type="submit" class="btn-primary" style="background: linear-gradient(95deg, #0ff, #ffa500); width: fit-content; margin: 0 auto;">🚀 Deploy Query</button>
-                </form>
-                <p id="formFeedback" style="text-align: center; margin-top: 1rem; color: #0ff; font-size: 0.9rem;"></p>
-            </div>
-        </section>
+    <section id="ecosystem" class="section">
+      <div class="badge" style="margin:0 auto 1rem; display:inline-block;" data-key="eco_badge">✦ THREE-LAYER ECOSYSTEM ✦</div>
+      <h2 class="section-title" data-key="eco_title">Concept → Implementation → Narrative</h2>
+      <div class="ecosystem-grid">
+        <div class="ecosystem-layer" style="border-left-color:#0ff;">
+          <div style="font-size:2rem;">🏛️</div>
+          <h3 style="color:#0ff;" data-key="eco_tersanesi_title">TERSANESI</h3>
+          <p data-key="eco_tersanesi_desc"><strong>Conceptual Platform</strong><br>Runtime architecture, agent orchestration, scalability, AI-native integration.</p>
+        </div>
+        <div class="ecosystem-layer" style="border-left-color:#ffa500;">
+          <div style="font-size:2rem;">🎮</div>
+          <h3 style="color:#ffa500;" data-key="eco_cavibara_title">Cavibara</h3>
+          <p data-key="eco_cavibara_desc"><strong>Practical Implementation</strong><br>UI, API, WebSocket, React, and economy logic.</p>
+        </div>
+        <div class="ecosystem-layer" style="border-left-color:#c084fc;">
+          <div style="font-size:2rem;">🌌</div>
+          <h3 style="color:#c084fc;" data-key="eco_wellamatores_title">Wellamatores</h3>
+          <p data-key="eco_wellamatores_desc"><strong>Narrative Universe</strong><br>Lore, factions, ARG clues, and WebGL world generation.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title" data-key="schemas_title">📡 Typed Data Streams</h2>
+      <p class="section-sub" data-key="schemas_subtitle">Strict schemas keep the system predictable.</p>
+      <div class="data-schema-grid">
+        <div class="schema-card">🤖 <strong>AgentEvent</strong><br><small data-key="schema1_flow">TERSANESI → Cavibara</small><br><span data-key="schema1_desc">Agent commands</span></div>
+        <div class="schema-card">🏛️ <strong>FactionState</strong><br><small data-key="schema2_flow">Wellamatores → TERSANESI</small><br><span data-key="schema2_desc">Faction state</span></div>
+        <div class="schema-card">💰 <strong>EconomicTx</strong><br><small data-key="schema3_flow">Cavibara ↔ Wellamatores</small><br><span data-key="schema3_desc">Economic transactions</span></div>
+        <div class="schema-card">🕵️ <strong>ARGClue</strong><br><small data-key="schema4_flow">Wellamatores → Cavibara</small><br><span data-key="schema4_desc">Riddles & hints</span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="journey-wrap">
+        <h2 class="section-title" data-key="journey_title">👤 How It Works — User Journey</h2>
+        <div class="journey-steps">
+          <div class="step" data-key="journey1">1️⃣ Enter Cavibara UI</div>
+          <div class="step" data-key="journey2">2️⃣ API + WebSocket</div>
+          <div class="step" data-key="journey3">3️⃣ Agent Orchestrator</div>
+          <div class="step" data-key="journey4">4️⃣ AI Factions</div>
+          <div class="step" data-key="journey5">5️⃣ Event Generation</div>
+          <div class="step" data-key="journey6">6️⃣ Living World Real-time</div>
+        </div>
+        <p style="text-align:center; color:#aac8ff; margin-top:1rem;" data-key="journey_note">Users see the interface; the rest runs as a single background pipeline.</p>
+      </div>
+    </section>
+
+    <div class="pillars">
+      <div class="pillar">
+        <div class="number">∞</div>
+        <div data-key="pillar1_title">Scalability Ceiling</div>
+        <small data-key="pillar1_sub">dynamic horizontal expansion</small>
+      </div>
+      <div class="pillar">
+        <div class="number">AI-First</div>
+        <div data-key="pillar2_title">Native Intelligence</div>
+        <small data-key="pillar2_sub">embedded agentic workflows</small>
+      </div>
+      <div class="pillar">
+        <div class="number">✦</div>
+        <div data-key="pillar3_title">Multi-versal Ready</div>
+        <small data-key="pillar3_sub">metaverse & MMO</small>
+      </div>
     </div>
+
+    <section id="about" class="about-section">
+      <div class="about-card">
+        <h2 data-key="about_title">⟡ T.E.R.S.A.N.E.S.I. Runtime ⟡</h2>
+        <p data-key="about_text">
+          <strong>Versatile Engineering Runtime for Cosmic Engineering Lifecycles</strong> — a next-generation platform for building AI-native applications, browser MMO strategy games, metaverse projects, and multi-agent orchestration systems. It focuses on reusable runtime infrastructure, typed events, and adaptive feedback loops rather than one-off prototypes.
+        </p>
+      </div>
+    </section>
+
+    <div class="tags" style="margin:2rem 0 1rem;">
+      <div class="tag" data-key="adv1">🚀 Versatile Engineering</div>
+      <div class="tag" data-key="adv2">🧠 Native AI Support</div>
+      <div class="tag" data-key="adv3">⚡ Flexible Infrastructure</div>
+      <div class="tag" data-key="adv4">📈 Dynamic Scalability</div>
+    </div>
+
+    <div class="audience" style="background:rgba(0,20,40,.5); border:1px solid #0ff2; border-radius:2rem; padding:2rem; margin:2rem 0; text-align:center;">
+      <h3 style="color:#0ff; width:100%; margin-bottom:1rem;" data-key="audience_title">🎯 Prime Constructs — Target Audience</h3>
+      <span data-key="audience1">AI Application Developers</span>
+      <span data-key="audience2">Metaverse Architects</span>
+      <span data-key="audience3">MMO Strategy Specialists</span>
+      <span data-key="audience4">Space-Tech Engineers</span>
+      <span data-key="audience5">Multi-agent System Designers</span>
+    </div>
+
+    <div style="text-align:center; margin:3rem 0 1rem;">
+      <h2 style="font-size:1.6rem;" data-key="tech_title">⚙️ Technology Stack</h2>
+      <div class="tech-stack">
+        <span class="tech-tag">⚛️ React</span>
+        <span class="tech-tag">🔌 WebSocket</span>
+        <span class="tech-tag">🐍 FastAPI</span>
+        <span class="tech-tag">🌐 Three.js</span>
+        <span class="tech-tag">✨ WebGL</span>
+        <span class="tech-tag">🐍 Python / Go</span>
+      </div>
+    </div>
+
+    <section id="contact" class="contact-section">
+      <h2 style="text-align:center; font-size:2rem; margin-bottom:.5rem;" data-key="contact_title">⟡ Engage the Nexus ⟡</h2>
+      <p style="text-align:center;" data-key="contact_subtitle">Join the early access of the runtime</p>
+      <form class="contact-form" id="demoForm">
+        <input type="text" placeholder="Cosmonaut / Studio Name" required data-key-placeholder="contact_name">
+        <input type="email" placeholder="Quantum address (email)" required data-key-placeholder="contact_email">
+        <textarea rows="4" placeholder="Describe your project: MMO strategy, metaverse world, or multi-agent swarm..." data-key-placeholder="contact_message"></textarea>
+        <button type="submit" class="btn-primary" style="background:linear-gradient(95deg,#0ff,#ffa500); width:fit-content; margin:0 auto;" data-key="contact_button">🚀 Deploy Query</button>
+      </form>
+    </section>
+
+    <div style="text-align:center; margin:2rem 0 3rem;">
+      <a href="#" style="color:#0ff; text-decoration:none; border:1px solid #0ff; padding:.7rem 1.8rem; border-radius:40px; display:inline-block;">🗺️ View Full Architecture Diagram (Mermaid)</a>
+      <p style="font-size:.8rem; color:#7f9fbf; margin-top:.8rem;" data-key="arch_note">Three layers. Four data schemas. Feedback loops. User journey.</p>
+    </div>
+  </div>
 </main>
 
 <footer>
-    <p>© 2026 T.E.R.S.A.N.E.S.I. — Versatile Engineering Runtime for Cosmic Engineering Lifecycles | Tersanesi Engineering</p>
-    <p style="font-size: 0.8rem; margin-top: 0.5rem;">⚡ AI-Native · Multi-Agent Orchestration · Metaverse & MMO Infrastructure</p>
+  <p data-key="footer1">© 2026 T.E.R.S.A.N.E.S.I. — Versatile Engineering Runtime for Cosmic Engineering Lifecycles | Tersanesi Engineering</p>
+  <p style="font-size:.8rem; margin-top:.5rem;" data-key="footer2">⚡ AI-Native · Multi-Agent Orchestration · Metaverse & MMO Infrastructure</p>
+  <p style="font-size:.75rem; margin-top:.5rem;" data-key="footer3">🏛️ TERSANESI → 🎮 Cavibara → 🌌 Wellamatores — closed adaptive ecosystem</p>
 </footer>
 
 <script>
-    // simple interactive form feedback (no actual backend, demonstration)
-    const form = document.getElementById('demoForm');
-    const feedback = document.getElementById('formFeedback');
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const name = document.getElementById('nameInput').value.trim();
-        const email = document.getElementById('emailInput').value.trim();
-        if(name && email) {
-            feedback.innerHTML = `✓ Transmission received, ${name}. The T.E.R.S.A.N.E.S.I. runtime will contact your orbital relay. 🛸`;
-            feedback.style.color = "#aaffdd";
-            form.reset();
-        } else {
-            feedback.innerHTML = "⚠️ Please provide both name and email to establish quantum link.";
-            feedback.style.color = "#ffaa66";
-        }
-        setTimeout(() => {
-            if(feedback.innerHTML.includes("Transmission")) {
-                setTimeout(() => {
-                    feedback.innerHTML = "";
-                }, 4000);
-            } else {
-                setTimeout(() => {
-                    feedback.innerHTML = "";
-                }, 3000);
-            }
-        }, 2000);
-    });
-    // smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            if(href === "#" || href === "") return;
-            const target = document.querySelector(href);
-            if(target) {
-                e.preventDefault();
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
-    });
-    // dynamic parallax / cyber grid effect optional
-    window.addEventListener('mousemove', (e) => {
-        const moveX = (e.clientX - window.innerWidth / 2) * 0.003;
-        const moveY = (e.clientY - window.innerHeight / 2) * 0.003;
-        const bg = document.querySelector('.cosmic-bg');
-        if(bg) {
-            bg.style.transform = `translate(${moveX}px, ${moveY}px)`;
-        }
-    });
+const translations = {
+  en: {
+    nav_features: "Capabilities",
+    nav_ecosystem: "Ecosystem",
+    nav_vision: "Vision",
+    nav_connect: "Connect",
+    hero_badge: "✦ AI-NATIVE ENGINEERING RUNTIME ✦",
+    hero_subtitle: "Tersanesi Engineering",
+    hero_tagline: "<strong>AI-native orchestration</strong> for browser MMO strategy games, metaverse worlds, and multi-agent systems.",
+    btn_initiate: "⚡ Initiate Runtime",
+    btn_explore: "⟡ Explore Infrastructure",
+    features_title: "Core Capabilities",
+    features_sub: "A tighter product story with fewer claims and clearer modules.",
+    feat1_title: "Cosmic Scalability",
+    feat1_desc: "Scale from small agent swarms to large world simulations without changing the core runtime pattern.",
+    feat2_title: "AI-Native Integration",
+    feat2_desc: "Embed LLM-driven workflows, decision logic, and agent coordination directly into the platform.",
+    feat3_title: "MMO Strategy Core",
+    feat3_desc: "Support real-time events, economy logic, and browser-based strategy gameplay with low-latency architecture.",
+    feat4_title: "Multi-Agent Orchestration",
+    feat4_desc: "Coordinate autonomous agents across services using typed events, shared state, and feedback loops.",
+    feat5_title: "Metaverse Foundations",
+    feat5_desc: "Build persistent worlds, narrative systems, and ARG-like layers on top of the same runtime backbone.",
+    feat6_title: "Versatile Infrastructure",
+    feat6_desc: "Deploy as a browser-first stack with React, WebSocket, API services, and WebGL-ready front ends.",
+    eco_badge: "✦ THREE-LAYER ECOSYSTEM ✦",
+    eco_title: "Concept → Implementation → Narrative",
+    eco_tersanesi_title: "TERSANESI",
+    eco_tersanesi_desc: "<strong>Conceptual Platform</strong><br>Runtime architecture, agent orchestration, scalability, AI-native integration.",
+    eco_cavibara_title: "Cavibara",
+    eco_cavibara_desc: "<strong>Practical Implementation</strong><br>UI, API, WebSocket, React, and economy logic.",
+    eco_wellamatores_title: "Wellamatores",
+    eco_wellamatores_desc: "<strong>Narrative Universe</strong><br>Lore, factions, ARG clues, and WebGL world generation.",
+    schemas_title: "📡 Typed Data Streams",
+    schemas_subtitle: "Strict schemas keep the system predictable.",
+    schema1_flow: "TERSANESI → Cavibara",
+    schema1_desc: "Agent commands",
+    schema2_flow: "Wellamatores → TERSANESI",
+    schema2_desc: "Faction state",
+    schema3_flow: "Cavibara ↔ Wellamatores",
+    schema3_desc: "Economic transactions",
+    schema4_flow: "Wellamatores → Cavibara",
+    schema4_desc: "Riddles & hints",
+    journey_title: "👤 How It Works — User Journey",
+    journey1: "1️⃣ Enter Cavibara UI",
+    journey2: "2️⃣ API + WebSocket",
+    journey3: "3️⃣ Agent Orchestrator",
+    journey4: "4️⃣ AI Factions",
+    journey5: "5️⃣ Event Generation",
+    journey6: "6️⃣ Living World Real-time",
+    journey_note: "Users see the interface; the rest runs as a single background pipeline.",
+    pillar1_title: "Scalability Ceiling",
+    pillar1_sub: "dynamic horizontal expansion",
+    pillar2_title: "Native Intelligence",
+    pillar2_sub: "embedded agentic workflows",
+    pillar3_title: "Multi-versal Ready",
+    pillar3_sub: "metaverse & MMO",
+    about_title: "⟡ T.E.R.S.A.N.E.S.I. Runtime ⟡",
+    about_text: "<strong>Versatile Engineering Runtime for Cosmic Engineering Lifecycles</strong> — a next-generation platform for building AI-native applications, browser MMO strategy games, metaverse projects, and multi-agent orchestration systems. It focuses on reusable runtime infrastructure, typed events, and adaptive feedback loops rather than one-off prototypes.",
+    adv1: "🚀 Versatile Engineering",
+    adv2: "🧠 Native AI Support",
+    adv3: "⚡ Flexible Infrastructure",
+    adv4: "📈 Dynamic Scalability",
+    audience_title: "🎯 Prime Constructs — Target Audience",
+    audience1: "AI Application Developers",
+    audience2: "Metaverse Architects",
+    audience3: "MMO Strategy Specialists",
+    audience4: "Space-Tech Engineers",
+    audience5: "Multi-agent System Designers",
+    tech_title: "⚙️ Technology Stack",
+    contact_title: "⟡ Engage the Nexus ⟡",
+    contact_subtitle: "Join the early access of the runtime",
+    contact_button: "🚀 Deploy Query",
+    arch_note: "Three layers. Four data schemas. Feedback loops. User journey.",
+    footer1: "© 2026 T.E.R.S.A.N.E.S.I. — Versatile Engineering Runtime for Cosmic Engineering Lifecycles | Tersanesi Engineering",
+    footer2: "⚡ AI-Native · Multi-Agent Orchestration · Metaverse & MMO Infrastructure",
+    footer3: "🏛️ TERSANESI → 🎮 Cavibara → 🌌 Wellamatores — closed adaptive ecosystem"
+  }
+};
+function applyLang(lang){
+  const t = translations[lang] || translations.en;
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const k = el.dataset.key;
+    if(t[k]) el.innerHTML = t[k];
+  });
+  document.querySelectorAll('[data-key-placeholder]').forEach(el => {
+    const k = el.dataset.keyPlaceholder;
+    if(t[k]) el.placeholder = t[k];
+  });
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+}
+document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
+applyLang('en');
+document.getElementById('demoForm').addEventListener('submit', e => {
+  e.preventDefault();
+  document.getElementById('demoForm').insertAdjacentHTML('afterend', '<p style="text-align:center; margin-top:1rem; color:#0ff;">Prototype request captured.</p>');
+});
 </script>
 </body>
 </html>
