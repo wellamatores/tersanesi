@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes" />
+    <title>TERSANESI · System Notes</title>
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --gold: #ffd866;
+            --cyan: #00c8ff;
+            --surface: rgba(8, 12, 25, 0.72);
+            --border: rgba(0, 200, 255, 0.1);
+            --text: #e8ecf0;
+            --text-muted: #8a94a8;
+            --sidebar-width: 72px;
+            --sidebar-expanded: 220px;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --radius: 18px;
+            --font: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif;
+            --mono: 'JetBrains Mono', 'Fira Code', monospace;
+        }
+        body {
+            background: #010105;
+            color: var(--text);
+            font-family: var(--font);
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+        ::selection {
+            background: rgba(0, 200, 255, 0.2);
+            color: #fff;
+        }
+
+        /* ===== 3D EARTH ===== */
+        #earth-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        #earth-container canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .lang-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: rgba(2, 4, 18, 0.82);
+            backdrop-filter: blur(18px);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.2rem 0 1.2rem;
+            z-index: 999;
+            transition: width var(--transition), box-shadow var(--transition);
+            box-shadow: 2px 0 40px rgba(0, 0, 0, 0.85);
+            overflow: hidden;
+        }
+        .lang-sidebar:hover {
+            width: var(--sidebar-expanded);
+            box-shadow: 4px 0 60px rgba(0, 200, 255, 0.05);
+        }
+        .sidebar-brand {
+            font-size: 1rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFE6A3, #FFC857);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            white-space: nowrap;
+            margin-bottom: 1.6rem;
+            letter-spacing: 0.5px;
+            transition: opacity var(--transition);
+            font-family: var(--mono);
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .sidebar-brand:hover {
+            opacity: 0.8;
+        }
+        .lang-sidebar:not(:hover) .sidebar-brand {
+            font-size: 0.75rem;
+            opacity: 0.5;
+        }
+        .lang-sidebar:hover .sidebar-brand small {
+            display: inline;
+        }
+        .sidebar-brand small {
+            display: none;
+            font-weight: 300;
+            font-size: 0.6rem;
+            opacity: 0.5;
+            margin-left: 0.2rem;
+        }
+
+        .lang-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            width: 100%;
+            flex: 1;
+            padding: 0 0.2rem;
+        }
+        .lang-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.4rem 0.6rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #8899bb;
+            font-weight: 500;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            border: 1px solid transparent;
+            background: transparent;
+            width: 100%;
+            user-select: none;
+            font-family: var(--font);
+        }
+        .lang-item .flag {
+            font-size: 1.2rem;
+            line-height: 1;
+            flex-shrink: 0;
+            width: 24px;
+            text-align: center;
+        }
+        .lang-item .label {
+            opacity: 0;
+            transition: opacity var(--transition), transform var(--transition);
+            transform: translateX(-4px);
+            font-size: 0.8rem;
+            letter-spacing: 0.2px;
+        }
+        .lang-sidebar:hover .lang-item .label {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .lang-item .code {
+            font-size: 0.55rem;
+            opacity: 0.3;
+            margin-left: auto;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.05rem 0.4rem;
+            border-radius: 16px;
+            transition: opacity var(--transition);
+        }
+        .lang-sidebar:not(:hover) .lang-item .code {
+            opacity: 0;
+        }
+        .lang-item:hover {
+            background: rgba(0, 200, 255, 0.06);
+            color: #fff;
+            border-color: rgba(0, 200, 255, 0.12);
+        }
+        .lang-item.active {
+            background: rgba(255, 215, 0, 0.06);
+            color: var(--gold);
+            border-color: rgba(255, 215, 0, 0.15);
+        }
+        .lang-item .tooltip {
+            position: absolute;
+            left: calc(100% + 12px);
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(8px);
+            padding: 0.2rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            color: #ddeeff;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            transform: translateY(-50%) scale(0.94);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+        }
+        .lang-item:hover .tooltip {
+            opacity: 1;
+            transform: translateY(-50%) scale(1);
+        }
+        .sidebar-footer {
+            margin-top: auto;
+            font-size: 0.45rem;
+            color: #445566;
+            text-align: center;
+            padding: 0.4rem 0;
+            opacity: 0.3;
+            transition: opacity var(--transition);
+            letter-spacing: 0.3px;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            width: 100%;
+        }
+        .lang-sidebar:hover .sidebar-footer {
+            opacity: 0.6;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            position: relative;
+            z-index: 10;
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            padding: 1.8rem 2.5rem 4rem;
+            min-height: 100vh;
+            transition: margin-left var(--transition);
+            background: rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(2px);
+        }
+
+        /* ===== BACK TO MAIN BUTTON ===== */
+        .back-to-main {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            border: 1px solid var(--border);
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            transition: all 0.25s;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+        }
+        .back-to-main:hover {
+            color: var(--text);
+            border-color: var(--border-active);
+            background: rgba(0, 200, 255, 0.04);
+        }
+        .back-to-main .arrow {
+            transition: transform 0.25s;
+        }
+        .back-to-main:hover .arrow {
+            transform: translateX(-3px);
+        }
+
+        /* ===== HEADER ===== */
+        .page-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.06);
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.8rem;
+        }
+        .page-header .header-left {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        .page-header h1 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            font-family: var(--mono);
+            color: var(--text);
+        }
+        .page-header h1 .gold {
+            color: var(--gold);
+        }
+        .page-header .indicator {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+            font-family: var(--mono);
+        }
+        .page-header .indicator span {
+            color: var(--gold);
+        }
+
+        /* ===== NAVIGATION ANCHORS ===== */
+        .layer-nav {
+            display: flex;
+            gap: 0.3rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            padding-bottom: 0.6rem;
+        }
+        .layer-nav a {
+            padding: 0.35rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            border: 1px solid transparent;
+            transition: all 0.25s;
+            text-decoration: none;
+            letter-spacing: 0.3px;
+            font-family: var(--mono);
+            cursor: pointer;
+        }
+        .layer-nav a:hover {
+            color: var(--text);
+            border-color: var(--border);
+        }
+        .layer-nav a.active {
+            color: var(--gold);
+            border-color: rgba(255, 215, 0, 0.15);
+            background: rgba(255, 215, 0, 0.04);
+        }
+        .layer-nav .badge {
+            font-size: 0.5rem;
+            opacity: 0.3;
+            margin-left: 0.3rem;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 0.05rem 0.4rem;
+            border-radius: 20px;
+        }
+
+        /* ===== LAYER SECTIONS ===== */
+        .layer-section {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .layer-section.hidden {
+            display: none;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .layer-label {
+            font-size: 0.6rem;
+            font-family: var(--mono);
+            color: var(--cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            opacity: 0.5;
+            margin-bottom: 0.2rem;
+        }
+        .layer-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.2rem;
+        }
+        .layer-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.8rem;
+            max-width: 640px;
+        }
+
+        /* ===== PUBLIC LAYER (L1) ===== */
+        .hero-card {
+            background: var(--surface);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2.2rem 2.8rem;
+            max-width: 860px;
+            margin-bottom: 2rem;
+        }
+        .hero-card .badge {
+            display: inline-block;
+            font-size: 0.6rem;
+            font-family: var(--mono);
+            color: var(--cyan);
+            background: rgba(0, 200, 255, 0.06);
+            padding: 0.15rem 0.8rem;
+            border-radius: 30px;
+            border: 1px solid rgba(0, 200, 255, 0.06);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+        .hero-card h2 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+        .hero-card h2 .gold {
+            color: var(--gold);
+        }
+        .hero-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0.6rem 0 1.2rem;
+            max-width: 580px;
+        }
+        .hero-card .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .hero-card .tags span {
+            font-size: 0.7rem;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.2rem 0.9rem;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        /* ===== PUBLIC: 3 pillars ===== */
+        .pillars {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            max-width: 860px;
+            margin-bottom: 1.5rem;
+        }
+        .pillar {
+            background: var(--surface);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.4rem;
+        }
+        .pillar .num {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            color: var(--cyan);
+            opacity: 0.3;
+            letter-spacing: 0.06em;
+        }
+        .pillar h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0.2rem 0 0.2rem;
+        }
+        .pillar p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* ===== EXPLORE LAYER (L2) — FAQ ===== */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1rem;
+            max-width: 960px;
+        }
+        .faq-card {
+            background: var(--surface);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.4rem 1.4rem;
+            transition: all 0.25s ease;
+        }
+        .faq-card:hover {
+            border-color: rgba(0, 200, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        .faq-card .q {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text);
+            margin-bottom: 0.3rem;
+            display: flex;
+            gap: 0.4rem;
+            align-items: flex-start;
+        }
+        .faq-card .q .marker {
+            color: var(--gold);
+            opacity: 0.5;
+            flex-shrink: 0;
+            font-size: 0.8rem;
+        }
+        .faq-card .q .tag {
+            font-size: 0.5rem;
+            font-family: var(--mono);
+            color: var(--cyan);
+            background: rgba(0, 200, 255, 0.06);
+            padding: 0.05rem 0.5rem;
+            border-radius: 30px;
+            margin-left: auto;
+            flex-shrink: 0;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+        }
+        .faq-card .a {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+        .faq-card .a strong {
+            color: var(--cyan);
+            font-weight: 500;
+        }
+        .faq-card .deep-hint {
+            margin-top: 0.5rem;
+            font-size: 0.7rem;
+            font-family: var(--mono);
+            color: var(--text-muted);
+            opacity: 0.35;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            padding-top: 0.5rem;
+            letter-spacing: 0.04em;
+        }
+
+        /* ===== DEEP LAYER (L3) ===== */
+        .deep-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            max-width: 960px;
+        }
+        .deep-card {
+            background: var(--surface);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.4rem;
+        }
+        .deep-card .icon {
+            font-size: 1.2rem;
+            opacity: 0.6;
+        }
+        .deep-card h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin: 0.2rem 0 0.2rem;
+            font-family: var(--mono);
+        }
+        .deep-card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        .deep-card .spec {
+            font-size: 0.65rem;
+            font-family: var(--mono);
+            color: var(--cyan);
+            opacity: 0.5;
+            margin-top: 0.3rem;
+            letter-spacing: 0.04em;
+        }
+
+        .deep-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--border), transparent);
+            margin: 2rem 0 1.5rem;
+            max-width: 960px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer-note {
+            text-align: center;
+            color: #445566;
+            font-size: 0.65rem;
+            letter-spacing: 0.5px;
+            margin-top: 2.5rem;
+            font-family: var(--mono);
+            opacity: 0.4;
+        }
+        .footer-note a {
+            color: var(--gold);
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .footer-note a:hover {
+            opacity: 0.7;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 820px) {
+            .lang-sidebar {
+                width: 0;
+                border-right: none;
+                box-shadow: none;
+                background: transparent;
+                backdrop-filter: none;
+                padding: 0;
+                overflow: hidden;
+                pointer-events: none;
+            }
+            .lang-sidebar:hover {
+                width: 0;
+                box-shadow: none;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 1rem 1rem 3rem;
+                background: rgba(0, 0, 0, 0.5);
+            }
+            .page-header h1 {
+                font-size: 1.2rem;
+            }
+            .hero-card {
+                padding: 1.4rem 1.4rem;
+            }
+            .hero-card h2 {
+                font-size: 1.5rem;
+            }
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+            .deep-grid {
+                grid-template-columns: 1fr;
+            }
+            .pillars {
+                grid-template-columns: 1fr;
+            }
+            .layer-nav a {
+                font-size: 0.65rem;
+                padding: 0.25rem 0.9rem;
+            }
+            .lang-item .tooltip {
+                display: none;
+            }
+            .layer-title {
+                font-size: 1.2rem;
+            }
+            .back-to-main {
+                font-size: 0.65rem;
+                padding: 0.2rem 0.8rem;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 3px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #05050f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--cyan);
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 3D EARTH ===== -->
+    <div id="earth-container"></div>
+
+    <!-- ===== SIDEBAR ===== -->
+    <nav class="lang-sidebar" id="langSidebar">
+        <a href="index.html" class="sidebar-brand" data-i18n="brand">TERS<small>ANESI</small></a>
+        <div class="lang-list" id="langList"></div>
+        <div class="sidebar-footer" data-i18n="sidebar_footer">⟡ 9 layers</div>
+    </nav>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content" id="mainContent">
+
+        <!-- HEADER -->
+        <div class="page-header">
+            <div class="header-left">
+                <a href="index.html" class="back-to-main" data-i18n="back_to_main">
+                    <span class="arrow">←</span> <span data-i18n="back_to_main_text">Back to Main</span>
+                </a>
+                <h1>⟡ SYSTEM <span class="gold" data-i18n="system_notes_title">NOTES</span></h1>
+            </div>
+            <div class="indicator"><span id="currentLangLabel">Русский</span> <span id="currentLangCode" style="opacity:0.4;">(ru)</span></div>
+        </div>
+
+        <!-- NAVIGATION -->
+        <nav class="layer-nav" id="layerNav">
+            <a href="#" class="active" data-layer="public" data-i18n="nav_overview">Overview <span class="badge">L1</span></a>
+            <a href="#" data-layer="explore" data-i18n="nav_explore">Explore <span class="badge">L2</span></a>
+            <a href="#" data-layer="deep" data-i18n="nav_architecture">Architecture <span class="badge">L3</span></a>
+        </nav>
+
+        <!-- ========================================================== -->
+        <!-- LAYER 1 — PUBLIC                                            -->
+        <!-- ========================================================== -->
+        <div class="layer-section" id="layer-public">
+
+            <div class="layer-label" data-i18n="l1_label">Layer 1 · Public</div>
+            <div class="layer-title" data-i18n="l1_title">What is TERSANESI?</div>
+            <div class="layer-desc" data-i18n="l1_desc">A runtime for coordinating autonomous AI systems across research, simulation, and digital environments.</div>
+
+            <div class="hero-card">
+                <div class="badge" data-i18n="l1_badge">AI-native orchestration</div>
+                <h2 data-i18n="l1_hero_title">Intelligent systems that <span class="gold">work together</span></h2>
+                <p data-i18n="l1_hero_desc">TERSANESI connects AI agents, data, workflows, and virtual environments into a single coordinated ecosystem — without forcing you to rebuild everything from scratch.</p>
+                <div class="tags">
+                    <span data-i18n="l1_tag_1">For research teams</span>
+                    <span data-i18n="l1_tag_2">For simulation engineers</span>
+                    <span data-i18n="l1_tag_3">For digital ecosystem builders</span>
+                </div>
+            </div>
+
+            <div class="pillars">
+                <div class="pillar">
+                    <div class="num" data-i18n="l1_pillar_1_num">01</div>
+                    <h4 data-i18n="l1_pillar_1_title">Coordinate</h4>
+                    <p data-i18n="l1_pillar_1_desc">Connect multiple AI agents, systems, and data sources into a unified flow.</p>
+                </div>
+                <div class="pillar">
+                    <div class="num" data-i18n="l1_pillar_2_num">02</div>
+                    <h4 data-i18n="l1_pillar_2_title">Scale</h4>
+                    <p data-i18n="l1_pillar_2_desc">From small research teams to large simulations — grow without redesign.</p>
+                </div>
+                <div class="pillar">
+                    <div class="num" data-i18n="l1_pillar_3_num">03</div>
+                    <h4 data-i18n="l1_pillar_3_title">Evolve</h4>
+                    <p data-i18n="l1_pillar_3_desc">Add new agents, workflows, and capabilities as your system grows.</p>
+                </div>
+            </div>
+
+            <div style="font-size:0.75rem; color:var(--text-muted); opacity:0.4; font-family:var(--mono);" data-i18n="l1_footer">
+                ↓ 2 more layers below — architecture and technical depth
+            </div>
+        </div>
+
+        <!-- ========================================================== -->
+        <!-- LAYER 2 — EXPLORE (FAQ)                                    -->
+        <!-- ========================================================== -->
+        <div class="layer-section hidden" id="layer-explore">
+
+            <div class="layer-label" data-i18n="l2_label">Layer 2 · Explore</div>
+            <div class="layer-title" data-i18n="l2_title">Questions &amp; Answers</div>
+            <div class="layer-desc" data-i18n="l2_desc">We answer — but leave depth behind each response.</div>
+
+            <div class="faq-grid" id="faqContainer">
+                <!-- динамический рендер -->
+            </div>
+        </div>
+
+        <!-- ========================================================== -->
+        <!-- LAYER 3 — DEEP (архитектура)                               -->
+        <!-- ========================================================== -->
+        <div class="layer-section hidden" id="layer-deep">
+
+            <div class="layer-label" data-i18n="l3_label">Layer 3 · Architecture</div>
+            <div class="layer-title" data-i18n="l3_title">System Design</div>
+            <div class="layer-desc" data-i18n="l3_desc">Technical disclosure — for engineers, architects, and deep-tech partners.</div>
+
+            <div class="deep-grid" id="deepContainer">
+                <!-- динамический рендер -->
+            </div>
+
+            <div class="deep-divider"></div>
+            <div style="font-size:0.7rem; color:var(--text-muted); opacity:0.3; font-family:var(--mono); max-width:960px;" data-i18n="l3_footer">
+                ⚡ Event Fabric · Multi-agent orchestration · Typed streams · Zero-trust security · Horizontal scaling
+            </div>
+        </div>
+
+        <div class="footer-note">
+            ⬩ <span data-i18n="footer_text">TERSANESI · three-layer system disclosure</span> ⬩
+            &nbsp;·&nbsp;
+            <a href="index.html" data-i18n="footer_back">← Back to Main</a>
+        </div>
+
+    </main>
+
+    <!-- ============================================================ -->
+    <!-- THREE.JS EARTH                                                -->
+    <!-- ============================================================ -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+
+        const container = document.getElementById('earth-container');
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x010105);
+        scene.fog = new THREE.FogExp2(0x010105, 0.00045);
+
+        const camera = new THREE.PerspectiveCamera(42, container.clientWidth / container.clientHeight, 0.1, 1000);
+        camera.position.set(0, 0.2, 13);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        function createStarLayer(count, spread, color, size, opacity) {
+            const geo = new THREE.BufferGeometry();
+            const pos = new Float32Array(count * 3);
+            for (let i = 0; i < count; i++) {
+                pos[i * 3] = (Math.random() - 0.5) * spread.x;
+                pos[i * 3 + 1] = (Math.random() - 0.5) * spread.y;
+                pos[i * 3 + 2] = (Math.random() - 0.5) * spread.z - 50;
+            }
+            geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+            const mat = new THREE.PointsMaterial({
+                color: color,
+                size: size,
+                transparent: true,
+                opacity: opacity,
+                blending: THREE.AdditiveBlending
+            });
+            return new THREE.Points(geo, mat);
+        }
+
+        const stars1 = createStarLayer(2800, { x: 1000, y: 700, z: 180 }, 0xffffff, 0.22, 0.7);
+        const stars2 = createStarLayer(4500, { x: 1500, y: 900, z: 250 }, 0xaad4ff, 0.12, 0.5);
+        const starsTwinkle = createStarLayer(1800, { x: 1200, y: 800, z: 300 }, 0xffdd99, 0.10, 0.4);
+        scene.add(stars1, stars2, starsTwinkle);
+
+        const textureLoader = new THREE.TextureLoader();
+        const earthMap = textureLoader.load('https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg');
+        const earthSpecularMap = textureLoader.load(
+            'https://threejs.org/examples/textures/planets/earth_specular_2048.jpg');
+        const earthNormalMap = textureLoader.load(
+        'https://threejs.org/examples/textures/planets/earth_normal_2048.jpg');
+        const cloudMap = textureLoader.load('https://threejs.org/examples/textures/planets/earth_clouds_1024.png');
+
+        const earthGeo = new THREE.SphereGeometry(2.35, 160, 160);
+        const earthMat = new THREE.MeshPhongMaterial({
+            map: earthMap,
+            specularMap: earthSpecularMap,
+            specular: new THREE.Color(0x333333),
+            shininess: 6,
+            normalMap: earthNormalMap,
+            normalScale: new THREE.Vector2(0.9, 0.9)
+        });
+        const earth = new THREE.Mesh(earthGeo, earthMat);
+        scene.add(earth);
+
+        const cloudGeo = new THREE.SphereGeometry(2.38, 160, 160);
+        const cloudMat = new THREE.MeshPhongMaterial({
+            map: cloudMap,
+            transparent: true,
+            opacity: 0.2,
+            blending: THREE.AdditiveBlending
+        });
+        const clouds = new THREE.Mesh(cloudGeo, cloudMat);
+        scene.add(clouds);
+
+        const atmosGeo = new THREE.SphereGeometry(2.48, 80, 80);
+        const atmosMat = new THREE.MeshPhongMaterial({
+            color: 0x3388ff,
+            transparent: true,
+            opacity: 0.07,
+            side: THREE.BackSide
+        });
+        const atmosphere = new THREE.Mesh(atmosGeo, atmosMat);
+        scene.add(atmosphere);
+
+        function createRing(radius, tube, color, emissive, emissiveIntensity, rotX, rotZ) {
+            const geo = new THREE.TorusGeometry(radius, tube, 128, 500);
+            const mat = new THREE.MeshStandardMaterial({
+                color: color,
+                emissive: emissive,
+                emissiveIntensity: emissiveIntensity,
+                transparent: true,
+                opacity: 0.9
+            });
+            const mesh = new THREE.Mesh(geo, mat);
+            mesh.rotation.x = rotX;
+            mesh.rotation.z = rotZ;
+            return mesh;
+        }
+
+        const ring1 = createRing(3.25, 0.025, 0x00ccff, 0x0088aa, 0.65, Math.PI / 2 + 0.1, 0.4);
+        const ring2 = createRing(3.85, 0.020, 0xff66cc, 0x551166, 0.50, Math.PI / 2 - 0.15, -0.2);
+        const ring3 = createRing(2.95, 0.012, 0x77ffaa, 0x227755, 0.40, Math.PI / 2 + 0.25, 0.6);
+        scene.add(ring1, ring2, ring3);
+
+        function createSatellites(count, radius, color, emissive, emissiveIntensity, size, speedBase, yOffsetFn) {
+            const group = [];
+            const geo = new THREE.SphereGeometry(size, 8, 8);
+            for (let i = 0; i < count; i++) {
+                const mat = new THREE.MeshStandardMaterial({
+                    color: color,
+                    emissive: emissive,
+                    emissiveIntensity: emissiveIntensity
+                });
+                const mesh = new THREE.Mesh(geo, mat);
+                scene.add(mesh);
+                group.push({
+                    mesh,
+                    angle: (i / count) * Math.PI * 2,
+                    radius,
+                    speed: speedBase + (Math.random() - 0.5) * 0.002,
+                    yOffset: yOffsetFn(i)
+                });
+            }
+            return group;
+        }
+
+        const sats1 = createSatellites(32, 3.45, 0x2af0ff, 0x00aacc, 0.7, 0.055, 0.007, (i) => Math.sin(i) * 0.12);
+        const sats2 = createSatellites(24, 4.05, 0xffaa66, 0xff5511, 0.6, 0.045, -0.0055, (i) => Math.cos(i * 0.8) * 0.1);
+
+        const particleCount = 1200;
+        const partGeo = new THREE.BufferGeometry();
+        const partPos = new Float32Array(particleCount * 3);
+        for (let i = 0; i < particleCount; i++) {
+            const radius = 3.0 + Math.random() * 1.2;
+            const angle = Math.random() * Math.PI * 2;
+            const y = (Math.random() - 0.5) * 0.7;
+            partPos[i * 3] = Math.cos(angle) * radius;
+            partPos[i * 3 + 1] = y;
+            partPos[i * 3 + 2] = Math.sin(angle) * radius;
+        }
+        partGeo.setAttribute('position', new THREE.BufferAttribute(partPos, 3));
+        const partMat = new THREE.PointsMaterial({
+            color: 0x44ddff,
+            size: 0.025,
+            transparent: true,
+            blending: THREE.AdditiveBlending
+        });
+        const orbitParticles = new THREE.Points(partGeo, partMat);
+        scene.add(orbitParticles);
+
+        const dustCount = 1800;
+        const dustGeo = new THREE.BufferGeometry();
+        const dustPos = new Float32Array(dustCount * 3);
+        for (let i = 0; i < dustCount; i++) {
+            dustPos[i * 3] = (Math.random() - 0.5) * 12;
+            dustPos[i * 3 + 1] = (Math.random() - 0.5) * 8;
+            dustPos[i * 3 + 2] = (Math.random() - 0.5) * 10 - 4;
+        }
+        dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPos, 3));
+        const dustMat = new THREE.PointsMaterial({
+            color: 0x77aaff,
+            size: 0.012,
+            transparent: true,
+            opacity: 0.3,
+            blending: THREE.AdditiveBlending
+        });
+        const cosmicDust = new THREE.Points(dustGeo, dustMat);
+        scene.add(cosmicDust);
+
+        const lineColors = [0x00ccff, 0xff66aa, 0x88ffcc];
+        const lines = [];
+        for (let i = 0; i < 18; i++) {
+            const points = [new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 0, 0)];
+            const geo = new THREE.BufferGeometry().setFromPoints(points);
+            const mat = new THREE.LineBasicMaterial({
+                color: lineColors[i % lineColors.length],
+                transparent: true,
+                opacity: 0.35
+            });
+            const line = new THREE.Line(geo, mat);
+            scene.add(line);
+            lines.push({ line, phase: Math.random() * Math.PI * 2, offset: i });
+        }
+
+        const ambient = new THREE.AmbientLight(0x111122);
+        scene.add(ambient);
+        const keyLight = new THREE.DirectionalLight(0xffffff, 1.4);
+        keyLight.position.set(6, 8, 5);
+        scene.add(keyLight);
+        const fillLight = new THREE.PointLight(0x4488ff, 0.5);
+        fillLight.position.set(-3, 1, 4);
+        scene.add(fillLight);
+        const rimLight = new THREE.PointLight(0xffaa66, 0.6);
+        rimLight.position.set(2, 3, -5);
+        scene.add(rimLight);
+        const earthGlow = new THREE.PointLight(0x2266cc, 0.55);
+        earthGlow.position.set(1.5, 1, 2.2);
+        scene.add(earthGlow);
+        const backRim = new THREE.PointLight(0x44aaff, 0.45);
+        backRim.position.set(-2, -1, -4.5);
+        scene.add(backRim);
+
+        function animate() {
+            const elapsed = performance.now() / 1000;
+            earth.rotation.y += 0.0022;
+            clouds.rotation.y += 0.0026;
+            atmosphere.rotation.y += 0.0018;
+            ring1.rotation.z += 0.0022;
+            ring1.rotation.x = Math.PI / 2 + 0.1 + Math.sin(elapsed * 0.35) * 0.04;
+            ring2.rotation.z -= 0.0018;
+            ring2.rotation.x = Math.PI / 2 - 0.15 + Math.cos(elapsed * 0.4) * 0.03;
+            ring3.rotation.z += 0.0025;
+            ring3.rotation.x = Math.PI / 2 + 0.25 + Math.sin(elapsed * 0.6) * 0.02;
+            sats1.forEach(sat => {
+                sat.angle += sat.speed;
+                const x = Math.cos(sat.angle) * sat.radius;
+                const z = Math.sin(sat.angle) * sat.radius;
+                sat.mesh.position.set(x, sat.yOffset + Math.sin(elapsed * 1.2 + sat.angle) * 0.05, z);
+            });
+            sats2.forEach(sat => {
+                sat.angle += sat.speed;
+                const x = Math.cos(sat.angle) * sat.radius;
+                const z = Math.sin(sat.angle) * sat.radius;
+                sat.mesh.position.set(x, sat.yOffset + Math.cos(elapsed * 0.9 + sat.angle) * 0.06, z);
+            });
+            lines.forEach((item, idx) => {
+                const t = elapsed * 0.8 + idx;
+                const radiusA = 3.2;
+                const radiusB = 3.9;
+                const angleA = (t * 0.6) % (Math.PI * 2);
+                const angleB = (t * 0.45 + idx) % (Math.PI * 2);
+                const yOffA = Math.sin(t) * 0.2;
+                const yOffB = Math.cos(t * 0.7) * 0.2;
+                const pA = new THREE.Vector3(Math.cos(angleA) * radiusA, yOffA, Math.sin(angleA) * radiusA);
+                const pB = new THREE.Vector3(Math.cos(angleB) * radiusB, yOffB + 0.1, Math.sin(angleB) * radiusB);
+                const pos = item.line.geometry.attributes.position.array;
+                pos[0] = pA.x;
+                pos[1] = pA.y;
+                pos[2] = pA.z;
+                pos[3] = pB.x;
+                pos[4] = pB.y;
+                pos[5] = pB.z;
+                item.line.geometry.attributes.position.needsUpdate = true;
+            });
+            stars1.rotation.y += 0.0002;
+            stars2.rotation.x += 0.0001;
+            starsTwinkle.rotation.y -= 0.00015;
+            orbitParticles.rotation.y += 0.002;
+            orbitParticles.rotation.x += 0.001;
+            cosmicDust.rotation.y += 0.0003;
+            cosmicDust.rotation.x += 0.0002;
+            const intensityVar = 0.5 + Math.sin(elapsed * 1.8) * 0.13;
+            earthGlow.intensity = intensityVar;
+            backRim.intensity = 0.45 + Math.sin(elapsed * 1.2) * 0.1;
+            camera.position.x += (Math.sin(elapsed * 0.12) * 0.08 - camera.position.x) * 0.02;
+            camera.position.y += (Math.cos(elapsed * 0.19) * 0.05 - camera.position.y) * 0.02;
+            camera.lookAt(0, 0, 0);
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        function resizeEarth() {
+            const w = container.clientWidth;
+            const h = container.clientHeight;
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+            renderer.setSize(w, h);
+        }
+        window.addEventListener('resize', resizeEarth);
+        window.addEventListener('orientationchange', () => { setTimeout(resizeEarth, 300); });
+        setTimeout(resizeEarth, 50);
+    </script>
+
+    <!-- ============================================================ -->
+    <!-- ЛОГИКА: ЯЗЫКИ + FAQ + DEEP + НАВИГАЦИЯ + ПЕРЕВОД           -->
+    <!-- ============================================================ -->
+    <script>
+        // ============================================================
+        // 1. ЯЗЫКИ
+        // ============================================================
+        const LANGUAGES = [
+            { code: 'en', label: 'English', flag: '🇬🇧', native: 'English' },
+            { code: 'ru', label: 'Русский', flag: '🇷🇺', native: 'Русский' },
+            { code: 'tr', label: 'Türkçe', flag: '🇹🇷', native: 'Türkçe' },
+            { code: 'ar', label: 'العربية', flag: '🇸🇦', native: 'العربية' },
+            { code: 'es', label: 'Español', flag: '🇪🇸', native: 'Español' },
+            { code: 'de', label: 'Deutsch', flag: '🇩🇪', native: 'Deutsch' },
+            { code: 'ja', label: '日本語', flag: '🇯🇵', native: '日本語' },
+            { code: 'zh', label: '中文', flag: '🇨🇳', native: '中文' },
+            { code: 'fr', label: 'Français', flag: '🇫🇷', native: 'Français' },
+        ];
+
+        // ============================================================
+        // 2. ПЕРЕВОДЫ
+        // ============================================================
+        const TRANSLATIONS = {
+            en: {
+                brand: "TERS<small>ANESI</small>",
+                sidebar_footer: "⟡ 9 layers",
+                back_to_main: "← Back to Main",
+                back_to_main_text: "Back to Main",
+                system_notes_title: "NOTES",
+                nav_overview: "Overview <span class=\"badge\">L1</span>",
+                nav_explore: "Explore <span class=\"badge\">L2</span>",
+                nav_architecture: "Architecture <span class=\"badge\">L3</span>",
+                l1_label: "Layer 1 · Public",
+                l1_title: "What is TERSANESI?",
+                l1_desc: "A runtime for coordinating autonomous AI systems across research, simulation, and digital environments.",
+                l1_badge: "AI-native orchestration",
+                l1_hero_title: "Intelligent systems that <span class=\"gold\">work together</span>",
+                l1_hero_desc: "TERSANESI connects AI agents, data, workflows, and virtual environments into a single coordinated ecosystem — without forcing you to rebuild everything from scratch.",
+                l1_tag_1: "For research teams",
+                l1_tag_2: "For simulation engineers",
+                l1_tag_3: "For digital ecosystem builders",
+                l1_pillar_1_num: "01",
+                l1_pillar_1_title: "Coordinate",
+                l1_pillar_1_desc: "Connect multiple AI agents, systems, and data sources into a unified flow.",
+                l1_pillar_2_num: "02",
+                l1_pillar_2_title: "Scale",
+                l1_pillar_2_desc: "From small research teams to large simulations — grow without redesign.",
+                l1_pillar_3_num: "03",
+                l1_pillar_3_title: "Evolve",
+                l1_pillar_3_desc: "Add new agents, workflows, and capabilities as your system grows.",
+                l1_footer: "↓ 2 more layers below — architecture and technical depth",
+                l2_label: "Layer 2 · Explore",
+                l2_title: "Questions & Answers",
+                l2_desc: "We answer — but leave depth behind each response.",
+                l3_label: "Layer 3 · Architecture",
+                l3_title: "System Design",
+                l3_desc: "Technical disclosure — for engineers, architects, and deep-tech partners.",
+                l3_footer: "⚡ Event Fabric · Multi-agent orchestration · Typed streams · Zero-trust security · Horizontal scaling",
+                footer_text: "TERSANESI · three-layer system disclosure",
+                footer_back: "← Back to Main"
+            },
+            ru: {
+                brand: "TERS<small>ANESI</small>",
+                sidebar_footer: "⟡ 9 слоёв",
+                back_to_main: "← На главную",
+                back_to_main_text: "На главную",
+                system_notes_title: "ЗАМЕТКИ",
+                nav_overview: "Обзор <span class=\"badge\">L1</span>",
+                nav_explore: "Исследовать <span class=\"badge\">L2</span>",
+                nav_architecture: "Архитектура <span class=\"badge\">L3</span>",
+                l1_label: "Слой 1 · Публичный",
+                l1_title: "Что такое TERSANESI?",
+                l1_desc: "Среда выполнения для координации автономных AI-систем в исследованиях, симуляциях и цифровых средах.",
+                l1_badge: "AI-нативная оркестрация",
+                l1_hero_title: "Интеллектуальные системы, которые <span class=\"gold\">работают вместе</span>",
+                l1_hero_desc: "TERSANESI объединяет AI-агентов, данные, рабочие процессы и виртуальные среды в единую скоординированную экосистему — без необходимости перестраивать всё с нуля.",
+                l1_tag_1: "Для исследовательских команд",
+                l1_tag_2: "Для инженеров симуляций",
+                l1_tag_3: "Для создателей цифровых экосистем",
+                l1_pillar_1_num: "01",
+                l1_pillar_1_title: "Координация",
+                l1_pillar_1_desc: "Объединяйте нескольких AI-агентов, системы и источники данных в единый поток.",
+                l1_pillar_2_num: "02",
+                l1_pillar_2_title: "Масштабирование",
+                l1_pillar_2_desc: "От небольших исследовательских команд до крупных симуляций — растите без перепроектирования.",
+                l1_pillar_3_num: "03",
+                l1_pillar_3_title: "Эволюция",
+                l1_pillar_3_desc: "Добавляйте новых агентов, рабочие процессы и возможности по мере роста системы.",
+                l1_footer: "↓ Ещё 2 слоя ниже — архитектура и техническая глубина",
+                l2_label: "Слой 2 · Исследование",
+                l2_title: "Вопросы и ответы",
+                l2_desc: "Мы отвечаем — но оставляем глубину за каждым ответом.",
+                l3_label: "Слой 3 · Архитектура",
+                l3_title: "Системный дизайн",
+                l3_desc: "Техническое раскрытие — для инженеров, архитекторов и deep-tech партнёров.",
+                l3_footer: "⚡ Event Fabric · Мульти-агентная оркестрация · Типизированные потоки · Zero-trust безопасность · Горизонтальное масштабирование",
+                footer_text: "TERSANESI · трёхслойное раскрытие системы",
+                footer_back: "← На главную"
+            },
+            tr: {
+                brand: "TERS<small>ANESI</small>",
+                sidebar_footer: "⟡ 9 katman",
+                back_to_main: "← Ana Sayfaya",
+                back_to_main_text: "Ana Sayfaya",
+                system_notes_title: "NOTLAR",
+                nav_overview: "Genel Bakış <span class=\"badge\">L1</span>",
+                nav_explore: "Keşfet <span class=\"badge\">L2</span>",
+                nav_architecture: "Mimari <span class=\"badge\">L3</span>",
+                l1_label: "Katman 1 · Kamu",
+                l1_title: "TERSANESI Nedir?",
+                l1_desc: "Araştırma, simülasyon ve dijital ortamlarda otonom AI sistemlerini koordine etmek için bir çalışma zamanı.",
+                l1_badge: "AI-doğal orkestrasyon",
+                l1_hero_title: "<span class=\"gold\">Birlikte çalışan</span> akıllı sistemler",
+                l1_hero_desc: "TERSANESI, AI ajanlarını, verileri, iş akışlarını ve sanal ortamları tek bir koordineli ekosistemde birleştirir — her şeyi sıfırdan yeniden inşa etmek zorunda kalmadan.",
+                l1_tag_1: "Araştırma ekipleri için",
+                l1_tag_2: "Simülasyon mühendisleri için",
+                l1_tag_3: "Dijital ekosistem oluşturucular için",
+                l1_pillar_1_num: "01",
+                l1_pillar_1_title: "Koordinasyon",
+                l1_pillar_1_desc: "Birden fazla AI ajanını, sistemi ve veri kaynağını tek bir akışta birleştirin.",
+                l1_pillar_2_num: "02",
+                l1_pillar_2_title: "Ölçeklendirme",
+                l1_pillar_2_desc: "Küçük araştırma ekiplerinden büyük simülasyonlara — yeniden tasarım olmadan büyüyün.",
+                l1_pillar_3_num: "03",
+                l1_pillar_3_title: "Evrim",
+                l1_pillar_3_desc: "Sisteminiz büyüdükçe yeni ajanlar, iş akışları ve yetenekler ekleyin.",
+                l1_footer: "↓ Aşağıda 2 katman daha — mimari ve teknik derinlik",
+                l2_label: "Katman 2 · Keşfet",
+                l2_title: "Sorular ve Cevaplar",
+                l2_desc: "Cevaplıyoruz — ancak her yanıtın arkasında derinlik bırakıyoruz.",
+                l3_label: "Katman 3 · Mimari",
+                l3_title: "Sistem Tasarımı",
+                l3_desc: "Teknik açıklama — mühendisler, mimarlar ve deep-tech ortakları için.",
+                l3_footer: "⚡ Event Fabric · Çoklu ajan orkestrasyonu · Tipli akışlar · Zero-trust güvenlik · Yatay ölçeklendirme",
+                footer_text: "TERSANESI · üç katmanlı sistem açıklaması",
+                footer_back: "← Ana Sayfaya"
+            }
+        };
+
+        // Fallback для непереведённых языков
+        const FALLBACK_LANG = 'en';
+
+        let currentLang = 'en';
+        let currentLayer = 'public';
+
+        // ============================================================
+        // 3. FAQ DATA — Layer 2
+        // ============================================================
+        const FAQ_DATA = [{
+            id: 'what_building',
+            en: { q: 'What is TERSANESI really building?', a: 'A runtime for coordinating autonomous AI systems across research, simulation and digital environments.<br><br><strong>→ Deep layer:</strong> Event-driven architecture with typed agent flows.' },
+            ru: { q: 'Что на самом деле строит TERSANESI?', a: 'Среду выполнения для координации автономных AI-систем в исследованиях, симуляциях и цифровых средах.<br><br><strong>→ Глубокий слой:</strong> Событийная архитектура с типизированными потоками агентов.' },
+            tr: { q: 'TERSANESI gerçekte ne inşa ediyor?', a: 'Araştırma, simülasyon ve dijital ortamlarda otonom AI sistemlerini koordine etmek için bir çalışma zamanı.<br><br><strong>→ Derin katman:</strong> Tipli ajan akışlarına sahip olay odaklı mimari.' }
+        }, {
+            id: 'platform_engine',
+            en: { q: 'Is this a platform, engine or ecosystem?', a: 'All three — depending on how deep you go.<br><br><strong>→ Surface level</strong> — it behaves like a platform.<br><strong>→ System level</strong> — it behaves like an execution kernel.' },
+            ru: { q: 'Это платформа, движок или экосистема?', a: 'Все три — в зависимости от того, как глубоко вы заходите.<br><br><strong>→ Поверхностный уровень</strong> — ведёт себя как платформа.<br><strong>→ Системный уровень</strong> — ведёт себя как ядро выполнения.' },
+            tr: { q: 'Bu bir platform, motor veya ekosistem mi?', a: 'Üçü de — ne kadar derine indiğinize bağlı.<br><br><strong>→ Yüzey seviyesi</strong> — bir platform gibi davranır.<br><strong>→ Sistem seviyesi</strong> — bir yürütme çekirdeği gibi davranır.' }
+        }, {
+            id: 'complexity',
+            en: { q: 'Why does it look so complex?', a: 'Because it is designed for systems that are not simple.<br><br><strong>→ Complexity is not added</strong> — it emerges from multi-agent interaction.' },
+            ru: { q: 'Почему это выглядит так сложно?', a: 'Потому что это создано для систем, которые не являются простыми.<br><br><strong>→ Сложность не добавляется</strong> — она возникает из мульти-агентного взаимодействия.' },
+            tr: { q: 'Neden bu kadar karmaşık görünüyor?', a: 'Çünkü basit olmayan sistemler için tasarlanmıştır.<br><br><strong>→ Karmaşıklık eklenmez</strong> — çoklu ajan etkileşiminden ortaya çıkar.' }
+        }, {
+            id: 'cavibara',
+            en: { q: 'What is Cavibara and Wellamatores?', a: 'Internal architecture layers.<br><br><strong>→ Cavibara</strong> — execution layer: API, UI, economy, dashboards.<br><strong>→ Wellamatores</strong> — simulation layer: narrative, world state, digital environments.' },
+            ru: { q: 'Что такое Cavibara и Wellamatores?', a: 'Внутренние слои архитектуры.<br><br><strong>→ Cavibara</strong> — слой выполнения: API, UI, экономика, панели.<br><strong>→ Wellamatores</strong> — слой симуляции: нарратив, состояние мира, цифровые среды.' },
+            tr: { q: 'Cavibara ve Wellamatores nedir?', a: 'İç mimari katmanları.<br><br><strong>→ Cavibara</strong> — yürütme katmanı: API, UI, ekonomi, panolar.<br><strong>→ Wellamatores</strong> — simülasyon katmanı: anlatı, dünya durumu, dijital ortamlar.' }
+        }, {
+            id: 'who_for',
+            en: { q: 'Who is this for?', a: 'Three primary groups:<br><br><strong>→ Research teams</strong> — AI, simulation, scientific workflows<br><strong>→ Digital ecosystem builders</strong> — virtual worlds, games, metaverses<br><strong>→ Enterprises</strong> — autonomous systems, AI products, automation' },
+            ru: { q: 'Для кого это?', a: 'Три основные группы:<br><br><strong>→ Исследовательские команды</strong> — AI, симуляции, научные процессы<br><strong>→ Создатели цифровых экосистем</strong> — виртуальные миры, игры, метавселенные<br><strong>→ Предприятия</strong> — автономные системы, AI-продукты, автоматизация' },
+            tr: { q: 'Bu kimler için?', a: 'Üç ana grup:<br><br><strong>→ Araştırma ekipleri</strong> — AI, simülasyon, bilimsel iş akışları<br><strong>→ Dijital ekosistem oluşturucular</strong> — sanal dünyalar, oyunlar, metaverse<br><strong>→ Kurumlar</strong> — otonom sistemler, AI ürünleri, otomasyon' }
+        }, {
+            id: 'next_step',
+            en: { q: 'What is the next step?', a: 'Explore the architecture layer below.<br><br><strong>→ Layer 3</strong> — technical disclosure: event fabric, multi-agent orchestration, typed streams, security model.' },
+            ru: { q: 'Какой следующий шаг?', a: 'Изучите слой архитектуры ниже.<br><br><strong>→ Слой 3</strong> — техническое раскрытие: событийная структура, мульти-агентная оркестрация, типизированные потоки, модель безопасности.' },
+            tr: { q: 'Bir sonraki adım nedir?', a: 'Aşağıdaki mimari katmanını keşfedin.<br><br><strong>→ Katman 3</strong> — teknik açıklama: olay dokusu, çoklu ajan orkestrasyonu, tipli akışlar, güvenlik modeli.' }
+        }];
+
+        // ============================================================
+        // 4. DEEP DATA — Layer 3
+        // ============================================================
+        const DEEP_DATA = [{
+            icon: '⚡',
+            title: 'Event Fabric',
+            desc: 'Core communication backbone. Decoupled, scalable, resilient. Enables asynchronous distributed intelligence coordination.',
+            spec: '10k+ events/sec · horizontal'
+        }, {
+            icon: '🔄',
+            title: 'Multi-Agent Orchestration',
+            desc: 'Autonomous agents with specialized capabilities. Complex behaviors emerge from interactions, not from central control.',
+            spec: '1000+ agents · swarm logic'
+        }, {
+            icon: '📋',
+            title: 'Typed Streams',
+            desc: 'AgentEvent → actions · StateSync → world state · EconomicTx → resource flow · NarrativeEvent → world expansion.',
+            spec: 'strict schemas · deterministic'
+        }, {
+            icon: '🔐',
+            title: 'Zero-Trust Security',
+            desc: 'Every interaction is authenticated and authorized. TLS for transit, AES-256 for storage. Quantum-ready cryptographic algorithms.',
+            spec: 'post-quantum · audit trails'
+        }, {
+            icon: '📦',
+            title: 'Multi-Model Persistence',
+            desc: 'Event Store (immutable log) · State Store (current state) · Knowledge Store (semantic indexing) · Checkpoint Store (snapshots).',
+            spec: 'event sourcing · time-travel'
+        }, {
+            icon: '🌍',
+            title: 'Horizontal Scaling',
+            desc: 'Sharding by tenant/domain · auto-scaling based on metrics · multi-region active-active clusters · edge support.',
+            spec: '1M+ events/sec · global'
+        }, {
+            icon: '🔌',
+            title: 'API Ecosystem',
+            desc: 'REST · WebSocket · GraphQL · gRPC · Agent SDK · Plugin System · Webhooks. All versioned, documented, and monitored.',
+            spec: 'extensible · monitored'
+        }];
+
+        // ============================================================
+        // 5. ФУНКЦИИ ПЕРЕВОДА
+        // ============================================================
+        function getTranslation(key) {
+            const langData = TRANSLATIONS[currentLang] || TRANSLATIONS[FALLBACK_LANG];
+            return langData[key] || TRANSLATIONS[FALLBACK_LANG][key] || key;
+        }
+
+        function applyTranslations() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                const translation = getTranslation(key);
+                if (translation) {
+                    if (translation.includes('<') && translation.includes('>')) {
+                        el.innerHTML = translation;
+                    } else {
+                        el.textContent = translation;
+                    }
+                }
+            });
+        }
+
+        // ============================================================
+        // 6. РЕНДЕР
+        // ============================================================
+        function renderSidebar() {
+            const container = document.getElementById('langList');
+            container.innerHTML = '';
+            LANGUAGES.forEach(lang => {
+                const btn = document.createElement('button');
+                btn.className = `lang-item${lang.code === currentLang ? ' active' : ''}`;
+                btn.dataset.lang = lang.code;
+                btn.innerHTML = `
+                    <span class="flag">${lang.flag}</span>
+                    <span class="label">${lang.native}</span>
+                    <span class="code">${lang.code}</span>
+                    <span class="tooltip">${lang.label}</span>
+                `;
+                btn.addEventListener('click', () => { setLanguage(lang.code); });
+                container.appendChild(btn);
+            });
+        }
+
+        function renderFAQ() {
+            const container = document.getElementById('faqContainer');
+            container.innerHTML = '';
+            FAQ_DATA.forEach(item => {
+                const content = item[currentLang] || item.en;
+                const card = document.createElement('div');
+                card.className = 'faq-card';
+                card.innerHTML = `
+                    <div class="q">
+                        <span class="marker">⏺</span>
+                        ${content.q}
+                        <span class="tag">L2</span>
+                    </div>
+                    <div class="a">${content.a}</div>
+                    <div class="deep-hint" data-i18n="faq_hint">↓ see Layer 3 for technical depth</div>
+                `;
+                container.appendChild(card);
+            });
+            // Применяем переводы к новым элементам
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                const translation = getTranslation(key);
+                if (translation) {
+                    if (translation.includes('<') && translation.includes('>')) {
+                        el.innerHTML = translation;
+                    } else {
+                        el.textContent = translation;
+                    }
+                }
+            });
+        }
+
+        function renderDeep() {
+            const container = document.getElementById('deepContainer');
+            container.innerHTML = '';
+            DEEP_DATA.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'deep-card';
+                card.innerHTML = `
+                    <div class="icon">${item.icon}</div>
+                    <h4>${item.title}</h4>
+                    <p>${item.desc}</p>
+                    <div class="spec">${item.spec}</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function updateLangIndicator() {
+            const found = LANGUAGES.find(l => l.code === currentLang);
+            document.getElementById('currentLangLabel').textContent = found ? found.native : '—';
+            document.getElementById('currentLangCode').textContent = `(${currentLang})`;
+        }
+
+        function setLanguage(code) {
+            currentLang = code;
+            document.querySelectorAll('.lang-item').forEach(el => {
+                el.classList.toggle('active', el.dataset.lang === code);
+            });
+            renderFAQ();
+            applyTranslations();
+            updateLangIndicator();
+            localStorage.setItem('tersanesi_lang', code);
+        }
+
+        function setLayer(layer) {
+            currentLayer = layer;
+            document.querySelectorAll('.layer-nav a').forEach(el => {
+                el.classList.toggle('active', el.dataset.layer === layer);
+            });
+            document.querySelectorAll('.layer-section').forEach(el => {
+                el.classList.toggle('hidden', el.id !== `layer-${layer}`);
+            });
+            localStorage.setItem('tersanesi_layer', layer);
+        }
+
+        // ============================================================
+        // 7. ИНИЦИАЛИЗАЦИЯ
+        // ============================================================
+        function init() {
+            const savedLang = localStorage.getItem('tersanesi_lang');
+            if (savedLang && LANGUAGES.some(l => l.code === savedLang)) {
+                currentLang = savedLang;
+            } else {
+                const browserLang = navigator.language.split('-')[0];
+                if (LANGUAGES.some(l => l.code === browserLang)) {
+                    currentLang = browserLang;
+                }
+            }
+
+            const savedLayer = localStorage.getItem('tersanesi_layer');
+            if (savedLayer && ['public', 'explore', 'deep'].includes(savedLayer)) {
+                currentLayer = savedLayer;
+            }
+
+            renderSidebar();
+            renderFAQ();
+            renderDeep();
+            applyTranslations();
+            updateLangIndicator();
+
+            // Навигация
+            document.querySelectorAll('.layer-nav a').forEach(el => {
+                el.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    setLayer(el.dataset.layer);
+                });
+            });
+
+            setLayer(currentLayer);
+        }
+
+        init();
+    </script>
+</body>
+</html>
