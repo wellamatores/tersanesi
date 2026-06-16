@@ -405,9 +405,74 @@
             color: var(--text-muted);
             transition: 0.2s;
             letter-spacing: 0.02em;
+            white-space: nowrap;
         }
         .header .nav a:hover {
             color: var(--text);
+        }
+        .header .nav a.gold-link {
+            color: var(--gold);
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            background: rgba(255, 215, 0, 0.04);
+        }
+        .header .nav a.gold-link:hover {
+            background: rgba(255, 215, 0, 0.08);
+            border-color: var(--gold);
+        }
+        .header .nav .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .header .nav .dropdown .dropbtn {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font);
+            letter-spacing: 0.02em;
+            transition: 0.2s;
+            padding: 0;
+        }
+        .header .nav .dropdown .dropbtn:hover {
+            color: var(--text);
+        }
+        .header .nav .dropdown .dropbtn::after {
+            content: " ▾";
+            font-size: 0.6rem;
+            opacity: 0.5;
+        }
+        .header .nav .dropdown .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(2, 4, 18, 0.95);
+            backdrop-filter: blur(18px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 0.4rem 0;
+            min-width: 160px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
+            margin-top: 0.4rem;
+        }
+        .header .nav .dropdown .dropdown-content a {
+            display: block;
+            padding: 0.4rem 1.2rem;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+        .header .nav .dropdown .dropdown-content a:hover {
+            background: rgba(0, 200, 255, 0.06);
+            color: var(--text);
+        }
+        .header .nav .dropdown:hover .dropdown-content {
+            display: block;
         }
 
         /* Mode Toggle */
@@ -544,6 +609,14 @@
         .btn-ghost:hover {
             background: rgba(0, 200, 255, 0.06);
             border-color: var(--cyan);
+        }
+        .btn-system {
+            border-color: rgba(255, 215, 0, 0.2);
+            color: var(--gold);
+        }
+        .btn-system:hover {
+            background: rgba(255, 215, 0, 0.06);
+            border-color: var(--gold);
         }
         .hero .meta {
             margin-top: 1.6rem;
@@ -684,6 +757,126 @@
             color: var(--text);
         }
 
+        /* ===== NEW SECTIONS ===== */
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+        .solution-card {
+            background: var(--surface);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.6rem 1.4rem;
+            transition: 0.3s;
+            text-align: center;
+        }
+        .solution-card:hover {
+            border-color: var(--border-active);
+            transform: translateY(-3px);
+        }
+        .solution-card .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .solution-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+        .solution-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+        .pricing-card {
+            background: var(--surface);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.8rem 1.6rem;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .pricing-card:hover {
+            border-color: var(--border-active);
+            transform: translateY(-3px);
+        }
+        .pricing-card.featured {
+            border-color: var(--gold);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.05);
+        }
+        .pricing-card .price {
+            font-size: 2.2rem;
+            font-weight: 700;
+            font-family: var(--mono);
+            color: var(--gold);
+            margin: 0.3rem 0;
+        }
+        .pricing-card .price small {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+        .pricing-card .features {
+            list-style: none;
+            padding: 0.5rem 0;
+            text-align: left;
+        }
+        .pricing-card .features li {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            padding: 0.2rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        .pricing-card .features li::before {
+            content: "✓ ";
+            color: var(--cyan);
+        }
+        .pricing-card .btn {
+            margin-top: 0.5rem;
+            width: 100%;
+        }
+
+        /* ===== DEVELOPERS ===== */
+        .dev-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        .dev-card {
+            background: var(--surface);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.6rem 1.4rem;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .dev-card:hover {
+            border-color: var(--border-active);
+            transform: translateY(-3px);
+        }
+        .dev-card .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .dev-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .dev-card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
         /* ===== CTA FINAL ===== */
         .cta-final {
             text-align: center;
@@ -724,6 +917,7 @@
         .footer .links {
             display: flex;
             gap: 1.2rem;
+            flex-wrap: wrap;
         }
         .footer .links a {
             color: var(--text-muted);
@@ -731,6 +925,12 @@
         }
         .footer .links a:hover {
             color: var(--text);
+        }
+        .footer .links a.gold {
+            color: var(--gold);
+        }
+        .footer .links a.gold:hover {
+            opacity: 0.8;
         }
 
         /* ===== MODE SWITCH ===== */
@@ -749,6 +949,14 @@
         }
 
         /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .header .nav a:not(.gold-link):not(.btn-primary) {
+                display: none;
+            }
+            .header .nav .dropdown .dropbtn {
+                display: none;
+            }
+        }
         @media (max-width: 820px) {
             .lang-sidebar {
                 width: 0;
@@ -776,15 +984,22 @@
             section {
                 padding: 3rem 5%;
             }
-            .header .nav a {
+            .header .nav a:not(.gold-link):not(.btn-primary) {
                 display: none;
             }
             .header .nav .mode-toggle {
                 margin-left: auto;
             }
+            .header .nav .gold-link {
+                font-size: 0.65rem;
+                padding: 0.15rem 0.6rem;
+            }
             .footer {
                 flex-direction: column;
                 text-align: center;
+            }
+            .pricing-grid {
+                grid-template-columns: 1fr;
             }
         }
         @media (max-width: 500px) {
@@ -802,6 +1017,14 @@
             }
             .value-card {
                 padding: 1.2rem;
+            }
+            .header .nav .gold-link {
+                font-size: 0.55rem;
+                padding: 0.1rem 0.5rem;
+            }
+            .header .nav .mode-toggle button {
+                font-size: 0.5rem;
+                padding: 0.15rem 0.5rem;
             }
         }
     </style>
@@ -846,114 +1069,299 @@
                 <span>runtime</span>
             </div>
             <div class="nav">
-                <a href="#core">Core</a>
-                <a href="#architecture">Architecture</a>
-                <a href="#use-cases">Use Cases</a>
+                <a href="#product" data-i18n="nav_product">Product</a>
+                <a href="#core" data-i18n="nav_core">Core</a>
+                <a href="#architecture" data-i18n="nav_architecture">Architecture</a>
+                
+                <div class="dropdown">
+                    <button class="dropbtn" data-i18n="nav_resources">Resources</button>
+                    <div class="dropdown-content">
+                        <a href="#developers" data-i18n="nav_developers">Developers</a>
+                        <a href="#solutions" data-i18n="nav_solutions">Solutions</a>
+                        <a href="#docs" data-i18n="nav_docs">Docs</a>
+                        <a href="system-notes.html" data-i18n="nav_system_notes" style="color: var(--gold);">📘 System Notes</a>
+                    </div>
+                </div>
+                
+                <a href="#pricing" data-i18n="nav_pricing">Pricing</a>
+                <a href="system-notes.html" class="gold-link" data-i18n="nav_system_notes_short">📘 Notes</a>
                 <div class="mode-toggle" id="modeToggle">
-                    <button class="active" data-mode="developer">Dev</button>
-                    <button data-mode="investor">Inv</button>
+                    <button class="active" data-mode="developer" data-i18n="nav_dev">Dev</button>
+                    <button data-mode="investor" data-i18n="nav_inv">Inv</button>
                 </div>
             </div>
         </header>
 
+        <!-- ========================================================== -->
         <!-- HERO -->
+        <!-- ========================================================== -->
         <section class="hero" id="hero">
             <div class="card">
-                <div class="badge">v.Orbit.3 · typed event fabric</div>
+                <div class="badge" data-i18n="hero_badge">v.Orbit.3 · typed event fabric</div>
                 <h1>
-                    AI-Native Runtime<br />
-                    for <span class="highlight">Multi-Agent Worlds</span>
+                    <span data-i18n="hero_title_1">AI-Native Runtime</span><br />
+                    <span data-i18n="hero_title_2">for <span class="highlight">Multi-Agent Worlds</span></span>
                 </h1>
-                <p class="sub">
+                <p class="sub" data-i18n="hero_sub">
                     Typed event-driven architecture for MMO systems, AI agents,
                     and dynamic digital ecosystems.
                 </p>
                 <div class="cta-group">
-                    <a href="#" class="btn btn-primary">Deploy Runtime →</a>
-                    <a href="#architecture" class="btn btn-ghost">Explore Architecture</a>
+                    <a href="#" class="btn btn-primary" data-i18n="hero_cta_primary">Deploy Runtime →</a>
+                    <a href="#architecture" class="btn btn-ghost" data-i18n="hero_cta_ghost">Explore Architecture</a>
+                    <a href="system-notes.html" class="btn btn-system" data-i18n="hero_cta_system">📘 System Notes</a>
                 </div>
-                <div class="meta">θ · TERSANESI · kernel v3.1</div>
+                <div class="meta" data-i18n="hero_meta">θ · TERSANESI · kernel v3.1</div>
             </div>
         </section>
 
+        <!-- ========================================================== -->
+        <!-- PRODUCT -->
+        <!-- ========================================================== -->
+        <section id="product">
+            <div class="section-label" data-i18n="product_label">Product</div>
+            <h2 class="section-title" data-i18n="product_title">What is TERSANESI?</h2>
+            <p class="section-desc" data-i18n="product_desc">A runtime for coordinating autonomous AI systems across research, simulation, and digital environments.</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                <div class="value-card">
+                    <div class="num" data-i18n="product_feature_1_num">01</div>
+                    <h3 data-i18n="product_feature_1_title">Coordinate</h3>
+                    <p data-i18n="product_feature_1_desc">Connect multiple AI agents, systems, and data sources into a unified flow.</p>
+                </div>
+                <div class="value-card">
+                    <div class="num" data-i18n="product_feature_2_num">02</div>
+                    <h3 data-i18n="product_feature_2_title">Scale</h3>
+                    <p data-i18n="product_feature_2_desc">From small research teams to large simulations — grow without redesign.</p>
+                </div>
+                <div class="value-card">
+                    <div class="num" data-i18n="product_feature_3_num">03</div>
+                    <h3 data-i18n="product_feature_3_title">Evolve</h3>
+                    <p data-i18n="product_feature_3_desc">Add new agents, workflows, and capabilities as your system grows.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================== -->
         <!-- CORE VALUES -->
+        <!-- ========================================================== -->
         <section id="core">
-            <div class="section-label">Core</div>
-            <h2 class="section-title">Three Pillars</h2>
-            <p class="section-desc">The foundational capabilities that power the runtime.</p>
+            <div class="section-label" data-i18n="core_label">Core</div>
+            <h2 class="section-title" data-i18n="core_title">Three Pillars</h2>
+            <p class="section-desc" data-i18n="core_desc">The foundational capabilities that power the runtime.</p>
             <div class="grid-3">
                 <div class="value-card">
-                    <div class="num">01</div>
-                    <h3>AI-Native Runtime</h3>
-                    <p>Event-driven inference engine for autonomous agents with typed state streams.</p>
+                    <div class="num" data-i18n="core_pillar_1_num">01</div>
+                    <h3 data-i18n="core_pillar_1_title">AI-Native Runtime</h3>
+                    <p data-i18n="core_pillar_1_desc">Event-driven inference engine for autonomous agents with typed state streams.</p>
                 </div>
                 <div class="value-card">
-                    <div class="num">02</div>
-                    <h3>Multi-Agent Orchestration</h3>
-                    <p>State synchronization, feedback loops, and swarm logic at scale.</p>
+                    <div class="num" data-i18n="core_pillar_2_num">02</div>
+                    <h3 data-i18n="core_pillar_2_title">Multi-Agent Orchestration</h3>
+                    <p data-i18n="core_pillar_2_desc">State synchronization, feedback loops, and swarm logic at scale.</p>
                 </div>
                 <div class="value-card">
-                    <div class="num">03</div>
-                    <h3>Scalable Simulation Layer</h3>
-                    <p>MMO / metaverse / persistent world infrastructure built for concurrency.</p>
+                    <div class="num" data-i18n="core_pillar_3_num">03</div>
+                    <h3 data-i18n="core_pillar_3_title">Scalable Simulation Layer</h3>
+                    <p data-i18n="core_pillar_3_desc">MMO / metaverse / persistent world infrastructure built for concurrency.</p>
                 </div>
             </div>
         </section>
 
+        <!-- ========================================================== -->
         <!-- ARCHITECTURE -->
+        <!-- ========================================================== -->
         <section id="architecture">
-            <div class="section-label">System</div>
-            <h2 class="section-title">Architecture</h2>
-            <p class="section-desc">Three layers that define the runtime stack.</p>
+            <div class="section-label" data-i18n="arch_label">System</div>
+            <h2 class="section-title" data-i18n="arch_title">Architecture</h2>
+            <p class="section-desc" data-i18n="arch_desc">Three layers that define the runtime stack.</p>
             <div class="arch-grid">
                 <div class="arch-card">
-                    <div class="layer-tag">kernel</div>
-                    <h4>TERSANESI</h4>
-                    <p>Orchestration · runtime logic · core kernel</p>
+                    <div class="layer-tag" data-i18n="arch_layer_1_tag">kernel</div>
+                    <h4 data-i18n="arch_layer_1_title">TERSANESI</h4>
+                    <p data-i18n="arch_layer_1_desc">Orchestration · runtime logic · core kernel</p>
                 </div>
                 <div class="arch-card">
-                    <div class="layer-tag">execution</div>
-                    <h4>Cavibara</h4>
-                    <p>API · UI · economy · dashboards</p>
+                    <div class="layer-tag" data-i18n="arch_layer_2_tag">execution</div>
+                    <h4 data-i18n="arch_layer_2_title">Cavibara</h4>
+                    <p data-i18n="arch_layer_2_desc">API · UI · economy · dashboards</p>
                 </div>
                 <div class="arch-card">
-                    <div class="layer-tag">world</div>
-                    <h4>Wellamatores</h4>
-                    <p>Narrative · simulation · world state</p>
+                    <div class="layer-tag" data-i18n="arch_layer_3_tag">world</div>
+                    <h4 data-i18n="arch_layer_3_title">Wellamatores</h4>
+                    <p data-i18n="arch_layer_3_desc">Narrative · simulation · world state</p>
                 </div>
             </div>
 
             <!-- Data Model (Developer mode) -->
             <div class="mode-dev" style="margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--border);">
-                <div style="font-size:0.7rem; font-family:var(--mono); color:var(--text-muted); margin-bottom:0.8rem; letter-spacing:0.04em;">TYPED STREAMS</div>
+                <div style="font-size:0.7rem; font-family:var(--mono); color:var(--text-muted); margin-bottom:0.8rem; letter-spacing:0.04em;" data-i18n="arch_typed_streams">TYPED STREAMS</div>
                 <div style="display:flex; flex-wrap:wrap; gap:0.8rem;">
-                    <span style="font-family:var(--mono); font-size:0.7rem; background:rgba(255,255,255,0.03); padding:0.2rem 1rem; border-radius:40px; border:1px solid var(--border);">AgentEvent → actions</span>
-                    <span style="font-family:var(--mono); font-size:0.7rem; background:rgba(255,255,255,0.03); padding:0.2rem 1rem; border-radius:40px; border:1px solid var(--border);">StateSync → world state</span>
-                    <span style="font-family:var(--mono); font-size:0.7rem; background:rgba(255,255,255,0.03); padding:0.2rem 1rem; border-radius:40px; border:1px solid var(--border);">EconomicTx → resource flow</span>
-                    <span style="font-family:var(--mono); font-size:0.7rem; background:rgba(255,255,255,0.03); padding:0.2rem 1rem; border-radius:40px; border:1px solid var(--border);">NarrativeEvent → world expansion</span>
+                    <span style="font-family:var(--mono); font-size:0.7rem; background:rgba(255,255,255,0.03); padding:0.2rem 1rem; border-radius:40px; border:1px solid var(--border);" data-i18n="arch_stream_1">AgentEvent → actions</span>
+                    <span style="font-family:var(--mono); font-size:0.7rem; background:rgba(255,255,255,0.03); padding:0.2rem 1rem; border-radius:40px; border:1px solid var(--border);" data-i18n="arch_stream_2">StateSync → world state</span>
+                    <span style="font-family:var(--mono); font-size:0.7rem; background:rgba(255,255,255,0.03); padding:0.2rem 1rem; border-radius:40px; border:1px solid var(--border);" data-i18n="arch_stream_3">EconomicTx → resource flow</span>
+                    <span style="font-family:var(--mono); font-size:0.7rem; background:rgba(255,255,255,0.03); padding:0.2rem 1rem; border-radius:40px; border:1px solid var(--border);" data-i18n="arch_stream_4">NarrativeEvent → world expansion</span>
                 </div>
             </div>
 
             <!-- Use Cases (Investor mode) -->
             <div class="mode-inv" style="margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--border);">
-                <div style="font-size:0.7rem; font-family:var(--mono); color:var(--text-muted); margin-bottom:0.8rem; letter-spacing:0.04em;">STRATEGIC APPLICATIONS</div>
+                <div style="font-size:0.7rem; font-family:var(--mono); color:var(--text-muted); margin-bottom:0.8rem; letter-spacing:0.04em;" data-i18n="arch_strategic">STRATEGIC APPLICATIONS</div>
                 <div style="display:flex; flex-wrap:wrap; gap:0.8rem;">
-                    <span style="font-family:var(--mono); font-size:0.7rem; background:rgba(255,255,255,0.03); padding:0.2rem 1rem; border-radius:40px; border:1px solid var(--border);">AI Simulation Platforms</span>
-                    <span style="font-family:var(--mono); font-size:0.7rem; background:rgba(255,255,255,0.03); padding:0.2rem 1rem; border-radius:40px; border:1px solid var(--border);">MMO Backend Infrastructure</span>
-                    <span style="font-family:var(--mono); font-size:0.7rem; background:rgba(255,255,255,0.03); padding:0.2rem 1rem; border-radius:40px; border:1px solid var(--border);">Metaverse Systems</span>
-                    <span style="font-family:var(--mono); font-size:0.7rem; background:rgba(255,255,255,0.03); padding:0.2rem 1rem; border-radius:40px; border:1px solid var(--border);">Multi-Agent Research</span>
-                    <span style="font-family:var(--mono); font-size:0.7rem; background:rgba(255,255,255,0.03); padding:0.2rem 1rem; border-radius:40px; border:1px solid var(--border);">Autonomous Economic Models</span>
+                    <span style="font-family:var(--mono); font-size:0.7rem; background:rgba(255,255,255,0.03); padding:0.2rem 1rem; border-radius:40px; border:1px solid var(--border);" data-i18n="arch_strategic_1">AI Simulation Platforms</span>
+                    <span style="font-family:var(--mono); font-size:0.7rem; background:rgba(255,255,255,0.03); padding:0.2rem 1rem; border-radius:40px; border:1px solid var(--border);" data-i18n="arch_strategic_2">MMO Backend Infrastructure</span>
+                    <span style="font-family:var(--mono); font-size:0.7rem; background:rgba(255,255,255,0.03); padding:0.2rem 1rem; border-radius:40px; border:1px solid var(--border);" data-i18n="arch_strategic_3">Metaverse Systems</span>
+                    <span style="font-family:var(--mono); font-size:0.7rem; background:rgba(255,255,255,0.03); padding:0.2rem 1rem; border-radius:40px; border:1px solid var(--border);" data-i18n="arch_strategic_4">Multi-Agent Research</span>
+                    <span style="font-family:var(--mono); font-size:0.7rem; background:rgba(255,255,255,0.03); padding:0.2rem 1rem; border-radius:40px; border:1px solid var(--border);" data-i18n="arch_strategic_5">Autonomous Economic Models</span>
                 </div>
             </div>
         </section>
 
-        <!-- TECH STACK + USE CASES -->
-        <section id="use-cases">
+        <!-- ========================================================== -->
+        <!-- SOLUTIONS -->
+        <!-- ========================================================== -->
+        <section id="solutions">
+            <div class="section-label" data-i18n="solutions_label">Solutions</div>
+            <h2 class="section-title" data-i18n="solutions_title">Industry Solutions</h2>
+            <p class="section-desc" data-i18n="solutions_desc">TERSANESI adapts to your domain — from gaming to scientific research.</p>
+            <div class="solutions-grid">
+                <div class="solution-card">
+                    <div class="icon">🎮</div>
+                    <h4 data-i18n="solutions_1_title">Gaming &amp; MMO</h4>
+                    <p data-i18n="solutions_1_desc">Scalable backend for persistent worlds, AI-driven NPCs, and real-time player interactions.</p>
+                </div>
+                <div class="solution-card">
+                    <div class="icon">🔬</div>
+                    <h4 data-i18n="solutions_2_title">Research &amp; Simulation</h4>
+                    <p data-i18n="solutions_2_desc">Multi-agent systems for scientific modeling, climate simulation, and computational social science.</p>
+                </div>
+                <div class="solution-card">
+                    <div class="icon">🌐</div>
+                    <h4 data-i18n="solutions_3_title">Metaverse &amp; Virtual Worlds</h4>
+                    <p data-i18n="solutions_3_desc">Infrastructure for digital twins, virtual economies, and persistent social spaces.</p>
+                </div>
+                <div class="solution-card">
+                    <div class="icon">🏢</div>
+                    <h4 data-i18n="solutions_4_title">Enterprise AI</h4>
+                    <p data-i18n="solutions_4_desc">Autonomous workflows, intelligent agents, and automated decision-making systems.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================== -->
+        <!-- DEVELOPERS -->
+        <!-- ========================================================== -->
+        <section id="developers">
+            <div class="section-label" data-i18n="dev_label">Developers</div>
+            <h2 class="section-title" data-i18n="dev_title">Developer Tools</h2>
+            <p class="section-desc" data-i18n="dev_desc">Everything you need to build and deploy AI-native applications.</p>
+            <div class="dev-grid">
+                <div class="dev-card">
+                    <div class="icon">📦</div>
+                    <h4 data-i18n="dev_1_title">SDK</h4>
+                    <p data-i18n="dev_1_desc">Full-featured SDKs for Python, TypeScript, Go, and Rust.</p>
+                </div>
+                <div class="dev-card">
+                    <div class="icon">🔌</div>
+                    <h4 data-i18n="dev_2_title">API</h4>
+                    <p data-i18n="dev_2_desc">REST, WebSocket, GraphQL, and gRPC interfaces.</p>
+                </div>
+                <div class="dev-card">
+                    <div class="icon">🛠️</div>
+                    <h4 data-i18n="dev_3_title">CLI Tools</h4>
+                    <p data-i18n="dev_3_desc">Command-line tools for deployment, monitoring, and debugging.</p>
+                </div>
+                <div class="dev-card">
+                    <div class="icon">📚</div>
+                    <h4 data-i18n="dev_4_title">Documentation</h4>
+                    <p data-i18n="dev_4_desc">Comprehensive guides, examples, and API references.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================== -->
+        <!-- PRICING -->
+        <!-- ========================================================== -->
+        <section id="pricing">
+            <div class="section-label" data-i18n="pricing_label">Pricing</div>
+            <h2 class="section-title" data-i18n="pricing_title">Choose Your Plan</h2>
+            <p class="section-desc" data-i18n="pricing_desc">Flexible pricing for teams of all sizes — from startups to enterprises.</p>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h4 data-i18n="pricing_plan_1_name">Starter</h4>
+                    <div class="price">$0 <small data-i18n="pricing_plan_1_period">/mo</small></div>
+                    <ul class="features">
+                        <li data-i18n="pricing_plan_1_feature_1">1,000 agent requests / day</li>
+                        <li data-i18n="pricing_plan_1_feature_2">3 agents max</li>
+                        <li data-i18n="pricing_plan_1_feature_3">Community support</li>
+                        <li data-i18n="pricing_plan_1_feature_4">Basic analytics</li>
+                    </ul>
+                    <a href="#" class="btn btn-ghost" data-i18n="pricing_plan_1_cta">Get Started</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h4 data-i18n="pricing_plan_2_name">Pro</h4>
+                    <div class="price">$49 <small data-i18n="pricing_plan_2_period">/mo</small></div>
+                    <ul class="features">
+                        <li data-i18n="pricing_plan_2_feature_1">100,000 agent requests / day</li>
+                        <li data-i18n="pricing_plan_2_feature_2">50 agents max</li>
+                        <li data-i18n="pricing_plan_2_feature_3">Priority support</li>
+                        <li data-i18n="pricing_plan_2_feature_4">Advanced analytics</li>
+                        <li data-i18n="pricing_plan_2_feature_5">Custom integrations</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" data-i18n="pricing_plan_2_cta">Start Trial</a>
+                </div>
+                <div class="pricing-card">
+                    <h4 data-i18n="pricing_plan_3_name">Enterprise</h4>
+                    <div class="price" data-i18n="pricing_plan_3_price">Custom</div>
+                    <ul class="features">
+                        <li data-i18n="pricing_plan_3_feature_1">Unlimited requests</li>
+                        <li data-i18n="pricing_plan_3_feature_2">Unlimited agents</li>
+                        <li data-i18n="pricing_plan_3_feature_3">Dedicated support</li>
+                        <li data-i18n="pricing_plan_3_feature_4">SLA guarantee</li>
+                        <li data-i18n="pricing_plan_3_feature_5">On-premise deployment</li>
+                        <li data-i18n="pricing_plan_3_feature_6">Custom SLAs</li>
+                    </ul>
+                    <a href="#" class="btn btn-ghost" data-i18n="pricing_plan_3_cta">Contact Sales</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================== -->
+        <!-- DOCS (developer mode) -->
+        <!-- ========================================================== -->
+        <div class="mode-dev" style="padding: 0 6%; max-width: 1280px; margin: 0 auto;">
+            <section id="docs" style="padding: 3rem 0;">
+                <div class="section-label" data-i18n="docs_label">Documentation</div>
+                <h2 class="section-title" data-i18n="docs_title">Technical Documentation</h2>
+                <p class="section-desc" data-i18n="docs_desc">Deep technical resources for architects and engineers.</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
+                    <div class="dev-card">
+                        <div class="icon">📖</div>
+                        <h4 data-i18n="docs_1_title">Architecture Guide</h4>
+                        <p data-i18n="docs_1_desc">Deep dive into system design and data flow.</p>
+                    </div>
+                    <div class="dev-card">
+                        <div class="icon">⚡</div>
+                        <h4 data-i18n="docs_2_title">API Reference</h4>
+                        <p data-i18n="docs_2_desc">Complete specification of all endpoints and schemas.</p>
+                    </div>
+                    <div class="dev-card">
+                        <div class="icon">🧪</div>
+                        <h4 data-i18n="docs_3_title">Examples &amp; Tutorials</h4>
+                        <p data-i18n="docs_3_desc">Step-by-step guides and sample projects.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ========================================================== -->
+        <!-- USE CASES (for both modes) -->
+        <!-- ========================================================== -->
+        <section id="use-cases" style="padding-top: 0;">
             <!-- Developer: Tech Stack -->
             <div class="mode-dev">
-                <div class="section-label">Stack</div>
-                <h2 class="section-title">Technology Stack</h2>
-                <p class="section-desc">Runtime agnostic — cloud, edge, or local swarm.</p>
+                <div class="section-label" data-i18n="stack_label">Stack</div>
+                <h2 class="section-title" data-i18n="stack_title">Technology Stack</h2>
+                <p class="section-desc" data-i18n="stack_desc">Runtime agnostic — cloud, edge, or local swarm.</p>
                 <div class="stack-list">
                     <span>React</span>
                     <span>WebSocket</span>
@@ -962,42 +1370,59 @@
                     <span>WebGL</span>
                     <span>Python</span>
                     <span>Go</span>
+                    <span>Rust</span>
+                    <span>TypeScript</span>
+                    <span>Redis</span>
+                    <span>Kafka</span>
+                    <span>Docker</span>
+                    <span>Kubernetes</span>
                 </div>
             </div>
 
             <!-- Investor: Use Cases -->
             <div class="mode-inv">
-                <div class="section-label">Applications</div>
-                <h2 class="section-title">Use Cases</h2>
-                <p class="section-desc">Where TERSANESI delivers immediate value.</p>
+                <div class="section-label" data-i18n="use_cases_label">Applications</div>
+                <h2 class="section-title" data-i18n="use_cases_title">Use Cases</h2>
+                <p class="section-desc" data-i18n="use_cases_desc">Where TERSANESI delivers immediate value.</p>
                 <div class="use-grid">
-                    <div class="use-item">AI Simulation Platforms</div>
-                    <div class="use-item">MMO Backend Infrastructure</div>
-                    <div class="use-item">Metaverse Systems</div>
-                    <div class="use-item">Multi-Agent Research</div>
-                    <div class="use-item">Autonomous Economic Models</div>
+                    <div class="use-item" data-i18n="use_case_1">AI Simulation Platforms</div>
+                    <div class="use-item" data-i18n="use_case_2">MMO Backend Infrastructure</div>
+                    <div class="use-item" data-i18n="use_case_3">Metaverse Systems</div>
+                    <div class="use-item" data-i18n="use_case_4">Multi-Agent Research</div>
+                    <div class="use-item" data-i18n="use_case_5">Autonomous Economic Models</div>
+                    <div class="use-item" data-i18n="use_case_6">Digital Twin Platforms</div>
+                    <div class="use-item" data-i18n="use_case_7">AI-Driven Workflows</div>
+                    <div class="use-item" data-i18n="use_case_8">Predictive Simulation</div>
                 </div>
             </div>
         </section>
 
+        <!-- ========================================================== -->
         <!-- FINAL CTA -->
+        <!-- ========================================================== -->
         <div class="cta-final">
-            <h2>Build AI-native worlds.</h2>
-            <p>Deploy scalable agent ecosystems in real time.</p>
+            <h2 data-i18n="cta_title">Build AI-native worlds.</h2>
+            <p data-i18n="cta_desc">Deploy scalable agent ecosystems in real time.</p>
             <div class="btns">
-                <a href="#" class="btn btn-primary">Get SDK</a>
-                <a href="#" class="btn btn-ghost">Run Demo</a>
-                <a href="#" class="btn" style="border-color:var(--border);">View Docs</a>
+                <a href="#" class="btn btn-primary" data-i18n="cta_btn_1">Get SDK</a>
+                <a href="#" class="btn btn-ghost" data-i18n="cta_btn_2">Run Demo</a>
+                <a href="#" class="btn" style="border-color:var(--border);" data-i18n="cta_btn_3">View Docs</a>
+                <a href="system-notes.html" class="btn btn-system" data-i18n="cta_btn_4">📘 System Notes</a>
             </div>
         </div>
 
+        <!-- ========================================================== -->
         <!-- FOOTER -->
+        <!-- ========================================================== -->
         <footer class="footer">
-            <div>© 2026 TERSANESI · AI-native runtime</div>
+            <div data-i18n="footer_copyright">© 2026 TERSANESI · AI-native runtime</div>
             <div class="links">
-                <a href="#">Whitepaper</a>
-                <a href="#">SDK</a>
-                <a href="#">Status</a>
+                <a href="#" data-i18n="footer_whitepaper">Whitepaper</a>
+                <a href="#" data-i18n="footer_sdk">SDK</a>
+                <a href="#" data-i18n="footer_status">Status</a>
+                <a href="system-notes.html" class="gold" data-i18n="footer_system_notes">📘 System Notes</a>
+                <a href="#" data-i18n="footer_github">GitHub</a>
+                <a href="#" data-i18n="footer_blog">Blog</a>
             </div>
         </footer>
     </div>
@@ -1006,8 +1431,566 @@
     <!-- SCRIPTS                                                      -->
     <!-- ============================================================ -->
 
-    <!-- Language Sidebar Logic -->
+    <!-- ===== TRANSLATION SYSTEM ===== -->
     <script>
+        const TRANSLATIONS = {
+            en: {
+                // Navigation
+                nav_product: "Product",
+                nav_core: "Core",
+                nav_architecture: "Architecture",
+                nav_resources: "Resources",
+                nav_developers: "Developers",
+                nav_solutions: "Solutions",
+                nav_docs: "Docs",
+                nav_system_notes: "System Notes",
+                nav_system_notes_short: "📘 Notes",
+                nav_dev: "Dev",
+                nav_inv: "Inv",
+
+                // Hero
+                hero_badge: "v.Orbit.3 · typed event fabric",
+                hero_title_1: "AI-Native Runtime",
+                hero_title_2: "for <span class=\"highlight\">Multi-Agent Worlds</span>",
+                hero_sub: "Typed event-driven architecture for MMO systems, AI agents, and dynamic digital ecosystems.",
+                hero_cta_primary: "Deploy Runtime →",
+                hero_cta_ghost: "Explore Architecture",
+                hero_cta_system: "📘 System Notes",
+                hero_meta: "θ · TERSANESI · kernel v3.1",
+
+                // Product
+                product_label: "Product",
+                product_title: "What is TERSANESI?",
+                product_desc: "A runtime for coordinating autonomous AI systems across research, simulation, and digital environments.",
+                product_feature_1_num: "01",
+                product_feature_1_title: "Coordinate",
+                product_feature_1_desc: "Connect multiple AI agents, systems, and data sources into a unified flow.",
+                product_feature_2_num: "02",
+                product_feature_2_title: "Scale",
+                product_feature_2_desc: "From small research teams to large simulations — grow without redesign.",
+                product_feature_3_num: "03",
+                product_feature_3_title: "Evolve",
+                product_feature_3_desc: "Add new agents, workflows, and capabilities as your system grows.",
+
+                // Core
+                core_label: "Core",
+                core_title: "Three Pillars",
+                core_desc: "The foundational capabilities that power the runtime.",
+                core_pillar_1_title: "AI-Native Runtime",
+                core_pillar_1_desc: "Event-driven inference engine for autonomous agents with typed state streams.",
+                core_pillar_2_title: "Multi-Agent Orchestration",
+                core_pillar_2_desc: "State synchronization, feedback loops, and swarm logic at scale.",
+                core_pillar_3_title: "Scalable Simulation Layer",
+                core_pillar_3_desc: "MMO / metaverse / persistent world infrastructure built for concurrency.",
+
+                // Architecture
+                arch_label: "System",
+                arch_title: "Architecture",
+                arch_desc: "Three layers that define the runtime stack.",
+                arch_layer_1_tag: "kernel",
+                arch_layer_1_title: "TERSANESI",
+                arch_layer_1_desc: "Orchestration · runtime logic · core kernel",
+                arch_layer_2_tag: "execution",
+                arch_layer_2_title: "Cavibara",
+                arch_layer_2_desc: "API · UI · economy · dashboards",
+                arch_layer_3_tag: "world",
+                arch_layer_3_title: "Wellamatores",
+                arch_layer_3_desc: "Narrative · simulation · world state",
+                arch_typed_streams: "TYPED STREAMS",
+                arch_stream_1: "AgentEvent → actions",
+                arch_stream_2: "StateSync → world state",
+                arch_stream_3: "EconomicTx → resource flow",
+                arch_stream_4: "NarrativeEvent → world expansion",
+                arch_strategic: "STRATEGIC APPLICATIONS",
+                arch_strategic_1: "AI Simulation Platforms",
+                arch_strategic_2: "MMO Backend Infrastructure",
+                arch_strategic_3: "Metaverse Systems",
+                arch_strategic_4: "Multi-Agent Research",
+                arch_strategic_5: "Autonomous Economic Models",
+
+                // Solutions
+                solutions_label: "Solutions",
+                solutions_title: "Industry Solutions",
+                solutions_desc: "TERSANESI adapts to your domain — from gaming to scientific research.",
+                solutions_1_title: "Gaming & MMO",
+                solutions_1_desc: "Scalable backend for persistent worlds, AI-driven NPCs, and real-time player interactions.",
+                solutions_2_title: "Research & Simulation",
+                solutions_2_desc: "Multi-agent systems for scientific modeling, climate simulation, and computational social science.",
+                solutions_3_title: "Metaverse & Virtual Worlds",
+                solutions_3_desc: "Infrastructure for digital twins, virtual economies, and persistent social spaces.",
+                solutions_4_title: "Enterprise AI",
+                solutions_4_desc: "Autonomous workflows, intelligent agents, and automated decision-making systems.",
+
+                // Developers
+                dev_label: "Developers",
+                dev_title: "Developer Tools",
+                dev_desc: "Everything you need to build and deploy AI-native applications.",
+                dev_1_title: "SDK",
+                dev_1_desc: "Full-featured SDKs for Python, TypeScript, Go, and Rust.",
+                dev_2_title: "API",
+                dev_2_desc: "REST, WebSocket, GraphQL, and gRPC interfaces.",
+                dev_3_title: "CLI Tools",
+                dev_3_desc: "Command-line tools for deployment, monitoring, and debugging.",
+                dev_4_title: "Documentation",
+                dev_4_desc: "Comprehensive guides, examples, and API references.",
+
+                // Pricing
+                pricing_label: "Pricing",
+                pricing_title: "Choose Your Plan",
+                pricing_desc: "Flexible pricing for teams of all sizes — from startups to enterprises.",
+                pricing_plan_1_name: "Starter",
+                pricing_plan_1_period: "/mo",
+                pricing_plan_1_feature_1: "1,000 agent requests / day",
+                pricing_plan_1_feature_2: "3 agents max",
+                pricing_plan_1_feature_3: "Community support",
+                pricing_plan_1_feature_4: "Basic analytics",
+                pricing_plan_1_cta: "Get Started",
+                pricing_plan_2_name: "Pro",
+                pricing_plan_2_period: "/mo",
+                pricing_plan_2_feature_1: "100,000 agent requests / day",
+                pricing_plan_2_feature_2: "50 agents max",
+                pricing_plan_2_feature_3: "Priority support",
+                pricing_plan_2_feature_4: "Advanced analytics",
+                pricing_plan_2_feature_5: "Custom integrations",
+                pricing_plan_2_cta: "Start Trial",
+                pricing_plan_3_name: "Enterprise",
+                pricing_plan_3_price: "Custom",
+                pricing_plan_3_feature_1: "Unlimited requests",
+                pricing_plan_3_feature_2: "Unlimited agents",
+                pricing_plan_3_feature_3: "Dedicated support",
+                pricing_plan_3_feature_4: "SLA guarantee",
+                pricing_plan_3_feature_5: "On-premise deployment",
+                pricing_plan_3_feature_6: "Custom SLAs",
+                pricing_plan_3_cta: "Contact Sales",
+
+                // Docs
+                docs_label: "Documentation",
+                docs_title: "Technical Documentation",
+                docs_desc: "Deep technical resources for architects and engineers.",
+                docs_1_title: "Architecture Guide",
+                docs_1_desc: "Deep dive into system design and data flow.",
+                docs_2_title: "API Reference",
+                docs_2_desc: "Complete specification of all endpoints and schemas.",
+                docs_3_title: "Examples & Tutorials",
+                docs_3_desc: "Step-by-step guides and sample projects.",
+
+                // Stack / Use Cases
+                stack_label: "Stack",
+                stack_title: "Technology Stack",
+                stack_desc: "Runtime agnostic — cloud, edge, or local swarm.",
+                use_cases_label: "Applications",
+                use_cases_title: "Use Cases",
+                use_cases_desc: "Where TERSANESI delivers immediate value.",
+                use_case_1: "AI Simulation Platforms",
+                use_case_2: "MMO Backend Infrastructure",
+                use_case_3: "Metaverse Systems",
+                use_case_4: "Multi-Agent Research",
+                use_case_5: "Autonomous Economic Models",
+                use_case_6: "Digital Twin Platforms",
+                use_case_7: "AI-Driven Workflows",
+                use_case_8: "Predictive Simulation",
+
+                // CTA
+                cta_title: "Build AI-native worlds.",
+                cta_desc: "Deploy scalable agent ecosystems in real time.",
+                cta_btn_1: "Get SDK",
+                cta_btn_2: "Run Demo",
+                cta_btn_3: "View Docs",
+                cta_btn_4: "📘 System Notes",
+
+                // Footer
+                footer_copyright: "© 2026 TERSANESI · AI-native runtime",
+                footer_whitepaper: "Whitepaper",
+                footer_sdk: "SDK",
+                footer_status: "Status",
+                footer_system_notes: "📘 System Notes",
+                footer_github: "GitHub",
+                footer_blog: "Blog"
+            },
+            ru: {
+                // Navigation
+                nav_product: "Продукт",
+                nav_core: "Ядро",
+                nav_architecture: "Архитектура",
+                nav_resources: "Ресурсы",
+                nav_developers: "Разработчикам",
+                nav_solutions: "Решения",
+                nav_docs: "Документация",
+                nav_system_notes: "Системные заметки",
+                nav_system_notes_short: "📘 Заметки",
+                nav_dev: "Dev",
+                nav_inv: "Inv",
+
+                // Hero
+                hero_badge: "v.Orbit.3 · типизированная событийная ткань",
+                hero_title_1: "AI-нативная среда",
+                hero_title_2: "для <span class=\"highlight\">Мульти-агентных миров</span>",
+                hero_sub: "Типизированная событийная архитектура для MMO-систем, AI-агентов и динамических цифровых экосистем.",
+                hero_cta_primary: "Развернуть Runtime →",
+                hero_cta_ghost: "Изучить архитектуру",
+                hero_cta_system: "📘 Системные заметки",
+                hero_meta: "θ · TERSANESI · ядро v3.1",
+
+                // Product
+                product_label: "Продукт",
+                product_title: "Что такое TERSANESI?",
+                product_desc: "Среда выполнения для координации автономных AI-систем в исследованиях, симуляциях и цифровых средах.",
+                product_feature_1_num: "01",
+                product_feature_1_title: "Координация",
+                product_feature_1_desc: "Объединяйте несколько AI-агентов, систем и источников данных в единый поток.",
+                product_feature_2_num: "02",
+                product_feature_2_title: "Масштабирование",
+                product_feature_2_desc: "От небольших исследовательских команд до крупных симуляций — растите без перепроектирования.",
+                product_feature_3_num: "03",
+                product_feature_3_title: "Эволюция",
+                product_feature_3_desc: "Добавляйте новых агентов, рабочие процессы и возможности по мере роста системы.",
+
+                // Core
+                core_label: "Ядро",
+                core_title: "Три столпа",
+                core_desc: "Фундаментальные возможности, обеспечивающие работу среды.",
+                core_pillar_1_title: "AI-нативная среда",
+                core_pillar_1_desc: "Событийный движок вывода для автономных агентов с типизированными потоками состояния.",
+                core_pillar_2_title: "Мульти-агентная оркестрация",
+                core_pillar_2_desc: "Синхронизация состояния, обратные связи и логика роя в масштабе.",
+                core_pillar_3_title: "Масштабируемый слой симуляции",
+                core_pillar_3_desc: "Инфраструктура для MMO / метавселенных / персистентных миров, построенная для конкурентности.",
+
+                // Architecture
+                arch_label: "Система",
+                arch_title: "Архитектура",
+                arch_desc: "Три слоя, определяющие стек runtime.",
+                arch_layer_1_tag: "ядро",
+                arch_layer_1_title: "TERSANESI",
+                arch_layer_1_desc: "Оркестрация · логика runtime · ядро",
+                arch_layer_2_tag: "исполнение",
+                arch_layer_2_title: "Cavibara",
+                arch_layer_2_desc: "API · UI · экономика · панели",
+                arch_layer_3_tag: "мир",
+                arch_layer_3_title: "Wellamatores",
+                arch_layer_3_desc: "Нарратив · симуляция · состояние мира",
+                arch_typed_streams: "ТИПИЗИРОВАННЫЕ ПОТОКИ",
+                arch_stream_1: "AgentEvent → действия",
+                arch_stream_2: "StateSync → состояние мира",
+                arch_stream_3: "EconomicTx → потоки ресурсов",
+                arch_stream_4: "NarrativeEvent → расширение мира",
+                arch_strategic: "СТРАТЕГИЧЕСКИЕ ПРИМЕНЕНИЯ",
+                arch_strategic_1: "Платформы AI-симуляций",
+                arch_strategic_2: "Бэкенд инфраструктура MMO",
+                arch_strategic_3: "Системы метавселенных",
+                arch_strategic_4: "Мульти-агентные исследования",
+                arch_strategic_5: "Автономные экономические модели",
+
+                // Solutions
+                solutions_label: "Решения",
+                solutions_title: "Отраслевые решения",
+                solutions_desc: "TERSANESI адаптируется к вашей области — от игр до научных исследований.",
+                solutions_1_title: "Игры и MMO",
+                solutions_1_desc: "Масштабируемый бэкенд для персистентных миров, AI-управляемых NPC и реального времени.",
+                solutions_2_title: "Исследования и симуляции",
+                solutions_2_desc: "Мульти-агентные системы для научного моделирования, климатических симуляций и вычислительных соц. наук.",
+                solutions_3_title: "Метавселенные и виртуальные миры",
+                solutions_3_desc: "Инфраструктура для цифровых двойников, виртуальных экономик и персистентных соц. пространств.",
+                solutions_4_title: "Корпоративный AI",
+                solutions_4_desc: "Автономные рабочие процессы, интеллектуальные агенты и системы автоматизированного принятия решений.",
+
+                // Developers
+                dev_label: "Разработчикам",
+                dev_title: "Инструменты для разработчиков",
+                dev_desc: "Всё, что нужно для создания и развертывания AI-нативных приложений.",
+                dev_1_title: "SDK",
+                dev_1_desc: "Полнофункциональные SDK для Python, TypeScript, Go и Rust.",
+                dev_2_title: "API",
+                dev_2_desc: "Интерфейсы REST, WebSocket, GraphQL и gRPC.",
+                dev_3_title: "CLI-инструменты",
+                dev_3_desc: "Инструменты командной строки для развертывания, мониторинга и отладки.",
+                dev_4_title: "Документация",
+                dev_4_desc: "Полные руководства, примеры и справочники API.",
+
+                // Pricing
+                pricing_label: "Цены",
+                pricing_title: "Выберите тариф",
+                pricing_desc: "Гибкие цены для команд любого размера — от стартапов до предприятий.",
+                pricing_plan_1_name: "Стартовый",
+                pricing_plan_1_period: "/мес",
+                pricing_plan_1_feature_1: "1 000 запросов агентов / день",
+                pricing_plan_1_feature_2: "Макс. 3 агента",
+                pricing_plan_1_feature_3: "Поддержка сообщества",
+                pricing_plan_1_feature_4: "Базовая аналитика",
+                pricing_plan_1_cta: "Начать",
+                pricing_plan_2_name: "Про",
+                pricing_plan_2_period: "/мес",
+                pricing_plan_2_feature_1: "100 000 запросов агентов / день",
+                pricing_plan_2_feature_2: "Макс. 50 агентов",
+                pricing_plan_2_feature_3: "Приоритетная поддержка",
+                pricing_plan_2_feature_4: "Расширенная аналитика",
+                pricing_plan_2_feature_5: "Пользовательские интеграции",
+                pricing_plan_2_cta: "Начать пробный период",
+                pricing_plan_3_name: "Корпоративный",
+                pricing_plan_3_price: "Индивидуально",
+                pricing_plan_3_feature_1: "Неограниченные запросы",
+                pricing_plan_3_feature_2: "Неограниченные агенты",
+                pricing_plan_3_feature_3: "Выделенная поддержка",
+                pricing_plan_3_feature_4: "Гарантия SLA",
+                pricing_plan_3_feature_5: "Развертывание on-premise",
+                pricing_plan_3_feature_6: "Индивидуальные SLA",
+                pricing_plan_3_cta: "Связаться с отделом продаж",
+
+                // Docs
+                docs_label: "Документация",
+                docs_title: "Техническая документация",
+                docs_desc: "Глубокие технические ресурсы для архитекторов и инженеров.",
+                docs_1_title: "Руководство по архитектуре",
+                docs_1_desc: "Глубокое погружение в дизайн системы и потоки данных.",
+                docs_2_title: "Справочник API",
+                docs_2_desc: "Полная спецификация всех эндпоинтов и схем.",
+                docs_3_title: "Примеры и туториалы",
+                docs_3_desc: "Пошаговые руководства и примеры проектов.",
+
+                // Stack / Use Cases
+                stack_label: "Стек",
+                stack_title: "Технологический стек",
+                stack_desc: "Независимость от среды — облако, периферия или локальный рой.",
+                use_cases_label: "Применения",
+                use_cases_title: "Кейсы использования",
+                use_cases_desc: "Где TERSANESI приносит мгновенную ценность.",
+                use_case_1: "Платформы AI-симуляций",
+                use_case_2: "Бэкенд инфраструктура MMO",
+                use_case_3: "Системы метавселенных",
+                use_case_4: "Мульти-агентные исследования",
+                use_case_5: "Автономные экономические модели",
+                use_case_6: "Платформы цифровых двойников",
+                use_case_7: "AI-управляемые рабочие процессы",
+                use_case_8: "Прогностическая симуляция",
+
+                // CTA
+                cta_title: "Создавайте AI-нативные миры.",
+                cta_desc: "Развертывайте масштабируемые экосистемы агентов в реальном времени.",
+                cta_btn_1: "Получить SDK",
+                cta_btn_2: "Запустить демо",
+                cta_btn_3: "Смотреть документацию",
+                cta_btn_4: "📘 Системные заметки",
+
+                // Footer
+                footer_copyright: "© 2026 TERSANESI · AI-нативная среда",
+                footer_whitepaper: "Белая книга",
+                footer_sdk: "SDK",
+                footer_status: "Статус",
+                footer_system_notes: "📘 Системные заметки",
+                footer_github: "GitHub",
+                footer_blog: "Блог"
+            },
+            tr: {
+                // Navigation
+                nav_product: "Ürün",
+                nav_core: "Çekirdek",
+                nav_architecture: "Mimari",
+                nav_resources: "Kaynaklar",
+                nav_developers: "Geliştiriciler",
+                nav_solutions: "Çözümler",
+                nav_docs: "Dokümanlar",
+                nav_system_notes: "Sistem Notları",
+                nav_system_notes_short: "📘 Notlar",
+                nav_dev: "Gel",
+                nav_inv: "Yat",
+
+                // Hero
+                hero_badge: "v.Orbit.3 · tipli olay dokusu",
+                hero_title_1: "AI-Doğal Çalışma Zamanı",
+                hero_title_2: "<span class=\"highlight\">Çoklu-Ajan Dünyaları</span> için",
+                hero_sub: "MMO sistemleri, AI ajanları ve dinamik dijital ekosistemler için tipli olay odaklı mimari.",
+                hero_cta_primary: "Çalışma Zamanını Dağıt →",
+                hero_cta_ghost: "Mimariyi Keşfet",
+                hero_cta_system: "📘 Sistem Notları",
+                hero_meta: "θ · TERSANESI · çekirdek v3.1",
+
+                // Product
+                product_label: "Ürün",
+                product_title: "TERSANESI Nedir?",
+                product_desc: "Araştırma, simülasyon ve dijital ortamlarda otonom AI sistemlerini koordine etmek için bir çalışma zamanı.",
+                product_feature_1_num: "01",
+                product_feature_1_title: "Koordinasyon",
+                product_feature_1_desc: "Birden fazla AI ajanını, sistemi ve veri kaynağını tek bir akışta birleştirin.",
+                product_feature_2_num: "02",
+                product_feature_2_title: "Ölçeklendirme",
+                product_feature_2_desc: "Küçük araştırma ekiplerinden büyük simülasyonlara — yeniden tasarım olmadan büyüyün.",
+                product_feature_3_num: "03",
+                product_feature_3_title: "Evrim",
+                product_feature_3_desc: "Sisteminiz büyüdükçe yeni ajanlar, iş akışları ve yetenekler ekleyin.",
+
+                // Core
+                core_label: "Çekirdek",
+                core_title: "Üç Sütun",
+                core_desc: "Çalışma zamanını güçlendiren temel yetenekler.",
+                core_pillar_1_title: "AI-Doğal Çalışma Zamanı",
+                core_pillar_1_desc: "Tipli durum akışları ile otonom ajanlar için olay odaklı çıkarım motoru.",
+                core_pillar_2_title: "Çoklu-Ajan Orkestrasyonu",
+                core_pillar_2_desc: "Durum senkronizasyonu, geri bildirim döngüleri ve ölçekte sürü mantığı.",
+                core_pillar_3_title: "Ölçeklenebilir Simülasyon Katmanı",
+                core_pillar_3_desc: "MMO / metaverse / kalıcı dünya altyapısı eşzamanlılık için inşa edildi.",
+
+                // Architecture
+                arch_label: "Sistem",
+                arch_title: "Mimari",
+                arch_desc: "Çalışma zamanı yığınını tanımlayan üç katman.",
+                arch_layer_1_tag: "çekirdek",
+                arch_layer_1_title: "TERSANESI",
+                arch_layer_1_desc: "Orkestrasyon · çalışma zamanı mantığı · çekirdek",
+                arch_layer_2_tag: "yürütme",
+                arch_layer_2_title: "Cavibara",
+                arch_layer_2_desc: "API · UI · ekonomi · panolar",
+                arch_layer_3_tag: "dünya",
+                arch_layer_3_title: "Wellamatores",
+                arch_layer_3_desc: "Anlatı · simülasyon · dünya durumu",
+                arch_typed_streams: "TİPLİ AKIŞLAR",
+                arch_stream_1: "AgentEvent → eylemler",
+                arch_stream_2: "StateSync → dünya durumu",
+                arch_stream_3: "EconomicTx → kaynak akışı",
+                arch_stream_4: "NarrativeEvent → dünya genişlemesi",
+                arch_strategic: "STRATEJİK UYGULAMALAR",
+                arch_strategic_1: "AI Simülasyon Platformları",
+                arch_strategic_2: "MMO Arka Uç Altyapısı",
+                arch_strategic_3: "Metaverse Sistemleri",
+                arch_strategic_4: "Çoklu-Ajan Araştırması",
+                arch_strategic_5: "Otonom Ekonomik Modeller",
+
+                // Solutions
+                solutions_label: "Çözümler",
+                solutions_title: "Sektör Çözümleri",
+                solutions_desc: "TERSANESI oyunlardan bilimsel araştırmaya kadar alanınıza uyum sağlar.",
+                solutions_1_title: "Oyun ve MMO",
+                solutions_1_desc: "Kalıcı dünyalar, AI güdümlü NPC'ler ve gerçek zamanlı oyuncu etkileşimleri için ölçeklenebilir arka uç.",
+                solutions_2_title: "Araştırma ve Simülasyon",
+                solutions_2_desc: "Bilimsel modelleme, iklim simülasyonu ve hesaplamalı sosyal bilimler için çoklu-ajan sistemleri.",
+                solutions_3_title: "Metaverse ve Sanal Dünyalar",
+                solutions_3_desc: "Dijital ikizler, sanal ekonomiler ve kalıcı sosyal alanlar için altyapı.",
+                solutions_4_title: "Kurumsal AI",
+                solutions_4_desc: "Otonom iş akışları, akıllı ajanlar ve otomatik karar verme sistemleri.",
+
+                // Developers
+                dev_label: "Geliştiriciler",
+                dev_title: "Geliştirici Araçları",
+                dev_desc: "AI-doğal uygulamalar oluşturmak ve dağıtmak için ihtiyacınız olan her şey.",
+                dev_1_title: "SDK",
+                dev_1_desc: "Python, TypeScript, Go ve Rust için tam özellikli SDK'lar.",
+                dev_2_title: "API",
+                dev_2_desc: "REST, WebSocket, GraphQL ve gRPC arayüzleri.",
+                dev_3_title: "CLI Araçları",
+                dev_3_desc: "Dağıtım, izleme ve hata ayıklama için komut satırı araçları.",
+                dev_4_title: "Dokümantasyon",
+                dev_4_desc: "Kapsamlı kılavuzlar, örnekler ve API referansları.",
+
+                // Pricing
+                pricing_label: "Fiyatlandırma",
+                pricing_title: "Planınızı Seçin",
+                pricing_desc: "Startuplardan kurumlara kadar her boyuttaki ekip için esnek fiyatlandırma.",
+                pricing_plan_1_name: "Başlangıç",
+                pricing_plan_1_period: "/ay",
+                pricing_plan_1_feature_1: "1.000 ajan isteği / gün",
+                pricing_plan_1_feature_2: "Maks. 3 ajan",
+                pricing_plan_1_feature_3: "Topluluk desteği",
+                pricing_plan_1_feature_4: "Temel analitik",
+                pricing_plan_1_cta: "Başlayın",
+                pricing_plan_2_name: "Pro",
+                pricing_plan_2_period: "/ay",
+                pricing_plan_2_feature_1: "100.000 ajan isteği / gün",
+                pricing_plan_2_feature_2: "Maks. 50 ajan",
+                pricing_plan_2_feature_3: "Öncelikli destek",
+                pricing_plan_2_feature_4: "Gelişmiş analitik",
+                pricing_plan_2_feature_5: "Özel entegrasyonlar",
+                pricing_plan_2_cta: "Denemeye Başla",
+                pricing_plan_3_name: "Kurumsal",
+                pricing_plan_3_price: "Özel",
+                pricing_plan_3_feature_1: "Sınırsız istek",
+                pricing_plan_3_feature_2: "Sınırsız ajan",
+                pricing_plan_3_feature_3: "Özel destek",
+                pricing_plan_3_feature_4: "SLA garantisi",
+                pricing_plan_3_feature_5: "Şirket içi dağıtım",
+                pricing_plan_3_feature_6: "Özel SLA'lar",
+                pricing_plan_3_cta: "Satışla İletişime Geç",
+
+                // Docs
+                docs_label: "Dokümantasyon",
+                docs_title: "Teknik Dokümantasyon",
+                docs_desc: "Mimarlar ve mühendisler için derin teknik kaynaklar.",
+                docs_1_title: "Mimari Rehberi",
+                docs_1_desc: "Sistem tasarımı ve veri akışına derin dalış.",
+                docs_2_title: "API Referansı",
+                docs_2_desc: "Tüm uç noktaların ve şemaların tam spesifikasyonu.",
+                docs_3_title: "Örnekler ve Eğitimler",
+                docs_3_desc: "Adım adım kılavuzlar ve örnek projeler.",
+
+                // Stack / Use Cases
+                stack_label: "Yığın",
+                stack_title: "Teknoloji Yığını",
+                stack_desc: "Çalışma zamanı bağımsız — bulut, kenar veya yerel sürü.",
+                use_cases_label: "Uygulamalar",
+                use_cases_title: "Kullanım Alanları",
+                use_cases_desc: "TERSANESI'nin anında değer sağladığı yerler.",
+                use_case_1: "AI Simülasyon Platformları",
+                use_case_2: "MMO Arka Uç Altyapısı",
+                use_case_3: "Metaverse Sistemleri",
+                use_case_4: "Çoklu-Ajan Araştırması",
+                use_case_5: "Otonom Ekonomik Modeller",
+                use_case_6: "Dijital İkiz Platformları",
+                use_case_7: "AI Güdümlü İş Akışları",
+                use_case_8: "Tahmine Dayalı Simülasyon",
+
+                // CTA
+                cta_title: "AI-doğal dünyalar inşa edin.",
+                cta_desc: "Gerçek zamanlı olarak ölçeklenebilir ajan ekosistemleri dağıtın.",
+                cta_btn_1: "SDK'yı Al",
+                cta_btn_2: "Demoyu Çalıştır",
+                cta_btn_3: "Dokümanları Görüntüle",
+                cta_btn_4: "📘 Sistem Notları",
+
+                // Footer
+                footer_copyright: "© 2026 TERSANESI · AI-doğal çalışma zamanı",
+                footer_whitepaper: "Beyaz Kağıt",
+                footer_sdk: "SDK",
+                footer_status: "Durum",
+                footer_system_notes: "📘 Sistem Notları",
+                footer_github: "GitHub",
+                footer_blog: "Blog"
+            }
+        };
+
+        // Локализация для всех остальных языков (ES, DE, JA, ZH, FR, AR)
+        // Будет использоваться English как fallback для непереведенных языков
+        const FALLBACK_LANG = 'en';
+
+        let currentLang = 'en';
+
+        function getTranslation(key) {
+            const langData = TRANSLATIONS[currentLang] || TRANSLATIONS[FALLBACK_LANG];
+            return langData[key] || TRANSLATIONS[FALLBACK_LANG][key] || key;
+        }
+
+        function applyTranslations() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                const translation = getTranslation(key);
+                if (translation) {
+                    // Проверяем, содержит ли перевод HTML-теги
+                    if (translation.includes('<') && translation.includes('>')) {
+                        el.innerHTML = translation;
+                    } else {
+                        el.textContent = translation;
+                    }
+                }
+            });
+        }
+
+        function setLanguage(code) {
+            currentLang = code;
+            applyTranslations();
+            document.querySelectorAll('.lang-item').forEach(el => {
+                el.classList.toggle('active', el.dataset.lang === code);
+            });
+            localStorage.setItem('tersanesi_lang', code);
+        }
+
+        // ===== LANGUAGE SIDEBAR =====
         const LANGUAGES = [
             { code: 'en', label: 'English', flag: '🇬🇧', native: 'English' },
             { code: 'ru', label: 'Русский', flag: '🇷🇺', native: 'Русский' },
@@ -1019,8 +2002,6 @@
             { code: 'zh', label: '中文', flag: '🇨🇳', native: '中文' },
             { code: 'fr', label: 'Français', flag: '🇫🇷', native: 'Français' },
         ];
-
-        let currentLang = 'en';
 
         function renderSidebar() {
             const container = document.getElementById('langList');
@@ -1037,27 +2018,13 @@
                     <span class="tooltip">${lang.label}</span>
                 `;
                 btn.addEventListener('click', () => {
-                    currentLang = lang.code;
-                    document.querySelectorAll('.lang-item').forEach(el => {
-                        el.classList.toggle('active', el.dataset.lang === lang.code);
-                    });
-                    localStorage.setItem('tersanesi_lang', lang.code);
+                    setLanguage(lang.code);
                 });
                 container.appendChild(btn);
             });
         }
 
-        // Restore saved language
-        const saved = localStorage.getItem('tersanesi_lang');
-        if (saved && LANGUAGES.some(l => l.code === saved)) {
-            currentLang = saved;
-        }
-
-        renderSidebar();
-    </script>
-
-    <!-- Mode Toggle -->
-    <script>
+        // ===== MODE TOGGLE =====
         (function() {
             const toggle = document.getElementById('modeToggle');
             const body = document.body;
@@ -1079,6 +2046,30 @@
                 }
             });
         })();
+
+        // ===== INIT =====
+        function init() {
+            const savedLang = localStorage.getItem('tersanesi_lang');
+            if (savedLang && LANGUAGES.some(l => l.code === savedLang)) {
+                currentLang = savedLang;
+            } else {
+                // Определяем язык браузера
+                const browserLang = navigator.language.split('-')[0];
+                if (LANGUAGES.some(l => l.code === browserLang)) {
+                    currentLang = browserLang;
+                }
+            }
+
+            renderSidebar();
+            applyTranslations();
+            
+            // Обновляем активный язык в сайдбаре
+            document.querySelectorAll('.lang-item').forEach(el => {
+                el.classList.toggle('active', el.dataset.lang === currentLang);
+            });
+        }
+
+        init();
     </script>
 
     <!-- Three.js (Quadrant 2) -->
@@ -1271,6 +2262,10 @@
             ctx = canvas.getContext('2d');
             draw();
         })();
+    </script>
+
+</body>
+</html>
     </script>
 
 </body>
