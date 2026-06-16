@@ -229,6 +229,56 @@
             backdrop-filter: blur(2px);
         }
 
+        /* ===== VIEW SWITCHER ===== */
+        .view-switcher {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 40px;
+            padding: 0.15rem;
+            border: 1px solid var(--border);
+            margin-bottom: 0.5rem;
+        }
+        .view-switcher .view-label {
+            font-size: 0.5rem;
+            color: var(--text-muted);
+            opacity: 0.4;
+            padding: 0 0.3rem 0 0.6rem;
+            font-family: var(--mono);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .view-switcher a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.25rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            transition: 0.25s;
+            font-family: var(--font);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            border: 1px solid transparent;
+            text-decoration: none;
+        }
+        .view-switcher a.active {
+            background: rgba(0, 200, 255, 0.12);
+            color: var(--cyan);
+            box-shadow: 0 0 12px rgba(0, 200, 255, 0.05);
+            border-color: rgba(0, 200, 255, 0.15);
+        }
+        .view-switcher a:hover:not(.active) {
+            color: var(--text);
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+        .view-switcher a .icon {
+            font-size: 0.7rem;
+        }
+
         /* ===== BACK TO MAIN BUTTON ===== */
         .back-to-main {
             display: inline-flex;
@@ -590,6 +640,27 @@
         .footer-note a:hover {
             opacity: 0.7;
         }
+        .footer-note .view-links {
+            display: inline-flex;
+            gap: 0.8rem;
+            margin: 0 0.5rem;
+        }
+        .footer-note .view-links a {
+            color: var(--text-muted);
+            font-size: 0.6rem;
+            padding: 0.1rem 0.6rem;
+            border-radius: 30px;
+            border: 1px solid transparent;
+            transition: 0.2s;
+        }
+        .footer-note .view-links a:hover {
+            color: var(--text);
+            border-color: var(--border);
+        }
+        .footer-note .view-links a.active-view {
+            color: var(--gold);
+            border-color: rgba(255, 215, 0, 0.15);
+        }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 820px) {
@@ -644,6 +715,13 @@
                 font-size: 0.65rem;
                 padding: 0.2rem 0.8rem;
             }
+            .view-switcher .view-label {
+                display: none;
+            }
+            .view-switcher a {
+                font-size: 0.5rem;
+                padding: 0.15rem 0.6rem;
+            }
         }
 
         ::-webkit-scrollbar {
@@ -676,6 +754,20 @@
         <!-- HEADER -->
         <div class="page-header">
             <div class="header-left">
+                <!-- ===== VIEW SWITCHER ===== -->
+                <div class="view-switcher">
+                    <span class="view-label" data-i18n="view_label">⟡ view</span>
+                    <a href="index.html" data-i18n="view_classic">
+                        <span class="icon">◈</span> <span data-i18n="view_classic_text">Classic</span>
+                    </a>
+                    <a href="system-notes.html" class="active" data-i18n="view_notes">
+                        <span class="icon">📘</span> <span data-i18n="view_notes_text">Notes</span>
+                    </a>
+                    <a href="cosmic.html" data-i18n="view_cosmic">
+                        <span class="icon">✦</span> <span data-i18n="view_cosmic_text">Cosmic</span>
+                    </a>
+                </div>
+
                 <a href="index.html" class="back-to-main" data-i18n="back_to_main">
                     <span class="arrow">←</span> <span data-i18n="back_to_main_text">Back to Main</span>
                 </a>
@@ -769,6 +861,12 @@
 
         <div class="footer-note">
             ⬩ <span data-i18n="footer_text">TERSANESI · three-layer system disclosure</span> ⬩
+            &nbsp;·&nbsp;
+            <span class="view-links">
+                <a href="index.html" data-i18n="footer_classic">◈ Classic</a>
+                <a href="system-notes.html" class="active-view" data-i18n="footer_notes">📘 Notes</a>
+                <a href="cosmic.html" data-i18n="footer_cosmic">✦ Cosmic</a>
+            </span>
             &nbsp;·&nbsp;
             <a href="index.html" data-i18n="footer_back">← Back to Main</a>
         </div>
@@ -1082,6 +1180,13 @@
             en: {
                 brand: "TERS<small>ANESI</small>",
                 sidebar_footer: "⟡ 9 layers",
+                view_label: "⟡ view",
+                view_classic: "◈ Classic",
+                view_classic_text: "Classic",
+                view_notes: "📘 Notes",
+                view_notes_text: "Notes",
+                view_cosmic: "✦ Cosmic",
+                view_cosmic_text: "Cosmic",
                 back_to_main: "← Back to Main",
                 back_to_main_text: "Back to Main",
                 system_notes_title: "NOTES",
@@ -1115,11 +1220,21 @@
                 l3_desc: "Technical disclosure — for engineers, architects, and deep-tech partners.",
                 l3_footer: "⚡ Event Fabric · Multi-agent orchestration · Typed streams · Zero-trust security · Horizontal scaling",
                 footer_text: "TERSANESI · three-layer system disclosure",
+                footer_classic: "◈ Classic",
+                footer_notes: "📘 Notes",
+                footer_cosmic: "✦ Cosmic",
                 footer_back: "← Back to Main"
             },
             ru: {
                 brand: "TERS<small>ANESI</small>",
                 sidebar_footer: "⟡ 9 слоёв",
+                view_label: "⟡ вид",
+                view_classic: "◈ Классика",
+                view_classic_text: "Классика",
+                view_notes: "📘 Заметки",
+                view_notes_text: "Заметки",
+                view_cosmic: "✦ Космос",
+                view_cosmic_text: "Космос",
                 back_to_main: "← На главную",
                 back_to_main_text: "На главную",
                 system_notes_title: "ЗАМЕТКИ",
@@ -1153,11 +1268,21 @@
                 l3_desc: "Техническое раскрытие — для инженеров, архитекторов и deep-tech партнёров.",
                 l3_footer: "⚡ Event Fabric · Мульти-агентная оркестрация · Типизированные потоки · Zero-trust безопасность · Горизонтальное масштабирование",
                 footer_text: "TERSANESI · трёхслойное раскрытие системы",
+                footer_classic: "◈ Классика",
+                footer_notes: "📘 Заметки",
+                footer_cosmic: "✦ Космос",
                 footer_back: "← На главную"
             },
             tr: {
                 brand: "TERS<small>ANESI</small>",
                 sidebar_footer: "⟡ 9 katman",
+                view_label: "⟡ görünüm",
+                view_classic: "◈ Klasik",
+                view_classic_text: "Klasik",
+                view_notes: "📘 Notlar",
+                view_notes_text: "Notlar",
+                view_cosmic: "✦ Kozmik",
+                view_cosmic_text: "Kozmik",
                 back_to_main: "← Ana Sayfaya",
                 back_to_main_text: "Ana Sayfaya",
                 system_notes_title: "NOTLAR",
@@ -1191,6 +1316,9 @@
                 l3_desc: "Teknik açıklama — mühendisler, mimarlar ve deep-tech ortakları için.",
                 l3_footer: "⚡ Event Fabric · Çoklu ajan orkestrasyonu · Tipli akışlar · Zero-trust güvenlik · Yatay ölçeklendirme",
                 footer_text: "TERSANESI · üç katmanlı sistem açıklaması",
+                footer_classic: "◈ Klasik",
+                footer_notes: "📘 Notlar",
+                footer_cosmic: "✦ Kozmik",
                 footer_back: "← Ana Sayfaya"
             }
         };
