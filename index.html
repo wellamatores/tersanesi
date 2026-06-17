@@ -1,15 +1,11 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TERSANESI · AI-Native Runtime · Ultimate</title>
+    <title>TERSANESI · AI-Native Runtime</title>
     <meta name="description" content="TERSANESI — AI-native runtime for multi-agent systems and MMO-scale simulations. Typed event-driven architecture." />
     <style>
-        /* ============================================================ */
-        /* ===== ВСЕ СТИЛИ ИЗ ОБОИХ ФАЙЛОВ (ОБЪЕДИНЕНЫ) ===== */
-        /* ============================================================ */
-
         /* ===== RESET & BASE ===== */
         * {
             margin: 0;
@@ -75,8 +71,7 @@
             background: #070a14;
             border: 1px solid rgba(0, 255, 255, 0.06);
         }
-        .divider-v,
-        .divider-h {
+        .divider-v, .divider-h {
             position: absolute;
             pointer-events: none;
             z-index: 2;
@@ -129,10 +124,7 @@
             border-radius: 50%;
             background: radial-gradient(circle, rgba(0, 150, 255, 0.35), rgba(0, 200, 255, 0.08) 60%, transparent 80%);
             border: 3px solid rgba(0, 200, 255, 0.4);
-            box-shadow: 
-                0 0 100px rgba(0, 150, 255, 0.25),
-                inset 0 0 100px rgba(0, 150, 255, 0.08),
-                0 0 200px rgba(0, 150, 255, 0.1);
+            box-shadow: 0 0 100px rgba(0, 150, 255, 0.25), inset 0 0 100px rgba(0, 150, 255, 0.08), 0 0 200px rgba(0, 150, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -144,24 +136,9 @@
             text-shadow: 0 0 40px rgba(255, 215, 0, 0.2);
         }
         @keyframes pulseTheta {
-            0% { 
-                transform: translate(-50%, -50%) scale(1); 
-                opacity: 0.7;
-                box-shadow: 0 0 80px rgba(0, 150, 255, 0.2), inset 0 0 80px rgba(0, 150, 255, 0.05);
-                border-color: rgba(0, 200, 255, 0.3);
-            }
-            50% { 
-                transform: translate(-50%, -50%) scale(1.18); 
-                opacity: 1;
-                box-shadow: 0 0 160px rgba(0, 150, 255, 0.45), inset 0 0 160px rgba(0, 150, 255, 0.12);
-                border-color: rgba(0, 200, 255, 0.65);
-            }
-            100% { 
-                transform: translate(-50%, -50%) scale(1); 
-                opacity: 0.7;
-                box-shadow: 0 0 80px rgba(0, 150, 255, 0.2), inset 0 0 80px rgba(0, 150, 255, 0.05);
-                border-color: rgba(0, 200, 255, 0.3);
-            }
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; box-shadow: 0 0 80px rgba(0, 150, 255, 0.2), inset 0 0 80px rgba(0, 150, 255, 0.05); border-color: rgba(0, 200, 255, 0.3); }
+            50% { transform: translate(-50%, -50%) scale(1.18); opacity: 1; box-shadow: 0 0 160px rgba(0, 150, 255, 0.45), inset 0 0 160px rgba(0, 150, 255, 0.12); border-color: rgba(0, 200, 255, 0.65); }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; box-shadow: 0 0 80px rgba(0, 150, 255, 0.2), inset 0 0 80px rgba(0, 150, 255, 0.05); border-color: rgba(0, 200, 255, 0.3); }
         }
         .q1 .theta-ring {
             position: absolute;
@@ -228,30 +205,17 @@
             75% { transform: translate(12px, -18px) scale(1.6); opacity: 0.9; }
         }
 
-        /* ===== КВАДРАНТ 2 — УЛУЧШЕННАЯ ВИДИМОСТЬ ===== */
+        /* Квадрант 2 — ЯРКАЯ 2D ВСЕЛЕННАЯ (без Three.js) */
         .q2 {
             background: #0a1628;
             cursor: pointer;
             overflow: hidden;
-            position: relative;
-        }
-        .q2::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(ellipse at center, rgba(0, 200, 255, 0.15), transparent 70%);
-            pointer-events: none;
-            z-index: 1;
+            transition: opacity 0.3s ease;
         }
         .q2 canvas {
             width: 100% !important;
             height: 100% !important;
             display: block;
-            position: relative;
-            z-index: 0;
         }
 
         /* Квадрант 3 — Туманность */
@@ -339,10 +303,6 @@
             filter: blur(25px);
             animation: corePulse 5s ease-in-out infinite alternate;
         }
-        @keyframes corePulse {
-            0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.7); }
-            100% { opacity: 1; transform: translate(-50%, -50%) scale(1.4); }
-        }
         .q3 .core-glow-2 {
             position: absolute;
             top: 50%;
@@ -353,6 +313,10 @@
             background: radial-gradient(ellipse, rgba(255, 215, 0, 0.12), transparent 60%);
             filter: blur(35px);
             animation: corePulse2 7s ease-in-out infinite alternate;
+        }
+        @keyframes corePulse {
+            0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.7); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1.4); }
         }
         @keyframes corePulse2 {
             0% { opacity: 0.3; transform: translate(-50%, -50%) scale(0.5); }
@@ -678,8 +642,6 @@
             background: rgba(255, 215, 0, 0.08);
             border-color: var(--gold);
         }
-
-        /* ===== ВЫПАДАЮЩЕЕ МЕНЮ RESOURCES ===== */
         .header .nav .dropdown {
             position: relative;
             display: inline-block;
@@ -734,7 +696,6 @@
             display: block;
         }
 
-        /* ===== ПЕРЕКЛЮЧАТЕЛЬ РЕЖИМОВ DEV/INV ===== */
         .mode-toggle {
             display: flex;
             background: rgba(255, 255, 255, 0.04);
@@ -790,14 +751,8 @@
             animation: fadeUp 0.8s ease-out;
         }
         @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .hero .badge {
             display: inline-block;
@@ -946,256 +901,218 @@
             line-height: 1.6;
         }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ===== DASHBOARD SECTION ===== */
-        .dashboard-grid {
+        .arch-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin: 2rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
         }
-        .metric-card {
+        .arch-card {
             background: var(--surface);
+            backdrop-filter: blur(12px);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 1.2rem 1.5rem;
+            padding: 1.6rem 1.4rem;
+            text-align: center;
+        }
+        .arch-card .layer-tag {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            color: var(--cyan);
+            opacity: 0.5;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        .arch-card h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0.3rem 0 0.2rem;
+        }
+        .arch-card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .stack-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            padding: 1rem 0 0.5rem;
+        }
+        .stack-list span {
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            border: 1px solid var(--border);
+        }
+
+        .use-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+        .use-item {
+            background: var(--surface);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 0.9rem 1.2rem;
+            font-size: 0.85rem;
+            text-align: center;
+            color: var(--text-muted);
+            transition: 0.2s;
+        }
+        .use-item:hover {
+            border-color: var(--border-active);
+            color: var(--text);
+        }
+
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+        .solution-card {
+            background: var(--surface);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.6rem 1.4rem;
+            transition: 0.3s;
+            text-align: center;
+        }
+        .solution-card:hover {
+            border-color: var(--border-active);
+            transform: translateY(-3px);
+        }
+        .solution-card .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .solution-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+        .solution-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+        .pricing-card {
+            background: var(--surface);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.8rem 1.6rem;
             text-align: center;
             transition: 0.3s;
         }
-        .metric-card:hover {
+        .pricing-card:hover {
             border-color: var(--border-active);
+            transform: translateY(-3px);
         }
-        .metric-card .metric-value {
-            font-size: 2rem;
+        .pricing-card.featured {
+            border-color: var(--gold);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.05);
+        }
+        .pricing-card .price {
+            font-size: 2.2rem;
             font-weight: 700;
             font-family: var(--mono);
+            color: var(--gold);
+            margin: 0.3rem 0;
+        }
+        .pricing-card .price small {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+        .pricing-card .features {
+            list-style: none;
+            padding: 0.5rem 0;
+            text-align: left;
+        }
+        .pricing-card .features li {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            padding: 0.2rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        .pricing-card .features li::before {
+            content: "✓ ";
             color: var(--cyan);
+        }
+        .pricing-card .btn {
+            margin-top: 0.5rem;
+            width: 100%;
+        }
+
+        .dev-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        .dev-card {
+            background: var(--surface);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.6rem 1.4rem;
+            text-align: center;
             transition: 0.3s;
         }
-        .metric-card .metric-label {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-top: 0.2rem;
+        .dev-card:hover {
+            border-color: var(--border-active);
+            transform: translateY(-3px);
         }
-        .metric-card .metric-change {
-            font-size: 0.65rem;
-            margin-top: 0.3rem;
-            font-weight: 500;
+        .dev-card .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
         }
-        .metric-card .metric-change.positive {
-            color: var(--ok);
+        .dev-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
         }
-        .metric-card .metric-change.negative {
-            color: var(--danger);
-        }
-
-        /* ===== QUICK ACTIONS ===== */
-        .quick-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-            margin: 1.5rem 0 2rem;
-        }
-        .quick-actions .btn {
-            font-size: 0.75rem;
-            padding: 0.5rem 1.2rem;
-        }
-
-        /* ===== TERMINAL ===== */
-        .terminal {
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 1.2rem 1.5rem;
-            font-family: var(--mono);
-            font-size: 0.75rem;
-            max-height: 200px;
-            overflow-y: auto;
-            margin: 1.5rem 0;
-            position: relative;
-        }
-        .terminal::-webkit-scrollbar {
-            width: 4px;
-        }
-        .terminal::-webkit-scrollbar-thumb {
-            background: rgba(0, 200, 255, 0.2);
-            border-radius: 10px;
-        }
-        .terminal .term-line {
-            color: var(--text-muted);
-            padding: 0.1rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
-        }
-        .terminal .term-line .prompt {
-            color: var(--cyan);
-            margin-right: 0.5rem;
-        }
-        .terminal .term-line .info {
-            color: var(--text);
-        }
-        .terminal .term-line .success {
-            color: var(--ok);
-        }
-        .terminal .term-line .warning {
-            color: var(--warning);
-        }
-        .terminal .term-line .error {
-            color: var(--danger);
-        }
-
-        /* ===== EVENT STREAM ===== */
-        .event-stream {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 1.2rem 1.6rem;
-            margin: 2rem 0;
-            overflow: hidden;
-            position: relative;
-        }
-        .event-stream .stream-label {
-            font-family: var(--mono);
-            font-size: 0.55rem;
-            color: var(--cyan);
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 0.4rem;
-            opacity: 0.5;
-        }
-        .event-stream .stream-container {
-            height: 60px;
-            overflow: hidden;
-            position: relative;
-        }
-        .event-stream .stream-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            animation: scrollStream 20s linear infinite;
-        }
-        .event-stream .stream-list li {
-            font-family: var(--mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            padding: 0.15rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-        .event-stream .stream-list li .time {
-            color: var(--cyan);
-            opacity: 0.4;
-            font-size: 0.6rem;
-            min-width: 50px;
-        }
-        .event-stream .stream-list li .event-type {
-            font-size: 0.6rem;
-            padding: 0.05rem 0.5rem;
-            border-radius: 20px;
-            background: rgba(0, 200, 255, 0.06);
-            border: 1px solid rgba(0, 200, 255, 0.06);
-            color: var(--cyan);
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-        }
-        .event-stream .stream-list li .event-type.tx {
-            color: var(--gold);
-            border-color: rgba(255, 215, 0, 0.1);
-            background: rgba(255, 215, 0, 0.04);
-        }
-        .event-stream .stream-list li .event-type.state {
-            color: var(--ok);
-            border-color: rgba(37, 245, 140, 0.1);
-            background: rgba(37, 245, 140, 0.04);
-        }
-        .event-stream .stream-list li .event-type.narrative {
-            color: #b388ff;
-            border-color: rgba(179, 136, 255, 0.1);
-            background: rgba(179, 136, 255, 0.04);
-        }
-        @keyframes scrollStream {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-50%); }
-        }
-
-        /* ===== LAST EVENT WIDGET ===== */
-        .last-event {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 0.8rem 1.2rem;
-            margin: 0.5rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-        }
-        .last-event .label {
-            font-size: 0.55rem;
-            font-family: var(--mono);
-            color: var(--text-muted);
-            opacity: 0.5;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-        }
-        .last-event .event-content {
-            font-family: var(--mono);
+        .dev-card p {
             font-size: 0.8rem;
-            color: var(--cyan);
-            flex: 1;
-        }
-        .last-event .event-time {
-            font-size: 0.6rem;
             color: var(--text-muted);
-            opacity: 0.4;
-            font-family: var(--mono);
+            line-height: 1.5;
         }
 
-        /* ===== SWARM CONTAINER ===== */
-        .swarm-container {
+        .cta-final {
+            text-align: center;
+            padding: 4rem 6%;
             background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1rem;
-            margin: 1.5rem 0;
-            position: relative;
-            overflow: hidden;
-            height: 200px;
-            width: 100%;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
         }
-        .swarm-container .swarm-label {
-            font-family: var(--mono);
-            font-size: 0.55rem;
-            color: var(--cyan);
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            opacity: 0.4;
-            position: absolute;
-            top: 0.5rem;
-            left: 1rem;
-            z-index: 5;
+        .cta-final h2 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
         }
-        .swarm-container canvas {
-            width: 100%;
-            height: 100%;
-            display: block;
-            border-radius: 8px;
+        .cta-final p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0.4rem 0 1.8rem;
+        }
+        .cta-final .btns {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
         }
 
-        /* ===== ФУТЕР ===== */
         .footer {
             padding: 1.6rem 6%;
             display: flex;
@@ -1226,7 +1143,6 @@
             opacity: 0.8;
         }
 
-        /* ===== РЕЖИМЫ DEV / INV ===== */
         .mode-dev,
         .mode-inv {
             transition: opacity 0.3s;
@@ -1241,7 +1157,6 @@
             display: block;
         }
 
-        /* ===== ORGANISM CARD ===== */
         .organism-card {
             background: var(--surface);
             backdrop-filter: blur(20px);
@@ -1441,101 +1356,338 @@
             color: var(--text);
         }
 
-        /* ===== СТЕК ТЕХНОЛОГИЙ ===== */
-        .stack-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            padding: 1rem 0 0.5rem;
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
-        .stack-list span {
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .live-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--ok);
+            border-radius: 50%;
+            animation: pulse-dot 1.5s ease-in-out infinite;
+            margin-right: 0.4rem;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.7); }
+        }
+        .status-ok {
+            color: var(--ok);
+            text-shadow: 0 0 20px rgba(37, 245, 140, 0.3);
+        }
+        .status-warning {
+            color: var(--warning);
+            text-shadow: 0 0 20px rgba(245, 185, 66, 0.3);
+        }
+        .status-bad {
+            color: var(--danger);
+            text-shadow: 0 0 20px rgba(255, 77, 109, 0.3);
+        }
+
+        .event-stream {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.6rem;
+            margin: 2rem 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .event-stream .stream-label {
             font-family: var(--mono);
-            font-size: 0.8rem;
+            font-size: 0.55rem;
+            color: var(--cyan);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.4rem;
+            opacity: 0.5;
+        }
+        .event-stream .stream-container {
+            height: 60px;
+            overflow: hidden;
+            position: relative;
+        }
+        .event-stream .stream-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            animation: scrollStream 20s linear infinite;
+        }
+        .event-stream .stream-list li {
+            font-family: var(--mono);
+            font-size: 0.75rem;
             color: var(--text-muted);
-            background: rgba(255, 255, 255, 0.03);
-            padding: 0.3rem 1rem;
-            border-radius: 40px;
-            border: 1px solid var(--border);
+            padding: 0.15rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .event-stream .stream-list li .time {
+            color: var(--cyan);
+            opacity: 0.4;
+            font-size: 0.6rem;
+            min-width: 50px;
+        }
+        .event-stream .stream-list li .event-type {
+            font-size: 0.6rem;
+            padding: 0.05rem 0.5rem;
+            border-radius: 20px;
+            background: rgba(0, 200, 255, 0.06);
+            border: 1px solid rgba(0, 200, 255, 0.06);
+            color: var(--cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .event-stream .stream-list li .event-type.tx {
+            color: var(--gold);
+            border-color: rgba(255, 215, 0, 0.1);
+            background: rgba(255, 215, 0, 0.04);
+        }
+        .event-stream .stream-list li .event-type.state {
+            color: var(--ok);
+            border-color: rgba(37, 245, 140, 0.1);
+            background: rgba(37, 245, 140, 0.04);
+        }
+        .event-stream .stream-list li .event-type.narrative {
+            color: #b388ff;
+            border-color: rgba(179, 136, 255, 0.1);
+            background: rgba(179, 136, 255, 0.04);
+        }
+        @keyframes scrollStream {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
         }
 
-        /* ===== GRID ДЛЯ USE CASES ===== */
-        .use-grid {
+        .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: 1rem;
+            margin: 1.5rem 0;
         }
-        .use-item {
-            background: var(--surface);
-            backdrop-filter: blur(8px);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 0.9rem 1.2rem;
-            font-size: 0.85rem;
-            text-align: center;
-            color: var(--text-muted);
-            transition: 0.2s;
-        }
-        .use-item:hover {
-            border-color: var(--border-active);
-            color: var(--text);
-        }
-
-        /* ===== ДОПОЛНИТЕЛЬНЫЕ КАРТОЧКИ ДЛЯ РАЗРАБОТЧИКОВ ===== */
-        .dev-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-        .dev-card {
+        .metric-card {
             background: var(--surface);
             backdrop-filter: blur(12px);
             border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 1.6rem 1.4rem;
+            border-radius: 16px;
+            padding: 1.2rem 1rem;
             text-align: center;
             transition: 0.3s;
         }
-        .dev-card:hover {
+        .metric-card:hover {
             border-color: var(--border-active);
-            transform: translateY(-3px);
+            transform: translateY(-2px);
         }
-        .dev-card .icon {
+        .metric-card .metric-value {
+            font-family: var(--mono);
             font-size: 2rem;
-            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: var(--cyan);
+            line-height: 1.2;
+            transition: all 0.3s;
         }
-        .dev-card h4 {
-            font-size: 1rem;
-            font-weight: 600;
-        }
-        .dev-card p {
+        .metric-card .metric-value .unit {
             font-size: 0.8rem;
+            font-weight: 400;
             color: var(--text-muted);
-            line-height: 1.5;
+        }
+        .metric-card .metric-label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-top: 0.2rem;
+            font-weight: 500;
+        }
+        .metric-card .metric-trend {
+            font-size: 0.6rem;
+            margin-top: 0.2rem;
+            font-family: var(--mono);
+        }
+        .metric-card .metric-trend.up {
+            color: var(--ok);
+        }
+        .metric-card .metric-trend.down {
+            color: var(--danger);
+        }
+        .metric-card .metric-trend.stable {
+            color: var(--warning);
         }
 
-        /* ===== CTA FINAL ===== */
-        .cta-final {
-            text-align: center;
-            padding: 4rem 6%;
-            background: rgba(0, 0, 0, 0.3);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
+        .terminal {
+            background: #0a0c14;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.2rem 1.4rem;
+            margin: 1.5rem 0;
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            max-height: 200px;
+            overflow-y: auto;
+            position: relative;
         }
-        .cta-final h2 {
-            font-size: 2.2rem;
-            font-weight: 600;
-            letter-spacing: -0.02em;
+        .terminal::-webkit-scrollbar {
+            width: 4px;
         }
-        .cta-final p {
+        .terminal::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .terminal::-webkit-scrollbar-thumb {
+            background: rgba(0, 200, 255, 0.2);
+            border-radius: 10px;
+        }
+        .terminal .terminal-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 0.6rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .terminal .terminal-header .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .terminal .terminal-header .dot.red { background: #ff5f56; }
+        .terminal .terminal-header .dot.yellow { background: #ffbd2e; }
+        .terminal .terminal-header .dot.green { background: #27c93f; }
+        .terminal .terminal-header .title {
+            font-size: 0.6rem;
             color: var(--text-muted);
-            font-size: 1rem;
-            margin: 0.4rem 0 1.8rem;
+            opacity: 0.5;
+            margin-left: 0.4rem;
+            letter-spacing: 0.04em;
         }
-        .cta-final .btns {
+        .terminal .terminal-line {
+            color: var(--text-muted);
+            padding: 0.1rem 0;
+            line-height: 1.6;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.01);
+        }
+        .terminal .terminal-line .prompt {
+            color: var(--cyan);
+            opacity: 0.5;
+        }
+        .terminal .terminal-line .highlight {
+            color: var(--gold);
+        }
+        .terminal .terminal-line .ok {
+            color: var(--ok);
+        }
+        .terminal .terminal-line .error {
+            color: var(--danger);
+        }
+
+        .swarm-container {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            position: relative;
+            overflow: hidden;
+            height: 200px;
+            width: 100%;
+        }
+        .swarm-container .swarm-label {
+            font-family: var(--mono);
+            font-size: 0.55rem;
+            color: var(--cyan);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            opacity: 0.4;
+            position: absolute;
+            top: 0.5rem;
+            left: 1rem;
+            z-index: 5;
+        }
+        .swarm-container canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .quick-actions {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
+            gap: 0.6rem;
+            margin: 1rem 0 0.5rem;
+        }
+        .quick-actions .btn-small {
+            font-size: 0.7rem;
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: 0.25s;
+            font-family: var(--font);
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+        .quick-actions .btn-small:hover {
+            border-color: var(--border-active);
+            color: var(--text);
+            background: rgba(0, 200, 255, 0.04);
+        }
+        .quick-actions .btn-small.primary {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        .quick-actions .btn-small.primary:hover {
+            background: rgba(255, 215, 0, 0.06);
+        }
+        .quick-actions .btn-small.danger {
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+        .quick-actions .btn-small.danger:hover {
+            background: rgba(255, 77, 109, 0.06);
+        }
+
+        .last-event {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 0.8rem 1.2rem;
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
             gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+        .last-event .label {
+            font-size: 0.55rem;
+            font-family: var(--mono);
+            color: var(--text-muted);
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .last-event .event-content {
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            color: var(--cyan);
+            flex: 1;
+        }
+        .last-event .event-time {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            opacity: 0.4;
+            font-family: var(--mono);
         }
 
         /* ===== RESPONSIVE ===== */
@@ -1577,6 +1729,41 @@
             section {
                 padding: 3rem 4%;
             }
+            .header .nav a:not(.gold-link):not(.btn-primary) {
+                display: none;
+            }
+            .header .nav .mode-toggle {
+                margin-left: auto;
+            }
+            .header .nav .gold-link {
+                font-size: 0.65rem;
+                padding: 0.15rem 0.6rem;
+            }
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            .organism-card {
+                padding: 1.8rem 1.4rem;
+            }
+            .organism-card .card-title {
+                font-size: 1.5rem;
+            }
+            .organism-card .pillars {
+                grid-template-columns: 1fr 1fr;
+            }
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .swarm-container {
+                height: 140px;
+            }
+            .section-title {
+                font-size: 1.7rem;
+            }
             .q1 .theta-glow {
                 width: 80px;
                 height: 80px;
@@ -1608,27 +1795,6 @@
                 width: 80%;
                 height: 80%;
             }
-            .header .nav a:not(.gold-link):not(.btn-primary) {
-                display: none;
-            }
-            .dashboard-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .organism-card {
-                padding: 1.8rem 1.4rem;
-            }
-            .organism-card .card-title {
-                font-size: 1.5rem;
-            }
-            .organism-card .pillars {
-                grid-template-columns: 1fr 1fr;
-            }
-            .swarm-container {
-                height: 140px;
-            }
-            .cta-final h2 {
-                font-size: 1.8rem;
-            }
         }
         @media (max-width: 500px) {
             .hero h1 {
@@ -1639,6 +1805,55 @@
             }
             .section-title {
                 font-size: 1.5rem;
+            }
+            .cta-final h2 {
+                font-size: 1.6rem;
+            }
+            .value-card {
+                padding: 1.2rem;
+            }
+            .header .nav .gold-link {
+                font-size: 0.55rem;
+                padding: 0.1rem 0.5rem;
+            }
+            .header .nav .mode-toggle button {
+                font-size: 0.5rem;
+                padding: 0.15rem 0.5rem;
+            }
+            .organism-card .pillars {
+                grid-template-columns: 1fr;
+            }
+            .organism-card .card-sub {
+                max-width: 100%;
+                border-left: none;
+                padding-left: 0;
+            }
+            .dashboard-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.6rem;
+            }
+            .metric-card .metric-value {
+                font-size: 1.4rem;
+            }
+            .event-stream .stream-list li {
+                font-size: 0.6rem;
+                flex-wrap: wrap;
+            }
+            .swarm-container {
+                height: 100px;
+            }
+            .quick-actions .btn-small {
+                font-size: 0.6rem;
+                padding: 0.3rem 0.8rem;
+            }
+            .mobile-lang-toggle {
+                font-size: 0.75rem;
+                padding: 0.5rem 0.9rem;
+            }
+            .mobile-lang-menu {
+                min-width: 160px;
+                right: 10px;
+                bottom: 70px;
             }
             .q1 .theta-glow {
                 width: 55px;
@@ -1673,55 +1888,6 @@
             .quad-grid {
                 opacity: 0.3;
             }
-            .mobile-lang-toggle {
-                font-size: 0.75rem;
-                padding: 0.5rem 0.9rem;
-            }
-            .mobile-lang-menu {
-                min-width: 160px;
-                right: 10px;
-                bottom: 70px;
-            }
-            .dashboard-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 0.6rem;
-            }
-            .metric-card .metric-value {
-                font-size: 1.3rem;
-            }
-            .quick-actions .btn {
-                font-size: 0.65rem;
-                padding: 0.4rem 0.8rem;
-            }
-            .terminal {
-                font-size: 0.6rem;
-                padding: 0.8rem 1rem;
-                max-height: 150px;
-            }
-            .organism-card {
-                padding: 1.2rem;
-            }
-            .organism-card .card-title {
-                font-size: 1.2rem;
-            }
-            .organism-card .pillars {
-                grid-template-columns: 1fr;
-            }
-            .organism-card .card-sub {
-                max-width: 100%;
-                border-left: none;
-                padding-left: 0;
-            }
-            .swarm-container {
-                height: 100px;
-            }
-            .cta-final h2 {
-                font-size: 1.4rem;
-            }
-            .cta-final .btns .btn {
-                font-size: 0.7rem;
-                padding: 0.5rem 1rem;
-            }
         }
     </style>
 </head>
@@ -1729,28 +1895,20 @@
 
     <!-- ===== QUADRANT BACKGROUND ===== -->
     <div class="quad-grid">
-        <!-- Квадрант 1 — Сетка + Тета -->
         <div class="quadrant q1">
             <div class="grid-bg"></div>
             <div class="theta-ring-2"></div>
             <div class="theta-ring"></div>
             <div class="theta-glow">θ</div>
             <div class="particles">
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
+                <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+                <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+                <div class="particle"></div><div class="particle"></div>
             </div>
         </div>
-        <!-- Квадрант 2 — 3D ВСЕЛЕННАЯ (УЛУЧШЕННАЯ ВИДИМОСТЬ) -->
-        <div class="quadrant q2" id="threeContainer">
+        <div class="quadrant q2" id="universeContainer">
             <canvas id="universeCanvas"></canvas>
         </div>
-        <!-- Квадрант 3 — Туманность -->
         <div class="quadrant q3">
             <div class="nebula-layer-3"></div>
             <div class="nebula-layer-2"></div>
@@ -1759,7 +1917,6 @@
             <div class="core-glow"></div>
             <div class="stars"></div>
         </div>
-        <!-- Квадрант 4 — Бинарный дождь -->
         <div class="quadrant q4">
             <canvas class="binary-rain" id="binaryCanvas"></canvas>
             <div class="lattice"></div>
@@ -1795,24 +1952,17 @@
                 <a href="#product" data-i18n="nav_product">Product</a>
                 <a href="#core" data-i18n="nav_core">Core</a>
                 <a href="#architecture" data-i18n="nav_architecture">Architecture</a>
-                <a href="#solutions" data-i18n="nav_solutions">Solutions</a>
-                <a href="#pricing" data-i18n="nav_pricing">Pricing</a>
-                <a href="#dashboard" data-i18n="nav_dashboard">📊 Dashboard</a>
-                
-                <!-- Выпадающее меню Resources -->
                 <div class="dropdown">
                     <button class="dropbtn" data-i18n="nav_resources">Resources</button>
                     <div class="dropdown-content">
                         <a href="#developers" data-i18n="nav_developers">Developers</a>
                         <a href="#solutions" data-i18n="nav_solutions">Solutions</a>
                         <a href="#docs" data-i18n="nav_docs">Docs</a>
-                        <a href="system-notes.html" data-i18n="nav_system_notes" style="color: var(--gold);">📘 System Notes</a>
+                        <a href="system-notes.html" style="color: var(--gold);" data-i18n="nav_system_notes">📘 System Notes</a>
                     </div>
                 </div>
-                
+                <a href="#pricing" data-i18n="Pricing">Pricing</a>
                 <a href="system-notes.html" class="gold-link" data-i18n="nav_system_notes_short">📘 Notes</a>
-                
-                <!-- Переключатель режимов Dev/Inv -->
                 <div class="mode-toggle" id="modeToggle">
                     <button class="active" data-mode="developer" data-i18n="nav_dev">Dev</button>
                     <button data-mode="investor" data-i18n="nav_inv">Inv</button>
@@ -1820,9 +1970,7 @@
             </div>
         </header>
 
-        <!-- ============================================================ -->
         <!-- HERO -->
-        <!-- ============================================================ -->
         <section class="hero" id="hero">
             <div class="card">
                 <div class="badge" data-i18n="hero_badge">v.Orbit.3 · typed event fabric</div>
@@ -1843,30 +1991,23 @@
             </div>
         </section>
 
-        <!-- ============================================================ -->
         <!-- EVENT STREAM -->
-        <!-- ============================================================ -->
         <section style="padding-top: 0;">
             <div class="event-stream reveal">
                 <span class="stream-label">⟡ Live Event Stream</span>
                 <div class="stream-container">
-                    <ul class="stream-list" id="eventStreamList">
-                        <!-- Populated by JavaScript -->
-                    </ul>
+                    <ul class="stream-list" id="eventStreamList"></ul>
                 </div>
             </div>
         </section>
 
-        <!-- ============================================================ -->
-        <!-- LAST EVENT + QUICK ACTIONS -->
-        <!-- ============================================================ -->
+        <!-- QUICK ACTIONS + LAST EVENT -->
         <section style="padding-top: 0;">
             <div class="last-event reveal" id="lastEventWidget">
                 <span class="label">⏳ Last Event</span>
                 <span class="event-content" id="lastEventContent">Agent #7f3a → EXPLORE</span>
                 <span class="event-time" id="lastEventTime">12:00:01</span>
             </div>
-
             <div class="quick-actions reveal">
                 <button class="btn-small primary" onclick="spawnAgent()">🧬 Spawn Agent</button>
                 <button class="btn-small" onclick="emitEvent()">⚡ Emit Event</button>
@@ -1875,9 +2016,7 @@
             </div>
         </section>
 
-        <!-- ============================================================ -->
         <!-- LIVING ORGANISM -->
-        <!-- ============================================================ -->
         <section id="organism" style="padding-top: 1rem;">
             <div class="organism-card reveal">
                 <div class="card-glow"></div>
@@ -1896,7 +2035,6 @@
                         T.E.R.S.A.N.E.S.I. — The Engine for Runtime Systems of Advanced Networked Entities and Synthetic Intelligence.
                     </span>
                 </div>
-
                 <div class="pillars">
                     <div class="pillar">
                         <div class="num">01</div>
@@ -1919,14 +2057,12 @@
                         <p>Environment reacts, degrades, regenerates, and imposes physical-like constraints (latency, scarcity, stochasticity).</p>
                     </div>
                 </div>
-
                 <div class="quote-block">
                     <div class="text">
                         “This isn't about building a smarter chatbot — it's about cultivating a <strong>digital mycelium</strong> where intelligence emerges from interaction, not from a single master model.”
                     </div>
                     <div class="source">— T.E.R.S.A.N.E.S.I. design philosophy</div>
                 </div>
-
                 <div class="runtime-scheduler">
                     <span class="label">⟡ The Hardest Part</span>
                     <p>
@@ -1934,9 +2070,7 @@
                         <span>That's where the “organism” breathes.</span>
                     </p>
                 </div>
-
                 <div class="divider"></div>
-
                 <div class="meta-footer">
                     <span>⏣ persistent · adaptive · emergent</span>
                     <div class="links">
@@ -1948,14 +2082,12 @@
             </div>
         </section>
 
-        <!-- ============================================================ -->
         <!-- PRODUCT -->
-        <!-- ============================================================ -->
         <section id="product">
             <div class="section-label reveal" data-i18n="product_label">Product</div>
             <h2 class="section-title reveal" data-i18n="product_title">What is TERSANESI?</h2>
             <p class="section-desc reveal" data-i18n="product_desc">A runtime for coordinating autonomous AI systems across research, simulation, and digital environments.</p>
-            <div class="grid-3">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
                 <div class="value-card reveal">
                     <div class="num" data-i18n="product_feature_1_num">01</div>
                     <h3 data-i18n="product_feature_1_title">Coordinate</h3>
@@ -1974,9 +2106,7 @@
             </div>
         </section>
 
-        <!-- ============================================================ -->
         <!-- CORE -->
-        <!-- ============================================================ -->
         <section id="core">
             <div class="section-label reveal" data-i18n="core_label">Core</div>
             <h2 class="section-title reveal" data-i18n="core_title">Three Pillars</h2>
@@ -2000,32 +2130,68 @@
             </div>
         </section>
 
-        <!-- ============================================================ -->
-        <!-- ARCHITECTURE -->
-        <!-- ============================================================ -->
+        <!-- ARCHITECTURE + DASHBOARD -->
         <section id="architecture">
             <div class="section-label reveal" data-i18n="arch_label">System</div>
             <h2 class="section-title reveal" data-i18n="arch_title">Architecture</h2>
             <p class="section-desc reveal" data-i18n="arch_desc">Three layers that define the runtime stack.</p>
-            <div class="grid-3">
-                <div class="value-card reveal">
-                    <div class="num" data-i18n="arch_layer_1_tag">kernel</div>
-                    <h3 data-i18n="arch_layer_1_title">TERSANESI</h3>
+            
+            <div class="dashboard-grid reveal">
+                <div class="metric-card">
+                    <div class="metric-value" id="metricAgents">47</div>
+                    <div class="metric-label">Active Agents</div>
+                    <div class="metric-trend up" id="metricAgentsTrend">▲ 2.4%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" id="metricRequests">1,247</div>
+                    <div class="metric-label">Requests / sec</div>
+                    <div class="metric-trend up">▲ 8.1%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" id="metricLatency">42 <span class="unit">ms</span></div>
+                    <div class="metric-label">Avg Latency</div>
+                    <div class="metric-trend stable">— stable</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" id="metricMemory">3.2 <span class="unit">GB</span></div>
+                    <div class="metric-label">Memory Used</div>
+                    <div class="metric-trend up">▲ 0.8%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" id="metricStatus" class="status-ok">● ONLINE</div>
+                    <div class="metric-label">Network Status</div>
+                    <div class="metric-trend stable">99.97% uptime</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" id="metricEvents">8.4K</div>
+                    <div class="metric-label">Events / min</div>
+                    <div class="metric-trend up">▲ 3.2%</div>
+                </div>
+            </div>
+
+            <div class="swarm-container reveal">
+                <span class="swarm-label">⟡ Agent Swarm</span>
+                <canvas id="swarmCanvas"></canvas>
+            </div>
+
+            <div class="arch-grid">
+                <div class="arch-card reveal">
+                    <div class="layer-tag" data-i18n="arch_layer_1_tag">kernel</div>
+                    <h4 data-i18n="arch_layer_1_title">TERSANESI</h4>
                     <p data-i18n="arch_layer_1_desc">Orchestration · runtime logic · core kernel</p>
                 </div>
-                <div class="value-card reveal">
-                    <div class="num" data-i18n="arch_layer_2_tag">execution</div>
-                    <h3 data-i18n="arch_layer_2_title">Cavibara</h3>
+                <div class="arch-card reveal">
+                    <div class="layer-tag" data-i18n="arch_layer_2_tag">execution</div>
+                    <h4 data-i18n="arch_layer_2_title">Cavibara</h4>
                     <p data-i18n="arch_layer_2_desc">API · UI · economy · dashboards</p>
                 </div>
-                <div class="value-card reveal">
-                    <div class="num" data-i18n="arch_layer_3_tag">world</div>
-                    <h3 data-i18n="arch_layer_3_title">Wellamatores</h3>
+                <div class="arch-card reveal">
+                    <div class="layer-tag" data-i18n="arch_layer_3_tag">world</div>
+                    <h4 data-i18n="arch_layer_3_title">Wellamatores</h4>
                     <p data-i18n="arch_layer_3_desc">Narrative · simulation · world state</p>
                 </div>
             </div>
 
-            <!-- TYPED STREAMS -->
             <div class="mode-dev" style="margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--border);">
                 <div style="font-size:0.7rem; font-family:var(--mono); color:var(--text-muted); margin-bottom:0.8rem; letter-spacing:0.04em;" data-i18n="arch_typed_streams">TYPED STREAMS</div>
                 <div style="display:flex; flex-wrap:wrap; gap:0.8rem;">
@@ -2036,7 +2202,6 @@
                 </div>
             </div>
 
-            <!-- STRATEGIC APPLICATIONS -->
             <div class="mode-inv" style="margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--border);">
                 <div style="font-size:0.7rem; font-family:var(--mono); color:var(--text-muted); margin-bottom:0.8rem; letter-spacing:0.04em;" data-i18n="arch_strategic">STRATEGIC APPLICATIONS</div>
                 <div style="display:flex; flex-wrap:wrap; gap:0.8rem;">
@@ -2049,138 +2214,57 @@
             </div>
         </section>
 
-        <!-- ============================================================ -->
-        <!-- DASHBOARD -->
-        <!-- ============================================================ -->
-        <section id="dashboard">
-            <div class="section-label reveal" data-i18n="dashboard_label">Live</div>
-            <h2 class="section-title reveal" data-i18n="dashboard_title">System Dashboard</h2>
-            <p class="section-desc reveal" data-i18n="dashboard_desc">Real-time metrics of the TERSANESI runtime — click buttons to interact with the system.</p>
-            
-            <div class="dashboard-grid">
-                <div class="metric-card reveal">
-                    <div class="metric-value" id="agentCount">100</div>
-                    <div class="metric-label" data-i18n="metric_agents">Active Agents</div>
-                    <div class="metric-change positive" id="agentChange">↑ +12%</div>
-                </div>
-                <div class="metric-card reveal">
-                    <div class="metric-value" id="rpsValue">3,247</div>
-                    <div class="metric-label" data-i18n="metric_rps">Requests / sec</div>
-                    <div class="metric-change positive" id="rpsChange">↑ +8%</div>
-                </div>
-                <div class="metric-card reveal">
-                    <div class="metric-value" id="latencyValue">42</div>
-                    <div class="metric-label" data-i18n="metric_latency">Latency (ms)</div>
-                    <div class="metric-change positive" id="latencyChange">↓ -3%</div>
-                </div>
-                <div class="metric-card reveal">
-                    <div class="metric-value" id="revenueValue">$2.4M</div>
-                    <div class="metric-label" data-i18n="metric_revenue">Processed Value</div>
-                    <div class="metric-change positive" id="revenueChange">↑ +18%</div>
-                </div>
-                <div class="metric-card reveal">
-                    <div class="metric-value" id="statusValue">● ONLINE</div>
-                    <div class="metric-label" data-i18n="metric_status">System Status</div>
-                    <div class="metric-change positive" id="statusChange">100% uptime</div>
-                </div>
-                <div class="metric-card reveal">
-                    <div class="metric-value" id="eventsValue">1,483</div>
-                    <div class="metric-label" data-i18n="metric_events">Events / min</div>
-                    <div class="metric-change positive" id="eventsChange">↑ +5%</div>
-                </div>
-            </div>
-
-            <!-- QUICK ACTIONS -->
-            <div class="quick-actions">
-                <button class="btn btn-primary" onclick="spawnAgent()" data-i18n="action_spawn">🤖 Spawn Agent</button>
-                <button class="btn btn-ghost" onclick="emitEvent()" data-i18n="action_emit">⚡ Emit Event</button>
-                <button class="btn btn-ghost" onclick="simulateLoad()" data-i18n="action_load">📈 Simulate Load</button>
-                <button class="btn" onclick="resetSystem()" data-i18n="action_reset">⟳ Reset</button>
-            </div>
-
-            <!-- ТЕРМИНАЛ -->
-            <div class="terminal" id="terminal">
-                <div class="term-line"><span class="prompt">$</span> <span class="info">System initialized. Runtime v.Orbit.3 ready.</span></div>
-                <div class="term-line"><span class="prompt">$</span> <span class="info">Event fabric connected. 100 agents active.</span></div>
-            </div>
-        </section>
-
-        <!-- ============================================================ -->
         <!-- SOLUTIONS -->
-        <!-- ============================================================ -->
         <section id="solutions">
             <div class="section-label reveal" data-i18n="solutions_label">Solutions</div>
             <h2 class="section-title reveal" data-i18n="solutions_title">Industry Solutions</h2>
             <p class="section-desc reveal" data-i18n="solutions_desc">TERSANESI adapts to your domain — from gaming to scientific research.</p>
-            <div class="grid-3">
-                <div class="value-card reveal">
-                    <div class="num" data-i18n="solutions_1_num">01</div>
-                    <h3 data-i18n="solutions_1_title">Gaming &amp; MMO</h3>
+            <div class="solutions-grid">
+                <div class="solution-card reveal">
+                    <div class="icon">🎮</div>
+                    <h4 data-i18n="solutions_1_title">Gaming &amp; MMO</h4>
                     <p data-i18n="solutions_1_desc">Scalable backend for persistent worlds, AI-driven NPCs, and real-time player interactions.</p>
                 </div>
-                <div class="value-card reveal">
-                    <div class="num" data-i18n="solutions_2_num">02</div>
-                    <h3 data-i18n="solutions_2_title">Research &amp; Simulation</h3>
+                <div class="solution-card reveal">
+                    <div class="icon">🔬</div>
+                    <h4 data-i18n="solutions_2_title">Research &amp; Simulation</h4>
                     <p data-i18n="solutions_2_desc">Multi-agent systems for scientific modeling, climate simulation, and computational social science.</p>
                 </div>
-                <div class="value-card reveal">
-                    <div class="num" data-i18n="solutions_3_num">03</div>
-                    <h3 data-i18n="solutions_3_title">Metaverse &amp; Virtual Worlds</h3>
+                <div class="solution-card reveal">
+                    <div class="icon">🌐</div>
+                    <h4 data-i18n="solutions_3_title">Metaverse &amp; Virtual Worlds</h4>
                     <p data-i18n="solutions_3_desc">Infrastructure for digital twins, virtual economies, and persistent social spaces.</p>
                 </div>
-                <div class="value-card reveal">
-                    <div class="num" data-i18n="solutions_4_num">04</div>
-                    <h3 data-i18n="solutions_4_title">Enterprise AI</h3>
+                <div class="solution-card reveal">
+                    <div class="icon">🏢</div>
+                    <h4 data-i18n="solutions_4_title">Enterprise AI</h4>
                     <p data-i18n="solutions_4_desc">Autonomous workflows, intelligent agents, and automated decision-making systems.</p>
                 </div>
             </div>
         </section>
 
-        <!-- ============================================================ -->
-        <!-- PRICING -->
-        <!-- ============================================================ -->
-        <section id="pricing">
-            <div class="section-label reveal" data-i18n="pricing_label">Pricing</div>
-            <h2 class="section-title reveal" data-i18n="pricing_title">Choose Your Plan</h2>
-            <p class="section-desc reveal" data-i18n="pricing_desc">Flexible pricing for teams of all sizes — from startups to enterprises.</p>
-            <div class="grid-3">
-                <div class="value-card reveal">
-                    <h3 data-i18n="pricing_plan_1_name">Starter</h3>
-                    <p style="font-size:1.5rem; font-weight:700; color:var(--gold); margin:0.3rem 0;">$0</p>
-                    <p style="font-size:0.8rem; color:var(--text-muted);" data-i18n="pricing_plan_1_feature_1">1,000 agent requests / day</p>
-                    <p style="font-size:0.8rem; color:var(--text-muted);" data-i18n="pricing_plan_1_feature_2">3 agents max</p>
-                    <p style="font-size:0.8rem; color:var(--text-muted);" data-i18n="pricing_plan_1_feature_3">Community support</p>
-                    <a href="#" class="btn btn-ghost" style="margin-top:1rem; width:100%; text-align:center;" data-i18n="pricing_plan_1_cta">Get Started</a>
-                </div>
-                <div class="value-card reveal" style="border-color: var(--gold);">
-                    <h3 data-i18n="pricing_plan_2_name">Pro</h3>
-                    <p style="font-size:1.5rem; font-weight:700; color:var(--gold); margin:0.3rem 0;">$49</p>
-                    <p style="font-size:0.8rem; color:var(--text-muted);" data-i18n="pricing_plan_2_feature_1">100,000 agent requests / day</p>
-                    <p style="font-size:0.8rem; color:var(--text-muted);" data-i18n="pricing_plan_2_feature_2">50 agents max</p>
-                    <p style="font-size:0.8rem; color:var(--text-muted);" data-i18n="pricing_plan_2_feature_3">Priority support</p>
-                    <p style="font-size:0.8rem; color:var(--text-muted);" data-i18n="pricing_plan_2_feature_4">Advanced analytics</p>
-                    <a href="#" class="btn btn-primary" style="margin-top:1rem; width:100%; text-align:center;" data-i18n="pricing_plan_2_cta">Start Trial</a>
-                </div>
-                <div class="value-card reveal">
-                    <h3 data-i18n="pricing_plan_3_name">Enterprise</h3>
-                    <p style="font-size:1.5rem; font-weight:700; color:var(--gold); margin:0.3rem 0;" data-i18n="pricing_plan_3_price">Custom</p>
-                    <p style="font-size:0.8rem; color:var(--text-muted);" data-i18n="pricing_plan_3_feature_1">Unlimited requests</p>
-                    <p style="font-size:0.8rem; color:var(--text-muted);" data-i18n="pricing_plan_3_feature_2">Unlimited agents</p>
-                    <p style="font-size:0.8rem; color:var(--text-muted);" data-i18n="pricing_plan_3_feature_3">Dedicated support</p>
-                    <p style="font-size:0.8rem; color:var(--text-muted);" data-i18n="pricing_plan_3_feature_4">SLA guarantee</p>
-                    <a href="#" class="btn btn-ghost" style="margin-top:1rem; width:100%; text-align:center;" data-i18n="pricing_plan_3_cta">Contact Sales</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============================================================ -->
-        <!-- DEVELOPERS -->
-        <!-- ============================================================ -->
+        <!-- DEVELOPERS + TERMINAL -->
         <section id="developers">
             <div class="section-label reveal" data-i18n="dev_label">Developers</div>
             <h2 class="section-title reveal" data-i18n="dev_title">Developer Tools</h2>
             <p class="section-desc reveal" data-i18n="dev_desc">Everything you need to build and deploy AI-native applications.</p>
             
+            <div class="terminal reveal" id="terminal">
+                <div class="terminal-header">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                    <span class="title">TERSANESI · runtime console</span>
+                </div>
+                <div id="terminalContent">
+                    <div class="terminal-line"><span class="prompt">$</span> Initializing TERSANESI kernel v3.1...</div>
+                    <div class="terminal-line"><span class="prompt">$</span> <span class="ok">✓</span> Core modules loaded</div>
+                    <div class="terminal-line"><span class="prompt">$</span> <span class="ok">✓</span> Agent registry initialized (47 agents)</div>
+                    <div class="terminal-line"><span class="prompt">$</span> <span class="ok">✓</span> Event bus connected</div>
+                    <div class="terminal-line"><span class="prompt">$</span> <span class="highlight">▶</span> Runtime is <span class="ok">OPERATIONAL</span></div>
+                </div>
+            </div>
+
             <div class="dev-grid">
                 <div class="dev-card reveal">
                     <div class="icon">📦</div>
@@ -2205,9 +2289,52 @@
             </div>
         </section>
 
-        <!-- ============================================================ -->
-        <!-- DOCS (режим Dev) -->
-        <!-- ============================================================ -->
+        <!-- PRICING -->
+        <section id="pricing">
+            <div class="section-label reveal" data-i18n="pricing_label">Pricing</div>
+            <h2 class="section-title reveal" data-i18n="pricing_title">Choose Your Plan</h2>
+            <p class="section-desc reveal" data-i18n="pricing_desc">Flexible pricing for teams of all sizes — from startups to enterprises.</p>
+            <div class="pricing-grid">
+                <div class="pricing-card reveal">
+                    <h4 data-i18n="pricing_plan_1_name">Starter</h4>
+                    <div class="price">$0 <small data-i18n="pricing_plan_1_period">/mo</small></div>
+                    <ul class="features">
+                        <li data-i18n="pricing_plan_1_feature_1">1,000 agent requests / day</li>
+                        <li data-i18n="pricing_plan_1_feature_2">3 agents max</li>
+                        <li data-i18n="pricing_plan_1_feature_3">Community support</li>
+                        <li data-i18n="pricing_plan_1_feature_4">Basic analytics</li>
+                    </ul>
+                    <a href="#" class="btn btn-ghost" data-i18n="pricing_plan_1_cta">Get Started</a>
+                </div>
+                <div class="pricing-card featured reveal">
+                    <h4 data-i18n="pricing_plan_2_name">Pro</h4>
+                    <div class="price">$49 <small data-i18n="pricing_plan_2_period">/mo</small></div>
+                    <ul class="features">
+                        <li data-i18n="pricing_plan_2_feature_1">100,000 agent requests / day</li>
+                        <li data-i18n="pricing_plan_2_feature_2">50 agents max</li>
+                        <li data-i18n="pricing_plan_2_feature_3">Priority support</li>
+                        <li data-i18n="pricing_plan_2_feature_4">Advanced analytics</li>
+                        <li data-i18n="pricing_plan_2_feature_5">Custom integrations</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" data-i18n="pricing_plan_2_cta">Start Trial</a>
+                </div>
+                <div class="pricing-card reveal">
+                    <h4 data-i18n="pricing_plan_3_name">Enterprise</h4>
+                    <div class="price" data-i18n="pricing_plan_3_price">Custom</div>
+                    <ul class="features">
+                        <li data-i18n="pricing_plan_3_feature_1">Unlimited requests</li>
+                        <li data-i18n="pricing_plan_3_feature_2">Unlimited agents</li>
+                        <li data-i18n="pricing_plan_3_feature_3">Dedicated support</li>
+                        <li data-i18n="pricing_plan_3_feature_4">SLA guarantee</li>
+                        <li data-i18n="pricing_plan_3_feature_5">On-premise deployment</li>
+                        <li data-i18n="pricing_plan_3_feature_6">Custom SLAs</li>
+                    </ul>
+                    <a href="#" class="btn btn-ghost" data-i18n="pricing_plan_3_cta">Contact Sales</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- DOCS (developer mode) -->
         <div class="mode-dev" style="padding: 0 5%; max-width: 1280px; margin: 0 auto;">
             <section id="docs" style="padding: 3rem 0;">
                 <div class="section-label reveal" data-i18n="docs_label">Documentation</div>
@@ -2233,11 +2360,22 @@
             </section>
         </div>
 
-        <!-- ============================================================ -->
-        <!-- USE CASES (режим Inv) -->
-        <!-- ============================================================ -->
-        <div class="mode-inv" style="padding: 0 5%; max-width: 1280px; margin: 0 auto;">
-            <section id="use-cases" style="padding: 3rem 0;">
+        <!-- USE CASES -->
+        <section id="use-cases" style="padding-top: 0;">
+            <div class="mode-dev">
+                <div class="section-label reveal" data-i18n="stack_label">Stack</div>
+                <h2 class="section-title reveal" data-i18n="stack_title">Technology Stack</h2>
+                <p class="section-desc reveal" data-i18n="stack_desc">Runtime agnostic — cloud, edge, or local swarm.</p>
+                <div class="stack-list reveal">
+                    <span>React</span><span>WebSocket</span><span>FastAPI</span>
+                    <span>Three.js</span><span>WebGL</span><span>Python</span>
+                    <span>Go</span><span>Rust</span><span>TypeScript</span>
+                    <span>Redis</span><span>Kafka</span><span>Docker</span>
+                    <span>Kubernetes</span>
+                </div>
+            </div>
+
+            <div class="mode-inv">
                 <div class="section-label reveal" data-i18n="use_cases_label">Applications</div>
                 <h2 class="section-title reveal" data-i18n="use_cases_title">Use Cases</h2>
                 <p class="section-desc reveal" data-i18n="use_cases_desc">Where TERSANESI delivers immediate value.</p>
@@ -2251,38 +2389,10 @@
                     <div class="use-item reveal" data-i18n="use_case_7">AI-Driven Workflows</div>
                     <div class="use-item reveal" data-i18n="use_case_8">Predictive Simulation</div>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
 
-        <!-- ============================================================ -->
-        <!-- TECHNOLOGY STACK (режим Dev) -->
-        <!-- ============================================================ -->
-        <div class="mode-dev" style="padding: 0 5%; max-width: 1280px; margin: 0 auto;">
-            <section id="stack" style="padding: 3rem 0;">
-                <div class="section-label reveal" data-i18n="stack_label">Stack</div>
-                <h2 class="section-title reveal" data-i18n="stack_title">Technology Stack</h2>
-                <p class="section-desc reveal" data-i18n="stack_desc">Runtime agnostic — cloud, edge, or local swarm.</p>
-                <div class="stack-list reveal">
-                    <span>React</span>
-                    <span>WebSocket</span>
-                    <span>FastAPI</span>
-                    <span>Three.js</span>
-                    <span>WebGL</span>
-                    <span>Python</span>
-                    <span>Go</span>
-                    <span>Rust</span>
-                    <span>TypeScript</span>
-                    <span>Redis</span>
-                    <span>Kafka</span>
-                    <span>Docker</span>
-                    <span>Kubernetes</span>
-                </div>
-            </section>
-        </div>
-
-        <!-- ============================================================ -->
-        <!-- CTA FINAL -->
-        <!-- ============================================================ -->
+        <!-- FINAL CTA -->
         <div class="cta-final reveal">
             <h2 data-i18n="cta_title">Build AI-native worlds.</h2>
             <p data-i18n="cta_desc">Deploy scalable agent ecosystems in real time.</p>
@@ -2294,9 +2404,7 @@
             </div>
         </div>
 
-        <!-- ============================================================ -->
         <!-- FOOTER -->
-        <!-- ============================================================ -->
         <footer class="footer">
             <div data-i18n="footer_copyright">© 2026 TERSANESI · AI-native runtime</div>
             <div class="links">
@@ -2311,18 +2419,8 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- ===== SCRIPTS ===== -->
+    <!-- SCRIPTS -->
     <!-- ============================================================ -->
-
-    <!-- Three.js (для квадранта 2) -->
-    <script type="importmap">
-        {
-            "imports": {
-                "three": "https://unpkg.com/three@0.128.0/build/three.module.js",
-                "three/addons/": "https://unpkg.com/three@0.128.0/examples/jsm/"
-            }
-        }
-    </script>
 
     <script>
         // ============================================================
@@ -2342,19 +2440,10 @@
 
         const TRANSLATIONS = {
             en: {
-                nav_product: "Product",
-                nav_core: "Core",
-                nav_architecture: "Architecture",
-                nav_solutions: "Solutions",
-                nav_pricing: "Pricing",
-                nav_dashboard: "📊 Dashboard",
-                nav_resources: "Resources",
-                nav_developers: "Developers",
-                nav_docs: "Docs",
-                nav_system_notes: "System Notes",
-                nav_system_notes_short: "📘 Notes",
-                nav_dev: "Dev",
-                nav_inv: "Inv",
+                nav_product: "Product", nav_core: "Core", nav_architecture: "Architecture",
+                nav_resources: "Resources", nav_developers: "Developers", nav_solutions: "Solutions",
+                nav_docs: "Docs", nav_system_notes: "System Notes", nav_system_notes_short: "📘 Notes",
+                nav_dev: "Dev", nav_inv: "Inv",
                 hero_badge: "v.Orbit.3 · typed event fabric",
                 hero_title_1: "AI-Native Runtime",
                 hero_title_2: 'for <span class="highlight">Multi-Agent Worlds</span>',
@@ -2378,13 +2467,10 @@
                 core_label: "Core",
                 core_title: "Three Pillars",
                 core_desc: "The foundational capabilities that power the runtime.",
-                core_pillar_1_num: "01",
                 core_pillar_1_title: "AI-Native Runtime",
                 core_pillar_1_desc: "Event-driven inference engine for autonomous agents with typed state streams.",
-                core_pillar_2_num: "02",
                 core_pillar_2_title: "Multi-Agent Orchestration",
                 core_pillar_2_desc: "State synchronization, feedback loops, and swarm logic at scale.",
-                core_pillar_3_num: "03",
                 core_pillar_3_title: "Scalable Simulation Layer",
                 core_pillar_3_desc: "MMO / metaverse / persistent world infrastructure built for concurrency.",
                 arch_label: "System",
@@ -2410,55 +2496,17 @@
                 arch_strategic_3: "Metaverse Systems",
                 arch_strategic_4: "Multi-Agent Research",
                 arch_strategic_5: "Autonomous Economic Models",
-                dashboard_label: "Live",
-                dashboard_title: "System Dashboard",
-                dashboard_desc: "Real-time metrics of the TERSANESI runtime — click buttons to interact with the system.",
-                metric_agents: "Active Agents",
-                metric_rps: "Requests / sec",
-                metric_latency: "Latency (ms)",
-                metric_revenue: "Processed Value",
-                metric_status: "System Status",
-                metric_events: "Events / min",
-                action_spawn: "🤖 Spawn Agent",
-                action_emit: "⚡ Emit Event",
-                action_load: "📈 Simulate Load",
-                action_reset: "⟳ Reset",
                 solutions_label: "Solutions",
                 solutions_title: "Industry Solutions",
                 solutions_desc: "TERSANESI adapts to your domain — from gaming to scientific research.",
-                solutions_1_num: "01",
                 solutions_1_title: "Gaming & MMO",
                 solutions_1_desc: "Scalable backend for persistent worlds, AI-driven NPCs, and real-time player interactions.",
-                solutions_2_num: "02",
                 solutions_2_title: "Research & Simulation",
                 solutions_2_desc: "Multi-agent systems for scientific modeling, climate simulation, and computational social science.",
-                solutions_3_num: "03",
                 solutions_3_title: "Metaverse & Virtual Worlds",
                 solutions_3_desc: "Infrastructure for digital twins, virtual economies, and persistent social spaces.",
-                solutions_4_num: "04",
                 solutions_4_title: "Enterprise AI",
                 solutions_4_desc: "Autonomous workflows, intelligent agents, and automated decision-making systems.",
-                pricing_label: "Pricing",
-                pricing_title: "Choose Your Plan",
-                pricing_desc: "Flexible pricing for teams of all sizes — from startups to enterprises.",
-                pricing_plan_1_name: "Starter",
-                pricing_plan_1_feature_1: "1,000 agent requests / day",
-                pricing_plan_1_feature_2: "3 agents max",
-                pricing_plan_1_feature_3: "Community support",
-                pricing_plan_1_cta: "Get Started",
-                pricing_plan_2_name: "Pro",
-                pricing_plan_2_feature_1: "100,000 agent requests / day",
-                pricing_plan_2_feature_2: "50 agents max",
-                pricing_plan_2_feature_3: "Priority support",
-                pricing_plan_2_feature_4: "Advanced analytics",
-                pricing_plan_2_cta: "Start Trial",
-                pricing_plan_3_name: "Enterprise",
-                pricing_plan_3_price: "Custom",
-                pricing_plan_3_feature_1: "Unlimited requests",
-                pricing_plan_3_feature_2: "Unlimited agents",
-                pricing_plan_3_feature_3: "Dedicated support",
-                pricing_plan_3_feature_4: "SLA guarantee",
-                pricing_plan_3_cta: "Contact Sales",
                 dev_label: "Developers",
                 dev_title: "Developer Tools",
                 dev_desc: "Everything you need to build and deploy AI-native applications.",
@@ -2470,6 +2518,33 @@
                 dev_3_desc: "Command-line tools for deployment, monitoring, and debugging.",
                 dev_4_title: "Documentation",
                 dev_4_desc: "Comprehensive guides, examples, and API references.",
+                pricing_label: "Pricing",
+                pricing_title: "Choose Your Plan",
+                pricing_desc: "Flexible pricing for teams of all sizes — from startups to enterprises.",
+                pricing_plan_1_name: "Starter",
+                pricing_plan_1_period: "/mo",
+                pricing_plan_1_feature_1: "1,000 agent requests / day",
+                pricing_plan_1_feature_2: "3 agents max",
+                pricing_plan_1_feature_3: "Community support",
+                pricing_plan_1_feature_4: "Basic analytics",
+                pricing_plan_1_cta: "Get Started",
+                pricing_plan_2_name: "Pro",
+                pricing_plan_2_period: "/mo",
+                pricing_plan_2_feature_1: "100,000 agent requests / day",
+                pricing_plan_2_feature_2: "50 agents max",
+                pricing_plan_2_feature_3: "Priority support",
+                pricing_plan_2_feature_4: "Advanced analytics",
+                pricing_plan_2_feature_5: "Custom integrations",
+                pricing_plan_2_cta: "Start Trial",
+                pricing_plan_3_name: "Enterprise",
+                pricing_plan_3_price: "Custom",
+                pricing_plan_3_feature_1: "Unlimited requests",
+                pricing_plan_3_feature_2: "Unlimited agents",
+                pricing_plan_3_feature_3: "Dedicated support",
+                pricing_plan_3_feature_4: "SLA guarantee",
+                pricing_plan_3_feature_5: "On-premise deployment",
+                pricing_plan_3_feature_6: "Custom SLAs",
+                pricing_plan_3_cta: "Contact Sales",
                 docs_label: "Documentation",
                 docs_title: "Technical Documentation",
                 docs_desc: "Deep technical resources for architects and engineers.",
@@ -2508,23 +2583,14 @@
                 footer_blog: "Blog"
             },
             ru: {
-                nav_product: "Продукт",
-                nav_core: "Ядро",
-                nav_architecture: "Архитектура",
-                nav_solutions: "Решения",
-                nav_pricing: "Цены",
-                nav_dashboard: "📊 Дашборд",
-                nav_resources: "Ресурсы",
-                nav_developers: "Разработчикам",
-                nav_docs: "Документация",
-                nav_system_notes: "Системные заметки",
-                nav_system_notes_short: "📘 Заметки",
-                nav_dev: "Dev",
-                nav_inv: "Инв",
+                nav_product: "Продукт", nav_core: "Ядро", nav_architecture: "Архитектура",
+                nav_resources: "Ресурсы", nav_developers: "Разработчикам", nav_solutions: "Решения",
+                nav_docs: "Документация", nav_system_notes: "Системные заметки", nav_system_notes_short: "📘 Заметки",
+                nav_dev: "Dev", nav_inv: "Инв",
                 hero_badge: "v.Orbit.3 · типизированная событийная ткань",
-                hero_title_1: "AI-нативное окружение",
-                hero_title_2: 'для <span class="highlight">Мульти-агентных миров</span>',
-                hero_sub: "Типизированная событийная архитектура для MMO-систем, AI-агентов и динамических цифровых экосистем.",
+                hero_title_1: "AI-нативная среда",
+                hero_title_2: 'для <span class="highlight">мульти-агентных миров</span>',
+                hero_sub: "Типизированная событийно-ориентированная архитектура для MMO-систем, AI-агентов и динамических цифровых экосистем.",
                 hero_cta_primary: "Развернуть Runtime →",
                 hero_cta_ghost: "Изучить архитектуру",
                 hero_cta_system: "📘 Системные заметки",
@@ -2534,28 +2600,25 @@
                 product_desc: "Среда выполнения для координации автономных AI-систем в исследованиях, симуляциях и цифровых средах.",
                 product_feature_1_num: "01",
                 product_feature_1_title: "Координация",
-                product_feature_1_desc: "Объединяйте несколько AI-агентов, систем и источников данных в единый поток.",
+                product_feature_1_desc: "Объединяет множественные AI-агенты, системы и источники данных в единый поток.",
                 product_feature_2_num: "02",
                 product_feature_2_title: "Масштабирование",
-                product_feature_2_desc: "От небольших исследовательских групп до крупных симуляций — рост без перепроектирования.",
+                product_feature_2_desc: "От малых исследовательских групп до крупных симуляций — рост без перепроектирования.",
                 product_feature_3_num: "03",
                 product_feature_3_title: "Эволюция",
-                product_feature_3_desc: "Добавляйте новых агентов, рабочие процессы и возможности по мере роста системы.",
+                product_feature_3_desc: "Добавляйте новых агентов, процессы и возможности по мере роста системы.",
                 core_label: "Ядро",
                 core_title: "Три столпа",
-                core_desc: "Фундаментальные возможности, лежащие в основе среды выполнения.",
-                core_pillar_1_num: "01",
-                core_pillar_1_title: "AI-нативное окружение",
-                core_pillar_1_desc: "Событийный движок вывода для автономных агентов с типизированными потоками состояний.",
-                core_pillar_2_num: "02",
-                core_pillar_2_title: "Оркестрация агентов",
-                core_pillar_2_desc: "Синхронизация состояний, обратные связи и логика роя в масштабе.",
-                core_pillar_3_num: "03",
-                core_pillar_3_title: "Масштабируемый симуляционный слой",
-                core_pillar_3_desc: "Инфраструктура для MMO / метавселенных / постоянных миров, созданная для конкурентности.",
+                core_desc: "Фундаментальные возможности, на которых построена среда выполнения.",
+                core_pillar_1_title: "AI-нативная среда",
+                core_pillar_1_desc: "Событийно-ориентированный движок вывода для автономных агентов с типизированными потоками состояния.",
+                core_pillar_2_title: "Мульти-агентная оркестрация",
+                core_pillar_2_desc: "Синхронизация состояния, обратные связи и логика роя в масштабе.",
+                core_pillar_3_title: "Масштабируемый слой симуляции",
+                core_pillar_3_desc: "Инфраструктура для MMO/метавселенных/персистентных миров, построенная для конкурентности.",
                 arch_label: "Система",
                 arch_title: "Архитектура",
-                arch_desc: "Три слоя, определяющие стек выполнения.",
+                arch_desc: "Три слоя, определяющие стек среды выполнения.",
                 arch_layer_1_tag: "ядро",
                 arch_layer_1_title: "TERSANESI",
                 arch_layer_1_desc: "Оркестрация · логика выполнения · ядро",
@@ -2576,55 +2639,17 @@
                 arch_strategic_3: "Системы метавселенных",
                 arch_strategic_4: "Мульти-агентные исследования",
                 arch_strategic_5: "Автономные экономические модели",
-                dashboard_label: "Живой",
-                dashboard_title: "Системный Дашборд",
-                dashboard_desc: "Метрики TERSANESI в реальном времени — нажимайте кнопки для взаимодействия с системой.",
-                metric_agents: "Активные агенты",
-                metric_rps: "Запросов / сек",
-                metric_latency: "Задержка (мс)",
-                metric_revenue: "Обработанная ценность",
-                metric_status: "Статус системы",
-                metric_events: "Событий / мин",
-                action_spawn: "🤖 Создать агента",
-                action_emit: "⚡ Отправить событие",
-                action_load: "📈 Симулировать нагрузку",
-                action_reset: "⟳ Сброс",
                 solutions_label: "Решения",
                 solutions_title: "Отраслевые решения",
-                solutions_desc: "TERSANESI адаптируется к вашей сфере — от игр до научных исследований.",
-                solutions_1_num: "01",
+                solutions_desc: "TERSANESI адаптируется к вашей области — от игр до научных исследований.",
                 solutions_1_title: "Игры и MMO",
-                solutions_1_desc: "Масштабируемый бэкенд для постоянных миров, AI-управляемых NPC и реального времени.",
-                solutions_2_num: "02",
+                solutions_1_desc: "Масштабируемый бэкенд для персистентных миров, AI-управляемых NPC и взаимодействий в реальном времени.",
                 solutions_2_title: "Исследования и симуляции",
-                solutions_2_desc: "Мульти-агентные системы для научного моделирования и вычислительных социальных наук.",
-                solutions_3_num: "03",
+                solutions_2_desc: "Мульти-агентные системы для научного моделирования, климатических симуляций и вычислительных социальных наук.",
                 solutions_3_title: "Метавселенные и виртуальные миры",
-                solutions_3_desc: "Инфраструктура для цифровых двойников, виртуальных экономик и социальных пространств.",
-                solutions_4_num: "04",
+                solutions_3_desc: "Инфраструктура для цифровых двойников, виртуальных экономик и персистентных социальных пространств.",
                 solutions_4_title: "Корпоративный AI",
-                solutions_4_desc: "Автономные рабочие процессы, интеллектуальные агенты и системы принятия решений.",
-                pricing_label: "Цены",
-                pricing_title: "Выберите тариф",
-                pricing_desc: "Гибкие цены для команд любого размера — от стартапов до предприятий.",
-                pricing_plan_1_name: "Стартовый",
-                pricing_plan_1_feature_1: "1 000 запросов агентов / день",
-                pricing_plan_1_feature_2: "Макс. 3 агента",
-                pricing_plan_1_feature_3: "Поддержка сообщества",
-                pricing_plan_1_cta: "Начать",
-                pricing_plan_2_name: "Профессиональный",
-                pricing_plan_2_feature_1: "100 000 запросов агентов / день",
-                pricing_plan_2_feature_2: "Макс. 50 агентов",
-                pricing_plan_2_feature_3: "Приоритетная поддержка",
-                pricing_plan_2_feature_4: "Расширенная аналитика",
-                pricing_plan_2_cta: "Попробовать",
-                pricing_plan_3_name: "Предприятие",
-                pricing_plan_3_price: "Индивидуально",
-                pricing_plan_3_feature_1: "Неограниченные запросы",
-                pricing_plan_3_feature_2: "Неограниченное число агентов",
-                pricing_plan_3_feature_3: "Выделенная поддержка",
-                pricing_plan_3_feature_4: "Гарантия SLA",
-                pricing_plan_3_cta: "Связаться с отделом продаж",
+                solutions_4_desc: "Автономные процессы, интеллектуальные агенты и автоматизированные системы принятия решений.",
                 dev_label: "Разработчикам",
                 dev_title: "Инструменты разработчика",
                 dev_desc: "Всё необходимое для создания и развертывания AI-нативных приложений.",
@@ -2636,6 +2661,33 @@
                 dev_3_desc: "Инструменты командной строки для развертывания, мониторинга и отладки.",
                 dev_4_title: "Документация",
                 dev_4_desc: "Полные руководства, примеры и справочники API.",
+                pricing_label: "Цены",
+                pricing_title: "Выберите тариф",
+                pricing_desc: "Гибкие цены для команд любого размера — от стартапов до предприятий.",
+                pricing_plan_1_name: "Стартовый",
+                pricing_plan_1_period: "/мес",
+                pricing_plan_1_feature_1: "1000 запросов агентов / день",
+                pricing_plan_1_feature_2: "макс. 3 агента",
+                pricing_plan_1_feature_3: "Сообщество поддержки",
+                pricing_plan_1_feature_4: "Базовая аналитика",
+                pricing_plan_1_cta: "Начать",
+                pricing_plan_2_name: "Профессиональный",
+                pricing_plan_2_period: "/мес",
+                pricing_plan_2_feature_1: "100 000 запросов агентов / день",
+                pricing_plan_2_feature_2: "макс. 50 агентов",
+                pricing_plan_2_feature_3: "Приоритетная поддержка",
+                pricing_plan_2_feature_4: "Расширенная аналитика",
+                pricing_plan_2_feature_5: "Индивидуальные интеграции",
+                pricing_plan_2_cta: "Начать пробный период",
+                pricing_plan_3_name: "Корпоративный",
+                pricing_plan_3_price: "Индивидуально",
+                pricing_plan_3_feature_1: "Неограниченные запросы",
+                pricing_plan_3_feature_2: "Неограниченное число агентов",
+                pricing_plan_3_feature_3: "Выделенная поддержка",
+                pricing_plan_3_feature_4: "Гарантия SLA",
+                pricing_plan_3_feature_5: "Локальное развертывание",
+                pricing_plan_3_feature_6: "Индивидуальные SLA",
+                pricing_plan_3_cta: "Связаться с продажами",
                 docs_label: "Документация",
                 docs_title: "Техническая документация",
                 docs_desc: "Глубокие технические ресурсы для архитекторов и инженеров.",
@@ -2665,8 +2717,8 @@
                 cta_btn_2: "Запустить демо",
                 cta_btn_3: "Просмотреть документацию",
                 cta_btn_4: "📘 Системные заметки",
-                footer_copyright: "© 2026 TERSANESI · AI-нативное окружение",
-                footer_whitepaper: "Белая книга",
+                footer_copyright: "© 2026 TERSANESI · AI-нативная среда выполнения",
+                footer_whitepaper: "Whitepaper",
                 footer_sdk: "SDK",
                 footer_status: "Статус",
                 footer_system_notes: "📘 Системные заметки",
@@ -2674,24 +2726,15 @@
                 footer_blog: "Блог"
             },
             tr: {
-                nav_product: "Ürün",
-                nav_core: "Çekirdek",
-                nav_architecture: "Mimari",
-                nav_solutions: "Çözümler",
-                nav_pricing: "Fiyatlandırma",
-                nav_dashboard: "📊 Kontrol Paneli",
-                nav_resources: "Kaynaklar",
-                nav_developers: "Geliştiriciler",
-                nav_docs: "Dokümantasyon",
-                nav_system_notes: "Sistem Notları",
-                nav_system_notes_short: "📘 Notlar",
-                nav_dev: "Dev",
-                nav_inv: "Yat",
-                hero_badge: "v.Orbit.3 · yazılı olay dokusu",
+                nav_product: "Ürün", nav_core: "Çekirdek", nav_architecture: "Mimari",
+                nav_resources: "Kaynaklar", nav_developers: "Geliştiriciler", nav_solutions: "Çözümler",
+                nav_docs: "Dökümanlar", nav_system_notes: "Sistem Notları", nav_system_notes_short: "📘 Notlar",
+                nav_dev: "Dev", nav_inv: "Yat",
+                hero_badge: "v.Orbit.3 · tipli olay dokusu",
                 hero_title_1: "AI-Yerel Çalışma Zamanı",
-                hero_title_2: '<span class="highlight">Çok Ajanlı Dünyalar</span> için',
-                hero_sub: "MMO sistemleri, AI ajanları ve dinamik dijital ekosistemler için yazılı olay odaklı mimari.",
-                hero_cta_primary: "Çalışma Zamanını Dağıt →",
+                hero_title_2: '<span class="highlight">Çoklu-Ajan Dünyaları</span> için',
+                hero_sub: "MMO sistemleri, AI ajanları ve dinamik dijital ekosistemler için tipli olay odaklı mimari.",
+                hero_cta_primary: "Runtime'ı Dağıt →",
                 hero_cta_ghost: "Mimariyi Keşfet",
                 hero_cta_system: "📘 Sistem Notları",
                 hero_meta: "θ · TERSANESI · çekirdek v3.1",
@@ -2700,7 +2743,7 @@
                 product_desc: "Araştırma, simülasyon ve dijital ortamlarda otonom AI sistemlerini koordine etmek için bir çalışma zamanı.",
                 product_feature_1_num: "01",
                 product_feature_1_title: "Koordinasyon",
-                product_feature_1_desc: "Birden fazla AI ajanını, sistemi ve veri kaynağını birleştirilmiş bir akışta birleştirin.",
+                product_feature_1_desc: "Birden fazla AI ajanını, sistemi ve veri kaynağını birleşik bir akışta bağlayın.",
                 product_feature_2_num: "02",
                 product_feature_2_title: "Ölçeklendirme",
                 product_feature_2_desc: "Küçük araştırma ekiplerinden büyük simülasyonlara — yeniden tasarım olmadan büyüyün.",
@@ -2710,15 +2753,12 @@
                 core_label: "Çekirdek",
                 core_title: "Üç Sütun",
                 core_desc: "Çalışma zamanını güçlendiren temel yetenekler.",
-                core_pillar_1_num: "01",
                 core_pillar_1_title: "AI-Yerel Çalışma Zamanı",
-                core_pillar_1_desc: "Yazılı durum akışlarıyla otonom ajanlar için olay odaklı çıkarım motoru.",
-                core_pillar_2_num: "02",
-                core_pillar_2_title: "Çok Ajanlı Orkestrasyon",
-                core_pillar_2_desc: "Ölçekte durum senkronizasyonu, geri bildirim döngüleri ve sürü mantığı.",
-                core_pillar_3_num: "03",
+                core_pillar_1_desc: "Tipli durum akışları ile otonom ajanlar için olay odaklı çıkarım motoru.",
+                core_pillar_2_title: "Çoklu-Ajan Orkestrasyonu",
+                core_pillar_2_desc: "Durum senkronizasyonu, geri bildirim döngüleri ve ölçekte sürü mantığı.",
                 core_pillar_3_title: "Ölçeklenebilir Simülasyon Katmanı",
-                core_pillar_3_desc: "Eşzamanlılık için oluşturulmuş MMO / metaverse / kalıcı dünya altyapısı.",
+                core_pillar_3_desc: "Eşzamanlılık için inşa edilmiş MMO/metaverse/persistent dünya altyapısı.",
                 arch_label: "Sistem",
                 arch_title: "Mimari",
                 arch_desc: "Çalışma zamanı yığınını tanımlayan üç katman.",
@@ -2731,7 +2771,7 @@
                 arch_layer_3_tag: "dünya",
                 arch_layer_3_title: "Wellamatores",
                 arch_layer_3_desc: "Anlatı · simülasyon · dünya durumu",
-                arch_typed_streams: "YAZILI AKIŞLAR",
+                arch_typed_streams: "TİPLİ AKIŞLAR",
                 arch_stream_1: "AgentEvent → eylemler",
                 arch_stream_2: "StateSync → dünya durumu",
                 arch_stream_3: "EconomicTx → kaynak akışı",
@@ -2740,57 +2780,19 @@
                 arch_strategic_1: "AI Simülasyon Platformları",
                 arch_strategic_2: "MMO Arka Uç Altyapısı",
                 arch_strategic_3: "Metaverse Sistemleri",
-                arch_strategic_4: "Çok Ajanlı Araştırma",
+                arch_strategic_4: "Çoklu-Ajan Araştırması",
                 arch_strategic_5: "Otonom Ekonomik Modeller",
-                dashboard_label: "Canlı",
-                dashboard_title: "Sistem Kontrol Paneli",
-                dashboard_desc: "TERSANESI çalışma zamanının gerçek zamanlı metrikleri — sistemi etkileşim için düğmelere tıklayın.",
-                metric_agents: "Aktif Ajanlar",
-                metric_rps: "İstek / sn",
-                metric_latency: "Gecikme (ms)",
-                metric_revenue: "İşlenen Değer",
-                metric_status: "Sistem Durumu",
-                metric_events: "Olay / dak",
-                action_spawn: "🤖 Ajan Oluştur",
-                action_emit: "⚡ Olay Gönder",
-                action_load: "📈 Yük Simüle Et",
-                action_reset: "⟳ Sıfırla",
                 solutions_label: "Çözümler",
                 solutions_title: "Sektör Çözümleri",
                 solutions_desc: "TERSANESI, oyunlardan bilimsel araştırmalara kadar alanınıza uyum sağlar.",
-                solutions_1_num: "01",
                 solutions_1_title: "Oyun ve MMO",
-                solutions_1_desc: "Kalıcı dünyalar, AI destekli NPC'ler ve gerçek zamanlı oyuncu etkileşimleri için ölçeklenebilir arka uç.",
-                solutions_2_num: "02",
+                solutions_1_desc: "Kalıcı dünyalar, AI güdümlü NPC'ler ve gerçek zamanlı oyuncu etkileşimleri için ölçeklenebilir arka uç.",
                 solutions_2_title: "Araştırma ve Simülasyon",
-                solutions_2_desc: "Bilimsel modelleme, iklim simülasyonu ve hesaplamalı sosyal bilim için çok ajanlı sistemler.",
-                solutions_3_num: "03",
+                solutions_2_desc: "Bilimsel modelleme, iklim simülasyonu ve hesaplamalı sosyal bilimler için çoklu-ajan sistemleri.",
                 solutions_3_title: "Metaverse ve Sanal Dünyalar",
                 solutions_3_desc: "Dijital ikizler, sanal ekonomiler ve kalıcı sosyal alanlar için altyapı.",
-                solutions_4_num: "04",
                 solutions_4_title: "Kurumsal AI",
-                solutions_4_desc: "Otonom iş akışları, zeki ajanlar ve otomatik karar alma sistemleri.",
-                pricing_label: "Fiyatlandırma",
-                pricing_title: "Planınızı Seçin",
-                pricing_desc: "Startuplardan kurumsal firmalara kadar her boyuttaki ekip için esnek fiyatlandırma.",
-                pricing_plan_1_name: "Başlangıç",
-                pricing_plan_1_feature_1: "1.000 ajan isteği / gün",
-                pricing_plan_1_feature_2: "Maks. 3 ajan",
-                pricing_plan_1_feature_3: "Topluluk desteği",
-                pricing_plan_1_cta: "Başlayın",
-                pricing_plan_2_name: "Pro",
-                pricing_plan_2_feature_1: "100.000 ajan isteği / gün",
-                pricing_plan_2_feature_2: "Maks. 50 ajan",
-                pricing_plan_2_feature_3: "Öncelikli destek",
-                pricing_plan_2_feature_4: "Gelişmiş analitik",
-                pricing_plan_2_cta: "Denemeye Başla",
-                pricing_plan_3_name: "Kurumsal",
-                pricing_plan_3_price: "Özel",
-                pricing_plan_3_feature_1: "Sınırsız istek",
-                pricing_plan_3_feature_2: "Sınırsız ajan",
-                pricing_plan_3_feature_3: "Özel destek",
-                pricing_plan_3_feature_4: "SLA garantisi",
-                pricing_plan_3_cta: "Satışla İletişime Geç",
+                solutions_4_desc: "Otonom iş akışları, akıllı ajanlar ve otomatik karar verme sistemleri.",
                 dev_label: "Geliştiriciler",
                 dev_title: "Geliştirici Araçları",
                 dev_desc: "AI-yerel uygulamalar oluşturmak ve dağıtmak için ihtiyacınız olan her şey.",
@@ -2802,6 +2804,33 @@
                 dev_3_desc: "Dağıtım, izleme ve hata ayıklama için komut satırı araçları.",
                 dev_4_title: "Dokümantasyon",
                 dev_4_desc: "Kapsamlı kılavuzlar, örnekler ve API referansları.",
+                pricing_label: "Fiyatlandırma",
+                pricing_title: "Planınızı Seçin",
+                pricing_desc: "Startuplardan kurumsal şirketlere kadar her boyuttaki ekip için esnek fiyatlandırma.",
+                pricing_plan_1_name: "Başlangıç",
+                pricing_plan_1_period: "/ay",
+                pricing_plan_1_feature_1: "Günde 1.000 ajan isteği",
+                pricing_plan_1_feature_2: "En fazla 3 ajan",
+                pricing_plan_1_feature_3: "Topluluk desteği",
+                pricing_plan_1_feature_4: "Temel analitik",
+                pricing_plan_1_cta: "Başlayın",
+                pricing_plan_2_name: "Pro",
+                pricing_plan_2_period: "/ay",
+                pricing_plan_2_feature_1: "Günde 100.000 ajan isteği",
+                pricing_plan_2_feature_2: "En fazla 50 ajan",
+                pricing_plan_2_feature_3: "Öncelikli destek",
+                pricing_plan_2_feature_4: "Gelişmiş analitik",
+                pricing_plan_2_feature_5: "Özel entegrasyonlar",
+                pricing_plan_2_cta: "Deneme Başlat",
+                pricing_plan_3_name: "Kurumsal",
+                pricing_plan_3_price: "Özel",
+                pricing_plan_3_feature_1: "Sınırsız istek",
+                pricing_plan_3_feature_2: "Sınırsız ajan",
+                pricing_plan_3_feature_3: "Özel destek",
+                pricing_plan_3_feature_4: "SLA garantisi",
+                pricing_plan_3_feature_5: "Şirket içi dağıtım",
+                pricing_plan_3_feature_6: "Özel SLA'lar",
+                pricing_plan_3_cta: "Satışla İletişime Geç",
                 docs_label: "Dokümantasyon",
                 docs_title: "Teknik Dokümantasyon",
                 docs_desc: "Mimarlar ve mühendisler için derin teknik kaynaklar.",
@@ -2820,7 +2849,7 @@
                 use_case_1: "AI Simülasyon Platformları",
                 use_case_2: "MMO Arka Uç Altyapısı",
                 use_case_3: "Metaverse Sistemleri",
-                use_case_4: "Çok Ajanlı Araştırma",
+                use_case_4: "Çoklu-Ajan Araştırması",
                 use_case_5: "Otonom Ekonomik Modeller",
                 use_case_6: "Dijital İkiz Platformları",
                 use_case_7: "AI Güdümlü İş Akışları",
@@ -2832,7 +2861,7 @@
                 cta_btn_3: "Dokümanları Görüntüle",
                 cta_btn_4: "📘 Sistem Notları",
                 footer_copyright: "© 2026 TERSANESI · AI-yerel çalışma zamanı",
-                footer_whitepaper: "Beyaz Bülten",
+                footer_whitepaper: "Whitepaper",
                 footer_sdk: "SDK",
                 footer_status: "Durum",
                 footer_system_notes: "📘 Sistem Notları",
@@ -2840,19 +2869,10 @@
                 footer_blog: "Blog"
             },
             ar: {
-                nav_product: "المنتج",
-                nav_core: "النواة",
-                nav_architecture: "الهندسة المعمارية",
-                nav_solutions: "الحلول",
-                nav_pricing: "التسعير",
-                nav_dashboard: "📊 لوحة القيادة",
-                nav_resources: "الموارد",
-                nav_developers: "المطورون",
-                nav_docs: "الوثائق",
-                nav_system_notes: "ملاحظات النظام",
-                nav_system_notes_short: "📘 ملاحظات",
-                nav_dev: "مطور",
-                nav_inv: "مستثمر",
+                nav_product: "المنتج", nav_core: "النواة", nav_architecture: "الهندسة المعمارية",
+                nav_resources: "الموارد", nav_developers: "المطورون", nav_solutions: "الحلول",
+                nav_docs: "الوثائق", nav_system_notes: "ملاحظات النظام", nav_system_notes_short: "📘 ملاحظات",
+                nav_dev: "مطور", nav_inv: "مستثمر",
                 hero_badge: "v.Orbit.3 · نسيج الأحداث المكتوبة",
                 hero_title_1: "بيئة تشغيل أصلية للذكاء الاصطناعي",
                 hero_title_2: 'لـ <span class="highlight">عوالم متعددة الوكلاء</span>',
@@ -2876,13 +2896,10 @@
                 core_label: "النواة",
                 core_title: "ثلاث ركائز",
                 core_desc: "القدرات الأساسية التي تدعم بيئة التشغيل.",
-                core_pillar_1_num: "01",
                 core_pillar_1_title: "بيئة تشغيل أصلية للذكاء الاصطناعي",
                 core_pillar_1_desc: "محرك استدلال يعتمد على الأحداث للوكلاء المستقلين مع تدفقات حالة مكتوبة.",
-                core_pillar_2_num: "02",
                 core_pillar_2_title: "تنسيق متعدد الوكلاء",
                 core_pillar_2_desc: "مزامنة الحالة وحلقات التغذية الراجعة ومنطق السرب على نطاق واسع.",
-                core_pillar_3_num: "03",
                 core_pillar_3_title: "طبقة محاكاة قابلة للتوسع",
                 core_pillar_3_desc: "بنية تحتية للعوالم المستمرة / MMO / الميتافيرس مبنية للتزامن.",
                 arch_label: "النظام",
@@ -2908,55 +2925,17 @@
                 arch_strategic_3: "أنظمة الميتافيرس",
                 arch_strategic_4: "بحوث متعددة الوكلاء",
                 arch_strategic_5: "نماذج اقتصادية مستقلة",
-                dashboard_label: "مباشر",
-                dashboard_title: "لوحة قيادة النظام",
-                dashboard_desc: "مقاييس TERSANESI في الوقت الفعلي — انقر على الأزرار للتفاعل مع النظام.",
-                metric_agents: "الوكلاء النشطون",
-                metric_rps: "طلبات / ثانية",
-                metric_latency: "زمن الاستجابة (مللي ثانية)",
-                metric_revenue: "القيمة المعالجة",
-                metric_status: "حالة النظام",
-                metric_events: "أحداث / دقيقة",
-                action_spawn: "🤖 إنشاء وكيل",
-                action_emit: "⚡ إرسال حدث",
-                action_load: "📈 محاكاة الحمل",
-                action_reset: "⟳ إعادة تعيين",
                 solutions_label: "الحلول",
                 solutions_title: "حلول صناعية",
                 solutions_desc: "يتكيف TERSANESI مع مجالك — من الألعاب إلى البحث العلمي.",
-                solutions_1_num: "01",
                 solutions_1_title: "الألعاب و MMO",
                 solutions_1_desc: "خلفية قابلة للتوسع للعوالم المستمرة والشخصيات غير القابلة للعب المدعومة بالذكاء الاصطناعي والتفاعلات في الوقت الفعلي.",
-                solutions_2_num: "02",
                 solutions_2_title: "البحث والمحاكاة",
                 solutions_2_desc: "أنظمة متعددة الوكلاء للنمذجة العلمية ومحاكاة المناخ والعلوم الاجتماعية الحاسوبية.",
-                solutions_3_num: "03",
                 solutions_3_title: "الميتافيرس والعوالم الافتراضية",
                 solutions_3_desc: "بنية تحتية للتوائم الرقمية والاقتصادات الافتراضية والمساحات الاجتماعية المستمرة.",
-                solutions_4_num: "04",
                 solutions_4_title: "الذكاء الاصطناعي للمؤسسات",
                 solutions_4_desc: "سير عمل مستقلة ووكلاء أذكياء وأنظمة اتخاذ قرارات آلية.",
-                pricing_label: "التسعير",
-                pricing_title: "اختر خطتك",
-                pricing_desc: "تسعير مرن للفرق من جميع الأحجام — من الشركات الناشئة إلى المؤسسات.",
-                pricing_plan_1_name: "مبتدئ",
-                pricing_plan_1_feature_1: "1000 طلب وكيل / يوم",
-                pricing_plan_1_feature_2: "حد أقصى 3 وكلاء",
-                pricing_plan_1_feature_3: "دعم المجتمع",
-                pricing_plan_1_cta: "ابدأ",
-                pricing_plan_2_name: "احترافي",
-                pricing_plan_2_feature_1: "100.000 طلب وكيل / يوم",
-                pricing_plan_2_feature_2: "حد أقصى 50 وكيل",
-                pricing_plan_2_feature_3: "دعم ذو أولوية",
-                pricing_plan_2_feature_4: "تحليلات متقدمة",
-                pricing_plan_2_cta: "ابدأ النسخة التجريبية",
-                pricing_plan_3_name: "مؤسسي",
-                pricing_plan_3_price: "مخصص",
-                pricing_plan_3_feature_1: "طلبات غير محدودة",
-                pricing_plan_3_feature_2: "وكلاء غير محدودين",
-                pricing_plan_3_feature_3: "دعم مخصص",
-                pricing_plan_3_feature_4: "ضمان SLA",
-                pricing_plan_3_cta: "اتصل بالمبيعات",
                 dev_label: "المطورون",
                 dev_title: "أدوات المطور",
                 dev_desc: "كل ما تحتاجه لبناء ونشر تطبيقات أصلية للذكاء الاصطناعي.",
@@ -2968,6 +2947,33 @@
                 dev_3_desc: "أدوات سطر الأوامر للنشر والمراقبة وتصحيح الأخطاء.",
                 dev_4_title: "الوثائق",
                 dev_4_desc: "أدلة شاملة وأمثلة ومراجع API.",
+                pricing_label: "التسعير",
+                pricing_title: "اختر خطتك",
+                pricing_desc: "تسعير مرن للفرق من جميع الأحجام — من الشركات الناشئة إلى المؤسسات.",
+                pricing_plan_1_name: "مبتدئ",
+                pricing_plan_1_period: "/شهر",
+                pricing_plan_1_feature_1: "1000 طلب وكيل / يوم",
+                pricing_plan_1_feature_2: "حد أقصى 3 وكلاء",
+                pricing_plan_1_feature_3: "دعم المجتمع",
+                pricing_plan_1_feature_4: "تحليلات أساسية",
+                pricing_plan_1_cta: "ابدأ",
+                pricing_plan_2_name: "احترافي",
+                pricing_plan_2_period: "/شهر",
+                pricing_plan_2_feature_1: "100.000 طلب وكيل / يوم",
+                pricing_plan_2_feature_2: "حد أقصى 50 وكيل",
+                pricing_plan_2_feature_3: "دعم ذو أولوية",
+                pricing_plan_2_feature_4: "تحليلات متقدمة",
+                pricing_plan_2_feature_5: "تكاملات مخصصة",
+                pricing_plan_2_cta: "ابدأ النسخة التجريبية",
+                pricing_plan_3_name: "مؤسسي",
+                pricing_plan_3_price: "مخصص",
+                pricing_plan_3_feature_1: "طلبات غير محدودة",
+                pricing_plan_3_feature_2: "وكلاء غير محدودين",
+                pricing_plan_3_feature_3: "دعم مخصص",
+                pricing_plan_3_feature_4: "ضمان SLA",
+                pricing_plan_3_feature_5: "نشر محلي",
+                pricing_plan_3_feature_6: "SLA مخصصة",
+                pricing_plan_3_cta: "اتصل بالمبيعات",
                 docs_label: "الوثائق",
                 docs_title: "الوثائق التقنية",
                 docs_desc: "موارد تقنية متعمقة للمهندسين والمعماريين.",
@@ -3006,19 +3012,10 @@
                 footer_blog: "المدونة"
             },
             es: {
-                nav_product: "Producto",
-                nav_core: "Núcleo",
-                nav_architecture: "Arquitectura",
-                nav_solutions: "Soluciones",
-                nav_pricing: "Precios",
-                nav_dashboard: "📊 Panel de control",
-                nav_resources: "Recursos",
-                nav_developers: "Desarrolladores",
-                nav_docs: "Documentación",
-                nav_system_notes: "Notas del Sistema",
-                nav_system_notes_short: "📘 Notas",
-                nav_dev: "Dev",
-                nav_inv: "Inv",
+                nav_product: "Producto", nav_core: "Núcleo", nav_architecture: "Arquitectura",
+                nav_resources: "Recursos", nav_developers: "Desarrolladores", nav_solutions: "Soluciones",
+                nav_docs: "Documentación", nav_system_notes: "Notas del Sistema", nav_system_notes_short: "📘 Notas",
+                nav_dev: "Dev", nav_inv: "Inv",
                 hero_badge: "v.Orbit.3 · tejido de eventos tipados",
                 hero_title_1: "Runtime Nativo de IA",
                 hero_title_2: 'para <span class="highlight">Mundos Multi-Agente</span>',
@@ -3042,13 +3039,10 @@
                 core_label: "Núcleo",
                 core_title: "Tres Pilares",
                 core_desc: "Las capacidades fundamentales que impulsan el runtime.",
-                core_pillar_1_num: "01",
                 core_pillar_1_title: "Runtime Nativo de IA",
                 core_pillar_1_desc: "Motor de inferencia basado en eventos para agentes autónomos con flujos de estado tipados.",
-                core_pillar_2_num: "02",
                 core_pillar_2_title: "Orquestación Multi-Agente",
                 core_pillar_2_desc: "Sincronización de estado, bucles de retroalimentación y lógica de enjambre a escala.",
-                core_pillar_3_num: "03",
                 core_pillar_3_title: "Capa de Simulación Escalable",
                 core_pillar_3_desc: "Infraestructura para mundos persistentes / MMO / metaverso construida para concurrencia.",
                 arch_label: "Sistema",
@@ -3074,57 +3068,19 @@
                 arch_strategic_3: "Sistemas de Metaverso",
                 arch_strategic_4: "Investigación Multi-Agente",
                 arch_strategic_5: "Modelos Económicos Autónomos",
-                dashboard_label: "En vivo",
-                dashboard_title: "Panel de control del sistema",
-                dashboard_desc: "Métricas en tiempo real del runtime TERSANESI — haz clic en los botones para interactuar con el sistema.",
-                metric_agents: "Agentes activos",
-                metric_rps: "Solicitudes / seg",
-                metric_latency: "Latencia (ms)",
-                metric_revenue: "Valor procesado",
-                metric_status: "Estado del sistema",
-                metric_events: "Eventos / min",
-                action_spawn: "🤖 Crear agente",
-                action_emit: "⚡ Enviar evento",
-                action_load: "📈 Simular carga",
-                action_reset: "⟳ Reiniciar",
                 solutions_label: "Soluciones",
-                solutions_title: "Soluciones industriales",
+                solutions_title: "Soluciones Industriales",
                 solutions_desc: "TERSANESI se adapta a tu dominio — desde juegos hasta investigación científica.",
-                solutions_1_num: "01",
                 solutions_1_title: "Juegos y MMO",
                 solutions_1_desc: "Backend escalable para mundos persistentes, NPCs impulsados por IA e interacciones en tiempo real.",
-                solutions_2_num: "02",
-                solutions_2_title: "Investigación y simulación",
+                solutions_2_title: "Investigación y Simulación",
                 solutions_2_desc: "Sistemas multi-agente para modelado científico, simulación climática y ciencias sociales computacionales.",
-                solutions_3_num: "03",
-                solutions_3_title: "Metaverso y mundos virtuales",
+                solutions_3_title: "Metaverso y Mundos Virtuales",
                 solutions_3_desc: "Infraestructura para gemelos digitales, economías virtuales y espacios sociales persistentes.",
-                solutions_4_num: "04",
-                solutions_4_title: "IA empresarial",
+                solutions_4_title: "IA Empresarial",
                 solutions_4_desc: "Flujos de trabajo autónomos, agentes inteligentes y sistemas automatizados de toma de decisiones.",
-                pricing_label: "Precios",
-                pricing_title: "Elige tu plan",
-                pricing_desc: "Precios flexibles para equipos de todos los tamaños — desde startups hasta empresas.",
-                pricing_plan_1_name: "Inicial",
-                pricing_plan_1_feature_1: "1,000 solicitudes de agente / día",
-                pricing_plan_1_feature_2: "máx. 3 agentes",
-                pricing_plan_1_feature_3: "Soporte comunitario",
-                pricing_plan_1_cta: "Comenzar",
-                pricing_plan_2_name: "Pro",
-                pricing_plan_2_feature_1: "100,000 solicitudes de agente / día",
-                pricing_plan_2_feature_2: "máx. 50 agentes",
-                pricing_plan_2_feature_3: "Soporte prioritario",
-                pricing_plan_2_feature_4: "Analíticas avanzadas",
-                pricing_plan_2_cta: "Iniciar prueba",
-                pricing_plan_3_name: "Empresarial",
-                pricing_plan_3_price: "Personalizado",
-                pricing_plan_3_feature_1: "Solicitudes ilimitadas",
-                pricing_plan_3_feature_2: "Agentes ilimitados",
-                pricing_plan_3_feature_3: "Soporte dedicado",
-                pricing_plan_3_feature_4: "Garantía SLA",
-                pricing_plan_3_cta: "Contactar ventas",
                 dev_label: "Desarrolladores",
-                dev_title: "Herramientas para desarrolladores",
+                dev_title: "Herramientas para Desarrolladores",
                 dev_desc: "Todo lo que necesitas para construir y desplegar aplicaciones nativas de IA.",
                 dev_1_title: "SDK",
                 dev_1_desc: "SDKs completos para Python, TypeScript, Go y Rust.",
@@ -3134,34 +3090,61 @@
                 dev_3_desc: "Herramientas de línea de comandos para despliegue, monitoreo y depuración.",
                 dev_4_title: "Documentación",
                 dev_4_desc: "Guías completas, ejemplos y referencias de API.",
+                pricing_label: "Precios",
+                pricing_title: "Elige tu Plan",
+                pricing_desc: "Precios flexibles para equipos de todos los tamaños — desde startups hasta empresas.",
+                pricing_plan_1_name: "Inicial",
+                pricing_plan_1_period: "/mes",
+                pricing_plan_1_feature_1: "1,000 solicitudes de agente / día",
+                pricing_plan_1_feature_2: "máx. 3 agentes",
+                pricing_plan_1_feature_3: "Soporte comunitario",
+                pricing_plan_1_feature_4: "Analíticas básicas",
+                pricing_plan_1_cta: "Comenzar",
+                pricing_plan_2_name: "Pro",
+                pricing_plan_2_period: "/mes",
+                pricing_plan_2_feature_1: "100,000 solicitudes de agente / día",
+                pricing_plan_2_feature_2: "máx. 50 agentes",
+                pricing_plan_2_feature_3: "Soporte prioritario",
+                pricing_plan_2_feature_4: "Analíticas avanzadas",
+                pricing_plan_2_feature_5: "Integraciones personalizadas",
+                pricing_plan_2_cta: "Iniciar Prueba",
+                pricing_plan_3_name: "Empresarial",
+                pricing_plan_3_price: "Personalizado",
+                pricing_plan_3_feature_1: "Solicitudes ilimitadas",
+                pricing_plan_3_feature_2: "Agentes ilimitados",
+                pricing_plan_3_feature_3: "Soporte dedicado",
+                pricing_plan_3_feature_4: "Garantía SLA",
+                pricing_plan_3_feature_5: "Despliegue local",
+                pricing_plan_3_feature_6: "SLAs personalizados",
+                pricing_plan_3_cta: "Contactar Ventas",
                 docs_label: "Documentación",
-                docs_title: "Documentación técnica",
+                docs_title: "Documentación Técnica",
                 docs_desc: "Recursos técnicos profundos para arquitectos e ingenieros.",
-                docs_1_title: "Guía de arquitectura",
+                docs_1_title: "Guía de Arquitectura",
                 docs_1_desc: "Inmersión profunda en el diseño del sistema y el flujo de datos.",
                 docs_2_title: "Referencia de API",
                 docs_2_desc: "Especificación completa de todos los endpoints y esquemas.",
-                docs_3_title: "Ejemplos y tutoriales",
+                docs_3_title: "Ejemplos y Tutoriales",
                 docs_3_desc: "Guías paso a paso y proyectos de ejemplo.",
                 stack_label: "Pila",
-                stack_title: "Pila tecnológica",
+                stack_title: "Pila Tecnológica",
                 stack_desc: "Agnóstico al runtime — nube, edge o enjambre local.",
                 use_cases_label: "Aplicaciones",
-                use_cases_title: "Casos de uso",
+                use_cases_title: "Casos de Uso",
                 use_cases_desc: "Donde TERSANESI ofrece valor inmediato.",
-                use_case_1: "Plataformas de simulación de IA",
-                use_case_2: "Infraestructura backend de MMO",
-                use_case_3: "Sistemas de metaverso",
-                use_case_4: "Investigación multi-agente",
-                use_case_5: "Modelos económicos autónomos",
-                use_case_6: "Plataformas de gemelos digitales",
-                use_case_7: "Flujos de trabajo impulsados por IA",
-                use_case_8: "Simulación predictiva",
+                use_case_1: "Plataformas de Simulación de IA",
+                use_case_2: "Infraestructura Backend de MMO",
+                use_case_3: "Sistemas de Metaverso",
+                use_case_4: "Investigación Multi-Agente",
+                use_case_5: "Modelos Económicos Autónomos",
+                use_case_6: "Plataformas de Gemelos Digitales",
+                use_case_7: "Flujos de Trabajo Impulsados por IA",
+                use_case_8: "Simulación Predictiva",
                 cta_title: "Construye mundos nativos de IA.",
                 cta_desc: "Despliega ecosistemas de agentes escalables en tiempo real.",
                 cta_btn_1: "Obtener SDK",
-                cta_btn_2: "Ejecutar demo",
-                cta_btn_3: "Ver documentación",
+                cta_btn_2: "Ejecutar Demo",
+                cta_btn_3: "Ver Documentación",
                 cta_btn_4: "📘 Notas del Sistema",
                 footer_copyright: "© 2026 TERSANESI · Runtime nativo de IA",
                 footer_whitepaper: "Whitepaper",
@@ -3172,19 +3155,10 @@
                 footer_blog: "Blog"
             },
             de: {
-                nav_product: "Produkt",
-                nav_core: "Kern",
-                nav_architecture: "Architektur",
-                nav_solutions: "Lösungen",
-                nav_pricing: "Preise",
-                nav_dashboard: "📊 Dashboard",
-                nav_resources: "Ressourcen",
-                nav_developers: "Entwickler",
-                nav_docs: "Dokumentation",
-                nav_system_notes: "Systemnotizen",
-                nav_system_notes_short: "📘 Notizen",
-                nav_dev: "Dev",
-                nav_inv: "Inv",
+                nav_product: "Produkt", nav_core: "Kern", nav_architecture: "Architektur",
+                nav_resources: "Ressourcen", nav_developers: "Entwickler", nav_solutions: "Lösungen",
+                nav_docs: "Dokumentation", nav_system_notes: "Systemnotizen", nav_system_notes_short: "📘 Notizen",
+                nav_dev: "Dev", nav_inv: "Inv",
                 hero_badge: "v.Orbit.3 · typisiertes Ereignisgewebe",
                 hero_title_1: "KI-native Laufzeit",
                 hero_title_2: 'für <span class="highlight">Multi-Agenten-Welten</span>',
@@ -3208,13 +3182,10 @@
                 core_label: "Kern",
                 core_title: "Drei Säulen",
                 core_desc: "Die grundlegenden Fähigkeiten, die die Laufzeit antreiben.",
-                core_pillar_1_num: "01",
                 core_pillar_1_title: "KI-native Laufzeit",
                 core_pillar_1_desc: "Ereignisgesteuerte Inferenz-Engine für autonome Agenten mit typisierten Zustandsströmen.",
-                core_pillar_2_num: "02",
                 core_pillar_2_title: "Multi-Agenten-Orchestrierung",
                 core_pillar_2_desc: "Zustandssynchronisation, Feedbackschleifen und Schwarmlogik im großen Maßstab.",
-                core_pillar_3_num: "03",
                 core_pillar_3_title: "Skalierbare Simulationsschicht",
                 core_pillar_3_desc: "Infrastruktur für persistente Welten / MMO / Metaverse, gebaut für Gleichzeitigkeit.",
                 arch_label: "System",
@@ -3229,7 +3200,7 @@
                 arch_layer_3_tag: "Welt",
                 arch_layer_3_title: "Wellamatores",
                 arch_layer_3_desc: "Narrativ · Simulation · Weltzustand",
-                arch_typed_streams: "TYPISIERTE STRÖME",
+                arch_typed_streams: "TYPIISIERTE STRÖME",
                 arch_stream_1: "AgentEvent → Aktionen",
                 arch_stream_2: "StateSync → Weltzustand",
                 arch_stream_3: "EconomicTx → Ressourcenfluss",
@@ -3240,55 +3211,17 @@
                 arch_strategic_3: "Metaverse-Systeme",
                 arch_strategic_4: "Multi-Agenten-Forschung",
                 arch_strategic_5: "Autonome Wirtschaftsmodelle",
-                dashboard_label: "Live",
-                dashboard_title: "System-Dashboard",
-                dashboard_desc: "Echtzeitmetriken der TERSANESI-Laufzeit — klicke auf die Schaltflächen, um mit dem System zu interagieren.",
-                metric_agents: "Aktive Agenten",
-                metric_rps: "Anfragen / Sek",
-                metric_latency: "Latenz (ms)",
-                metric_revenue: "Verarbeiteter Wert",
-                metric_status: "Systemstatus",
-                metric_events: "Ereignisse / Min",
-                action_spawn: "🤖 Agent erzeugen",
-                action_emit: "⚡ Ereignis senden",
-                action_load: "📈 Last simulieren",
-                action_reset: "⟳ Zurücksetzen",
                 solutions_label: "Lösungen",
                 solutions_title: "Branchenlösungen",
                 solutions_desc: "TERSANESI passt sich deiner Domäne an — von Spielen bis zur wissenschaftlichen Forschung.",
-                solutions_1_num: "01",
                 solutions_1_title: "Gaming & MMO",
                 solutions_1_desc: "Skalierbares Backend für persistente Welten, KI-gesteuerte NPCs und Echtzeit-Interaktionen.",
-                solutions_2_num: "02",
                 solutions_2_title: "Forschung & Simulation",
                 solutions_2_desc: "Multi-Agenten-Systeme für wissenschaftliche Modellierung, Klimasimulation und computergestützte Sozialwissenschaften.",
-                solutions_3_num: "03",
                 solutions_3_title: "Metaverse & Virtuelle Welten",
                 solutions_3_desc: "Infrastruktur für digitale Zwillinge, virtuelle Wirtschaften und persistente soziale Räume.",
-                solutions_4_num: "04",
                 solutions_4_title: "Unternehmens-KI",
                 solutions_4_desc: "Autonome Workflows, intelligente Agenten und automatisierte Entscheidungssysteme.",
-                pricing_label: "Preise",
-                pricing_title: "Wähle deinen Plan",
-                pricing_desc: "Flexible Preise für Teams jeder Größe — von Startups bis zu Unternehmen.",
-                pricing_plan_1_name: "Starter",
-                pricing_plan_1_feature_1: "1.000 Agentenanfragen / Tag",
-                pricing_plan_1_feature_2: "max. 3 Agenten",
-                pricing_plan_1_feature_3: "Community-Support",
-                pricing_plan_1_cta: "Loslegen",
-                pricing_plan_2_name: "Pro",
-                pricing_plan_2_feature_1: "100.000 Agentenanfragen / Tag",
-                pricing_plan_2_feature_2: "max. 50 Agenten",
-                pricing_plan_2_feature_3: "Prioritäts-Support",
-                pricing_plan_2_feature_4: "Erweiterte Analytik",
-                pricing_plan_2_cta: "Testversion starten",
-                pricing_plan_3_name: "Enterprise",
-                pricing_plan_3_price: "Individuell",
-                pricing_plan_3_feature_1: "Unbegrenzte Anfragen",
-                pricing_plan_3_feature_2: "Unbegrenzte Agenten",
-                pricing_plan_3_feature_3: "Dedizierter Support",
-                pricing_plan_3_feature_4: "SLA-Garantie",
-                pricing_plan_3_cta: "Vertrieb kontaktieren",
                 dev_label: "Entwickler",
                 dev_title: "Entwicklertools",
                 dev_desc: "Alles, was du brauchst, um KI-native Anwendungen zu bauen und bereitzustellen.",
@@ -3300,6 +3233,33 @@
                 dev_3_desc: "Befehlszeilentools für Bereitstellung, Überwachung und Debugging.",
                 dev_4_title: "Dokumentation",
                 dev_4_desc: "Umfassende Anleitungen, Beispiele und API-Referenzen.",
+                pricing_label: "Preise",
+                pricing_title: "Wähle deinen Plan",
+                pricing_desc: "Flexible Preise für Teams jeder Größe — von Startups bis zu Unternehmen.",
+                pricing_plan_1_name: "Starter",
+                pricing_plan_1_period: "/Monat",
+                pricing_plan_1_feature_1: "1.000 Agentenanfragen / Tag",
+                pricing_plan_1_feature_2: "max. 3 Agenten",
+                pricing_plan_1_feature_3: "Community-Support",
+                pricing_plan_1_feature_4: "Basis-Analytik",
+                pricing_plan_1_cta: "Loslegen",
+                pricing_plan_2_name: "Pro",
+                pricing_plan_2_period: "/Monat",
+                pricing_plan_2_feature_1: "100.000 Agentenanfragen / Tag",
+                pricing_plan_2_feature_2: "max. 50 Agenten",
+                pricing_plan_2_feature_3: "Prioritäts-Support",
+                pricing_plan_2_feature_4: "Erweiterte Analytik",
+                pricing_plan_2_feature_5: "Benutzerdefinierte Integrationen",
+                pricing_plan_2_cta: "Testversion starten",
+                pricing_plan_3_name: "Enterprise",
+                pricing_plan_3_price: "Individuell",
+                pricing_plan_3_feature_1: "Unbegrenzte Anfragen",
+                pricing_plan_3_feature_2: "Unbegrenzte Agenten",
+                pricing_plan_3_feature_3: "Dedizierter Support",
+                pricing_plan_3_feature_4: "SLA-Garantie",
+                pricing_plan_3_feature_5: "Lokale Bereitstellung",
+                pricing_plan_3_feature_6: "Individuelle SLAs",
+                pricing_plan_3_cta: "Vertrieb kontaktieren",
                 docs_label: "Dokumentation",
                 docs_title: "Technische Dokumentation",
                 docs_desc: "Tiefgehende technische Ressourcen für Architekten und Ingenieure.",
@@ -3338,19 +3298,10 @@
                 footer_blog: "Blog"
             },
             ja: {
-                nav_product: "製品",
-                nav_core: "コア",
-                nav_architecture: "アーキテクチャ",
-                nav_solutions: "ソリューション",
-                nav_pricing: "価格",
-                nav_dashboard: "📊 ダッシュボード",
-                nav_resources: "リソース",
-                nav_developers: "開発者",
-                nav_docs: "ドキュメント",
-                nav_system_notes: "システムノート",
-                nav_system_notes_short: "📘 ノート",
-                nav_dev: "Dev",
-                nav_inv: "Inv",
+                nav_product: "製品", nav_core: "コア", nav_architecture: "アーキテクチャ",
+                nav_resources: "リソース", nav_developers: "開発者", nav_solutions: "ソリューション",
+                nav_docs: "ドキュメント", nav_system_notes: "システムノート", nav_system_notes_short: "📘 ノート",
+                nav_dev: "Dev", nav_inv: "Inv",
                 hero_badge: "v.Orbit.3 · 型付きイベントファブリック",
                 hero_title_1: "AIネイティブランタイム",
                 hero_title_2: '<span class="highlight">マルチエージェントワールド</span>向け',
@@ -3374,13 +3325,10 @@
                 core_label: "コア",
                 core_title: "三本柱",
                 core_desc: "ランタイムを支える基盤能力。",
-                core_pillar_1_num: "01",
                 core_pillar_1_title: "AIネイティブランタイム",
                 core_pillar_1_desc: "型付き状態ストリームを備えた自律エージェント向けイベント駆動推論エンジン。",
-                core_pillar_2_num: "02",
                 core_pillar_2_title: "マルチエージェントオーケストレーション",
                 core_pillar_2_desc: "状態同期、フィードバックループ、大規模スワームロジック。",
-                core_pillar_3_num: "03",
                 core_pillar_3_title: "スケーラブルなシミュレーションレイヤー",
                 core_pillar_3_desc: "同時実行性のために構築されたMMO/メタバース/永続ワールドインフラ。",
                 arch_label: "システム",
@@ -3406,55 +3354,17 @@
                 arch_strategic_3: "メタバースシステム",
                 arch_strategic_4: "マルチエージェント研究",
                 arch_strategic_5: "自律型経済モデル",
-                dashboard_label: "ライブ",
-                dashboard_title: "システムダッシュボード",
-                dashboard_desc: "TERSANESIランタイムのリアルタイムメトリクス — ボタンをクリックしてシステムと対話。",
-                metric_agents: "アクティブエージェント",
-                metric_rps: "リクエスト / 秒",
-                metric_latency: "レイテンシ (ms)",
-                metric_revenue: "処理済み価値",
-                metric_status: "システムステータス",
-                metric_events: "イベント / 分",
-                action_spawn: "🤖 エージェント生成",
-                action_emit: "⚡ イベント送信",
-                action_load: "📈 負荷シミュレーション",
-                action_reset: "⟳ リセット",
                 solutions_label: "ソリューション",
                 solutions_title: "業界ソリューション",
                 solutions_desc: "TERSANESIはゲームから科学研究まで、あなたのドメインに適応します。",
-                solutions_1_num: "01",
                 solutions_1_title: "ゲーミング＆MMO",
                 solutions_1_desc: "永続ワールド、AI駆動NPC、リアルタイムプレイヤーインタラクションのためのスケーラブルバックエンド。",
-                solutions_2_num: "02",
                 solutions_2_title: "研究＆シミュレーション",
                 solutions_2_desc: "科学的モデリング、気候シミュレーション、計算社会科学のためのマルチエージェントシステム。",
-                solutions_3_num: "03",
                 solutions_3_title: "メタバース＆バーチャルワールド",
                 solutions_3_desc: "デジタルツイン、仮想経済、永続的社会空間のためのインフラ。",
-                solutions_4_num: "04",
                 solutions_4_title: "エンタープライズAI",
                 solutions_4_desc: "自律型ワークフロー、インテリジェントエージェント、自動化された意思決定システム。",
-                pricing_label: "価格",
-                pricing_title: "プランを選択",
-                pricing_desc: "スタートアップからエンタープライズまで、あらゆる規模のチームに対応する柔軟な価格設定。",
-                pricing_plan_1_name: "スターター",
-                pricing_plan_1_feature_1: "1,000エージェントリクエスト/日",
-                pricing_plan_1_feature_2: "最大3エージェント",
-                pricing_plan_1_feature_3: "コミュニティサポート",
-                pricing_plan_1_cta: "始める",
-                pricing_plan_2_name: "プロ",
-                pricing_plan_2_feature_1: "100,000エージェントリクエスト/日",
-                pricing_plan_2_feature_2: "最大50エージェント",
-                pricing_plan_2_feature_3: "優先サポート",
-                pricing_plan_2_feature_4: "高度な分析",
-                pricing_plan_2_cta: "トライアル開始",
-                pricing_plan_3_name: "エンタープライズ",
-                pricing_plan_3_price: "カスタム",
-                pricing_plan_3_feature_1: "無制限リクエスト",
-                pricing_plan_3_feature_2: "無制限エージェント",
-                pricing_plan_3_feature_3: "専用サポート",
-                pricing_plan_3_feature_4: "SLA保証",
-                pricing_plan_3_cta: "営業に問い合わせる",
                 dev_label: "開発者",
                 dev_title: "開発者ツール",
                 dev_desc: "AIネイティブアプリケーションを構築・デプロイするために必要なすべて。",
@@ -3466,6 +3376,33 @@
                 dev_3_desc: "デプロイメント、モニタリング、デバッグのためのコマンドラインツール。",
                 dev_4_title: "ドキュメント",
                 dev_4_desc: "包括的なガイド、例、APIリファレンス。",
+                pricing_label: "価格",
+                pricing_title: "プランを選択",
+                pricing_desc: "スタートアップからエンタープライズまで、あらゆる規模のチームに対応する柔軟な価格設定。",
+                pricing_plan_1_name: "スターター",
+                pricing_plan_1_period: "/月",
+                pricing_plan_1_feature_1: "1,000エージェントリクエスト/日",
+                pricing_plan_1_feature_2: "最大3エージェント",
+                pricing_plan_1_feature_3: "コミュニティサポート",
+                pricing_plan_1_feature_4: "基本分析",
+                pricing_plan_1_cta: "始める",
+                pricing_plan_2_name: "プロ",
+                pricing_plan_2_period: "/月",
+                pricing_plan_2_feature_1: "100,000エージェントリクエスト/日",
+                pricing_plan_2_feature_2: "最大50エージェント",
+                pricing_plan_2_feature_3: "優先サポート",
+                pricing_plan_2_feature_4: "高度な分析",
+                pricing_plan_2_feature_5: "カスタム統合",
+                pricing_plan_2_cta: "トライアル開始",
+                pricing_plan_3_name: "エンタープライズ",
+                pricing_plan_3_price: "カスタム",
+                pricing_plan_3_feature_1: "無制限リクエスト",
+                pricing_plan_3_feature_2: "無制限エージェント",
+                pricing_plan_3_feature_3: "専用サポート",
+                pricing_plan_3_feature_4: "SLA保証",
+                pricing_plan_3_feature_5: "オンプレミスデプロイ",
+                pricing_plan_3_feature_6: "カスタムSLA",
+                pricing_plan_3_cta: "営業に問い合わせる",
                 docs_label: "ドキュメント",
                 docs_title: "技術ドキュメント",
                 docs_desc: "アーキテクトとエンジニアのための深い技術リソース。",
@@ -3504,19 +3441,10 @@
                 footer_blog: "ブログ"
             },
             zh: {
-                nav_product: "产品",
-                nav_core: "核心",
-                nav_architecture: "架构",
-                nav_solutions: "解决方案",
-                nav_pricing: "定价",
-                nav_dashboard: "📊 仪表板",
-                nav_resources: "资源",
-                nav_developers: "开发者",
-                nav_docs: "文档",
-                nav_system_notes: "系统笔记",
-                nav_system_notes_short: "📘 笔记",
-                nav_dev: "开发",
-                nav_inv: "投资",
+                nav_product: "产品", nav_core: "核心", nav_architecture: "架构",
+                nav_resources: "资源", nav_developers: "开发者", nav_solutions: "解决方案",
+                nav_docs: "文档", nav_system_notes: "系统笔记", nav_system_notes_short: "📘 笔记",
+                nav_dev: "开发", nav_inv: "投资",
                 hero_badge: "v.Orbit.3 · 类型化事件结构",
                 hero_title_1: "AI原生运行时",
                 hero_title_2: '用于<span class="highlight">多智能体世界</span>',
@@ -3540,13 +3468,10 @@
                 core_label: "核心",
                 core_title: "三大支柱",
                 core_desc: "驱动运行时的基础能力。",
-                core_pillar_1_num: "01",
                 core_pillar_1_title: "AI原生运行时",
                 core_pillar_1_desc: "为自主智能体提供类型化状态流的事件驱动推理引擎。",
-                core_pillar_2_num: "02",
                 core_pillar_2_title: "多智能体编排",
                 core_pillar_2_desc: "状态同步、反馈循环和大规模集群逻辑。",
-                core_pillar_3_num: "03",
                 core_pillar_3_title: "可扩展模拟层",
                 core_pillar_3_desc: "为并发构建的MMO/元宇宙/持久世界基础设施。",
                 arch_label: "系统",
@@ -3572,55 +3497,17 @@
                 arch_strategic_3: "元宇宙系统",
                 arch_strategic_4: "多智能体研究",
                 arch_strategic_5: "自主经济模型",
-                dashboard_label: "实时",
-                dashboard_title: "系统仪表板",
-                dashboard_desc: "TERSANESI运行时的实时指标 — 点击按钮与系统交互。",
-                metric_agents: "活跃智能体",
-                metric_rps: "请求 / 秒",
-                metric_latency: "延迟 (毫秒)",
-                metric_revenue: "处理价值",
-                metric_status: "系统状态",
-                metric_events: "事件 / 分钟",
-                action_spawn: "🤖 生成智能体",
-                action_emit: "⚡ 发送事件",
-                action_load: "📈 模拟负载",
-                action_reset: "⟳ 重置",
                 solutions_label: "解决方案",
                 solutions_title: "行业解决方案",
                 solutions_desc: "TERSANESI适应您的领域 — 从游戏到科学研究。",
-                solutions_1_num: "01",
                 solutions_1_title: "游戏与MMO",
                 solutions_1_desc: "为持久世界、AI驱动的NPC和实时玩家交互提供可扩展后端。",
-                solutions_2_num: "02",
                 solutions_2_title: "研究与模拟",
                 solutions_2_desc: "用于科学建模、气候模拟和计算社会科学的的多智能体系统。",
-                solutions_3_num: "03",
                 solutions_3_title: "元宇宙与虚拟世界",
                 solutions_3_desc: "数字孪生、虚拟经济和持久社交空间的基础设施。",
-                solutions_4_num: "04",
                 solutions_4_title: "企业AI",
                 solutions_4_desc: "自主工作流、智能体和自动化决策系统。",
-                pricing_label: "定价",
-                pricing_title: "选择您的方案",
-                pricing_desc: "为各种规模的团队提供灵活的定价 — 从初创企业到大型企业。",
-                pricing_plan_1_name: "入门版",
-                pricing_plan_1_feature_1: "1,000次智能体请求/天",
-                pricing_plan_1_feature_2: "最多3个智能体",
-                pricing_plan_1_feature_3: "社区支持",
-                pricing_plan_1_cta: "开始使用",
-                pricing_plan_2_name: "专业版",
-                pricing_plan_2_feature_1: "100,000次智能体请求/天",
-                pricing_plan_2_feature_2: "最多50个智能体",
-                pricing_plan_2_feature_3: "优先支持",
-                pricing_plan_2_feature_4: "高级分析",
-                pricing_plan_2_cta: "开始试用",
-                pricing_plan_3_name: "企业版",
-                pricing_plan_3_price: "定制",
-                pricing_plan_3_feature_1: "无限请求",
-                pricing_plan_3_feature_2: "无限智能体",
-                pricing_plan_3_feature_3: "专属支持",
-                pricing_plan_3_feature_4: "SLA保证",
-                pricing_plan_3_cta: "联系销售",
                 dev_label: "开发者",
                 dev_title: "开发者工具",
                 dev_desc: "构建和部署AI原生应用所需的一切。",
@@ -3632,6 +3519,33 @@
                 dev_3_desc: "用于部署、监控和调试的命令行工具。",
                 dev_4_title: "文档",
                 dev_4_desc: "全面的指南、示例和API参考。",
+                pricing_label: "定价",
+                pricing_title: "选择您的方案",
+                pricing_desc: "为各种规模的团队提供灵活的定价 — 从初创企业到大型企业。",
+                pricing_plan_1_name: "入门版",
+                pricing_plan_1_period: "/月",
+                pricing_plan_1_feature_1: "1,000次智能体请求/天",
+                pricing_plan_1_feature_2: "最多3个智能体",
+                pricing_plan_1_feature_3: "社区支持",
+                pricing_plan_1_feature_4: "基础分析",
+                pricing_plan_1_cta: "开始使用",
+                pricing_plan_2_name: "专业版",
+                pricing_plan_2_period: "/月",
+                pricing_plan_2_feature_1: "100,000次智能体请求/天",
+                pricing_plan_2_feature_2: "最多50个智能体",
+                pricing_plan_2_feature_3: "优先支持",
+                pricing_plan_2_feature_4: "高级分析",
+                pricing_plan_2_feature_5: "自定义集成",
+                pricing_plan_2_cta: "开始试用",
+                pricing_plan_3_name: "企业版",
+                pricing_plan_3_price: "定制",
+                pricing_plan_3_feature_1: "无限请求",
+                pricing_plan_3_feature_2: "无限智能体",
+                pricing_plan_3_feature_3: "专属支持",
+                pricing_plan_3_feature_4: "SLA保证",
+                pricing_plan_3_feature_5: "本地部署",
+                pricing_plan_3_feature_6: "自定义SLA",
+                pricing_plan_3_cta: "联系销售",
                 docs_label: "文档",
                 docs_title: "技术文档",
                 docs_desc: "为架构师和工程师提供的深度技术资源。",
@@ -3670,19 +3584,10 @@
                 footer_blog: "博客"
             },
             fr: {
-                nav_product: "Produit",
-                nav_core: "Noyau",
-                nav_architecture: "Architecture",
-                nav_solutions: "Solutions",
-                nav_pricing: "Tarifs",
-                nav_dashboard: "📊 Tableau de bord",
-                nav_resources: "Ressources",
-                nav_developers: "Développeurs",
-                nav_docs: "Documentation",
-                nav_system_notes: "Notes Système",
-                nav_system_notes_short: "📘 Notes",
-                nav_dev: "Dev",
-                nav_inv: "Inv",
+                nav_product: "Produit", nav_core: "Noyau", nav_architecture: "Architecture",
+                nav_resources: "Ressources", nav_developers: "Développeurs", nav_solutions: "Solutions",
+                nav_docs: "Documentation", nav_system_notes: "Notes Système", nav_system_notes_short: "📘 Notes",
+                nav_dev: "Dev", nav_inv: "Inv",
                 hero_badge: "v.Orbit.3 · tissu d'événements typés",
                 hero_title_1: "Runtime natif IA",
                 hero_title_2: 'pour <span class="highlight">mondes multi-agents</span>',
@@ -3706,13 +3611,10 @@
                 core_label: "Noyau",
                 core_title: "Trois piliers",
                 core_desc: "Les capacités fondamentales qui alimentent le runtime.",
-                core_pillar_1_num: "01",
                 core_pillar_1_title: "Runtime natif IA",
                 core_pillar_1_desc: "Moteur d'inférence événementiel pour agents autonomes avec flux d'état typés.",
-                core_pillar_2_num: "02",
                 core_pillar_2_title: "Orchestration multi-agents",
                 core_pillar_2_desc: "Synchronisation d'état, boucles de rétroaction et logique d'essaim à l'échelle.",
-                core_pillar_3_num: "03",
                 core_pillar_3_title: "Couche de simulation scalable",
                 core_pillar_3_desc: "Infrastructure pour mondes persistants / MMO / métavers construite pour la concurrence.",
                 arch_label: "Système",
@@ -3738,55 +3640,17 @@
                 arch_strategic_3: "Systèmes métavers",
                 arch_strategic_4: "Recherche multi-agents",
                 arch_strategic_5: "Modèles économiques autonomes",
-                dashboard_label: "En direct",
-                dashboard_title: "Tableau de bord système",
-                dashboard_desc: "Métriques en temps réel du runtime TERSANESI — cliquez sur les boutons pour interagir avec le système.",
-                metric_agents: "Agents actifs",
-                metric_rps: "Requêtes / sec",
-                metric_latency: "Latence (ms)",
-                metric_revenue: "Valeur traitée",
-                metric_status: "État du système",
-                metric_events: "Événements / min",
-                action_spawn: "🤖 Créer un agent",
-                action_emit: "⚡ Émettre un événement",
-                action_load: "📈 Simuler la charge",
-                action_reset: "⟳ Réinitialiser",
                 solutions_label: "Solutions",
                 solutions_title: "Solutions sectorielles",
                 solutions_desc: "TERSANESI s'adapte à votre domaine — des jeux à la recherche scientifique.",
-                solutions_1_num: "01",
                 solutions_1_title: "Jeux et MMO",
                 solutions_1_desc: "Backend scalable pour mondes persistants, PNJ pilotés par IA et interactions en temps réel.",
-                solutions_2_num: "02",
                 solutions_2_title: "Recherche et simulation",
                 solutions_2_desc: "Systèmes multi-agents pour la modélisation scientifique, la simulation climatique et les sciences sociales computationnelles.",
-                solutions_3_num: "03",
                 solutions_3_title: "Métavers et mondes virtuels",
                 solutions_3_desc: "Infrastructure pour jumeaux numériques, économies virtuelles et espaces sociaux persistants.",
-                solutions_4_num: "04",
                 solutions_4_title: "IA d'entreprise",
                 solutions_4_desc: "Flux de travail autonomes, agents intelligents et systèmes de décision automatisés.",
-                pricing_label: "Tarifs",
-                pricing_title: "Choisissez votre formule",
-                pricing_desc: "Tarifs flexibles pour les équipes de toutes tailles — des startups aux entreprises.",
-                pricing_plan_1_name: "Démarrage",
-                pricing_plan_1_feature_1: "1 000 requêtes d'agent / jour",
-                pricing_plan_1_feature_2: "3 agents max",
-                pricing_plan_1_feature_3: "Support communautaire",
-                pricing_plan_1_cta: "Commencer",
-                pricing_plan_2_name: "Pro",
-                pricing_plan_2_feature_1: "100 000 requêtes d'agent / jour",
-                pricing_plan_2_feature_2: "50 agents max",
-                pricing_plan_2_feature_3: "Support prioritaire",
-                pricing_plan_2_feature_4: "Analytique avancée",
-                pricing_plan_2_cta: "Essayer",
-                pricing_plan_3_name: "Entreprise",
-                pricing_plan_3_price: "Personnalisé",
-                pricing_plan_3_feature_1: "Requêtes illimitées",
-                pricing_plan_3_feature_2: "Agents illimités",
-                pricing_plan_3_feature_3: "Support dédié",
-                pricing_plan_3_feature_4: "Garantie SLA",
-                pricing_plan_3_cta: "Contacter les ventes",
                 dev_label: "Développeurs",
                 dev_title: "Outils développeur",
                 dev_desc: "Tout ce dont vous avez besoin pour construire et déployer des applications natives IA.",
@@ -3798,6 +3662,33 @@
                 dev_3_desc: "Outils en ligne de commande pour le déploiement, la surveillance et le débogage.",
                 dev_4_title: "Documentation",
                 dev_4_desc: "Guides complets, exemples et références API.",
+                pricing_label: "Tarifs",
+                pricing_title: "Choisissez votre formule",
+                pricing_desc: "Tarifs flexibles pour les équipes de toutes tailles — des startups aux entreprises.",
+                pricing_plan_1_name: "Démarrage",
+                pricing_plan_1_period: "/mois",
+                pricing_plan_1_feature_1: "1 000 requêtes d'agent / jour",
+                pricing_plan_1_feature_2: "3 agents max",
+                pricing_plan_1_feature_3: "Support communautaire",
+                pricing_plan_1_feature_4: "Analytique de base",
+                pricing_plan_1_cta: "Commencer",
+                pricing_plan_2_name: "Pro",
+                pricing_plan_2_period: "/mois",
+                pricing_plan_2_feature_1: "100 000 requêtes d'agent / jour",
+                pricing_plan_2_feature_2: "50 agents max",
+                pricing_plan_2_feature_3: "Support prioritaire",
+                pricing_plan_2_feature_4: "Analytique avancée",
+                pricing_plan_2_feature_5: "Intégrations personnalisées",
+                pricing_plan_2_cta: "Essayer",
+                pricing_plan_3_name: "Entreprise",
+                pricing_plan_3_price: "Personnalisé",
+                pricing_plan_3_feature_1: "Requêtes illimitées",
+                pricing_plan_3_feature_2: "Agents illimités",
+                pricing_plan_3_feature_3: "Support dédié",
+                pricing_plan_3_feature_4: "Garantie SLA",
+                pricing_plan_3_feature_5: "Déploiement sur site",
+                pricing_plan_3_feature_6: "SLA personnalisés",
+                pricing_plan_3_cta: "Contacter les ventes",
                 docs_label: "Documentation",
                 docs_title: "Documentation technique",
                 docs_desc: "Ressources techniques approfondies pour architectes et ingénieurs.",
@@ -3838,7 +3729,7 @@
         };
 
         // ============================================================
-        // ЛОГИКА ПЕРЕКЛЮЧЕНИЯ ЯЗЫКОВ
+        // LANGUAGE SYSTEM INIT
         // ============================================================
         let currentLang = localStorage.getItem('tersanesi-lang') || 'en';
 
@@ -3865,12 +3756,15 @@
             if (!LANGUAGES.some(l => l.code === code)) return;
             currentLang = code;
             localStorage.setItem('tersanesi-lang', code);
+            
             document.querySelectorAll('.lang-item').forEach(el => {
                 el.classList.toggle('active', el.dataset.lang === code);
             });
+            
             const langData = LANGUAGES.find(l => l.code === code);
             const flagEl = document.getElementById('currentLangFlag');
             if (flagEl && langData) flagEl.textContent = langData.flag;
+            
             applyTranslations();
         }
 
@@ -3913,6 +3807,9 @@
             });
         }
 
+        // ============================================================
+        // MOBILE LANGUAGE TOGGLE
+        // ============================================================
         document.addEventListener('DOMContentLoaded', () => {
             const toggle = document.getElementById('mobileLangToggle');
             const menu = document.getElementById('mobileLangMenu');
@@ -3927,15 +3824,20 @@
             }
         });
 
+        // ============================================================
+        // INIT
+        // ============================================================
         renderLanguageSidebar();
         renderMobileMenu();
+        
         const initialLang = LANGUAGES.find(l => l.code === currentLang);
         const flagEl = document.getElementById('currentLangFlag');
         if (flagEl && initialLang) flagEl.textContent = initialLang.flag;
+        
         applyTranslations();
 
         // ============================================================
-        // MODE TOGGLE (Dev/Inv)
+        // MODE TOGGLE
         // ============================================================
         (function() {
             const toggle = document.getElementById('modeToggle');
@@ -3997,121 +3899,100 @@
             ];
 
             const allEvents = [...events, ...events];
-            allEvents.forEach((evt) => {
+            allEvents.forEach((evt, index) => {
                 const li = document.createElement('li');
                 li.innerHTML = `
                     <span class="time">${evt.time}</span>
                     <span class="event-type ${evt.class}">${evt.type}</span>
                     <span>${evt.msg}</span>
                 `;
+                li.style.animationDelay = `${index * 0.1}s`;
                 streamList.appendChild(li);
             });
         })();
 
         // ============================================================
-        // DASHBOARD SYSTEM
-        // ============================================================
-        let agentCount = 100;
-        let rps = 3247;
-        let latency = 42;
-        let revenue = 2.4;
-        let events = 1483;
-        let statuses = ['● ONLINE', '● OPTIMIZING', '● SCALING'];
-        let statusIndex = 0;
-
-        const terminal = document.getElementById('terminal');
-
-        function addTerminalLine(message, type = 'info') {
-            const line = document.createElement('div');
-            line.className = 'term-line';
-            const cls = type === 'success' ? 'success' : type === 'warning' ? 'warning' : type === 'error' ? 'error' : 'info';
-            line.innerHTML = `<span class="prompt">$</span> <span class="${cls}">${message}</span>`;
-            terminal.appendChild(line);
-            terminal.scrollTop = terminal.scrollHeight;
-            if (terminal.children.length > 100) {
-                terminal.removeChild(terminal.firstChild);
-            }
-        }
-
-        function updateMetrics() {
-            agentCount += Math.floor(Math.random() * 6) - 2;
-            agentCount = Math.max(10, agentCount);
-            
-            const rpsChange = Math.floor(Math.random() * 60) - 25;
-            rps = Math.max(100, rps + rpsChange);
-            
-            const latChange = Math.floor(Math.random() * 8) - 3;
-            latency = Math.max(5, Math.min(200, latency + latChange));
-            
-            revenue += (Math.random() - 0.45) * 0.08;
-            revenue = Math.max(0.1, revenue);
-            
-            events += Math.floor(Math.random() * 30) - 10;
-            events = Math.max(10, events);
-
-            document.getElementById('agentCount').textContent = agentCount;
-            document.getElementById('rpsValue').textContent = rps.toLocaleString();
-            document.getElementById('latencyValue').textContent = Math.round(latency);
-            document.getElementById('revenueValue').textContent = '$' + revenue.toFixed(1) + 'M';
-            document.getElementById('eventsValue').textContent = events.toLocaleString();
-        }
-
-        function updateStatus() {
-            statusIndex = (statusIndex + 1) % statuses.length;
-            const status = statuses[statusIndex];
-            document.getElementById('statusValue').textContent = status;
-            if (status === '● ONLINE') {
-                document.getElementById('statusChange').textContent = '100% uptime';
-                document.getElementById('statusChange').className = 'metric-change positive';
-            } else {
-                document.getElementById('statusChange').textContent = 'system scaling';
-                document.getElementById('statusChange').className = 'metric-change warning';
-            }
-        }
-
-        // ============================================================
         // QUICK ACTIONS
         // ============================================================
+        let agentCounter = 47;
+
         function spawnAgent() {
-            agentCount += 1;
-            document.getElementById('agentCount').textContent = agentCount;
-            addTerminalLine(`Agent #${agentCount} spawned. Total: ${agentCount} active.`, 'success');
-            updateLastEvent(`🧬 Agent #${agentCount} spawned`, 'SYSTEM');
+            agentCounter++;
+            const agentEl = document.getElementById('metricAgents');
+            if (agentEl) {
+                agentEl.textContent = agentCounter;
+                const trendEl = document.getElementById('metricAgentsTrend');
+                if (trendEl) {
+                    trendEl.textContent = '▲ +1';
+                    trendEl.className = 'metric-trend up';
+                    setTimeout(() => {
+                        trendEl.textContent = '▲ stable';
+                    }, 2000);
+                }
+            }
+            updateLastEvent(`🧬 Agent #${agentCounter.toString(16).padStart(4, '0')} spawned`, 'SYSTEM');
+            addTerminalLog(`Agent #${agentCounter.toString(16).padStart(4, '0')} spawned`, 'ok');
         }
 
+        let eventCounter = 0;
+        const eventTypes = ['AgentEvent', 'StateSync', 'EconomicTx', 'NarrativeEvent'];
+        const eventMessages = [
+            'action: EXPLORE', 'world state updated', '12.4 ETH transferred',
+            'new region discovered', 'agent joined swarm', 'memory compacted',
+            'resource allocated', 'faction declared war', 'market price updated'
+        ];
+
         function emitEvent() {
-            const types = ['user.login', 'agent.action', 'system.metric', 'data.sync', 'state.update'];
-            const type = types[Math.floor(Math.random() * types.length)];
-            const id = Math.random().toString(36).substring(2, 8);
-            addTerminalLine(`Event emitted: ${type} (id: ${id})`, 'info');
-            events += 1;
-            document.getElementById('eventsValue').textContent = events.toLocaleString();
-            updateLastEvent(`⚡ ${type} → ${id}`, 'SYSTEM');
+            eventCounter++;
+            const type = eventTypes[Math.floor(Math.random() * eventTypes.length)];
+            const msg = eventMessages[Math.floor(Math.random() * eventMessages.length)];
+            const now = new Date();
+            const time = now.toTimeString().split(' ')[0];
+            updateLastEvent(`${type} → ${msg}`, time);
+            addTerminalLog(`${type}: ${msg}`, 'info');
+            const evtEl = document.getElementById('metricEvents');
+            if (evtEl) {
+                const val = parseFloat(evtEl.textContent) + 0.1;
+                evtEl.textContent = val.toFixed(1) + 'K';
+            }
         }
 
         function simulateLoad() {
-            const load = Math.floor(Math.random() * 500) + 100;
-            rps += load;
-            latency += Math.floor(Math.random() * 15) + 2;
-            document.getElementById('rpsValue').textContent = rps.toLocaleString();
-            document.getElementById('latencyValue').textContent = Math.round(latency);
-            addTerminalLine(`Load simulation: +${load} RPS, latency +${Math.floor(Math.random() * 15) + 2}ms`, 'warning');
-            updateLastEvent(`📊 Load simulation: +${load} RPS`, 'SYSTEM');
+            const reqEl = document.getElementById('metricRequests');
+            const latEl = document.getElementById('metricLatency');
+            if (reqEl) {
+                const current = parseInt(reqEl.textContent.replace(/,/g, ''));
+                const newVal = current + Math.floor(Math.random() * 100) + 50;
+                reqEl.textContent = newVal.toLocaleString();
+            }
+            if (latEl) {
+                const current = parseInt(latEl.textContent);
+                const newLat = current + Math.floor(Math.random() * 8) - 2;
+                latEl.innerHTML = `${Math.max(35, Math.min(65, newLat))} <span class="unit">ms</span>`;
+            }
+            updateLastEvent('📊 Load simulation completed', 'SYSTEM');
+            addTerminalLog('Load simulation: +' + (Math.floor(Math.random() * 50) + 20) + ' req/s', 'highlight');
         }
 
         function resetSystem() {
-            agentCount = 100;
-            rps = 3247;
-            latency = 42;
-            revenue = 2.4;
-            events = 1483;
-            document.getElementById('agentCount').textContent = agentCount;
-            document.getElementById('rpsValue').textContent = rps.toLocaleString();
-            document.getElementById('latencyValue').textContent = latency;
-            document.getElementById('revenueValue').textContent = '$' + revenue.toFixed(1) + 'M';
-            document.getElementById('eventsValue').textContent = events.toLocaleString();
-            addTerminalLine('System reset to baseline values.', 'error');
+            agentCounter = 47;
+            const agentEl = document.getElementById('metricAgents');
+            if (agentEl) agentEl.textContent = '47';
+            const reqEl = document.getElementById('metricRequests');
+            if (reqEl) reqEl.textContent = '1,247';
+            const latEl = document.getElementById('metricLatency');
+            if (latEl) latEl.innerHTML = '42 <span class="unit">ms</span>';
+            const memEl = document.getElementById('metricMemory');
+            if (memEl) memEl.innerHTML = '3.2 <span class="unit">GB</span>';
+            const evtEl = document.getElementById('metricEvents');
+            if (evtEl) evtEl.textContent = '8.4K';
+            const statusEl = document.getElementById('metricStatus');
+            if (statusEl) {
+                statusEl.textContent = '● ONLINE';
+                statusEl.className = 'metric-value status-ok';
+            }
             updateLastEvent('🔄 System reset to baseline', 'SYSTEM');
+            addTerminalLog('System reset complete', 'ok');
         }
 
         function updateLastEvent(message, time) {
@@ -4128,17 +4009,514 @@
             }
         }
 
-        // Expose functions globally
-        window.spawnAgent = spawnAgent;
-        window.emitEvent = emitEvent;
-        window.simulateLoad = simulateLoad;
-        window.resetSystem = resetSystem;
+        function addTerminalLog(msg, type = 'info') {
+            const terminalContent = document.getElementById('terminalContent');
+            if (!terminalContent) return;
+            const line = document.createElement('div');
+            line.className = 'terminal-line';
+            const now = new Date();
+            const time = now.toTimeString().split(' ')[0];
+            let content = `<span class="prompt">$</span> [${time}] `;
+            if (type === 'ok') {
+                content += `<span class="ok">✓</span> ${msg}`;
+            } else if (type === 'error') {
+                content += `<span class="error">✗</span> ${msg}`;
+            } else if (type === 'highlight') {
+                content += `<span class="highlight">▶</span> ${msg}`;
+            } else {
+                content += msg;
+            }
+            line.innerHTML = content;
+            terminalContent.appendChild(line);
+            while (terminalContent.children.length > 20) {
+                terminalContent.removeChild(terminalContent.firstChild);
+            }
+            const terminal = document.getElementById('terminal');
+            if (terminal) {
+                terminal.scrollTop = terminal.scrollHeight;
+            }
+        }
 
         // ============================================================
-        // TIMERS
+        // DASHBOARD METRICS (LIVE UPDATE)
         // ============================================================
-        setInterval(updateMetrics, 3000);
-        setInterval(updateStatus, 5000);
+        (function() {
+            let agents = 47;
+            let requests = 1247;
+            let latency = 42;
+            let memory = 3.2;
+            let events = 8400;
+
+            function updateMetrics() {
+                agents += Math.floor(Math.random() * 3) - 1;
+                agents = Math.max(42, Math.min(58, agents));
+                requests += Math.floor(Math.random() * 20) - 10;
+                requests = Math.max(1100, Math.min(1400, requests));
+                latency += Math.floor(Math.random() * 4) - 2;
+                latency = Math.max(35, Math.min(55, latency));
+                memory += (Math.random() * 0.1) - 0.05;
+                memory = Math.max(2.8, Math.min(4.0, memory));
+                events += Math.floor(Math.random() * 60) - 30;
+                events = Math.max(7800, Math.min(9200, events));
+
+                const agentEl = document.getElementById('metricAgents');
+                const reqEl = document.getElementById('metricRequests');
+                const latEl = document.getElementById('metricLatency');
+                const memEl = document.getElementById('metricMemory');
+                const evtEl = document.getElementById('metricEvents');
+
+                if (agentEl) agentEl.textContent = agents;
+                if (reqEl) reqEl.textContent = requests.toLocaleString();
+                if (latEl) latEl.innerHTML = `${latency} <span class="unit">ms</span>`;
+                if (memEl) memEl.innerHTML = `${memory.toFixed(1)} <span class="unit">GB</span>`;
+                if (evtEl) evtEl.textContent = (events / 1000).toFixed(1) + 'K';
+            }
+
+            setInterval(updateMetrics, 3000);
+
+            setInterval(() => {
+                const statusEl = document.getElementById('metricStatus');
+                if (!statusEl) return;
+                const statuses = ['● ONLINE', '● OPTIMIZING', '● STABLE'];
+                const colors = ['status-ok', 'status-warning', 'status-ok'];
+                const idx = Math.floor(Math.random() * statuses.length);
+                statusEl.textContent = statuses[idx];
+                statusEl.className = `metric-value ${colors[idx]}`;
+            }, 8000);
+        })();
+
+        // ============================================================
+        // TERMINAL (LIVE LOGS)
+        // ============================================================
+        (function() {
+            const terminalContent = document.getElementById('terminalContent');
+            if (!terminalContent) return;
+
+            const logs = [
+                { type: 'info', msg: 'Agent #7f3a heartbeat received' },
+                { type: 'ok', msg: 'State sync completed in 12ms' },
+                { type: 'info', msg: 'Event queue: 342 pending' },
+                { type: 'highlight', msg: '▶ Scheduler tick #8472' },
+                { type: 'ok', msg: 'Memory allocation: 3.2GB' },
+                { type: 'info', msg: 'Agent #b92a reconnected' },
+                { type: 'error', msg: '⚠️ Latency spike: 87ms (recovering)' },
+                { type: 'ok', msg: 'Latency restored to 42ms' },
+                { type: 'highlight', msg: '▶ New world state version 3.2.1' },
+                { type: 'info', msg: 'Narrative engine: 12 active quests' },
+                { type: 'ok', msg: 'EconomicTx processed: 340 units' },
+                { type: 'info', msg: 'Agent swarm: 47 active' },
+            ];
+
+            let logIndex = 0;
+
+            function addLog() {
+                const log = logs[logIndex % logs.length];
+                logIndex++;
+                const line = document.createElement('div');
+                line.className = 'terminal-line';
+                const now = new Date();
+                const time = now.toTimeString().split(' ')[0];
+                let content = `<span class="prompt">$</span> [${time}] `;
+                if (log.type === 'ok') {
+                    content += `<span class="ok">✓</span> ${log.msg}`;
+                } else if (log.type === 'error') {
+                    content += `<span class="error">✗</span> ${log.msg}`;
+                } else if (log.type === 'highlight') {
+                    content += `<span class="highlight">▶</span> ${log.msg}`;
+                } else {
+                    content += log.msg;
+                }
+                line.innerHTML = content;
+                terminalContent.appendChild(line);
+                while (terminalContent.children.length > 20) {
+                    terminalContent.removeChild(terminalContent.firstChild);
+                }
+                const terminal = document.getElementById('terminal');
+                if (terminal) {
+                    terminal.scrollTop = terminal.scrollHeight;
+                }
+            }
+
+            setTimeout(() => {
+                for (let i = 0; i < 8; i++) {
+                    setTimeout(addLog, i * 400);
+                }
+            }, 500);
+
+            setInterval(addLog, 2000);
+        })();
+
+        // ============================================================
+        // AGENT SWARM VISUALIZATION
+        // ============================================================
+        (function() {
+            const canvas = document.getElementById('swarmCanvas');
+            if (!canvas) return;
+
+            const container = canvas.parentElement;
+            let ctx = canvas.getContext('2d');
+            let width, height;
+            let agents = [];
+
+            const AGENT_COUNT = 60;
+            const COLORS = ['#00c8ff', '#25f58c', '#ffd866', '#b388ff', '#ff6b6b'];
+
+            function resize() {
+                const rect = container.getBoundingClientRect();
+                width = canvas.width = rect.width || 600;
+                height = canvas.height = rect.height || 200;
+                canvas.style.width = '100%';
+                canvas.style.height = '100%';
+            }
+
+            function initAgents() {
+                agents = [];
+                for (let i = 0; i < AGENT_COUNT; i++) {
+                    agents.push({
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        vx: (Math.random() - 0.5) * 0.8,
+                        vy: (Math.random() - 0.5) * 0.8,
+                        radius: 2 + Math.random() * 4,
+                        color: COLORS[Math.floor(Math.random() * COLORS.length)],
+                        phase: Math.random() * Math.PI * 2,
+                        targetX: Math.random() * width,
+                        targetY: Math.random() * height,
+                    });
+                }
+            }
+
+            function updateAgents() {
+                agents.forEach(a => {
+                    const dx = a.targetX - a.x;
+                    const dy = a.targetY - a.y;
+                    a.vx += (dx * 0.002) + (Math.random() - 0.5) * 0.04;
+                    a.vy += (dy * 0.002) + (Math.random() - 0.5) * 0.04;
+                    a.vx *= 0.98;
+                    a.vy *= 0.98;
+                    const speed = Math.sqrt(a.vx * a.vx + a.vy * a.vy);
+                    if (speed > 1.5) {
+                        a.vx = (a.vx / speed) * 1.5;
+                        a.vy = (a.vy / speed) * 1.5;
+                    }
+                    a.x += a.vx;
+                    a.y += a.vy;
+                    if (a.x < 0) { a.x = 0; a.vx = Math.abs(a.vx); }
+                    if (a.x > width) { a.x = width; a.vx = -Math.abs(a.vx); }
+                    if (a.y < 0) { a.y = 0; a.vy = Math.abs(a.vy); }
+                    if (a.y > height) { a.y = height; a.vy = -Math.abs(a.vy); }
+                    if (Math.random() < 0.005) {
+                        a.targetX = Math.random() * width;
+                        a.targetY = Math.random() * height;
+                    }
+                });
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, width, height);
+                for (let i = 0; i < agents.length; i++) {
+                    for (let j = i + 1; j < agents.length; j++) {
+                        const dx = agents[i].x - agents[j].x;
+                        const dy = agents[i].y - agents[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 80) {
+                            const alpha = 0.08 * (1 - dist / 80);
+                            ctx.beginPath();
+                            ctx.moveTo(agents[i].x, agents[i].y);
+                            ctx.lineTo(agents[j].x, agents[j].y);
+                            ctx.strokeStyle = `rgba(0, 200, 255, ${alpha})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    }
+                }
+                agents.forEach(a => {
+                    ctx.beginPath();
+                    ctx.arc(a.x, a.y, a.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = a.color;
+                    ctx.shadowColor = a.color;
+                    ctx.shadowBlur = 10;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                    const grad = ctx.createRadialGradient(a.x, a.y, 0, a.x, a.y, a.radius * 3);
+                    grad.addColorStop(0, a.color + '40');
+                    grad.addColorStop(1, 'transparent');
+                    ctx.beginPath();
+                    ctx.arc(a.x, a.y, a.radius * 3, 0, Math.PI * 2);
+                    ctx.fillStyle = grad;
+                    ctx.fill();
+                });
+            }
+
+            function animate() {
+                updateAgents();
+                draw();
+                requestAnimationFrame(animate);
+            }
+
+            const ro = new ResizeObserver(resize);
+            ro.observe(container);
+            setTimeout(resize, 50);
+            initAgents();
+            animate();
+
+            window.addEventListener('resize', () => {
+                resize();
+                initAgents();
+            });
+        })();
+
+        // ============================================================
+        // QUADRANT 2: 2D UNIVERSE (яркая звездная система без Three.js)
+        // ============================================================
+        (function() {
+            const container = document.getElementById('universeContainer');
+            const canvas = document.getElementById('universeCanvas');
+            if (!container || !canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let time = 0;
+            let particles = [];
+            const PARTICLE_COUNT = 350;
+
+            // Интерактивные подсказки
+            const UNIVERSE_MESSAGES = [
+                '🌌 Orbital system active',
+                '🛰️ 47 satellites in orbit',
+                '📡 Connection stable',
+                '⏣ Quantum sync: 97.4%',
+                '🔭 Observing sector 7',
+                '✨ Star cluster detected',
+                '🔄 Warp drive engaged',
+                '🌠 Nebula forming'
+            ];
+
+            function resize() {
+                const rect = container.getBoundingClientRect();
+                width = canvas.width = rect.width || 400;
+                height = canvas.height = rect.height || 300;
+                canvas.style.width = '100%';
+                canvas.style.height = '100%';
+                initParticles();
+            }
+
+            function initParticles() {
+                particles = [];
+                for (let i = 0; i < PARTICLE_COUNT; i++) {
+                    const radius = 0.3 + Math.random() * 4.0;
+                    const angle = Math.random() * Math.PI * 2;
+                    const tilt = Math.acos((Math.random() * 2) - 1);
+                    const size = 3 + Math.random() * 7;
+                    
+                    const colorType = Math.random();
+                    let r, g, b;
+                    if (colorType < 0.35) {
+                        r = 0; g = 180 + Math.random() * 75; b = 255;
+                    } else if (colorType < 0.6) {
+                        r = 255; g = 255; b = 255;
+                    } else if (colorType < 0.8) {
+                        r = 255; g = 200 + Math.random() * 55; b = 50 + Math.random() * 50;
+                    } else {
+                        r = 200 + Math.random() * 55; g = 100 + Math.random() * 80; b = 255;
+                    }
+                    
+                    particles.push({
+                        x: radius * Math.sin(tilt) * Math.cos(angle),
+                        y: radius * Math.sin(tilt) * Math.sin(angle) * 0.6,
+                        z: radius * Math.cos(tilt),
+                        size: size,
+                        speed: 0.2 + Math.random() * 0.8,
+                        color: { r, g, b },
+                        phase: Math.random() * Math.PI * 2,
+                        radius: radius,
+                        angle: angle,
+                        tilt: tilt
+                    });
+                }
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, width, height);
+
+                const bgGrad = ctx.createRadialGradient(
+                    width * 0.5, height * 0.5, 0,
+                    width * 0.5, height * 0.5, Math.max(width, height) * 0.9
+                );
+                bgGrad.addColorStop(0, '#0a2040');
+                bgGrad.addColorStop(0.3, '#081430');
+                bgGrad.addColorStop(0.7, '#060e20');
+                bgGrad.addColorStop(1, '#030810');
+                ctx.fillStyle = bgGrad;
+                ctx.fillRect(0, 0, width, height);
+
+                const cx = width / 2;
+                const cy = height / 2;
+                const scale = Math.min(width, height) / 4.5;
+
+                const glowGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.min(width, height) * 0.6);
+                glowGrad.addColorStop(0, 'rgba(0, 200, 255, 0.35)');
+                glowGrad.addColorStop(0.2, 'rgba(50, 150, 255, 0.2)');
+                glowGrad.addColorStop(0.5, 'rgba(100, 100, 255, 0.08)');
+                glowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+                ctx.fillStyle = glowGrad;
+                ctx.fillRect(0, 0, width, height);
+
+                const goldGlow = ctx.createRadialGradient(
+                    cx + Math.sin(time * 0.2) * 40,
+                    cy + Math.cos(time * 0.3) * 30,
+                    0,
+                    cx + Math.sin(time * 0.2) * 40,
+                    cy + Math.cos(time * 0.3) * 30,
+                    Math.min(width, height) * 0.4
+                );
+                goldGlow.addColorStop(0, 'rgba(255, 200, 50, 0.15)');
+                goldGlow.addColorStop(1, 'rgba(255, 200, 50, 0)');
+                ctx.fillStyle = goldGlow;
+                ctx.fillRect(0, 0, width, height);
+
+                // Связи между частицами
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = (particles[i].x - particles[j].x) * scale;
+                        const dy = (particles[i].y - particles[j].y) * scale;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 120 && dist > 2) {
+                            const alpha = 0.2 * (1 - dist / 120) * (0.5 + 0.5 * (particles[i].z + 2) / 4);
+                            ctx.strokeStyle = `rgba(80, 220, 255, ${alpha})`;
+                            ctx.lineWidth = 1.5;
+                            ctx.beginPath();
+                            ctx.moveTo(cx + particles[i].x * scale, cy + particles[i].y * scale);
+                            ctx.lineTo(cx + particles[j].x * scale, cy + particles[j].y * scale);
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                const sortedParticles = [...particles];
+                sortedParticles.sort((a, b) => a.z - b.z);
+
+                // Отрисовка частиц
+                for (const p of sortedParticles) {
+                    const x = cx + p.x * scale;
+                    const y = cy + p.y * scale;
+                    const size = p.size * (0.6 + 0.5 * (p.z + 2) / 4.5);
+                    const alpha = 0.7 + 0.3 * (p.z + 2) / 4.5;
+
+                    const r = p.color.r;
+                    const g = p.color.g;
+                    const b = p.color.b;
+
+                    const glow = ctx.createRadialGradient(x, y, 0, x, y, size * 5);
+                    glow.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${0.7 * alpha})`);
+                    glow.addColorStop(0.3, `rgba(${r}, ${g}, ${b}, ${0.3 * alpha})`);
+                    glow.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
+                    ctx.shadowBlur = 0;
+                    ctx.fillStyle = glow;
+                    ctx.beginPath();
+                    ctx.arc(x, y, size * 5, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.9)`;
+                    ctx.shadowBlur = 30;
+                    ctx.fillStyle = `rgba(${Math.min(255, r + 50)}, ${Math.min(255, g + 50)}, ${Math.min(255, b + 50)}, ${0.95 * alpha})`;
+                    ctx.beginPath();
+                    ctx.arc(x, y, size * 0.5, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    ctx.shadowBlur = 0;
+                    ctx.fillStyle = `rgba(255, 255, 255, ${0.9 * alpha})`;
+                    ctx.beginPath();
+                    ctx.arc(x, y, size * 0.15, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                // Яркие звезды
+                for (let i = 0; i < 3; i++) {
+                    const angle = time * (0.3 + i * 0.15) + i * 2.1;
+                    const dist = 0.1 + i * 0.15;
+                    const sx = cx + Math.cos(angle) * dist * Math.min(width, height) * 0.25;
+                    const sy = cy + Math.sin(angle * 0.7) * dist * Math.min(width, height) * 0.25;
+                    
+                    const starSize = 60 - i * 15;
+                    const grad = ctx.createRadialGradient(sx, sy, 0, sx, sy, starSize);
+                    grad.addColorStop(0, `rgba(255, 255, 255, ${0.9 - i * 0.2})`);
+                    grad.addColorStop(0.2, `rgba(200, 230, 255, ${0.7 - i * 0.15})`);
+                    grad.addColorStop(0.6, `rgba(100, 200, 255, ${0.3 - i * 0.08})`);
+                    grad.addColorStop(1, 'rgba(100, 200, 255, 0)');
+                    ctx.shadowBlur = 80;
+                    ctx.shadowColor = `rgba(150, 220, 255, ${0.4 - i * 0.1})`;
+                    ctx.fillStyle = grad;
+                    ctx.beginPath();
+                    ctx.arc(sx, sy, starSize, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.shadowBlur = 0;
+
+                // Кольца
+                const ringAlpha = 0.25 + 0.2 * Math.sin(time * 0.5);
+                
+                ctx.shadowBlur = 30;
+                ctx.shadowColor = 'rgba(0, 200, 255, 0.4)';
+                ctx.strokeStyle = `rgba(0, 220, 255, ${ringAlpha})`;
+                ctx.lineWidth = 3;
+                const ringRadius = Math.min(width, height) * 0.4;
+                ctx.beginPath();
+                ctx.ellipse(cx, cy, ringRadius, ringRadius * 0.55, time * 0.07, 0, Math.PI * 2);
+                ctx.stroke();
+
+                ctx.shadowColor = 'rgba(255, 200, 100, 0.3)';
+                ctx.strokeStyle = `rgba(255, 210, 80, ${ringAlpha * 0.7})`;
+                ctx.lineWidth = 2.5;
+                const ringRadius2 = ringRadius * 1.35;
+                ctx.beginPath();
+                ctx.ellipse(cx, cy, ringRadius2, ringRadius2 * 0.5, -time * 0.05, 0, Math.PI * 2);
+                ctx.stroke();
+
+                ctx.shadowBlur = 0;
+
+                // Обновление частиц
+                for (const p of particles) {
+                    p.angle += 0.006 * p.speed;
+                    p.tilt += 0.0025 * p.speed;
+                    p.radius += Math.sin(time * 0.4 + p.phase) * 0.002;
+                    p.radius = Math.max(0.3, Math.min(3.8, p.radius));
+                    p.x = p.radius * Math.sin(p.tilt) * Math.cos(p.angle);
+                    p.y = p.radius * Math.sin(p.tilt) * Math.sin(p.angle) * 0.6;
+                    p.z = p.radius * Math.cos(p.tilt);
+                }
+
+                time += 0.016;
+                requestAnimationFrame(draw);
+            }
+
+            // Resize Observer
+            const ro = new ResizeObserver(() => resize());
+            ro.observe(container);
+
+            setTimeout(() => {
+                resize();
+                draw();
+            }, 50);
+
+            window.addEventListener('resize', resize);
+
+            // Интерактивность: клик по квадранту
+            container.addEventListener('click', () => {
+                const msg = UNIVERSE_MESSAGES[Math.floor(Math.random() * UNIVERSE_MESSAGES.length)];
+                addTerminalLog(`🌌 ${msg}`, 'info');
+                // Также показываем alert для наглядности
+                alert(msg);
+            });
+
+            // Эффект при наведении
+            container.addEventListener('mouseenter', () => {
+                container.style.opacity = '0.9';
+            });
+            container.addEventListener('mouseleave', () => {
+                container.style.opacity = '1';
+            });
+        })();
 
         // ============================================================
         // QUADRANT 4: BINARY RAIN
@@ -4151,7 +4529,7 @@
             const parent = canvas.parentElement;
             let width, height;
 
-            const chars = '0123456789'.split('');
+            const chars = '01'.split('');
             const drops = [];
             const columnSize = 14;
 
@@ -4201,155 +4579,6 @@
             const ro = new ResizeObserver(() => resize());
             ro.observe(parent);
         })();
-
-        // ============================================================
-        // INITIAL TERMINAL MESSAGES
-        // ============================================================
-        setTimeout(() => addTerminalLine('Event fabric initialized. 100 agents ready.', 'success'), 500);
-        setTimeout(() => addTerminalLine('Runtime v.Orbit.3 running at 100% capacity.', 'info'), 1500);
-        setTimeout(() => addTerminalLine('System status: ONLINE — all systems nominal.', 'success'), 2500);
     </script>
-
-    <!-- ===== Three.js модуль (квадрант 2) ===== -->
-    <script type="module">
-        import * as THREE from 'three';
-        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-        
-        const container = document.getElementById('threeContainer');
-        if (!container) return;
-
-        const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x050812);
-        
-        const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 500);
-        camera.position.set(5, 2.5, 10);
-        
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        container.appendChild(renderer.domElement);
-        
-        const controls = new OrbitControls(camera, renderer.domElement);
-        controls.enableDamping = true;
-        controls.autoRotate = true;
-        controls.autoRotateSpeed = 0.3;
-        controls.enableZoom = false;
-        controls.enablePan = false;
-        controls.target.set(0, 0.3, 0);
-        
-        // Lights
-        const ambient = new THREE.AmbientLight(0x223355, 0.6);
-        scene.add(ambient);
-        const dir = new THREE.DirectionalLight(0xffeedd, 0.9);
-        dir.position.set(3, 6, 5);
-        scene.add(dir);
-        const rim = new THREE.DirectionalLight(0x4488ff, 0.4);
-        rim.position.set(-3, 1, -4);
-        scene.add(rim);
-        
-        // Stars
-        const starsGeo = new THREE.BufferGeometry();
-        const starCount = 1200;
-        const pos = new Float32Array(starCount * 3);
-        for (let i = 0; i < starCount; i++) {
-            pos[i * 3] = (Math.random() - 0.5) * 300;
-            pos[i * 3 + 1] = (Math.random() - 0.5) * 200;
-            pos[i * 3 + 2] = (Math.random() - 0.5) * 120 - 60;
-        }
-        starsGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-        const starsMat = new THREE.PointsMaterial({ color: 0x8899bb, size: 0.12, transparent: true, opacity: 0.5 });
-        const stars = new THREE.Points(starsGeo, starsMat);
-        scene.add(stars);
-        
-        // Station
-        const station = new THREE.Group();
-        
-        const ring = new THREE.Mesh(
-            new THREE.TorusGeometry(1.2, 0.06, 48, 96),
-            new THREE.MeshStandardMaterial({ color: 0x44aaff, metalness: 0.8, emissive: 0x004466, emissiveIntensity: 0.25 })
-        );
-        station.add(ring);
-        
-        const core = new THREE.Mesh(
-            new THREE.SphereGeometry(0.4, 48, 48),
-            new THREE.MeshStandardMaterial({ color: 0xffbb66, metalness: 0.6, emissive: 0x442200, emissiveIntensity: 0.2 })
-        );
-        station.add(core);
-        
-        for (let i = 0; i < 6; i++) {
-            const a = (i / 6) * Math.PI * 2;
-            const arm = new THREE.Mesh(
-                new THREE.BoxGeometry(0.04, 0.04, 1.0),
-                new THREE.MeshStandardMaterial({ color: 0x88ccff, metalness: 0.5 })
-            );
-            arm.position.set(Math.cos(a) * 0.95, Math.sin(a) * 0.95, 0);
-            arm.rotation.z = a;
-            station.add(arm);
-        }
-        
-        const panelGeo = new THREE.BoxGeometry(0.4, 0.03, 0.2);
-        for (let i = 0; i < 4; i++) {
-            const a = (i / 4) * Math.PI * 2;
-            const panel = new THREE.Mesh(panelGeo, new THREE.MeshStandardMaterial({ color: 0x66ccff, metalness: 0.5 }));
-            panel.position.set(Math.cos(a) * 1.5, Math.sin(a) * 1.5, 0.08);
-            station.add(panel);
-        }
-        
-        const gpGeo = new THREE.BufferGeometry();
-        const gpPos = new Float32Array(300 * 3);
-        for (let i = 0; i < 300; i++) {
-            gpPos[i * 3] = (Math.random() - 0.5) * 3.8;
-            gpPos[i * 3 + 1] = (Math.random() - 0.5) * 3.2;
-            gpPos[i * 3 + 2] = (Math.random() - 0.5) * 3.2;
-        }
-        gpGeo.setAttribute('position', new THREE.BufferAttribute(gpPos, 3));
-        const gpMat = new THREE.PointsMaterial({ color: 0x44ccff, size: 0.025, transparent: true, opacity: 0.3 });
-        const gp = new THREE.Points(gpGeo, gpMat);
-        station.add(gp);
-        
-        scene.add(station);
-        
-        const moon = new THREE.Mesh(
-            new THREE.SphereGeometry(0.2, 24, 24),
-            new THREE.MeshStandardMaterial({ color: 0xaa9988, roughness: 0.7 })
-        );
-        scene.add(moon);
-        
-        function resize() {
-            const w = container.clientWidth;
-            const h = container.clientHeight;
-            if (w === 0 || h === 0) return;
-            camera.aspect = w / h;
-            camera.updateProjectionMatrix();
-            renderer.setSize(w, h);
-        }
-        
-        const ro = new ResizeObserver(resize);
-        ro.observe(container);
-        resize();
-        
-        let t = 0;
-        
-        function animate() {
-            requestAnimationFrame(animate);
-            t += 0.012;
-            
-            station.rotation.y += 0.006;
-            station.rotation.x = Math.sin(t * 0.6) * 0.08;
-            station.rotation.z = Math.cos(t * 0.5) * 0.06;
-            gp.rotation.y += 0.008;
-            
-            moon.position.x = Math.cos(t * 0.8) * 2.2;
-            moon.position.z = Math.sin(t * 1.1) * 2.0;
-            moon.position.y = Math.sin(t * 1.5) * 0.6;
-            
-            stars.rotation.y += 0.0003;
-            
-            controls.update();
-            renderer.render(scene, camera);
-        }
-        
-        animate();
-    </script>
-
 </body>
 </html>
