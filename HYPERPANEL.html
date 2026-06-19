@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HYPERPANEL 6×11 • 66 виджетов</title>
+  <style>
+    /* ===== RESET & VARIABLES ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #05080c;
+      --panel: rgba(10, 15, 20, 0.92);
+      --border: rgba(0, 255, 204, 0.3);
+      --text: #b0f0e8;
+      --accent: #00f0d0;
+      --hot: #ff3ca6;
+      --warn: #ffb347;
+      --quantum: #6a5acd;
+      --meso: #2e8b57;
+      --hyperspace: #9370db;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --shadow: 0 0 30px rgba(0, 255, 204, 0.05);
+      --cell-gap: 4px;
+      --cell-bg: rgba(10, 15, 20, 0.6);
+      --radius: 8px;
+    }
+
+    .light-theme {
+      --bg: #e8edf2;
+      --panel: rgba(240, 245, 250, 0.92);
+      --border: rgba(0, 100, 80, 0.3);
+      --text: #1a2a2a;
+      --shadow: 0 0 30px rgba(0, 100, 80, 0.1);
+      --cell-bg: rgba(220, 225, 230, 0.6);
+    }
+
+    body {
+      background: radial-gradient(circle at 20% 30%, #121b26, #05080c 90%);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      padding: 8px;
+      transition: background 0.5s ease;
+    }
+
+    body.light-theme {
+      background: radial-gradient(circle at 20% 30%, #d5dce3, #b0b8c0 90%);
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      max-width: 1600px;
+      margin: 0 auto 8px;
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(0, 255, 204, 0.05);
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      border: 2px solid var(--accent);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 700;
+      background: rgba(0, 255, 204, 0.03);
+      color: var(--accent);
+      font-family: var(--font-mono);
+    }
+
+    .logo-text {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--text);
+    }
+
+    .logo-text span { color: var(--accent); }
+    .logo-sub {
+      font-size: 0.3rem;
+      letter-spacing: 0.15em;
+      color: rgba(127, 255, 232, 0.15);
+      text-transform: uppercase;
+      display: block;
+    }
+
+    .header-controls {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .header-btn {
+      padding: 3px 10px;
+      border: 1px solid rgba(0, 255, 204, 0.08);
+      border-radius: 12px;
+      background: rgba(0, 255, 204, 0.02);
+      color: rgba(127, 255, 232, 0.25);
+      font-size: 0.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .header-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .header-btn.tersanesi {
+      border-color: var(--hyperspace);
+      color: var(--hyperspace);
+      background: rgba(147, 112, 219, 0.04);
+    }
+
+    .header-btn.tersanesi:hover {
+      background: rgba(147, 112, 219, 0.12);
+      box-shadow: 0 0 20px rgba(147, 112, 219, 0.1);
+    }
+
+    .header-link {
+      text-decoration: none;
+    }
+
+    /* ===== FRAME 6×11 ===== */
+    .frame {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: repeat(11, 1fr);
+      gap: var(--cell-gap);
+      max-width: 1600px;
+      margin: 0 auto;
+      height: calc(100vh - 80px);
+      min-height: 500px;
+    }
+
+    /* ===== ЯЧЕЙКА ===== */
+    .cell {
+      background: var(--cell-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(4px);
+      padding: 4px 5px 3px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+      position: relative;
+      min-height: 40px;
+      cursor: grab;
+      user-select: none;
+    }
+
+    .cell:active {
+      cursor: grabbing;
+    }
+
+    .cell.dragging {
+      opacity: 0.3;
+      transform: scale(0.95);
+      border-color: var(--accent);
+      z-index: 10;
+    }
+
+    .cell.drag-over {
+      border-color: var(--accent);
+      border-style: dashed;
+      box-shadow: 0 0 30px rgba(0, 255, 204, 0.15);
+      transform: scale(1.02);
+      background: rgba(0, 255, 204, 0.05);
+    }
+
+    .cell:hover {
+      border-color: rgba(0, 255, 204, 0.5);
+      box-shadow: var(--shadow);
+      z-index: 2;
+    }
+
+    .cell-empty {
+      background: rgba(10, 15, 20, 0.2);
+      border: 1px dashed rgba(0, 255, 204, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(127, 255, 232, 0.08);
+      font-size: 0.4rem;
+      letter-spacing: 0.05em;
+      cursor: default;
+    }
+
+    .cell-empty:hover {
+      border-color: rgba(0, 255, 204, 0.15);
+      color: rgba(127, 255, 232, 0.15);
+    }
+
+    .cell-header {
+      font-size: 0.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(127, 255, 232, 0.25);
+      border-bottom: 1px solid rgba(0, 255, 204, 0.05);
+      padding-bottom: 2px;
+      margin-bottom: 2px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .cell-header .badge {
+      font-size: 0.3rem;
+      padding: 1px 5px;
+      border-radius: 4px;
+      background: rgba(0, 255, 204, 0.06);
+      border: 1px solid rgba(0, 255, 204, 0.08);
+    }
+
+    .cell-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2px;
+      font-size: 0.4rem;
+      min-height: 0;
+      pointer-events: none;
+    }
+
+    .cell-content .row {
+      display: flex;
+      justify-content: space-between;
+      padding: 1px 3px;
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 3px;
+      font-size: 0.35rem;
+    }
+
+    .cell-content .row .label {
+      color: rgba(127, 255, 232, 0.35);
+    }
+
+    .cell-content .row .value {
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    .cell-content .big-value {
+      font-size: 0.7rem;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .cell-content .big-symbol {
+      font-size: 1.2rem;
+      font-weight: 200;
+      text-align: center;
+      background: linear-gradient(135deg, #6a5acd, #ff3ca6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .cell-content canvas {
+      width: 100%;
+      height: 100%;
+      border-radius: 4px;
+      display: block;
+      background: rgba(0, 0, 0, 0.3);
+      min-height: 25px;
+      pointer-events: none;
+    }
+
+    .cell-content .spin-dots {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      margin-top: 2px;
+    }
+
+    .cell-content .spin-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    .spin-dot.up { background: var(--accent); }
+    .spin-dot.down { background: var(--hot); }
+    .spin-dot.entangled { background: var(--quantum); box-shadow: 0 0 8px rgba(106, 90, 205, 0.4); }
+
+    .cell-content .stress-bar {
+      height: 3px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 3px;
+      overflow: hidden;
+      margin: 2px 0;
+    }
+
+    .stress-bar .fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.5s ease;
+      background: linear-gradient(90deg, var(--meso), var(--warn), var(--hot));
+    }
+
+    .cell-content .wormhole-indicator {
+      display: flex;
+      gap: 3px;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 2px 0;
+    }
+
+    .cell-content .wormhole {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--hyperspace);
+      animation: pulse 2s ease-in-out infinite;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .cell-content .time-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .cell-content .time-item {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 3px;
+      padding: 1px 3px;
+      text-align: center;
+    }
+
+    .time-item .tlabel {
+      font-size: 0.25rem;
+      text-transform: uppercase;
+      color: rgba(127, 255, 232, 0.25);
+    }
+
+    .time-item .tvalue {
+      font-size: 0.45rem;
+      font-family: var(--font-mono);
+      color: var(--warn);
+      font-weight: 600;
+    }
+
+    .cell-btn {
+      padding: 2px 6px;
+      border: 1px solid var(--accent);
+      background: rgba(0, 255, 204, 0.06);
+      color: var(--accent);
+      border-radius: 3px;
+      font-size: 0.3rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+      pointer-events: auto;
+    }
+
+    .cell-btn:hover {
+      background: rgba(0, 255, 204, 0.15);
+      box-shadow: 0 0 15px rgba(0, 255, 204, 0.05);
+    }
+
+    .cell-btn.warning { border-color: var(--warn); color: var(--warn); }
+    .cell-btn.warning:hover { background: rgba(255, 179, 71, 0.15); }
+
+    .cell-btn.hyper { border-color: var(--hyperspace); color: var(--hyperspace); }
+    .cell-btn.hyper:hover { background: rgba(147, 112, 219, 0.15); }
+
+    .cell-btn.danger { border-color: var(--hot); color: var(--hot); }
+    .cell-btn.danger:hover { background: rgba(255, 60, 166, 0.15); }
+
+    .cell-content .alarm-row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.35rem;
+      padding: 2px 4px;
+      border-radius: 3px;
+      background: rgba(0, 0, 0, 0.15);
+      pointer-events: none;
+    }
+
+    .alarm-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .alarm-dot.ok { background: var(--meso); }
+    .alarm-dot.warn { background: var(--warn); }
+    .alarm-dot.danger { background: var(--hot); animation: alarmBlink 0.5s ease-in-out infinite; }
+
+    .cell-content .slider-wrap {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      pointer-events: auto;
+    }
+
+    .cell-content .slider-wrap input[type="range"] {
+      flex: 1;
+      height: 2px;
+      background: rgba(0, 255, 204, 0.15);
+      border-radius: 2px;
+      outline: none;
+      -webkit-appearance: none;
+      pointer-events: auto;
+    }
+
+    .cell-content .slider-wrap input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(0, 255, 204, 0.2);
+      pointer-events: auto;
+    }
+
+    .cell-content .slider-wrap .slider-val {
+      font-family: var(--font-mono);
+      font-size: 0.4rem;
+      min-width: 20px;
+      text-align: right;
+      pointer-events: none;
+    }
+
+    .cell-content .btn-group {
+      display: flex;
+      gap: 3px;
+      flex-wrap: wrap;
+      justify-content: center;
+      pointer-events: auto;
+    }
+
+    /* ===== FULLSCREEN MODAL - БОЛЬШОЙ ===== */
+    .fullscreen-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(5, 8, 12, 0.98);
+      backdrop-filter: blur(30px);
+      z-index: 1000;
+      padding: 40px;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .fullscreen-modal.open { 
+      display: flex !important; 
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .fullscreen-modal .modal-content {
+      width: 100%;
+      max-width: 1400px;
+      max-height: 92vh;
+      background: var(--panel);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 40px 48px;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 0 80px rgba(0, 255, 204, 0.08);
+    }
+
+    .fullscreen-modal .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 24px;
+      background: none;
+      border: none;
+      color: rgba(127, 255, 232, 0.3);
+      font-size: 2rem;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      z-index: 10;
+      line-height: 1;
+    }
+
+    .fullscreen-modal .modal-close:hover { 
+      color: var(--hot);
+      transform: scale(1.1);
+    }
+
+    .fullscreen-modal .modal-widget {
+      background: transparent;
+      border: none;
+      padding: 0;
+    }
+
+    .fullscreen-modal .modal-widget .widget-content {
+      font-size: 1.2rem;
+      gap: 16px;
+      min-height: 200px;
+      padding: 10px 0;
+    }
+
+    .fullscreen-modal .modal-widget .big-symbol { 
+      font-size: 4.5rem; 
+    }
+    
+    .fullscreen-modal .modal-widget .big-value { 
+      font-size: 2.8rem; 
+    }
+    
+    .fullscreen-modal .modal-widget canvas { 
+      height: 200px !important;
+      width: 100% !important;
+      border-radius: 10px;
+    }
+    
+    .fullscreen-modal .modal-widget .cell-btn { 
+      font-size: 0.8rem; 
+      padding: 8px 24px; 
+      border-radius: 8px;
+    }
+    
+    .fullscreen-modal .modal-widget .slider-wrap input[type="range"] {
+      height: 6px;
+    }
+    
+    .fullscreen-modal .modal-widget .slider-wrap input[type="range"]::-webkit-slider-thumb {
+      width: 18px;
+      height: 18px;
+    }
+    
+    .fullscreen-modal .modal-widget .slider-wrap .slider-val {
+      font-size: 0.9rem;
+      min-width: 50px;
+    }
+    
+    .fullscreen-modal .modal-widget .time-grid {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 12px;
+    }
+    
+    .fullscreen-modal .modal-widget .time-item .tvalue {
+      font-size: 0.9rem;
+    }
+    
+    .fullscreen-modal .modal-widget .time-item .tlabel {
+      font-size: 0.5rem;
+    }
+    
+    .fullscreen-modal .modal-widget .spin-dot {
+      width: 14px;
+      height: 14px;
+    }
+    
+    .fullscreen-modal .modal-widget .wormhole {
+      width: 18px;
+      height: 18px;
+    }
+    
+    .fullscreen-modal .modal-widget .stress-bar {
+      height: 8px;
+    }
+    
+    .fullscreen-modal .modal-widget .alarm-row {
+      font-size: 0.8rem;
+      padding: 8px 16px;
+      border-radius: 8px;
+    }
+    
+    .fullscreen-modal .modal-widget .alarm-dot {
+      width: 12px;
+      height: 12px;
+    }
+    
+    .fullscreen-modal .modal-widget .row {
+      font-size: 0.8rem;
+      padding: 6px 12px;
+    }
+    
+    .fullscreen-modal .modal-widget .cell-header {
+      font-size: 0.8rem;
+      border-bottom-width: 2px;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+    }
+    
+    .fullscreen-modal .modal-widget .cell-header .badge {
+      font-size: 0.5rem;
+      padding: 4px 12px;
+    }
+
+    /* ===== КНОПКИ ===== */
+    .expand-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.65rem;
+      padding: 0 4px;
+      color: rgba(147, 112, 219, 0.7) !important;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 10px rgba(147, 112, 219, 0.2);
+      line-height: 1;
+      pointer-events: auto;
+      position: relative;
+      z-index: 5;
+    }
+    
+    .expand-btn:hover {
+      color: var(--hyperspace) !important;
+      text-shadow: 0 0 30px rgba(147, 112, 219, 0.8);
+      transform: scale(1.2);
+    }
+    
+    .remove-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.65rem;
+      padding: 0 4px;
+      color: rgba(255, 60, 166, 0.5) !important;
+      transition: all 0.3s ease;
+      line-height: 1;
+      pointer-events: auto;
+      position: relative;
+      z-index: 5;
+    }
+    
+    .remove-btn:hover {
+      color: var(--hot) !important;
+      text-shadow: 0 0 30px rgba(255, 60, 166, 0.6);
+      transform: scale(1.2);
+    }
+
+    /* ===== WIDGET LIBRARY ===== */
+    .widget-library {
+      position: fixed;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 4px 10px;
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      justify-content: center;
+      backdrop-filter: blur(12px);
+      max-width: 92vw;
+    }
+
+    .widget-library .lib-btn {
+      padding: 2px 8px;
+      border: 1px solid rgba(0, 255, 204, 0.04);
+      border-radius: 8px;
+      background: rgba(0, 255, 204, 0.01);
+      color: rgba(127, 255, 232, 0.15);
+      font-size: 0.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .widget-library .lib-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .widget-library .lib-btn.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(0, 255, 204, 0.03);
+    }
+
+    /* ===== THEME TOGGLE ===== */
+    .theme-toggle {
+      position: fixed;
+      bottom: 48px;
+      right: 10px;
+      z-index: 50;
+      padding: 4px 10px;
+      border-radius: 12px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 0.35rem;
+      backdrop-filter: blur(6px);
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover { border-color: var(--accent); }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.6); }
+    }
+
+    @keyframes alarmBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1200px) {
+      .frame {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: auto;
+        height: auto;
+        gap: 4px;
+      }
+      .cell { min-height: 70px; }
+    }
+
+    @media (max-width: 768px) {
+      .frame {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
+        height: auto;
+        gap: 4px;
+      }
+      .cell { min-height: 60px; padding: 3px 4px; }
+      .cell-content .big-symbol { font-size: 1rem; }
+      .cell-content .big-value { font-size: 0.6rem; }
+      body { padding: 4px; }
+      .header { padding: 6px 8px; }
+      .fullscreen-modal { padding: 16px; }
+      .fullscreen-modal .modal-content { padding: 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .frame {
+        grid-template-columns: 1fr 1fr;
+        gap: 3px;
+      }
+      .cell { min-height: 50px; padding: 2px 3px; }
+      .cell-header { font-size: 0.3rem; }
+      .cell-content { font-size: 0.35rem; }
+      .cell-content .row { font-size: 0.3rem; padding: 1px 2px; }
+      .widget-library { padding: 3px 6px; gap: 3px; bottom: 4px; }
+      .widget-library .lib-btn { font-size: 0.25rem; padding: 1px 5px; }
+      .header-btn { font-size: 0.3rem; padding: 2px 6px; }
+      .expand-btn { font-size: 0.55rem; }
+      .remove-btn { font-size: 0.55rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER С КНОПКОЙ TERSANESI ===== -->
+  <header class="header">
+    <a href="https://tersanesi.vercel.app" target="_blank" class="logo">
+      <div class="logo-icon">∞</div>
+      <div class="logo-text">
+        T.E.R.S.A.N.E.S.I.
+        <span class="logo-sub">6×11 widget panel</span>
+      </div>
+    </a>
+    <div class="header-controls">
+      <a href="https://tersanesi.vercel.app" target="_blank" class="header-link">
+        <button class="header-btn tersanesi">🚀 TERSANESI</button>
+      </a>
+      <button class="header-btn" id="resetLayoutBtn">⟳ Reset</button>
+      <button class="header-btn" id="exportLayoutBtn">📤 Export</button>
+      <button class="header-btn" id="importLayoutBtn">📥 Import</button>
+      <input type="file" id="importFileInput" accept=".json" style="display:none;" />
+    </div>
+  </header>
+
+  <!-- ===== FRAME 6×11 ===== -->
+  <div class="frame" id="widgetsContainer"></div>
+
+  <!-- ===== WIDGET LIBRARY ===== -->
+  <div class="widget-library" id="widgetLibrary">
+    <span style="font-size:0.25rem;color:rgba(127,255,232,0.06);letter-spacing:0.05em;text-transform:uppercase;">➕</span>
+  </div>
+
+  <!-- ===== FULLSCREEN MODAL ===== -->
+  <div class="fullscreen-modal" id="fullscreenModal">
+    <div class="modal-content">
+      <button class="modal-close" id="modalCloseBtn">✕</button>
+      <div class="modal-widget" id="modalWidgetContainer"></div>
+    </div>
+  </div>
+
+  <!-- ===== THEME TOGGLE ===== -->
+  <button class="theme-toggle" id="themeToggle">🌙 THEME</button>
+
+  <script>
+    (function() {
+      'use strict';
+
+      // ============================================================
+      //  WIDGET DEFINITIONS (17 штук)
+      // ============================================================
+      const WIDGET_TYPES = {
+        infinity: {
+          id: 'infinity',
+          label: '∞^∞',
+          icon: '∞',
+          render: (state, id) => `
+            <div class="cell-header">
+              <span>∞^∞</span>
+              <span class="badge">CORE</span>
+            </div>
+            <div class="cell-content" style="justify-content:center;align-items:center;">
+              <div class="big-symbol">∞^∞</div>
+              <div style="font-size:0.25rem;color:rgba(127,255,232,0.1);">МАТЕМАТИЧЕСКАЯ НЕОПР.</div>
+              <div style="display:flex;gap:4px;margin-top:2px;font-size:0.35rem;flex-wrap:wrap;justify-content:center;">
+                <span>Base: <strong id="infBase_${id}">1.00</strong></span>
+                <span>Exp: <strong id="infExp_${id}">1.00</strong></span>
+                <span>Result: <strong id="infResult_${id}" style="color:var(--meso);">= 1.0000</strong></span>
+              </div>
+              <div class="btn-group">
+                <button class="cell-btn warning" data-action="infReset" data-id="${id}">⟳ Reset</button>
+                <button class="cell-btn hyper" data-action="infAuto" data-id="${id}">🔄 Auto</button>
+              </div>
+              <div style="font-size:0.25rem;color:rgba(127,255,232,0.08);" id="infStatus_${id}">Mode: manual</div>
+            </div>
+          `
+        },
+        spin: {
+          id: 'spin',
+          label: 'Spin',
+          icon: '🌀',
+          render: (state, id) => `
+            <div class="cell-header">
+              <span>🌀 SPIN</span>
+              <span class="badge">QUANTUM</span>
+            </div>
+            <div class="cell-content">
+              <div class="slider-wrap">
+                <input type="range" min="0" max="100" value="${(state.spin || 0.5) * 100}" data-action="spinSlider" data-id="${id}" />
+                <span class="slider-val" id="spinVal_${id}">${(state.spin || 0.5).toFixed(2)}</span>
+              </div>
+              <div class="spin-dots">
+                <span class="spin-dot up"></span>
+                <span class="spin-dot entangled"></span>
+                <span class="spin-dot down"></span>
+              </div>
+            </div>
+          `
+        },
+        polarization: {
+          id: 'polarization',
+          label: 'Polarization',
+          icon: '🎯',
+          render: (state, id) => `
+            <div class="cell-header">
+              <span>🎯 POLARIZATION</span>
+              <span class="badge">%</span>
+            </div>
+            <div class="cell-content" style="justify-content:center;align-items:center;">
+              <div class="big-value" id="polVal_${id}" style="color:var(--quantum);">${Math.round((state.polarization || 0.7) * 100)}%</div>
+              <div style="font-size:0.25rem;color:rgba(127,255,232,0.08);">Prob: <span id="probVal_${id}">${Math.round((state.polarization || 0.7) * 100)}%</span></div>
+            </div>
+          `
+        },
+        entanglement: {
+          id: 'entanglement',
+          label: 'Entanglement',
+          icon: '🔗',
+          render: (state, id) => `
+            <div class="cell-header">
+              <span>🔗 ENTANGLEMENT</span>
+              <span class="badge">PARTICLES</span>
+            </div>
+            <div class="cell-content" style="justify-content:center;align-items:center;">
+              <div class="big-value" id="entVal_${id}" style="color:var(--hyperspace);">${state.entanglement || 2} particles</div>
+              <button class="cell-btn hyper" data-action="entangle" data-id="${id}">ENTANGLE</button>
+            </div>
+          `
+        },
+        tunneling: {
+          id: 'tunneling',
+          label: 'Tunneling',
+          icon: '⚡',
+          render: (state, id) => `
+            <div class="cell-header">
+              <span>⚡ TUNNELING</span>
+              <span class="badge">%</span>
+            </div>
+            <div class="cell-content" style="justify-content:center;align-items:center;">
+              <div class="big-value" id="tunVal_${id}" style="color:var(--warn);">${((state.tunnel || 0.003) * 100).toFixed(1)}%</div>
+            </div>
+          `
+        },
+        waveFunction: {
+          id: 'waveFunction',
+          label: 'Wave Function',
+          icon: 'Ψ',
+          render: (state, id) => `
+            <div class="cell-header">
+              <span>Ψ WAVE FUNCTION</span>
+              <span class="badge">QUANTUM</span>
+            </div>
+            <div class="cell-content" style="padding:0;">
+              <canvas id="waveCanvas_${id}" style="width:100%;height:100%;min-height:30px;border-radius:4px;background:rgba(0,0,0,0.05);"></canvas>
+            </div>
+          `
+        },
+        resonance: {
+          id: 'resonance',
+          label: 'Resonance',
+          icon: '📡',
+          render: (state, id) => `
+            <div class="cell-header">
+              <span>📡 RESONANCE</span>
+              <span class="badge">HZ</span>
+            </div>
+            <div class="cell-content">
+              <div class="slider-wrap">
+                <input type="range" min="300" max="600" value="${state.resonance || 440}" data-action="freqSlider" data-id="${id}" />
+                <span class="slider-val" id="freqVal_${id}">${state.resonance || 440}</span>
+              </div>
+            </div>
+          `
+        },
+        stress: {
+          id: 'stress',
+          label: 'Stress',
+          icon: '📊',
+          render: (state, id) => `
+            <div class="cell-header">
+              <span>📊 STRESS</span>
+              <span class="badge">MPA</span>
+            </div>
+            <div class="cell-content">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span class="big-value" id="stressVal_${id}" style="color:var(--warn);font-size:0.6rem;">${(state.stress || 50).toFixed(1)}</span>
+                <button class="cell-btn warning" data-action="stressTest" data-id="${id}">🧪 TEST</button>
+              </div>
+              <div class="stress-bar"><div class="fill" id="stressFill_${id}" style="width:${Math.min(100, (state.stress || 50) / 200 * 100)}%;"></div></div>
+            </div>
+          `
+        },
+        entropy: {
+          id: 'entropy',
+          label: 'Entropy',
+          icon: '🔥',
+          render: (state, id) => `
+            <div class="cell-header">
+              <span>🔥 ENTROPY</span>
+              <span class="badge">J/K</span>
+            </div>
+            <div class="cell-content" style="justify-content:center;align-items:center;">
+              <div class="big-value" id="entVal_${id}" style="color:var(--accent);">${(state.entropy || 0.7).toFixed(2)}</div>
+            </div>
+          `
+        },
+        status: {
+          id: 'status',
+          label: 'Status',
+          icon: '⚠️',
+          render: (state, id) => `
+            <div class="cell-header">
+              <span>⚠️ STATUS</span>
+              <span class="badge">ALARM</span>
+            </div>
+            <div class="cell-content" style="justify-content:center;">
+              <div class="alarm-row" id="alarmRow_${id}">
+                <span class="alarm-dot ok" id="alarmDot_${id}"></span>
+                <span id="alarmText_${id}" style="font-size:0.35rem;">SYSTEM STABLE</span>
+              </div>
+            </div>
+          `
+        },
+        curvature: {
+          id: 'curvature',
+          label: 'Curvature',
+          icon: '🌀',
+          render: (state, id) => `
+            <div class="cell-header">
+              <span>🌀 CURVATURE</span>
+              <span class="badge">1/m²</span>
+            </div>
+            <div class="cell-content">
+              <div class="slider-wrap">
+                <input type="range" min="0" max="100" value="${(state.curvature || 0.003) * 10000}" data-action="curvatureSlider" data-id="${id}" />
+                <span class="slider-val" id="curvVal_${id}">${(state.curvature || 0.003).toFixed(3)}</span>
+              </div>
+            </div>
+          `
+        },
+        metric: {
+          id: 'metric',
+          label: 'Metric',
+          icon: '📐',
+          render: (state, id) => `
+            <div class="cell-header">
+              <span>📐 METRIC</span>
+              <span class="badge">SPACETIME</span>
+            </div>
+            <div class="cell-content" style="justify-content:center;align-items:center;">
+              <div class="big-value" id="metricVal_${id}" style="color:var(--accent);font-size:0.5rem;">${state.metric || 'Schwarzschild'}</div>
+            </div>
+          `
+        },
+        wormholes: {
+          id: 'wormholes',
+          label: 'Wormholes',
+          icon: '🌀',
+          render: (state, id) => `
+            <div class="cell-header">
+              <span>🌀 WORMHOLES</span>
+              <span class="badge">ACTIVE</span>
+            </div>
+            <div class="cell-content" style="justify-content:center;">
+              <div class="wormhole-indicator" id="wormholeContainer_${id}">
+                ${Array(state.wormholes || 3).fill(0).map((_, i) => `<span class="wormhole" style="animation-delay:${i * 0.5}s;"></span>`).join('')}
+              </div>
+            </div>
+          `
+        },
+        branching: {
+          id: 'branching',
+          label: 'Branching',
+          icon: '🌿',
+          render: (state, id) => `
+            <div class="cell-header">
+              <span>🌿 BRANCHING</span>
+              <span class="badge">REALITY</span>
+            </div>
+            <div class="cell-content" style="justify-content:center;align-items:center;">
+              <div class="big-value" id="branchVal_${id}" style="color:var(--hot);font-size:0.5rem;">${state.branch || 42} → ${(state.branch || 42) + 1}</div>
+            </div>
+          `
+        },
+        hyperJump: {
+          id: 'hyperJump',
+          label: 'Hyperjump',
+          icon: '🚀',
+          render: (state, id) => `
+            <div class="cell-header">
+              <span>🚀 HYPERJUMP</span>
+              <span class="badge">ACTION</span>
+            </div>
+            <div class="cell-content" style="justify-content:center;align-items:center;">
+              <button class="cell-btn hyper" data-action="hyperJump" data-id="${id}" style="font-size:0.4rem;padding:4px 10px;">HYPERJUMP</button>
+            </div>
+          `
+        },
+        time: {
+          id: 'time',
+          label: 'Time',
+          icon: '⏳',
+          render: (state, id) => `
+            <div class="cell-header">
+              <span>⏳ TIME SCALES</span>
+              <span class="badge">RELATIVITY</span>
+            </div>
+            <div class="cell-content">
+              <div class="time-grid">
+                <div class="time-item"><div class="tlabel">Planck</div><div class="tvalue" id="planckTime_${id}">${(state.planckTime || 0).toFixed(2)}</div></div>
+                <div class="time-item"><div class="tlabel">Quantum</div><div class="tvalue" id="quantumTime_${id}">${(state.quantumTime || 0).toFixed(3)}</div></div>
+                <div class="time-item"><div class="tlabel">Macro</div><div class="tvalue" id="macroTime_${id}">${(state.macroTime || 0).toFixed(1)}</div></div>
+                <div class="time-item"><div class="tlabel">Geological</div><div class="tvalue" id="geoTime_${id}">${(state.geoTime || 0).toFixed(3)}</div></div>
+              </div>
+            </div>
+          `
+        },
+        curvatureGraph: {
+          id: 'curvatureGraph',
+          label: 'Curvature Graph',
+          icon: '📈',
+          render: (state, id) => `
+            <div class="cell-header">
+              <span>📈 CURVATURE GRAPH</span>
+              <span class="badge">VISUAL</span>
+            </div>
+            <div class="cell-content" style="padding:0;">
+              <canvas id="curvatureGraph_${id}" style="width:100%;height:100%;min-height:30px;border-radius:4px;background:rgba(0,0,0,0.05);"></canvas>
+            </div>
+          `
+        }
+      };
+
+      // ============================================================
+      //  СОСТОЯНИЕ
+      // ============================================================
+      const data = {
+        spin: 0.72,
+        polarization: 0.87,
+        entanglement: 2,
+        tunnel: 0.003,
+        waveData: [],
+        resonance: 440,
+        stress: 95.3,
+        entropy: 0.82,
+        curvature: 0.003,
+        metric: 'Schwarzschild',
+        wormholes: 3,
+        branch: 42,
+        infBase: 1.0,
+        infExp: 1.0,
+        infAuto: false,
+        macroTime: 0,
+        planckTime: 0,
+        quantumTime: 0,
+        geoTime: 0,
+        alarmLevel: 'ok',
+        isHyperJumping: false,
+        widgets: []
+      };
+
+      // ============================================================
+      //  DEFAULT LAYOUT — 66 виджетов в сетке 6×11
+      // ============================================================
+      function getDefaultLayout() {
+        const mainWidgets = [
+          'infinity', 'spin', 'polarization', 'entanglement',
+          'tunneling', 'waveFunction', 'resonance', 'stress',
+          'entropy', 'status', 'curvature', 'metric',
+          'wormholes', 'branching', 'hyperJump', 'time',
+          'curvatureGraph'
+        ];
+        
+        const result = [...mainWidgets];
+        const reserveTypes = ['infinity', 'spin', 'polarization', 'entanglement', 'tunneling', 'resonance', 'stress', 'entropy', 'curvature', 'wormholes', 'branching', 'time'];
+        while (result.length < 66) {
+          const randomType = reserveTypes[Math.floor(Math.random() * reserveTypes.length)];
+          result.push(randomType);
+        }
+        return result;
+      }
+
+      // ============================================================
+      //  AUDIO
+      // ============================================================
+      let audioCtx = null;
+
+      function playTone(freq, duration, type = 'sine') {
+        try {
+          if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = type;
+          osc.frequency.value = freq;
+          gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + duration);
+        } catch (e) {}
+      }
+
+      function playHyperJump() {
+        playTone(200, 0.25, 'sawtooth');
+        setTimeout(() => playTone(400, 0.25, 'sawtooth'), 150);
+        setTimeout(() => playTone(800, 0.4, 'square'), 350);
+        setTimeout(() => playTone(1200, 0.6, 'sine'), 600);
+      }
+
+      // ============================================================
+      //  DRAG & DROP
+      // ============================================================
+      let draggedId = null;
+      let dragStartIndex = null;
+
+      function setupDrag(el) {
+        el.addEventListener('dragstart', (e) => {
+          draggedId = el.dataset.widgetId;
+          dragStartIndex = parseInt(el.dataset.index);
+          el.classList.add('dragging');
+          e.dataTransfer.effectAllowed = 'move';
+          e.dataTransfer.setData('text/plain', draggedId);
+        });
+
+        el.addEventListener('dragend', () => {
+          el.classList.remove('dragging');
+          document.querySelectorAll('.cell.drag-over').forEach(el => el.classList.remove('drag-over'));
+          draggedId = null;
+          dragStartIndex = null;
+        });
+
+        el.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          e.dataTransfer.dropEffect = 'move';
+          if (draggedId && draggedId !== el.dataset.widgetId) {
+            document.querySelectorAll('.cell.drag-over').forEach(el => el.classList.remove('drag-over'));
+            el.classList.add('drag-over');
+          }
+        });
+
+        el.addEventListener('dragleave', () => {
+          el.classList.remove('drag-over');
+        });
+
+        el.addEventListener('drop', (e) => {
+          e.preventDefault();
+          el.classList.remove('drag-over');
+          
+          const targetId = el.dataset.widgetId;
+          if (draggedId && draggedId !== targetId) {
+            const fromIdx = data.widgets.findIndex((_, i) => `${_}_${i}` === draggedId);
+            const toIdx = parseInt(el.dataset.index);
+            
+            if (fromIdx !== -1 && toIdx !== -1 && fromIdx !== toIdx) {
+              const [moved] = data.widgets.splice(fromIdx, 1);
+              data.widgets.splice(toIdx, 0, moved);
+              renderWidgets();
+            }
+          }
+          draggedId = null;
+          dragStartIndex = null;
+        });
+      }
+
+      // ============================================================
+      //  РЕНДЕР
+      // ============================================================
+      function renderWidgets() {
+        const container = document.getElementById('widgetsContainer');
+        if (!container) return;
+        container.innerHTML = '';
+
+        data.widgets.forEach((type, index) => {
+          const def = WIDGET_TYPES[type];
+          if (!def) {
+            const empty = document.createElement('div');
+            empty.className = 'cell cell-empty';
+            empty.textContent = '⚡ РЕЗЕРВ';
+            container.appendChild(empty);
+            return;
+          }
+          
+          const id = `${type}_${index}`;
+          const html = def.render(data, id);
+
+          const el = document.createElement('div');
+          el.className = 'cell';
+          el.dataset.widgetId = id;
+          el.dataset.widgetType = type;
+          el.dataset.index = index;
+          el.draggable = true;
+
+          el.innerHTML = `
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-shrink:0;margin-bottom:2px;">
+              <span style="font-size:0.3rem;color:rgba(127,255,232,0.15);">${def.icon} ${def.label}</span>
+              <div style="display:flex;gap:2px;">
+                <button class="expand-btn" data-action="expand" data-id="${id}" data-type="${type}" title="Fullscreen">⛶</button>
+                <button class="remove-btn" data-action="remove" data-id="${id}" title="Remove">✕</button>
+              </div>
+            </div>
+            ${html}
+          `;
+
+          container.appendChild(el);
+          setupDrag(el);
+          setupWidgetActions(el, id, type);
+        });
+
+        updateLibrary();
+        initCanvases();
+        setTimeout(drawAllCanvases, 50);
+        saveLayout();
+      }
+
+      // ============================================================
+      //  WIDGET ACTIONS
+      // ============================================================
+      function setupWidgetActions(el, id, type) {
+        // Expand
+        const expandBtn = el.querySelector('.expand-btn');
+        if (expandBtn) {
+          expandBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            const typeAttr = this.dataset.type || type;
+            const idAttr = this.dataset.id || id;
+            openFullscreen(idAttr, typeAttr);
+          });
+        }
+
+        // Remove
+        const removeBtn = el.querySelector('.remove-btn');
+        if (removeBtn) {
+          removeBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const idAttr = this.dataset.id || id;
+            removeWidget(idAttr);
+          });
+        }
+
+        // Internal actions
+        el.querySelectorAll('[data-action]').forEach(btn => {
+          const action = btn.dataset.action;
+          if (action === 'expand' || action === 'remove') return;
+          
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const targetId = btn.dataset.id || id;
+            handleAction(action, targetId, btn);
+          });
+        });
+
+        // Sliders
+        el.querySelectorAll('input[type="range"]').forEach(input => {
+          input.addEventListener('input', () => {
+            const action = input.dataset.action;
+            const targetId = input.dataset.id || id;
+            handleSlider(action, targetId, input);
+          });
+        });
+      }
+
+      function handleAction(action, id, btn) {
+        switch (action) {
+          case 'infReset':
+            data.infBase = 1.0;
+            data.infExp = 1.0;
+            data.infAuto = false;
+            updateAll();
+            break;
+          case 'infAuto':
+            data.infAuto = !data.infAuto;
+            btn.textContent = data.infAuto ? '⏹ Stop' : '🔄 Auto';
+            if (!data.infAuto) { data.infBase = 1.0; data.infExp = 1.0; }
+            updateAll();
+            break;
+          case 'entangle':
+            data.entanglement = Math.floor(3 + Math.random() * 5);
+            playTone(600, 0.15, 'sine');
+            setTimeout(() => playTone(900, 0.15, 'sine'), 120);
+            updateAll();
+            break;
+          case 'stressTest':
+            data.stress = 120 + Math.random() * 80;
+            playTone(500, 0.2, 'square');
+            updateAll();
+            break;
+          case 'hyperJump':
+            if (data.isHyperJumping) return;
+            data.isHyperJumping = true;
+            playHyperJump();
+            btn.textContent = '🌀 JUMPING...';
+            btn.disabled = true;
+            data.wormholes = 0;
+            const metrics = ['Schwarzschild', 'Minkowski', 'Friedmann', 'de Sitter'];
+            updateAll();
+            setTimeout(() => {
+              data.wormholes = Math.floor(5 + Math.random() * 5);
+              data.branch += 1;
+              data.metric = metrics[Math.floor(Math.random() * metrics.length)];
+              data.isHyperJumping = false;
+              btn.textContent = 'HYPERJUMP';
+              btn.disabled = false;
+              playTone(1000, 0.4, 'sine');
+              updateAll();
+            }, 1400);
+            break;
+        }
+      }
+
+      function handleSlider(action, id, input) {
+        const val = parseFloat(input.value);
+        switch (action) {
+          case 'spinSlider':
+            data.spin = val / 100;
+            const spinValEl = document.getElementById(`spinVal_${id}`);
+            if (spinValEl) spinValEl.textContent = (val / 100).toFixed(2);
+            break;
+          case 'freqSlider':
+            data.resonance = val;
+            const freqValEl = document.getElementById(`freqVal_${id}`);
+            if (freqValEl) freqValEl.textContent = Math.round(val);
+            break;
+          case 'curvatureSlider':
+            data.curvature = val / 10000;
+            const curvValEl = document.getElementById(`curvVal_${id}`);
+            if (curvValEl) curvValEl.textContent = (val / 10000).toFixed(3);
+            break;
+        }
+        updateAll();
+      }
+
+      // ============================================================
+      //  REMOVE / ADD
+      // ============================================================
+      function removeWidget(id) {
+        const idx = data.widgets.findIndex((_, i) => `${_}_${i}` === id);
+        if (idx !== -1) {
+          data.widgets.splice(idx, 1);
+          const reserveTypes = ['infinity', 'spin', 'polarization', 'entanglement', 'tunneling', 'resonance', 'stress', 'entropy', 'curvature', 'wormholes', 'branching', 'time'];
+          const randomType = reserveTypes[Math.floor(Math.random() * reserveTypes.length)];
+          data.widgets.splice(idx, 0, randomType);
+          renderWidgets();
+        }
+      }
+
+      function addWidget(type) {
+        data.widgets.push(type);
+        renderWidgets();
+      }
+
+      // ============================================================
+      //  FULLSCREEN - БОЛЬШОЙ РЕЖИМ
+      // ============================================================
+      function openFullscreen(id, type) {
+        const def = WIDGET_TYPES[type];
+        if (!def) return;
+        
+        const html = def.render(data, id);
+        const container = document.getElementById('modalWidgetContainer');
+        if (!container) return;
+        
+        container.innerHTML = `
+          <div class="modal-widget" style="background:transparent;border:none;padding:0;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:0.8rem;color:rgba(127,255,232,0.3);border-bottom:1px solid rgba(0,255,204,0.05);padding-bottom:8px;">
+              <span style="font-size:1rem;">${def.icon} ${def.label}</span>
+              <span class="badge" style="font-size:0.5rem;padding:4px 16px;border-radius:8px;background:rgba(0,255,204,0.06);border:1px solid rgba(0,255,204,0.1);">FULLSCREEN</span>
+            </div>
+            ${html}
+          </div>
+        `;
+
+        // Обработчики для кнопок внутри модалки
+        container.querySelectorAll('[data-action]').forEach(btn => {
+          const action = btn.dataset.action;
+          if (action === 'expand' || action === 'remove') return;
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            handleAction(action, btn.dataset.id || id, btn);
+          });
+        });
+
+        // Обработчики для слайдеров в модалке
+        container.querySelectorAll('input[type="range"]').forEach(input => {
+          input.addEventListener('input', () => {
+            handleSlider(input.dataset.action, input.dataset.id || id, input);
+          });
+        });
+
+        const modal = document.getElementById('fullscreenModal');
+        if (modal) modal.classList.add('open');
+
+        setTimeout(() => {
+          const canvas = container.querySelector('canvas');
+          if (canvas) {
+            const rect = container.querySelector('.modal-widget')?.getBoundingClientRect();
+            if (rect) {
+              canvas.width = Math.max(rect.width - 60, 400);
+              canvas.height = 200;
+              canvas.style.height = '200px';
+              canvas.style.width = '100%';
+            }
+          }
+          drawAllCanvases();
+        }, 150);
+      }
+
+      function closeFullscreen() {
+        const modal = document.getElementById('fullscreenModal');
+        if (modal) modal.classList.remove('open');
+      }
+
+      // ============================================================
+      //  CANVAS
+      // ============================================================
+      function initCanvases() {
+        document.querySelectorAll('#widgetsContainer canvas, #modalWidgetContainer canvas').forEach(canvas => {
+          try {
+            const rect = canvas.parentElement?.getBoundingClientRect();
+            if (rect) {
+              canvas.width = Math.max(rect.width || 150, 80);
+              canvas.height = Math.max(rect.height || 30, 20);
+            } else {
+              canvas.width = 150;
+              canvas.height = 30;
+            }
+          } catch(e) {
+            canvas.width = 150;
+            canvas.height = 30;
+          }
+        });
+      }
+
+      function drawAllCanvases() {
+        document.querySelectorAll('[id^="waveCanvas_"]').forEach(canvas => {
+          try {
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width || 150;
+            const h = canvas.height || 30;
+            ctx.clearRect(0, 0, w, h);
+            if (!data.waveData || data.waveData.length === 0) {
+              data.waveData = Array.from({ length: 30 }, () => Math.random() * 0.8 + 0.2);
+            }
+            ctx.beginPath();
+            ctx.moveTo(0, h / 2);
+            for (let i = 0; i < data.waveData.length; i++) {
+              const x = (i / (data.waveData.length - 1)) * w;
+              const y = h / 2 - (data.waveData[i] * h / 2.5);
+              ctx.lineTo(x, y);
+            }
+            ctx.strokeStyle = '#6a5acd';
+            ctx.lineWidth = 1.2;
+            ctx.stroke();
+          } catch(e) {}
+        });
+
+        document.querySelectorAll('[id^="curvatureGraph_"]').forEach(canvas => {
+          try {
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width || 150;
+            const h = canvas.height || 30;
+            ctx.clearRect(0, 0, w, h);
+            ctx.beginPath();
+            ctx.moveTo(0, h / 2);
+            for (let x = 0; x < w; x++) {
+              const y = h / 2 + Math.sin(x * 0.03 + data.curvature * 200) * 8 +
+                Math.sin(x * 0.07 + 1.5) * 4;
+              ctx.lineTo(x, y);
+            }
+            ctx.strokeStyle = '#9370db';
+            ctx.lineWidth = 1.2;
+            ctx.stroke();
+          } catch(e) {}
+        });
+      }
+
+      // ============================================================
+      //  UPDATE
+      // ============================================================
+      function updateAll() {
+        data.widgets.forEach((type, index) => {
+          const id = `${type}_${index}`;
+          
+          const base = data.infBase, exp = data.infExp;
+          const val = Math.pow(base, exp);
+          const infBaseEl = document.getElementById(`infBase_${id}`);
+          if (infBaseEl) infBaseEl.textContent = base.toFixed(2);
+          const infExpEl = document.getElementById(`infExp_${id}`);
+          if (infExpEl) infExpEl.textContent = exp.toFixed(2);
+          const infResultEl = document.getElementById(`infResult_${id}`);
+          if (infResultEl) infResultEl.textContent = `= ${val.toFixed(4)}`;
+          const infStatusEl = document.getElementById(`infStatus_${id}`);
+          if (infStatusEl) infStatusEl.textContent = data.infAuto ? 'Mode: auto' : 'Mode: manual';
+
+          const spinEl = document.getElementById(`spinVal_${id}`);
+          if (spinEl) spinEl.textContent = data.spin.toFixed(2);
+
+          const polVal = document.getElementById(`polVal_${id}`);
+          if (polVal) polVal.textContent = `${Math.round(data.polarization * 100)}%`;
+          const probVal = document.getElementById(`probVal_${id}`);
+          if (probVal) probVal.textContent = `${Math.round(data.polarization * 100)}%`;
+
+          const entVal = document.getElementById(`entVal_${id}`);
+          if (entVal && type === 'entanglement') entVal.textContent = `${data.entanglement} particles`;
+
+          const tunVal = document.getElementById(`tunVal_${id}`);
+          if (tunVal) tunVal.textContent = `${(data.tunnel * 100).toFixed(1)}%`;
+
+          const freqVal = document.getElementById(`freqVal_${id}`);
+          if (freqVal) freqVal.textContent = Math.round(data.resonance);
+
+          const stressVal = document.getElementById(`stressVal_${id}`);
+          if (stressVal) stressVal.textContent = data.stress.toFixed(1);
+          const stressFill = document.getElementById(`stressFill_${id}`);
+          if (stressFill) stressFill.style.width = `${Math.min(100, data.stress / 200 * 100)}%`;
+
+          const entVal2 = document.getElementById(`entVal_${id}`);
+          if (entVal2 && type === 'entropy') entVal2.textContent = data.entropy.toFixed(2);
+
+          updateAlarm(id);
+
+          const curvVal = document.getElementById(`curvVal_${id}`);
+          if (curvVal) curvVal.textContent = data.curvature.toFixed(3);
+
+          const metricVal = document.getElementById(`metricVal_${id}`);
+          if (metricVal) metricVal.textContent = data.metric;
+
+          const wormContainer = document.getElementById(`wormholeContainer_${id}`);
+          if (wormContainer) {
+            wormContainer.innerHTML = '';
+            for (let i = 0; i < data.wormholes; i++) {
+              const dot = document.createElement('span');
+              dot.className = 'wormhole';
+              dot.style.animationDelay = `${i * 0.5}s`;
+              wormContainer.appendChild(dot);
+            }
+          }
+
+          const branchVal = document.getElementById(`branchVal_${id}`);
+          if (branchVal) branchVal.textContent = `${data.branch} → ${data.branch + 1}`;
+
+          const planckEl = document.getElementById(`planckTime_${id}`);
+          if (planckEl) planckEl.textContent = data.planckTime.toFixed(2);
+          const quantumEl = document.getElementById(`quantumTime_${id}`);
+          if (quantumEl) quantumEl.textContent = data.quantumTime.toFixed(3);
+          const macroEl = document.getElementById(`macroTime_${id}`);
+          if (macroEl) macroEl.textContent = data.macroTime.toFixed(1);
+          const geoEl = document.getElementById(`geoTime_${id}`);
+          if (geoEl) geoEl.textContent = data.geoTime.toFixed(3);
+        });
+
+        drawAllCanvases();
+      }
+
+      function updateAlarm(id) {
+        const dot = document.getElementById(`alarmDot_${id}`);
+        const text = document.getElementById(`alarmText_${id}`);
+        const row = document.getElementById(`alarmRow_${id}`);
+        if (!dot || !text) return;
+        if (data.stress > 150) {
+          dot.className = 'alarm-dot danger';
+          text.textContent = '⚠️ CRITICAL STRESS!';
+          if (row) row.style.background = 'rgba(255,60,166,0.04)';
+        } else if (data.stress > 100) {
+          dot.className = 'alarm-dot warn';
+          text.textContent = '⚠️ HIGH STRESS';
+          if (row) row.style.background = 'rgba(255,179,71,0.04)';
+        } else {
+          dot.className = 'alarm-dot ok';
+          text.textContent = '✅ SYSTEM STABLE';
+          if (row) row.style.background = 'transparent';
+        }
+      }
+
+      // ============================================================
+      //  SIMULATION
+      // ============================================================
+      function simulateData() {
+        const now = Date.now();
+        data.spin = Math.sin(now / 5000) * 0.5 + 0.5;
+        data.polarization = 0.7 + Math.sin(now / 3000) * 0.2;
+        data.tunnel = 0.001 + Math.sin(now / 7000) * 0.004;
+        data.entanglement = Math.floor(1 + Math.random() * 3);
+        if (!data.waveData || data.waveData.length === 0) {
+          data.waveData = Array.from({ length: 30 }, () => Math.random() * 0.8 + 0.2);
+        }
+        data.waveData = data.waveData.map((v, i) => {
+          return 0.3 + 0.6 * Math.sin(i / 3 + now / 2000 + v * 0.5) * 0.5 + 0.5;
+        });
+        data.stress = 50 + Math.sin(now / 4000) * 30 + Math.random() * 10;
+        data.entropy = 0.7 + Math.sin(now / 6000) * 0.2;
+        data.wormholes = Math.floor(2 + Math.sin(now / 10000) * 2);
+        data.branch = 42 + Math.floor(Math.sin(now / 15000) * 2);
+        data.macroTime += 0.22;
+        data.planckTime = data.macroTime / 5.39e-44 / 1e43;
+        data.quantumTime = data.macroTime / 1e-12 / 1000;
+        data.geoTime = data.macroTime / 3.154e7;
+
+        if (data.infAuto) {
+          const t = now / 1000;
+          data.infBase = 0.1 + (Math.sin(t * 0.3) * 0.5 + 0.5) * 2.9;
+          data.infExp = 0.1 + (Math.sin(t * 0.4 + 1) * 0.5 + 0.5) * 2.9;
+        }
+        updateAll();
+      }
+
+      // ============================================================
+      //  LAYOUT SAVE / LOAD / RESET
+      // ============================================================
+      function saveLayout() {
+        try {
+          localStorage.setItem('tersanesi_widgets_66', JSON.stringify(data.widgets));
+        } catch (e) {}
+      }
+
+      function loadLayout() {
+        try {
+          const saved = localStorage.getItem('tersanesi_widgets_66');
+          if (saved) {
+            const parsed = JSON.parse(saved);
+            if (Array.isArray(parsed) && parsed.length === 66) {
+              data.widgets = parsed;
+              return true;
+            }
+          }
+        } catch (e) {}
+        return false;
+      }
+
+      function resetLayout() {
+        if (confirm('Reset to default 6×11 layout?')) {
+          data.widgets = getDefaultLayout();
+          renderWidgets();
+        }
+      }
+
+      function exportLayout() {
+        const json = JSON.stringify(data.widgets, null, 2);
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'tersanesi_66_widgets.json';
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+
+      function importLayout() {
+        document.getElementById('importFileInput').click();
+      }
+
+      // ============================================================
+      //  WIDGET LIBRARY
+      // ============================================================
+      function updateLibrary() {
+        const container = document.getElementById('widgetLibrary');
+        if (!container) return;
+        const label = container.querySelector('span');
+        container.innerHTML = '';
+        container.appendChild(label);
+
+        Object.entries(WIDGET_TYPES).forEach(([type, def]) => {
+          const btn = document.createElement('button');
+          btn.className = 'lib-btn';
+          if (data.widgets.includes(type)) btn.classList.add('active');
+          btn.textContent = `${def.icon} ${def.label}`;
+          btn.addEventListener('click', () => addWidget(type));
+          container.appendChild(btn);
+        });
+      }
+
+      // ============================================================
+      //  INIT
+      // ============================================================
+      function init() {
+        try {
+          console.log('🚀 HYPERPANEL 6×11 — загрузка...');
+          
+          if (!loadLayout()) {
+            data.widgets = getDefaultLayout();
+          }
+
+          renderWidgets();
+
+          document.getElementById('resetLayoutBtn')?.addEventListener('click', resetLayout);
+          document.getElementById('exportLayoutBtn')?.addEventListener('click', exportLayout);
+          document.getElementById('importLayoutBtn')?.addEventListener('click', importLayout);
+          document.getElementById('importFileInput')?.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+              try {
+                const parsed = JSON.parse(ev.target.result);
+                if (Array.isArray(parsed) && parsed.length === 66) {
+                  data.widgets = parsed;
+                  renderWidgets();
+                } else {
+                  alert('Файл должен содержать ровно 66 виджетов');
+                }
+              } catch (err) {
+                alert('Invalid file');
+              }
+            };
+            reader.readAsText(file);
+            e.target.value = '';
+          });
+
+          document.getElementById('modalCloseBtn')?.addEventListener('click', closeFullscreen);
+          document.getElementById('fullscreenModal')?.addEventListener('click', (e) => {
+            if (e.target === document.getElementById('fullscreenModal')) closeFullscreen();
+          });
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeFullscreen();
+          });
+
+          document.getElementById('themeToggle')?.addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
+            const btn = document.getElementById('themeToggle');
+            if (btn) {
+              btn.textContent = document.body.classList.contains('light-theme') ? '🌞 THEME' : '🌙 THEME';
+            }
+          });
+
+          updateAll();
+          setInterval(simulateData, 220);
+
+          let resizeTimeout;
+          window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+              initCanvases();
+              drawAllCanvases();
+            }, 200);
+          });
+
+          console.log('🧩 HYPERPANEL 6×11 — 66 виджетов с Drag & Drop');
+          console.log(`📦 ${data.widgets.length} widgets loaded`);
+          console.log('🔄 Перетаскивайте виджеты для изменения порядка');
+          console.log('🔗 Кнопка TERSANESI ведёт на https://tersanesi.vercel.app');
+        } catch (error) {
+          console.error('Initialization error:', error);
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', init);
+    })();
+  </script>
+
+</body>
+</html>
