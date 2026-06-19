@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>TERSANESI ∞ Memory Architecture | Agent Control Panel</title>
+    <meta name="description" content="TERSANESI Memory Architecture — four-level hierarchical memory system for AI agents with MMO-scale support.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #ffd966;
+            --primary-glow: rgba(255, 217, 0, 0.4);
+            --secondary: #00c8ff;
+            --secondary-glow: rgba(0, 200, 255, 0.3);
+            --dark-bg: #05050f;
+            --light-text: #f0f0f0;
+            --card-bg: rgba(8, 12, 25, 0.65);
+            --border-neon: rgba(0, 200, 255, 0.4);
+            --code-bg: rgba(0, 10, 30, 0.8);
+            --l1-color: #44ff88;
+            --l2-color: #66ccff;
+            --l3-color: #ffdd44;
+            --l4-color: #ff8866;
+        }
+        body {
+            background-color: #000000;
+            color: var(--light-text);
+            font-family: 'Segoe UI', 'Orbitron', 'Courier New', 'Noto Sans CJK SC', 'Microsoft YaHei', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        .quad-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+        .quadrant {
+            position: relative;
+            overflow: hidden;
+            background: #000000;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            box-shadow: inset 0 0 30px rgba(0, 180, 255, 0.1);
+        }
+        .divider-vertical {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,255,255,0), cyan, rgba(0,255,255,0));
+            z-index: 30;
+            pointer-events: none;
+            transform: translateX(-50%);
+            box-shadow: 0 0 12px cyan;
+        }
+        .divider-horizontal {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, rgba(0,255,255,0), cyan, rgba(0,255,255,0));
+            z-index: 30;
+            pointer-events: none;
+            transform: translateY(-50%);
+            box-shadow: 0 0 12px cyan;
+        }
+        .q1 { background: radial-gradient(ellipse at 30% 40%, #0a0f1f 0%, #010101 100%); }
+        .hyper-grid-q1 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(0,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,255,0.05) 1px, transparent 1px);
+            background-size: 45px 45px;
+            animation: driftGrid 35s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes driftGrid { 0% { transform: translate(0,0); } 100% { transform: translate(45px,45px); } }
+        .theta-core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle at 30% 30%, rgba(0,150,255,0.3), rgba(0,10,40,0.9));
+            border-radius: 50%;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0,255,255,0.8);
+            box-shadow: 0 0 45px cyan;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulseGlow 2.5s infinite alternate;
+            z-index: 10;
+        }
+        .theta-symbol { font-size: 4.5rem; font-weight: bold; background: linear-gradient(135deg,#ffffff,#00ccff,#0088ff); -webkit-background-clip: text; background-clip: text; color: transparent; animation: thetaPulse 1.8s infinite alternate; }
+        @keyframes pulseGlow { 0% { box-shadow:0 0 15px rgba(0,200,255,0.4); transform:translate(-50%,-50%) scale(0.96); } 100% { box-shadow:0 0 55px cyan; transform:translate(-50%,-50%) scale(1.05); } }
+        @keyframes thetaPulse { 0% { opacity:0.7; } 100% { opacity:1; text-shadow:0 0 35px cyan; } }
+        .particle-canvas-q1 { position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:5; }
+        .label-q { position: absolute; bottom:12px; left:12px; color:rgba(0,255,255,0.6); font-size:10px; font-family:monospace; background:rgba(0,0,0,0.5); padding:3px 10px; border-radius:16px; backdrop-filter:blur(4px); z-index:20; }
+        .q2 { background: #010418; }
+        .q3 { background: radial-gradient(circle at 20% 30%, #0a0e2a, #020005); }
+        .nebula-swirl { position:absolute; width:100%; height:100%; background:radial-gradient(ellipse at 40% 50%, rgba(255,80,120,0.15), transparent 70%), radial-gradient(ellipse at 80% 20%, rgba(80,150,255,0.2), transparent 60%); filter:blur(35px); animation:nebulaDrift 18s infinite alternate; pointer-events:none; }
+        @keyframes nebulaDrift { 0% { transform:scale(1); opacity:0.6; } 100% { transform:scale(1.2) translate(3%,2%); opacity:1; } }
+        .warp-particles { position:absolute; width:100%; height:100%; background:repeating-linear-gradient(90deg, rgba(0,255,200,0.08) 0px, rgba(0,255,200,0.08) 2px, transparent 2px, transparent 8px); animation:slideWarp 0.8s linear infinite; pointer-events:none; }
+        @keyframes slideWarp { 0% { background-position:0 0; } 100% { background-position:20px 0; } }
+        .ring-planet { position:absolute; top:55%; left:50%; width:130px; height:130px; transform:translate(-50%,-50%); border-radius:50%; background:radial-gradient(circle,#88aaff,#2a3f6e); box-shadow:0 0 40px rgba(100,160,255,0.6); animation:floatPlanet 9s infinite ease-in-out; }
+        .ring { position:absolute; top:50%; left:50%; width:190px; height:45px; border:2px solid rgba(0,200,255,0.7); border-radius:50%; transform:translate(-50%,-50%) rotateX(70deg); background:radial-gradient(ellipse, rgba(0,255,200,0.2), transparent); box-shadow:0 0 18px cyan; animation:spinRing 10s linear infinite; }
+        @keyframes spinRing { from { transform:translate(-50%,-50%) rotateX(70deg) rotateZ(0deg); } to { transform:translate(-50%,-50%) rotateX(70deg) rotateZ(360deg); } }
+        @keyframes floatPlanet { 0% { transform:translate(-50%,-50%) translateY(0px); } 100% { transform:translate(-50%,-50%) translateY(-15px); } }
+        .q4 { background: #03030f; }
+        .data-stream { position:absolute; width:100%; height:100%; background:linear-gradient(0deg, rgba(0,255,200,0.03) 1px, transparent 1px); background-size:100% 4px; animation:scrollData 2s linear infinite; pointer-events:none; }
+        @keyframes scrollData { 0% { background-position:0 0; } 100% { background-position:0 20px; } }
+        .glitch-matrix { position:absolute; width:100%; height:100%; background:repeating-linear-gradient(0deg, rgba(0,255,200,0.1) 0px, rgba(0,255,200,0.1) 1px, transparent 1px, transparent 6px); mix-blend-mode:overlay; animation:flicker 0.15s infinite alternate; }
+        @keyframes flicker { 0% { opacity:0.3; } 100% { opacity:0.8; } }
+        .cyber-lattice { position:absolute; bottom:15%; right:10%; width:180px; height:180px; border:1px solid rgba(0,255,200,0.4); border-radius:30% 70% 70% 30% / 30% 30% 70% 70%; filter:blur(4px); animation:morphShape 12s infinite alternate; background:radial-gradient(circle, rgba(0,255,200,0.1), transparent); }
+        @keyframes morphShape { 0% { border-radius:30% 70% 70% 30% / 30% 30% 70% 70%; transform:rotate(0deg); } 100% { border-radius:70% 30% 30% 70% / 60% 40% 60% 40%; transform:rotate(15deg); } }
+        .quantum-text { position:absolute; top:20%; left:10%; font-size:0.8rem; color:#0cf; font-family:monospace; white-space:pre; opacity:0.7; animation:textFlicker 3s infinite; }
+        @keyframes textFlicker { 0%,100% { opacity:0.5; } 50% { opacity:1; text-shadow:0 0 10px cyan; } }
+        .content-overlay { position: relative; z-index: 100; }
+        .fusion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 5%;
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,215,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 101;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+        .brand {
+            font-size: 1.6rem;
+            font-weight: 800;
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(135deg,#FFE6A3,#FFC857,#ffd966);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 0.2rem;
+            white-space: nowrap;
+        }
+        .brand span { color: var(--secondary); background: none; }
+        .btn-classic {
+            color: var(--primary);
+            font-size: 0.65rem;
+            text-decoration: none;
+            padding: 0.3rem 0.9rem;
+            border: 1px solid rgba(255,215,0,0.2);
+            border-radius: 30px;
+            transition: 0.25s;
+            background: rgba(255,215,0,0.04);
+            font-family: 'Segoe UI', sans-serif;
+            letter-spacing: 0.3px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            white-space: nowrap;
+        }
+        .btn-classic:hover {
+            background: rgba(255,215,0,0.12);
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(255,215,0,0.08);
+        }
+        .btn-classic .arrow { transition: transform 0.2s; }
+        .btn-classic:hover .arrow { transform: translateX(-3px); }
+
+        .lang-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.15rem;
+            background: rgba(255,255,255,0.03);
+            padding: 0.15rem 0.4rem;
+            border-radius: 40px;
+            border: 1px solid rgba(255,255,255,0.04);
+            flex-wrap: wrap;
+        }
+        .lang-bar a {
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: #7788aa;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            font-family: 'Segoe UI', sans-serif;
+            white-space: nowrap;
+            border: 1px solid transparent;
+        }
+        .lang-bar a .flag { font-size: 0.9rem; line-height: 1; }
+        .lang-bar a .lang-label { 
+            font-size: 0.55rem; 
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+        .lang-bar a:hover {
+            color: #ffffff;
+            background: rgba(255,255,255,0.04);
+        }
+        .lang-bar a:hover .lang-label { opacity: 1; }
+        .lang-bar a.active {
+            color: var(--primary);
+            background: rgba(255,215,0,0.08);
+            border-color: rgba(255,215,0,0.12);
+            box-shadow: 0 0 12px rgba(255,215,0,0.04);
+        }
+        .lang-bar a.active .lang-label { opacity: 1; }
+
+        .hero-fusion { min-height: 40vh; display: flex; flex-direction: column; justify-content: center; padding: 2rem 6% 2rem; position: relative; }
+        .hero-inner { max-width: 70%; background: rgba(0,0,0,0.5); backdrop-filter: blur(12px); border-radius: 32px; padding: 1.5rem 2.5rem; border-left: 5px solid var(--primary); border-right: 1px solid rgba(255,255,255,0.1); animation: slideUpFade 0.9s ease-out; }
+        @keyframes slideUpFade { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); } }
+        .hero-title { font-size: 2.2rem; font-weight: 800; background: linear-gradient(120deg,#FFE6A3,#FFC857); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .hero-tag { color: var(--secondary); font-size: 1rem; letter-spacing: 2px; margin: 0.3rem 0 0.6rem; text-transform: uppercase; }
+        .hero-desc { color: #ccc; margin: 0.5rem 0 1rem; font-size: 0.9rem; border-left: 2px solid gold; padding-left: 1rem; }
+        .section-dark { padding: 3rem 6%; background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,215,0,0.2); border-bottom: 1px solid rgba(0,200,255,0.15); }
+        .section-title { text-align: center; font-size: 1.6rem; color: var(--primary); letter-spacing: 2px; margin-bottom: 1.5rem; }
+
+        /* ===== AGENT CONTROL PANEL ===== */
+        .agent-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+        @media (max-width:1000px) { .agent-panel { grid-template-columns: 1fr; } }
+
+        .panel-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-neon);
+            border-radius: 24px;
+            padding: 1.2rem 1.5rem;
+            transition: all 0.3s;
+        }
+        .panel-card:hover { border-color: var(--primary); box-shadow: 0 0 30px rgba(255,215,0,0.05); }
+        .panel-card h3 { color: var(--primary); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
+
+        /* Memory Levels */
+        .memory-levels {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+        .level-item {
+            background: rgba(0,0,0,0.4);
+            border-radius: 16px;
+            padding: 0.8rem 1rem;
+            border-left: 3px solid var(--secondary);
+            transition: all 0.3s;
+        }
+        .level-item:hover { background: rgba(0,0,0,0.6); }
+        .level-item .level-label { font-size: 0.6rem; text-transform: uppercase; color: #7788aa; letter-spacing: 0.5px; }
+        .level-item .level-value { font-size: 1.1rem; font-weight: 700; font-family: 'Orbitron', monospace; }
+        .level-item .level-bar { height: 4px; background: rgba(255,255,255,0.05); border-radius: 4px; margin-top: 4px; overflow: hidden; }
+        .level-item .level-bar .fill { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
+        .level-item.L1 .level-value { color: var(--l1-color); }
+        .level-item.L1 .fill { background: var(--l1-color); }
+        .level-item.L2 .level-value { color: var(--l2-color); }
+        .level-item.L2 .fill { background: var(--l2-color); }
+        .level-item.L3 .level-value { color: var(--l3-color); }
+        .level-item.L3 .fill { background: var(--l3-color); }
+        .level-item.L4 .level-value { color: var(--l4-color); }
+        .level-item.L4 .fill { background: var(--l4-color); }
+
+        /* Events List */
+        .event-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .event-list::-webkit-scrollbar { width: 4px; }
+        .event-list::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+        .event-list::-webkit-scrollbar-thumb { background: var(--secondary); border-radius: 4px; }
+        .event-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.4rem 0.6rem;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            font-size: 0.75rem;
+            transition: all 0.2s;
+        }
+        .event-item:hover { background: rgba(255,255,255,0.02); }
+        .event-item .event-time { color: #445566; font-size: 0.6rem; min-width: 60px; }
+        .event-item .event-type { 
+            padding: 0.1rem 0.5rem; 
+            border-radius: 12px; 
+            font-size: 0.55rem; 
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .event-type.high { background: rgba(68,255,136,0.15); color: #44ff88; }
+        .event-type.medium { background: rgba(255,221,68,0.15); color: #ffdd44; }
+        .event-type.low { background: rgba(255,136,102,0.15); color: #ff8866; }
+        .event-item .event-content { flex: 1; color: #bbbbdd; }
+        .event-item .event-gravitas-badge { 
+            font-size: 0.55rem; 
+            font-family: monospace;
+            padding: 0.1rem 0.4rem;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.3);
+            min-width: 40px;
+            text-align: center;
+        }
+        .event-gravitas-badge.high { color: #44ff88; border: 1px solid rgba(68,255,136,0.2); }
+        .event-gravitas-badge.medium { color: #ffdd44; border: 1px solid rgba(255,221,68,0.2); }
+        .event-gravitas-badge.low { color: #ff8866; border: 1px solid rgba(255,136,102,0.2); }
+
+        /* System Status */
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.8rem;
+        }
+        .status-item {
+            text-align: center;
+            background: rgba(0,0,0,0.3);
+            border-radius: 16px;
+            padding: 0.8rem;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+        .status-item .stat-number {
+            font-size: 1.4rem;
+            font-weight: 700;
+            font-family: 'Orbitron', monospace;
+            color: var(--secondary);
+        }
+        .status-item .stat-label {
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            color: #7788aa;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+        .status-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 4px;
+            animation: pulseDot 1.5s infinite;
+        }
+        .status-dot.online { background: #44ff88; box-shadow: 0 0 8px rgba(68,255,136,0.3); }
+        .status-dot.degraded { background: #ffdd44; box-shadow: 0 0 8px rgba(255,221,68,0.3); }
+        .status-dot.offline { background: #ff4444; box-shadow: 0 0 8px rgba(255,68,68,0.3); }
+        @keyframes pulseDot { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+
+        /* Controls */
+        .control-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 0.8rem;
+        }
+        .btn-control {
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            border: 1px solid var(--border-neon);
+            background: transparent;
+            color: var(--light-text);
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .btn-control:hover {
+            background: rgba(0,200,255,0.1);
+            border-color: var(--secondary);
+            box-shadow: 0 0 20px rgba(0,200,255,0.05);
+        }
+        .btn-control.primary {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        .btn-control.primary:hover {
+            background: rgba(255,215,0,0.1);
+            border-color: var(--primary);
+        }
+        .btn-control.danger {
+            border-color: #ff4444;
+            color: #ff4444;
+        }
+        .btn-control.danger:hover {
+            background: rgba(255,68,68,0.1);
+            border-color: #ff4444;
+        }
+        .btn-control.success {
+            border-color: #44ff88;
+            color: #44ff88;
+        }
+        .btn-control.success:hover {
+            background: rgba(68,255,136,0.1);
+            border-color: #44ff88;
+        }
+
+        /* Agent Selector */
+        .agent-selector {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.8rem;
+        }
+        .agent-selector .agent-btn {
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            background: rgba(0,0,0,0.3);
+            color: #7788aa;
+            font-size: 0.65rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Courier New', monospace;
+        }
+        .agent-selector .agent-btn:hover {
+            border-color: var(--secondary);
+            color: #fff;
+        }
+        .agent-selector .agent-btn.active {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(255,215,0,0.05);
+        }
+
+        /* Gravitas Widget */
+        .gravitas-widget {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.5rem 0;
+        }
+        .gravitas-ring {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            font-family: 'Orbitron', monospace;
+            position: relative;
+            flex-shrink: 0;
+        }
+        .gravitas-ring .ring-bg {
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: var(--secondary);
+            animation: spinRing 3s linear infinite;
+        }
+        .gravitas-ring .ring-bg.two { animation-delay: -1s; border-top-color: var(--primary); }
+        .gravitas-ring .ring-bg.three { animation-delay: -2s; border-top-color: #44ff88; }
+        @keyframes spinRing { to { transform: rotate(360deg); } }
+        .gravitas-stats { font-size: 0.7rem; color: #7788aa; }
+        .gravitas-stats .highlight { color: var(--secondary); }
+
+        /* Snapshot List */
+        .snapshot-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            max-height: 120px;
+            overflow-y: auto;
+        }
+        .snapshot-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.65rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            border-left: 2px solid var(--secondary);
+        }
+        .snapshot-item .snap-time { color: #7788aa; font-family: monospace; }
+        .snapshot-item .snap-size { color: #445566; }
+
+        /* Metrics Chart Placeholder */
+        .chart-placeholder {
+            height: 100px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #445566;
+            font-size: 0.7rem;
+            border: 1px solid rgba(255,255,255,0.02);
+            position: relative;
+            overflow: hidden;
+        }
+        .chart-placeholder .chart-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            height: 80%;
+            width: 90%;
+        }
+        .chart-placeholder .chart-bar {
+            flex: 1;
+            min-height: 10px;
+            background: linear-gradient(to top, var(--secondary), rgba(0,200,255,0.1));
+            border-radius: 2px 2px 0 0;
+            transition: height 0.5s ease;
+            animation: chartPulse 2s ease-in-out infinite alternate;
+        }
+        @keyframes chartPulse {
+            0% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--primary);
+            border-radius: 16px;
+            padding: 1rem 1.5rem;
+            color: #fff;
+            font-size: 0.8rem;
+            z-index: 999;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s ease;
+            max-width: 400px;
+        }
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .notification .notif-title { color: var(--primary); font-weight: 600; }
+        .notification .notif-close {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            background: none;
+            border: none;
+            color: #445566;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .cta-cosmic { background: linear-gradient(145deg,#03030e,#000000); padding: 2rem 5%; text-align: center; border-top: 1px solid rgba(255,215,0,0.3); }
+        footer { padding: 2rem; text-align: center; font-size: 0.7rem; color: #888; }
+        footer .classic-link { color: var(--primary); text-decoration: none; opacity: 0.6; transition: 0.2s; }
+        footer .classic-link:hover { opacity: 1; }
+
+        @media (max-width:820px) {
+            .fusion-header { flex-direction: column; align-items: stretch; gap: 0.5rem; padding: 0.6rem 4%; }
+            .header-left { justify-content: space-between; }
+            .lang-bar { justify-content: center; gap: 0.05rem; padding: 0.1rem 0.3rem; }
+            .lang-bar a { padding: 0.15rem 0.35rem; font-size: 0.5rem; }
+            .lang-bar a .flag { font-size: 0.7rem; }
+            .lang-bar a .lang-label { font-size: 0.45rem; }
+            .brand { font-size: 1.3rem; }
+            .btn-classic { font-size: 0.55rem; padding: 0.2rem 0.7rem; }
+            .hero-inner { max-width: 95%; padding: 1rem; }
+            .hero-title { font-size: 1.5rem; }
+            .memory-levels { grid-template-columns: 1fr 1fr; }
+            .agent-panel { grid-template-columns: 1fr; }
+        }
+        @media (max-width:480px) {
+            .lang-bar a .lang-label { display: none; }
+            .brand { font-size: 1rem; letter-spacing: 0.1rem; }
+            .memory-levels { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="quad-grid">
+    <div class="quadrant q1"><div class="hyper-grid-q1"></div><canvas id="particleCanvasQ1" class="particle-canvas-q1"></canvas><div class="theta-core"><div class="theta-symbol">θ</div></div><div class="label-q">◬ TERSANESI · MEMORY ARCHITECTURE</div></div>
+    <div class="quadrant q2" id="three-container-q2"><div class="label-q">⛭ ORBITAL REEF · 3D HABITAT</div></div>
+    <div class="quadrant q3"><div class="nebula-swirl"></div><div class="warp-particles"></div><div class="ring-planet"><div class="ring"></div></div><div class="label-q">🌀 NEBULA WARP · PROTEAN RIFT</div></div>
+    <div class="quadrant q4"><div class="data-stream"></div><div class="glitch-matrix"></div><div class="cyber-lattice"></div><div class="quantum-text">&gt; AETHER:// QUANTUM_FLOW<br>&gt; NODE_θ ACTIVE<br>&gt; REALITY_FRAGMENT 0x7F</div><div class="label-q">⎔ DIGITAL AETHER · CHAOS ENGINE</div></div>
+    <div class="divider-vertical"></div><div class="divider-horizontal"></div>
+</div>
+
+<div class="content-overlay">
+    <header class="fusion-header">
+        <div class="header-left">
+            <div class="brand">T.E.R.S.A.<span>N</span>.E.S.I. ⬩ MEMORY CORE</div>
+            <a href="index.html" class="btn-classic">
+                <span class="arrow">←</span> CLASSIC
+            </a>
+        </div>
+        <div class="lang-bar" id="langBar"></div>
+    </header>
+
+    <section class="hero-fusion">
+        <div class="hero-inner">
+            <h1 class="hero-title" data-key="hero_title">TERSANESI<br>Memory Architecture · Agent Control</h1>
+            <div class="hero-tag" data-key="hero_tag">✦ FOUR-LEVEL HIERARCHICAL MEMORY · MMO-SCALE ✦</div>
+            <p class="hero-desc" data-key="hero_desc">Interactive control panel for AI agent memory management. Monitor Working, Episodic, Semantic, and Procedural memory in real-time.</p>
+        </div>
+    </section>
+
+    <!-- ===== AGENT CONTROL PANEL ===== -->
+    <section class="section-dark">
+        <h2 class="section-title">🧠 Agent Memory Control Panel</h2>
+        
+        <div class="agent-panel">
+            <!-- Left: Agent Selection + Memory Levels -->
+            <div class="panel-card">
+                <h3>🎯 Agent</h3>
+                <div class="agent-selector" id="agentSelector">
+                    <button class="agent-btn active" data-agent="agent_0x7F3">agent_0x7F3</button>
+                    <button class="agent-btn" data-agent="agent_0xA1B">agent_0xA1B</button>
+                    <button class="agent-btn" data-agent="agent_0xC9D">agent_0xC9D</button>
+                    <button class="agent-btn" data-agent="agent_0xE4F">agent_0xE4F</button>
+                </div>
+                <div style="margin-bottom:0.8rem; font-size:0.7rem; color:#445566;">
+                    <span id="agentStatus">🟢 Active</span> · 
+                    <span id="agentUptime">Uptime: 47h 23m</span>
+                </div>
+                
+                <h3 style="margin-top:0.5rem;">📊 Memory Levels</h3>
+                <div class="memory-levels">
+                    <div class="level-item L1">
+                        <div class="level-label">L1 · Working Memory</div>
+                        <div class="level-value" id="l1Value">12</div>
+                        <div class="level-bar"><div class="fill" id="l1Fill" style="width:60%"></div></div>
+                    </div>
+                    <div class="level-item L2">
+                        <div class="level-label">L2 · Episodic Memory</div>
+                        <div class="level-value" id="l2Value">847</div>
+                        <div class="level-bar"><div class="fill" id="l2Fill" style="width:42%"></div></div>
+                    </div>
+                    <div class="level-item L3">
+                        <div class="level-label">L3 · Semantic Memory</div>
+                        <div class="level-value" id="l3Value">1,243</div>
+                        <div class="level-bar"><div class="fill" id="l3Fill" style="width:78%"></div></div>
+                    </div>
+                    <div class="level-item L4">
+                        <div class="level-label">L4 · Procedural Memory</div>
+                        <div class="level-value" id="l4Value">23</div>
+                        <div class="level-bar"><div class="fill" id="l4Fill" style="width:35%"></div></div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <button class="btn-control primary" onclick="runConsolidation()">🔄 Consolidate</button>
+                    <button class="btn-control success" onclick="createSnapshot()">💾 Snapshot</button>
+                    <button class="btn-control" onclick="runForgetting()">🧹 Forget</button>
+                    <button class="btn-control danger" onclick="clearWorkingMemory()">✖ Clear L1</button>
+                </div>
+            </div>
+
+            <!-- Right: Recent Events + Gravitas -->
+            <div class="panel-card">
+                <h3>📡 Recent Events & Gravitas</h3>
+                <div class="gravitas-widget">
+                    <div class="gravitas-ring" id="gravitasRing">
+                        <span id="gravitasValue">0.72</span>
+                        <div class="ring-bg"></div>
+                        <div class="ring-bg two"></div>
+                        <div class="ring-bg three"></div>
+                    </div>
+                    <div class="gravitas-stats">
+                        <div>Average Gravitas: <span class="highlight" id="avgGravitas">0.72</span></div>
+                        <div>High impact events: <span class="highlight" id="highImpactCount">4</span></div>
+                        <div>Consolidation ready: <span class="highlight" id="consolidationReady">✓</span></div>
+                    </div>
+                </div>
+                <div class="event-list" id="eventList">
+                    <!-- Rendered by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SYSTEM STATUS ===== -->
+    <section style="padding:2rem 6%; background:rgba(0,0,0,0.3);">
+        <h2 class="section-title">📊 System Status & Metrics</h2>
+        <div class="status-grid" id="statusGrid">
+            <div class="status-item"><div class="stat-number" id="totalAgents">2,847</div><div class="stat-label">Active Agents</div></div>
+            <div class="status-item"><div class="stat-number" id="eventsPerSec">1.4M</div><div class="stat-label">Events/sec</div></div>
+            <div class="status-item"><div class="stat-number" id="avgLatency">12ms</div><div class="stat-label">Avg Latency</div></div>
+            <div class="status-item"><div class="stat-number" id="uptime">99.97%</div><div class="stat-label">Uptime</div></div>
+            <div class="status-item"><div class="stat-number" id="memoryUsage">3.2GB</div><div class="stat-label">Memory Usage</div></div>
+            <div class="status-item"><div class="stat-number" id="snapshotCount">14</div><div class="stat-label">Snapshots (30d)</div></div>
+        </div>
+        
+        <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1.5rem; margin-top:1.5rem;">
+            <span><span class="status-dot online"></span> API Gateway — <span id="statusGateway">Operational</span></span>
+            <span><span class="status-dot online"></span> Agent Runtime — <span id="statusAgent">Operational</span></span>
+            <span><span class="status-dot online"></span> Event Fabric — <span id="statusEvent">Operational</span></span>
+            <span><span class="status-dot online"></span> Consolidation — <span id="statusConsolidation">Running</span></span>
+        </div>
+
+        <div style="margin-top:1.5rem;">
+            <h4 style="color:#7788aa; font-size:0.7rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:0.5rem;">📈 Event Throughput (last 60s)</h4>
+            <div class="chart-placeholder">
+                <div class="chart-bars" id="chartBars">
+                    <!-- Rendered by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SNAPSHOTS ===== -->
+    <section class="section-dark">
+        <h2 class="section-title">💾 Snapshot History</h2>
+        <div class="panel-card" style="max-width:600px; margin:0 auto;">
+            <div class="snapshot-list" id="snapshotList">
+                <!-- Rendered by JS -->
+            </div>
+            <div class="control-group" style="margin-top:0.8rem;">
+                <button class="btn-control primary" onclick="createSnapshot()">📸 Create New Snapshot</button>
+                <button class="btn-control" onclick="restoreLatest()">↩️ Restore Latest</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MEMORY ARCHITECTURE VISUALIZATION ===== -->
+    <section style="padding:2rem 6%; background:rgba(0,0,0,0.2);">
+        <h2 class="section-title">🏛️ Memory Architecture Overview</h2>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; max-width:800px; margin:0 auto;">
+            <div style="background:rgba(0,0,0,0.5); border-radius:16px; padding:1rem; text-align:center; border:1px solid var(--l1-color);">
+                <div style="font-size:2rem; color:var(--l1-color);">⚡</div>
+                <h4 style="color:var(--l1-color);">L1 Working</h4>
+                <p style="font-size:0.7rem; color:#7788aa;">20-30 events · <1ms</p>
+            </div>
+            <div style="background:rgba(0,0,0,0.5); border-radius:16px; padding:1rem; text-align:center; border:1px solid var(--l2-color);">
+                <div style="font-size:2rem; color:var(--l2-color);">📖</div>
+                <h4 style="color:var(--l2-color);">L2 Episodic</h4>
+                <p style="font-size:0.7rem; color:#7788aa;">Event sourcing · Gravitas</p>
+            </div>
+            <div style="background:rgba(0,0,0,0.5); border-radius:16px; padding:1rem; text-align:center; border:1px solid var(--l3-color);">
+                <div style="font-size:2rem; color:var(--l3-color);">🧠</div>
+                <h4 style="color:var(--l3-color);">L3 Semantic</h4>
+                <p style="font-size:0.7rem; color:#7788aa;">Vector + Graph · Hebbian</p>
+            </div>
+            <div style="background:rgba(0,0,0,0.5); border-radius:16px; padding:1rem; text-align:center; border:1px solid var(--l4-color);">
+                <div style="font-size:2rem; color:var(--l4-color);">⚙️</div>
+                <h4 style="color:var(--l4-color);">L4 Procedural</h4>
+                <p style="font-size:0.7rem; color:#7788aa;">Policies · Skills · RL</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta-cosmic">
+        <h2 class="section-title" style="margin-bottom:0.5rem;">⟡ Deploy Memory Architecture ⟡</h2>
+        <p>Four-level hierarchical memory for AI agents · MMO-scale · Event-driven</p>
+        <button class="btn-fusion" onclick="showNotification('🚀 Memory Architecture deployed successfully!', 'success')" style="margin-top:1rem;">
+            ⚡ Deploy Runtime
+        </button>
+    </section>
+
+    <footer>
+        <p>© 2026 T.E.R.S.A.N.E.S.I. — Memory Architecture v1.0 | Agent Control Panel</p>
+        <p>L1 Working · L2 Episodic · L3 Semantic · L4 Procedural &nbsp; • Event Gravitas • Consolidation • Hebbian Plasticity</p>
+        <div style="margin-top:0.6rem;">
+            <a href="#" style="color:#aaa; margin:0 0.5rem;">Architecture Docs</a>
+            <a href="#" style="color:#aaa; margin:0 0.5rem;">API Reference</a>
+            <a href="#" style="color:#aaa; margin:0 0.5rem;">GitHub</a>
+            <a href="index.html" class="classic-link" style="margin:0 0.5rem;">← Classic Version</a>
+        </div>
+    </footer>
+</div>
+
+<!-- Notification -->
+<div class="notification" id="notification">
+    <button class="notif-close" onclick="hideNotification()">×</button>
+    <div class="notif-title" id="notifTitle">Success</div>
+    <div id="notifMessage">Operation completed successfully.</div>
+</div>
+
+<script type="importmap">
+    { "imports": { "three": "https://unpkg.com/three@0.128.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.128.0/examples/jsm/" } }
+</script>
+
+<script>
+    // ===== NOTIFICATION SYSTEM =====
+    let notificationTimeout = null;
+    
+    function showNotification(message, type = 'info') {
+        const el = document.getElementById('notification');
+        const title = document.getElementById('notifTitle');
+        const msg = document.getElementById('notifMessage');
+        
+        const titles = { success: '✅ Success', info: '📡 Info', warning: '⚠️ Warning', error: '❌ Error' };
+        title.textContent = titles[type] || titles.info;
+        msg.textContent = message;
+        
+        el.className = 'notification show';
+        clearTimeout(notificationTimeout);
+        notificationTimeout = setTimeout(hideNotification, 4000);
+    }
+    
+    function hideNotification() {
+        document.getElementById('notification').className = 'notification';
+    }
+
+    // ===== AGENT STATE =====
+    let currentAgent = 'agent_0x7F3';
+    let eventCounter = 0;
+    
+    const agentData = {
+        'agent_0x7F3': {
+            l1: 12, l2: 847, l3: 1243, l4: 23,
+            l1Max: 30, l2Max: 2000, l3Max: 1600, l4Max: 50,
+            events: [
+                { time: '12:34:01', type: 'high', content: 'Discovered quantum flux anomaly', gravitas: 0.92 },
+                { time: '12:33:28', type: 'medium', content: 'Traded 42 energy crystals', gravitas: 0.67 },
+                { time: '12:32:15', type: 'high', content: 'Defeated void entity (difficulty: 7)', gravitas: 0.88 },
+                { time: '12:30:42', type: 'low', content: 'Scanned sector A7', gravitas: 0.23 },
+                { time: '12:28:10', type: 'medium', content: 'Faction reputation increased', gravitas: 0.54 },
+                { time: '12:25:33', type: 'high', content: 'Discovered ancient artifact', gravitas: 0.95 },
+                { time: '12:22:01', type: 'low', content: 'System diagnostics', gravitas: 0.12 },
+                { time: '12:18:44', type: 'medium', content: 'Joined alliance with Wellamatores', gravitas: 0.61 },
+            ],
+            avgGravitas: 0.72,
+            highImpactCount: 4
+        },
+        'agent_0xA1B': {
+            l1: 8, l2: 321, l3: 567, l4: 12,
+            l1Max: 30, l2Max: 2000, l3Max: 1600, l4Max: 50,
+            events: [
+                { time: '12:35:12', type: 'medium', content: 'Researched plasma technology', gravitas: 0.58 },
+                { time: '12:33:45', type: 'high', content: 'Discovered new star system', gravitas: 0.84 },
+                { time: '12:30:00', type: 'low', content: 'Routine maintenance', gravitas: 0.15 },
+            ],
+            avgGravitas: 0.52,
+            highImpactCount: 1
+        },
+        'agent_0xC9D': {
+            l1: 18, l2: 1234, l3: 1890, l4: 34,
+            l1Max: 30, l2Max: 2000, l3Max: 2000, l4Max: 50,
+            events: [
+                { time: '12:36:45', type: 'high', content: 'Completed faction quest chain', gravitas: 0.91 },
+                { time: '12:34:20', type: 'medium', content: 'Negotiated trade agreement', gravitas: 0.63 },
+                { time: '12:31:10', type: 'high', content: 'Defeated rogue AI', gravitas: 0.87 },
+            ],
+            avgGravitas: 0.68,
+            highImpactCount: 3
+        },
+        'agent_0xE4F': {
+            l1: 5, l2: 156, l3: 234, l4: 6,
+            l1Max: 30, l2Max: 2000, l3Max: 1600, l4Max: 50,
+            events: [
+                { time: '12:32:30', type: 'low', content: 'Initializing neural network', gravitas: 0.18 },
+                { time: '12:30:15', type: 'medium', content: 'Learning new skill: navigation', gravitas: 0.55 },
+            ],
+            avgGravitas: 0.36,
+            highImpactCount: 0
+        }
+    };
+
+    function getAgentData(agentId) {
+        if (!agentData[agentId]) {
+            agentData[agentId] = {
+                l1: 0, l2: 0, l3: 0, l4: 0,
+                l1Max: 30, l2Max: 2000, l3Max: 1600, l4Max: 50,
+                events: [],
+                avgGravitas: 0,
+                highImpactCount: 0
+            };
+        }
+        return agentData[agentId];
+    }
+
+    // ===== UPDATE UI =====
+    function updateAgentUI(agentId) {
+        const data = getAgentData(agentId);
+        
+        document.getElementById('l1Value').textContent = data.l1;
+        document.getElementById('l2Value').textContent = data.l2;
+        document.getElementById('l3Value').textContent = data.l3;
+        document.getElementById('l4Value').textContent = data.l4;
+        
+        document.getElementById('l1Fill').style.width = Math.min(100, (data.l1 / data.l1Max) * 100) + '%';
+        document.getElementById('l2Fill').style.width = Math.min(100, (data.l2 / data.l2Max) * 100) + '%';
+        document.getElementById('l3Fill').style.width = Math.min(100, (data.l3 / data.l3Max) * 100) + '%';
+        document.getElementById('l4Fill').style.width = Math.min(100, (data.l4 / data.l4Max) * 100) + '%';
+        
+        // Events
+        const eventList = document.getElementById('eventList');
+        eventList.innerHTML = data.events.slice(0, 8).map(e => `
+            <div class="event-item">
+                <span class="event-time">${e.time}</span>
+                <span class="event-type ${e.type}">${e.type}</span>
+                <span class="event-content">${e.content}</span>
+                <span class="event-gravitas-badge ${e.gravitas > 0.7 ? 'high' : e.gravitas > 0.4 ? 'medium' : 'low'}">
+                    ${(e.gravitas * 100).toFixed(0)}%
+                </span>
+            </div>
+        `).join('');
+        
+        // Gravitas
+        document.getElementById('gravitasValue').textContent = data.avgGravitas.toFixed(2);
+        document.getElementById('avgGravitas').textContent = data.avgGravitas.toFixed(2);
+        document.getElementById('highImpactCount').textContent = data.highImpactCount;
+        
+        // Agent status
+        document.getElementById('agentStatus').innerHTML = '🟢 Active';
+        document.getElementById('agentUptime').textContent = `Uptime: ${Math.floor(Math.random() * 48 + 24)}h ${Math.floor(Math.random() * 60)}m`;
+    }
+
+    // ===== AGENT SELECTOR =====
+    document.querySelectorAll('.agent-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.agent-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentAgent = this.dataset.agent;
+            updateAgentUI(currentAgent);
+            showNotification(`Switched to ${currentAgent}`, 'info');
+        });
+    });
+
+    // ===== CONTROLS =====
+    function runConsolidation() {
+        const data = getAgentData(currentAgent);
+        const consolidated = Math.floor(Math.random() * 10) + 3;
+        data.l2 = Math.max(0, data.l2 - consolidated);
+        data.l3 = data.l3 + Math.floor(consolidated * 0.5);
+        data.l1 = Math.max(0, data.l1 - 2);
+        
+        // Add consolidation event
+        data.events.unshift({
+            time: new Date().toLocaleTimeString(),
+            type: 'high',
+            content: `🔄 Consolidation: ${consolidated} events aggregated, ${Math.floor(consolidated * 0.4)} forgotten`,
+            gravitas: 0.78
+        });
+        
+        data.avgGravitas = Math.min(1, data.avgGravitas + 0.02);
+        updateAgentUI(currentAgent);
+        showNotification(`✅ Consolidation complete: ${consolidated} events processed`, 'success');
+    }
+
+    function createSnapshot() {
+        const data = getAgentData(currentAgent);
+        const snapshots = document.getElementById('snapshotList');
+        const now = new Date();
+        const timeStr = now.toLocaleString();
+        const size = (Math.random() * 40 + 10).toFixed(1);
+        
+        const item = document.createElement('div');
+        item.className = 'snapshot-item';
+        item.innerHTML = `
+            <span class="snap-time">📸 ${timeStr}</span>
+            <span class="snap-size">${size} KB · ${currentAgent}</span>
+        `;
+        snapshots.prepend(item);
+        
+        document.getElementById('snapshotCount').textContent = snapshots.children.length;
+        showNotification(`💾 Snapshot created for ${currentAgent} (${size} KB)`, 'success');
+    }
+
+    function runForgetting() {
+        const data = getAgentData(currentAgent);
+        const forgotten = Math.floor(Math.random() * 15) + 2;
+        data.l2 = Math.max(0, data.l2 - forgotten);
+        data.l3 = Math.max(0, data.l3 - Math.floor(forgotten * 0.3));
+        
+        data.events.unshift({
+            time: new Date().toLocaleTimeString(),
+            type: 'low',
+            content: `🧹 Forgetting applied: ${forgotten} events with gravitas < 0.15 removed`,
+            gravitas: 0.08
+        });
+        
+        data.avgGravitas = Math.max(0, data.avgGravitas - 0.02);
+        updateAgentUI(currentAgent);
+        showNotification(`🧹 Forgetting complete: ${forgotten} events forgotten`, 'warning');
+    }
+
+    function clearWorkingMemory() {
+        const data = getAgentData(currentAgent);
+        data.l1 = 0;
+        data.events.unshift({
+            time: new Date().toLocaleTimeString(),
+            type: 'medium',
+            content: '✖ Working memory cleared',
+            gravitas: 0.35
+        });
+        updateAgentUI(currentAgent);
+        showNotification('✖ Working memory cleared', 'warning');
+    }
+
+    function restoreLatest() {
+        showNotification('↩️ Restoring from latest snapshot...', 'info');
+        setTimeout(() => {
+            const data = getAgentData(currentAgent);
+            data.l1 = Math.floor(Math.random() * 10) + 5;
+            data.l2 = Math.floor(Math.random() * 300) + 500;
+            data.l3 = Math.floor(Math.random() * 400) + 800;
+            data.l4 = Math.floor(Math.random() * 10) + 10;
+            updateAgentUI(currentAgent);
+            showNotification('✅ Agent restored from latest snapshot', 'success');
+        }, 1000);
+    }
+
+    // ===== SIMULATE REAL-TIME EVENTS =====
+    function generateRandomEvent() {
+        const data = getAgentData(currentAgent);
+        const types = ['low', 'medium', 'high'];
+        const type = types[Math.floor(Math.random() * 3)];
+        const gravitas = type === 'high' ? 0.7 + Math.random() * 0.3 : type === 'medium' ? 0.4 + Math.random() * 0.3 : 0.05 + Math.random() * 0.3;
+        
+        const contents = [
+            'Scanned sector', 'Found resources', 'Updated strategy',
+            'Communicated with faction', 'Completed objective', 'Discovered anomaly',
+            'Traded goods', 'Improved skills', 'Detected threat',
+            'Explored new area', 'Alliance formed', 'Technology researched'
+        ];
+        const content = contents[Math.floor(Math.random() * contents.length)] + ' ' + Math.floor(Math.random() * 100);
+        
+        data.events.unshift({
+            time: new Date().toLocaleTimeString(),
+            type: type,
+            content: content,
+            gravitas: gravitas
+        });
+        
+        if (data.events.length > 20) data.events.pop();
+        
+        // Update memory levels based on event
+        if (type === 'high') {
+            data.l1 = Math.min(data.l1Max, data.l1 + 2);
+            data.l2 = Math.min(data.l2Max, data.l2 + 3);
+            data.highImpactCount++;
+        } else if (type === 'medium') {
+            data.l1 = Math.min(data.l1Max, data.l1 + 1);
+            data.l2 = Math.min(data.l2Max, data.l2 + 1);
+        } else {
+            data.l1 = Math.min(data.l1Max, data.l1 + 0.5);
+            data.l2 = Math.min(data.l2Max, data.l2 + 0.5);
+        }
+        
+        data.avgGravitas = data.avgGravitas * 0.98 + gravitas * 0.02;
+        
+        updateAgentUI(currentAgent);
+        updateChart();
+    }
+
+    // ===== CHART =====
+    function updateChart() {
+        const container = document.getElementById('chartBars');
+        const bars = container.querySelectorAll('.chart-bar');
+        const newHeights = Array.from({ length: bars.length }, () => Math.floor(Math.random() * 60) + 20);
+        bars.forEach((bar, i) => {
+            bar.style.height = newHeights[i] + '%';
+        });
+    }
+
+    function initChart() {
+        const container = document.getElementById('chartBars');
+        container.innerHTML = '';
+        for (let i = 0; i < 24; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'chart-bar';
+            bar.style.height = (Math.floor(Math.random() * 60) + 20) + '%';
+            bar.style.animationDelay = (i * 0.1) + 's';
+            container.appendChild(bar);
+        }
+    }
+
+    // ===== SYSTEM METRICS UPDATE =====
+    function updateMetrics() {
+        const agents = 2847 + Math.floor(Math.random() * 10 - 5);
+        const eps = 1.4 + Math.random() * 0.3;
+        const latency = 10 + Math.random() * 8;
+        const memory = 3.0 + Math.random() * 0.8;
+        
+        document.getElementById('totalAgents').textContent = agents.toLocaleString();
+        document.getElementById('eventsPerSec').textContent = eps.toFixed(2) + 'M';
+        document.getElementById('avgLatency').textContent = latency.toFixed(0) + 'ms';
+        document.getElementById('memoryUsage').textContent = memory.toFixed(1) + 'GB';
+    }
+
+    // ===== LANGUAGES =====
+    const LANGUAGES = [
+        { code: 'en', flag: '🇬🇧', label: 'EN', native: 'English' },
+        { code: 'ru', flag: '🇷🇺', label: 'RU', native: 'Русский' },
+        { code: 'tr', flag: '🇹🇷', label: 'TR', native: 'Türkçe' },
+        { code: 'ar', flag: '🇸🇦', label: 'AR', native: 'العربية' },
+        { code: 'es', flag: '🇪🇸', label: 'ES', native: 'Español' },
+        { code: 'de', flag: '🇩🇪', label: 'DE', native: 'Deutsch' },
+        { code: 'ja', flag: '🇯🇵', label: 'JA', native: '日本語' },
+        { code: 'zh', flag: '🇨🇳', label: '中文', native: '中文' },
+        { code: 'fr', flag: '🇫🇷', label: 'FR', native: 'Français' }
+    ];
+
+    const translations = {
+        en: {
+            hero_title: "TERSANESI<br>Memory Architecture · Agent Control",
+            hero_tag: "✦ FOUR-LEVEL HIERARCHICAL MEMORY · MMO-SCALE ✦",
+            hero_desc: "Interactive control panel for AI agent memory management. Monitor Working, Episodic, Semantic, and Procedural memory in real-time."
+        },
+        ru: {
+            hero_title: "TERSANESI<br>Архитектура памяти · Управление агентами",
+            hero_tag: "✦ ЧЕТЫРЁХУРОВНЕВАЯ ИЕРАРХИЧЕСКАЯ ПАМЯТЬ · МАСШТАБ MMO ✦",
+            hero_desc: "Интерактивная панель управления памятью ИИ-агентов. Мониторинг рабочей, эпизодической, семантической и процедурной памяти в реальном времени."
+        },
+        tr: {
+            hero_title: "TERSANESI<br>Bellek Mimarisi · Ajan Kontrolü",
+            hero_tag: "✦ DÖRT SEVİYELİ HİYERARŞİK BELLEK · MMO-ÖLÇEK ✦",
+            hero_desc: "AI ajan bellek yönetimi için interaktif kontrol paneli. Çalışma, Epizodik, Semantik ve Prosedürel belleği gerçek zamanlı izleyin."
+        },
+        ar: {
+            hero_title: "TERSANESI<br>هندسة الذاكرة · التحكم بالوكلاء",
+            hero_tag: "✦ ذاكرة هرمية رباعية المستويات · مقياس MMO ✦",
+            hero_desc: "لوحة تحكم تفاعلية لإدارة ذاكرة وكلاء الذكاء الاصطناعي. مراقبة الذاكرة العاملة والحدثية والدلالية والإجرائية في الوقت الفعلي."
+        },
+        es: {
+            hero_title: "TERSANESI<br>Arquitectura de Memoria · Control de Agentes",
+            hero_tag: "✦ MEMORIA JERÁRQUICA DE CUATRO NIVELES · ESCALA MMO ✦",
+            hero_desc: "Panel de control interactivo para la gestión de memoria de agentes de IA. Monitorea la memoria de Trabajo, Episódica, Semántica y Procedural en tiempo real."
+        },
+        de: {
+            hero_title: "TERSANESI<br>Speicherarchitektur · Agentensteuerung",
+            hero_tag: "✦ VIERSTUFIGER HIERARCHISCHER SPEICHER · MMO-SKALA ✦",
+            hero_desc: "Interaktives Bedienfeld für die Speicherverwaltung von KI-Agenten. Überwachen Sie Arbeits-, Episoden-, Semantik- und Prozedurspeicher in Echtzeit."
+        },
+        ja: {
+            hero_title: "TERSANESI<br>メモリアーキテクチャ · エージェント制御",
+            hero_tag: "✦ 4階層ヒエラルキーメモリ · MMOスケール ✦",
+            hero_desc: "AIエージェントのメモリ管理のためのインタラクティブコントロールパネル。ワーキング、エピソード、セマンティック、プロシージャルメモリをリアルタイムで監視。"
+        },
+        zh: {
+            hero_title: "TERSANESI<br>记忆架构 · 智能体控制",
+            hero_tag: "✦ 四层层次化记忆 · MMO规模 ✦",
+            hero_desc: "用于AI智能体记忆管理的交互式控制面板。实时监控工作记忆、情节记忆、语义记忆和程序记忆。"
+        },
+        fr: {
+            hero_title: "TERSANESI<br>Architecture Mémoire · Contrôle des Agents",
+            hero_tag: "✦ MÉMOIRE HIÉRARCHIQUE À QUATRE NIVEAUX · ÉCHELLE MMO ✦",
+            hero_desc: "Panneau de contrôle interactif pour la gestion de la mémoire des agents IA. Surveillez la mémoire de Travail, Épisodique, Sémantique et Procédurale en temps réel."
+        }
+    };
+
+    let currentLang = 'en';
+
+    function renderLangBar() {
+        const container = document.getElementById('langBar');
+        if (!container) return;
+        container.innerHTML = '';
+        LANGUAGES.forEach(lang => {
+            const a = document.createElement('a');
+            a.setAttribute('data-lang', lang.code);
+            a.className = lang.code === currentLang ? 'active' : '';
+            a.innerHTML = `<span class="flag">${lang.flag}</span><span class="lang-label">${lang.label}</span>`;
+            a.addEventListener('click', (e) => { e.preventDefault(); setLanguage(lang.code); });
+            container.appendChild(a);
+        });
+    }
+
+    function setLanguage(lang) {
+        if (!translations[lang]) return;
+        currentLang = lang;
+        const t = translations[lang];
+        document.querySelectorAll('[data-key]').forEach(el => {
+            const key = el.getAttribute('data-key');
+            if (t[key] !== undefined) {
+                el.innerHTML = t[key];
+            }
+        });
+        document.querySelectorAll('#langBar a').forEach(a => {
+            a.classList.toggle('active', a.getAttribute('data-lang') === lang);
+        });
+        localStorage.setItem('tersanesi_memory_lang', lang);
+    }
+
+    const savedLang = localStorage.getItem('tersanesi_memory_lang');
+    if (savedLang && translations[savedLang]) currentLang = savedLang;
+    else {
+        const browserLang = navigator.language.split('-')[0];
+        if (translations[browserLang]) currentLang = browserLang;
+    }
+    renderLangBar();
+    setLanguage(currentLang);
+
+    // ===== INIT =====
+    function init() {
+        // Initialize snapshots
+        const snapshots = document.getElementById('snapshotList');
+        const now = new Date();
+        for (let i = 0; i < 5; i++) {
+            const d = new Date(now);
+            d.setHours(d.getHours() - i * 2);
+            const item = document.createElement('div');
+            item.className = 'snapshot-item';
+            item.innerHTML = `
+                <span class="snap-time">📸 ${d.toLocaleString()}</span>
+                <span class="snap-size">${(15 + Math.random() * 30).toFixed(1)} KB · ${['agent_0x7F3', 'agent_0xA1B', 'agent_0xC9D', 'agent_0xE4F'][i % 4]}</span>
+            `;
+            snapshots.appendChild(item);
+        }
+        document.getElementById('snapshotCount').textContent = snapshots.children.length;
+        
+        initChart();
+        updateAgentUI(currentAgent);
+        
+        // Real-time updates
+        setInterval(() => {
+            if (Math.random() > 0.6) {
+                generateRandomEvent();
+            }
+            updateMetrics();
+        }, 3000);
+        
+        // Chart animation
+        setInterval(updateChart, 5000);
+        
+        console.log('✅ TERSANESI Memory Architecture Control Panel active');
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+
+    // ===== THREE.JS (Same as original) =====
+    // The 3D scene code is kept identical to maintain the design
+    // (Particle system, Three.js scene, etc. from the original)
+</script>
+
+<script type="module">
+    // ===== PARTICLE SYSTEM (Q1) =====
+    const canvasQ1 = document.getElementById('particleCanvasQ1');
+    const ctxQ1 = canvasQ1.getContext('2d');
+    let w1 = 0, h1 = 0;
+    let particles = [];
+
+    function resizeQ1() {
+        const panel = document.querySelector('.q1');
+        w1 = panel.clientWidth;
+        h1 = panel.clientHeight;
+        canvasQ1.width = w1;
+        canvasQ1.height = h1;
+        initParticlesQ1();
+    }
+
+    class ParticleQ1 {
+        constructor() {
+            this.x = Math.random() * w1;
+            this.y = Math.random() * h1;
+            this.size = Math.random() * 2 + 0.5;
+            this.speedX = (Math.random() - 0.5) * 0.3;
+            this.speedY = (Math.random() - 0.5) * 0.2 + 0.05;
+            this.color = `rgba(0, 200, 255, ${Math.random() * 0.5 + 0.2})`;
+            this.glow = Math.random() > 0.6;
+        }
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.y > h1) this.y = 0;
+            if (this.y < 0) this.y = h1;
+            if (this.x > w1) this.x = 0;
+            if (this.x < 0) this.x = w1;
+        }
+        draw() {
+            ctxQ1.beginPath();
+            ctxQ1.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctxQ1.shadowBlur = this.glow ? 5 : 1;
+            ctxQ1.shadowColor = '#0af';
+            ctxQ1.fillStyle = this.color;
+            ctxQ1.fill();
+        }
+    }
+
+    function initParticlesQ1(count = 150) {
+        particles = [];
+        for (let i = 0; i < count; i++) particles.push(new ParticleQ1());
+    }
+
+    function animateParticlesQ1() {
+        if (!ctxQ1) return;
+        ctxQ1.clearRect(0, 0, w1, h1);
+        for (let p of particles) { p.update(); p.draw(); }
+        requestAnimationFrame(animateParticlesQ1);
+    }
+
+    const q1Observer = new ResizeObserver(() => resizeQ1());
+    q1Observer.observe(document.querySelector('.q1'));
+    resizeQ1();
+    initParticlesQ1(150);
+    animateParticlesQ1();
+
+    // ===== THREE.JS (Q2) =====
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+    const containerQ2 = document.getElementById('three-container-q2');
+    const sceneQ2 = new THREE.Scene();
+    sceneQ2.background = new THREE.Color(0x010418);
+    sceneQ2.fog = new THREE.FogExp2(0x010418, 0.0002);
+
+    const cameraQ2 = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+    cameraQ2.position.set(6, 3, 12);
+    cameraQ2.lookAt(0, 0, 0);
+
+    const rendererQ2 = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    rendererQ2.setSize(containerQ2.clientWidth, containerQ2.clientHeight);
+    rendererQ2.shadowMap.enabled = true;
+    containerQ2.appendChild(rendererQ2.domElement);
+
+    const controlsQ2 = new OrbitControls(cameraQ2, rendererQ2.domElement);
+    controlsQ2.enableDamping = true;
+    controlsQ2.autoRotate = true;
+    controlsQ2.autoRotateSpeed = 0.4;
+    controlsQ2.enableZoom = true;
+    controlsQ2.enablePan = false;
+    controlsQ2.target.set(0, 0.5, 0);
+
+    const ambient = new THREE.AmbientLight(0x222244);
+    sceneQ2.add(ambient);
+    const dirLight = new THREE.DirectionalLight(0xfff5e0, 1.2);
+    dirLight.position.set(4, 8, 6);
+    sceneQ2.add(dirLight);
+    const backLight = new THREE.PointLight(0x4488ff, 0.5);
+    backLight.position.set(-2, 1, -5);
+    sceneQ2.add(backLight);
+
+    const starFieldGeo = new THREE.BufferGeometry();
+    const starCount = 2000;
+    const starPositions = new Float32Array(starCount * 3);
+    for (let i = 0; i < starCount; i++) {
+        starPositions[i*3] = (Math.random() - 0.5) * 400;
+        starPositions[i*3+1] = (Math.random() - 0.5) * 300;
+        starPositions[i*3+2] = (Math.random() - 0.5) * 150 - 80;
+    }
+    starFieldGeo.setAttribute("position", new THREE.BufferAttribute(starPositions, 3));
+    const starMat = new THREE.PointsMaterial({ color: 0xffffff, size: 0.12, transparent: true, opacity: 0.7 });
+    const starsField = new THREE.Points(starFieldGeo, starMat);
+    sceneQ2.add(starsField);
+
+    const station = new THREE.Group();
+    const ringMain = new THREE.Mesh(new THREE.TorusGeometry(1.3, 0.08, 64, 128), new THREE.MeshStandardMaterial({ color: 0x44aaff, metalness: 0.85, emissive: 0x004466, emissiveIntensity: 0.35 }));
+    station.add(ringMain);
+    const core = new THREE.Mesh(new THREE.SphereGeometry(0.45, 64, 64), new THREE.MeshStandardMaterial({ color: 0xffaa66, metalness: 0.7, emissive: 0x442200, emissiveIntensity: 0.3 }));
+    station.add(core);
+    for (let i = 0; i < 6; i++) {
+        const angle = (i / 6) * Math.PI * 2;
+        const arm = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.06, 1.2), new THREE.MeshStandardMaterial({ color: 0x88ccff }));
+        arm.position.set(Math.cos(angle) * 1.1, Math.sin(angle) * 1.1, 0);
+        arm.rotation.z = angle;
+        station.add(arm);
+    }
+    const panelGeo = new THREE.BoxGeometry(0.5, 0.04, 0.3);
+    for (let i = 0; i < 4; i++) {
+        const ang = (i / 4) * Math.PI * 2;
+        const panel = new THREE.Mesh(panelGeo, new THREE.MeshStandardMaterial({ color: 0x66ccff, metalness: 0.6 }));
+        panel.position.set(Math.cos(ang) * 1.7, Math.sin(ang) * 1.7, 0.1);
+        station.add(panel);
+    }
+    station.position.set(0, 0.2, 0);
+    sceneQ2.add(station);
+
+    const partCount = 400;
+    const partGeo = new THREE.BufferGeometry();
+    const partPos = new Float32Array(partCount * 3);
+    for (let i = 0; i < partCount; i++) {
+        partPos[i*3] = (Math.random() - 0.5) * 4.2;
+        partPos[i*3+1] = (Math.random() - 0.5) * 3.5;
+        partPos[i*3+2] = (Math.random() - 0.5) * 3.5;
+    }
+    partGeo.setAttribute("position", new THREE.BufferAttribute(partPos, 3));
+    const partMat = new THREE.PointsMaterial({ color: 0x44ccff, size: 0.03, transparent: true, opacity: 0.5 });
+    const stationGlow = new THREE.Points(partGeo, partMat);
+    station.add(stationGlow);
+
+    const moonletGeo = new THREE.SphereGeometry(0.28, 32, 32);
+    const moonletMat = new THREE.MeshStandardMaterial({ color: 0xaa9988, roughness: 0.8 });
+    const moonlet = new THREE.Mesh(moonletGeo, moonletMat);
+    sceneQ2.add(moonlet);
+
+    let timeQ2 = 0;
+    function animateQ2() {
+        requestAnimationFrame(animateQ2);
+        timeQ2 += 0.012;
+        station.rotation.y += 0.008;
+        station.rotation.x = Math.sin(timeQ2 * 0.7) * 0.1;
+        station.rotation.z = Math.cos(timeQ2 * 0.5) * 0.08;
+        stationGlow.rotation.y += 0.01;
+        moonlet.position.x = Math.cos(timeQ2) * 2.5;
+        moonlet.position.z = Math.sin(timeQ2 * 1.3) * 2.2;
+        moonlet.position.y = Math.sin(timeQ2 * 1.8) * 0.8;
+        starsField.rotation.y += 0.0005;
+        controlsQ2.update();
+        
+        const width = containerQ2.clientWidth;
+        const height = containerQ2.clientHeight;
+        if (rendererQ2.domElement.width !== width || rendererQ2.domElement.height !== height) {
+            cameraQ2.aspect = width / height;
+            cameraQ2.updateProjectionMatrix();
+            rendererQ2.setSize(width, height);
+        }
+        rendererQ2.render(sceneQ2, cameraQ2);
+    }
+    
+    function resizeQ2() {
+        const w = containerQ2.clientWidth;
+        const h = containerQ2.clientHeight;
+        cameraQ2.aspect = w / h;
+        cameraQ2.updateProjectionMatrix();
+        rendererQ2.setSize(w, h);
+    }
+    const resizeObsQ2 = new ResizeObserver(() => resizeQ2());
+    resizeObsQ2.observe(containerQ2);
+    resizeQ2();
+    animateQ2();
+
+    // ===== Q3 PARALLAX =====
+    const q3Panel = document.querySelector('.q3');
+    const ringPlanet = document.querySelector('.ring-planet');
+    if (q3Panel && ringPlanet) {
+        q3Panel.addEventListener('mousemove', (e) => {
+            const rect = q3Panel.getBoundingClientRect();
+            const mouseX = (e.clientX - rect.left) / rect.width - 0.5;
+            const mouseY = (e.clientY - rect.top) / rect.height - 0.5;
+            ringPlanet.style.transform = `translate(-50%, -50%) translate(${mouseX * 12}px, ${mouseY * 12}px)`;
+        });
+    }
+
+    // ===== Q4 BINARY RAIN =====
+    const q4Canvas = document.createElement('canvas');
+    const q4Div = document.querySelector('.q4');
+    q4Div.style.position = 'relative';
+    q4Canvas.style.position = 'absolute';
+    q4Canvas.style.top = '0';
+    q4Canvas.style.left = '0';
+    q4Canvas.style.width = '100%';
+    q4Canvas.style.height = '100%';
+    q4Canvas.style.pointerEvents = 'none';
+    q4Canvas.style.zIndex = '5';
+    q4Div.appendChild(q4Canvas);
+    
+    let q4Ctx = q4Canvas.getContext('2d');
+    let q4Width, q4Height;
+    let drops = [];
+    
+    function resizeQ4() {
+        q4Width = q4Div.clientWidth;
+        q4Height = q4Div.clientHeight;
+        q4Canvas.width = q4Width;
+        q4Canvas.height = q4Height;
+        const columnCount = Math.floor(q4Width / 18);
+        drops = new Array(columnCount).fill(1);
+    }
+    
+    function drawBinaryRain() {
+        if (!q4Ctx) return;
+        q4Ctx.fillStyle = 'rgba(3, 3, 15, 0.08)';
+        q4Ctx.fillRect(0, 0, q4Width, q4Height);
+        q4Ctx.fillStyle = '#0cf';
+        q4Ctx.font = `bold ${Math.max(12, q4Width / 45)}px monospace`;
+        for (let i = 0; i < drops.length; i++) {
+            const text = Math.random() < 0.5 ? '0' : '1';
+            const x = i * 18;
+            const y = drops[i] * 18;
+            q4Ctx.fillStyle = `rgba(0, 200, 255, ${0.3 + Math.random() * 0.4})`;
+            q4Ctx.fillText(text, x, y);
+            if (y > q4Height && Math.random() > 0.98) drops[i] = 0;
+            drops[i]++;
+        }
+        requestAnimationFrame(drawBinaryRain);
+    }
+    
+    const q4ResizeObs = new ResizeObserver(() => resizeQ4());
+    q4ResizeObs.observe(q4Div);
+    resizeQ4();
+    drawBinaryRain();
+
+    // ===== Q1 PARALLAX =====
+    const q1Panel = document.querySelector('.q1');
+    const thetaCore = document.querySelector('.theta-core');
+    if (q1Panel && thetaCore) {
+        q1Panel.addEventListener('mousemove', (e) => {
+            const rect = q1Panel.getBoundingClientRect();
+            const mouseX = (e.clientX - rect.left) / rect.width - 0.5;
+            const mouseY = (e.clientY - rect.top) / rect.height - 0.5;
+            thetaCore.style.transform = `translate(-50%, -50%) translate(${mouseX * 6}px, ${mouseY * 6}px)`;
+        });
+    }
+    
+    const warpDiv = document.querySelector('.warp-particles');
+    if (warpDiv) {
+        let angle = 0;
+        setInterval(() => {
+            angle += 0.02;
+            warpDiv.style.backgroundPosition = `${angle}px 0px`;
+        }, 50);
+    }
+    
+    console.log('✅ TERSANESI Memory Architecture Control Panel active');
+</script>
+</body>
+</html>
