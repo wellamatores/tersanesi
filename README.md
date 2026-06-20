@@ -1,4 +1,4 @@
- θ TERSANESI
+θ TERSANESI
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub stars](https://img.shields.io/github/stars/wellamatores/tersanesi?style=social)](https://github.com/wellamatores/tersanesi)
@@ -8,7 +8,9 @@
 
 **T.E.R.S.A.N.E.S.I.** — *Versatile Engineering Runtime for Cosmic Engineering Lifecycles*
 
-AI-native runtime for multi-agent systems, MMO backends, persistent virtual worlds, and cosmic-scale simulations. Built with a **four-level hierarchical memory architecture** that scales from 10 agents to 10,000+.
+**AI-native runtime** for multi-agent systems, MMO backends, persistent virtual worlds, and cosmic-scale simulations.
+
+Built with a **four-level hierarchical memory architecture** that seamlessly scales from 10 agents to 10,000+.
 
 🔗 **Live Demo:** [tersanesi.vercel.app](https://tersanesi.vercel.app)
 
@@ -25,21 +27,21 @@ AI-native runtime for multi-agent systems, MMO backends, persistent virtual worl
 - [Documentation](#-documentation)
 - [Contributing](#-contributing)
 - [License](#-license)
-- [Links](#-links)
+- [The Story](#-the-story)
 
 ---
 
 ## ✨ Features
 
 - 🧠 **Four-Level Hierarchical Memory** — L1 Working, L2 Episodic, L3 Semantic, L4 Procedural
-- 🎯 **Gravitas Calculator** — Score and prioritize every event
-- 🌀 **Hebbian Plasticity** — "Fire together, wire together" for adaptive learning
+- 🎯 **Gravitas Calculator** — Real-time scoring and prioritization of every event
+- 🌀 **Hebbian Plasticity** — "Fire together, wire together" adaptive learning
 - 💾 **Snapshot & Restore** — Full state recovery in **<200ms**
-- 🧹 **Natural Forgetting** — Intelligent memory pruning
-- 🌐 **9 Languages** — EN, RU, TR, AR, ES, DE, JA, ZH, FR
-- 🎮 **MMO-Scale Ready** — 10,000+ concurrent agents
+- 🧹 **Natural Forgetting** — Intelligent, context-aware memory pruning
+- 🌐 **9 Languages Support** — EN, RU, TR, AR, ES, DE, JA, ZH, FR
+- 🎮 **MMO-Scale Ready** — Designed for 10,000+ concurrent agents
 - ⚡ **Typed Event Streams** — AgentEvent → StateSync → EconomicTx → NarrativeEvent
-- 🔐 **Zero-Trust Security** — Post-quantum ready
+- 🔐 **Zero-Trust Security** — Post-quantum ready architecture
 
 ---
 
@@ -52,8 +54,11 @@ cd tersanesi
 
 # Open the main landing page
 open index.html
+```
 
-# Or deploy instantly with Vercel
+### Deploy Instantly
+
+```bash
 npx vercel deploy
 ```
 
@@ -61,43 +66,34 @@ npx vercel deploy
 
 Simply open any HTML file in your browser:
 
-```bash
-# Main landing
-open index.html
-
-# Control panel (66 widgets)
-open HYPERPANEL.html
-
-# System documentation
-open system-notes.html
-
-# Cosmic visualization
-open cosmic.html
-
-# API reference
-open api.html
-```
+| Page | File |
+|------|------|
+| 🏠 Main Landing | `index.html` |
+| 🎛️ Control Panel (66 widgets) | `HYPERPANEL.html` |
+| 📘 System Documentation | `system-notes.html` |
+| 🌌 Cosmic Visualization | `cosmic.html` |
+| 🔌 API Reference | `api.html` |
 
 ---
 
 ## 🏛️ Architecture
 
-TERSANESI is built on three integrated layers:
+TERSANESI consists of three tightly integrated layers:
 
 | Layer | Name | Purpose |
 |-------|------|---------|
-| **Kernel** | TERSANESI | Orchestration · runtime logic · core kernel |
-| **Execution** | Cavibara | API · UI · economy · dashboards |
-| **World** | Wellamatores | Narrative · simulation · world state |
+| **Kernel** | TERSANESI | Orchestration · Runtime logic · Core kernel |
+| **Execution** | Cavibara | API · UI · Economy · Dashboards |
+| **World** | Wellamatores | Narrative · Simulation · World state |
 
 ### Memory Hierarchy
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │  L1 — Working Memory     │  <1ms  │  20–30 events        │
-│  L2 — Episodic Memory    │  events │  Gravitas scoring    │
-│  L3 — Semantic Memory    │  graph  │  Hebbian learning    │
-│  L4 — Procedural Memory  │  skills │  RL policies         │
+│  L2 — Episodic Memory    │ events │  Gravitas scoring    │
+│  L3 — Semantic Memory    │  graph │  Hebbian learning    │
+│  L4 — Procedural Memory  │ skills │  RL policies         │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -116,12 +112,12 @@ NarrativeEvent → world expansion & lore generation
 
 ```
 tersanesi/
-├── index.html            # Main landing page (marketing)
+├── index.html            # Main marketing landing page
 ├── system-notes.html     # 3-layer documentation (Public · Explore · Architecture)
 ├── cosmic.html           # Quadrant universe visualization
 ├── HYPERPANEL.html       # 66-widget agent control panel
 ├── api.html              # API endpoint reference
-├── LICENSE               # MIT license
+├── LICENSE               # MIT License
 └── README.md             # This file
 ```
 
@@ -133,9 +129,9 @@ tersanesi/
 |------|-------------|------|
 | 🏠 **Main Landing** | Marketing & product overview | [index.html](https://tersanesi.vercel.app) |
 | 📘 **System Notes** | 3-layer documentation | [system-notes.html](https://tersanesi.vercel.app/system-notes.html) |
-| 🌌 **Cosmic View** | Quadrant visualization | [cosmic.html](https://tersanesi.vercel.app/cosmic.html) |
+| 🌌 **Cosmic View** | Quadrant universe visualization | [cosmic.html](https://tersanesi.vercel.app/cosmic.html) |
 | 🎛️ **HYPERPANEL** | 66-widget control panel | [HYPERPANEL.html](https://tersanesi.vercel.app/HYPERPANEL.html) |
-| 🔌 **API Reference** | Endpoint documentation | [api.html](https://tersanesi.vercel.app/api.html) |
+| 🔌 **API Reference** | Full API documentation | [api.html](https://tersanesi.vercel.app/api.html) |
 
 ---
 
@@ -145,7 +141,7 @@ tersanesi/
 |-------|--------------|
 | **Frontend** | HTML5 · CSS3 · Vanilla JS · Three.js |
 | **Visualization** | WebGL · Canvas 2D · Three.js |
-| **Architecture** | Event-driven · Typed streams · Multi-agent orchestration |
+| **Architecture** | Event-driven · Typed streams · Multi-agent |
 | **Deployment** | GitHub Pages · Vercel |
 | **License** | MIT |
 
@@ -222,10 +218,4 @@ If you find this project useful, please consider:
 ---
 
 *Built with ❤️ by TERSANESI — Engineering the memory layer for the AI economy.*
-
-
-
-
-
-
 
