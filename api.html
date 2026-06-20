@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>TERSANESI ∞ ULTIMATE | API Nexus + Memory Architecture + Agent Control</title>
-    <meta name="description" content="TERSANESI Ultimate — полная интеграция API Portal, Memory Architecture и Agent Control Panel в едином продукте.">
+    <title>θ 🧠 TERSANESI · 86 MEMORY TYPES</title>
+    <meta name="description" content="TERSANESI — 86 типов памяти, 9 слоев, ядро C01 Consciousness Core.">
     <style>
         /* ===== ALL CSS ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -41,13 +41,7 @@
             left: 0;
             z-index: 0;
         }
-        .quadrant {
-            position: relative;
-            overflow: hidden;
-            background: #000000;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            box-shadow: inset 0 0 30px rgba(0, 180, 255, 0.1);
-        }
+        .quadrant { position: relative; overflow: hidden; background: #000000; border: 1px solid rgba(0, 255, 255, 0.2); box-shadow: inset 0 0 30px rgba(0, 180, 255, 0.1); }
         .divider-vertical {
             position: absolute;
             left: 50%;
@@ -140,12 +134,7 @@
             flex-wrap: wrap;
             gap: 0.6rem;
         }
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 1.2rem;
-            flex-wrap: wrap;
-        }
+        .header-left { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
         .brand {
             font-size: 1.6rem;
             font-weight: 800;
@@ -175,11 +164,7 @@
             white-space: nowrap;
             cursor: pointer;
         }
-        .btn-classic:hover {
-            background: rgba(255,215,0,0.12);
-            border-color: var(--primary);
-            box-shadow: 0 0 20px rgba(255,215,0,0.08);
-        }
+        .btn-classic:hover { background: rgba(255,215,0,0.12); border-color: var(--primary); box-shadow: 0 0 20px rgba(255,215,0,0.08); }
         .btn-classic .arrow { transition: transform 0.2s; }
         .btn-classic:hover .arrow { transform: translateX(-3px); }
 
@@ -210,24 +195,10 @@
             border: 1px solid transparent;
         }
         .lang-bar a .flag { font-size: 0.9rem; line-height: 1; }
-        .lang-bar a .lang-label { 
-            font-size: 0.55rem; 
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-            opacity: 0.6;
-            transition: opacity 0.2s;
-        }
-        .lang-bar a:hover {
-            color: #ffffff;
-            background: rgba(255,255,255,0.04);
-        }
+        .lang-bar a .lang-label { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.3px; opacity: 0.6; transition: opacity 0.2s; }
+        .lang-bar a:hover { color: #ffffff; background: rgba(255,255,255,0.04); }
         .lang-bar a:hover .lang-label { opacity: 1; }
-        .lang-bar a.active {
-            color: var(--primary);
-            background: rgba(255,215,0,0.08);
-            border-color: rgba(255,215,0,0.12);
-            box-shadow: 0 0 12px rgba(255,215,0,0.04);
-        }
+        .lang-bar a.active { color: var(--primary); background: rgba(255,215,0,0.08); border-color: rgba(255,215,0,0.12); box-shadow: 0 0 12px rgba(255,215,0,0.04); }
         .lang-bar a.active .lang-label { opacity: 1; }
 
         .hero-fusion { min-height: 40vh; display: flex; flex-direction: column; justify-content: center; padding: 2rem 6% 2rem; position: relative; }
@@ -259,11 +230,7 @@
         .panel-card:hover { border-color: var(--primary); box-shadow: 0 0 30px rgba(255,215,0,0.05); }
         .panel-card h3 { color: var(--primary); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
 
-        .memory-levels {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.8rem;
-        }
+        .memory-levels { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
         .level-item {
             background: rgba(0,0,0,0.4);
             border-radius: 16px;
@@ -285,10 +252,7 @@
         .level-item.L4 .level-value { color: var(--l4-color); }
         .level-item.L4 .fill { background: var(--l4-color); }
 
-        .event-list {
-            max-height: 150px;
-            overflow-y: auto;
-        }
+        .event-list { max-height: 150px; overflow-y: auto; }
         .event-list::-webkit-scrollbar { width: 4px; }
         .event-list::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
         .event-list::-webkit-scrollbar-thumb { background: var(--secondary); border-radius: 4px; }
@@ -303,36 +267,17 @@
         }
         .event-item:hover { background: rgba(255,255,255,0.02); }
         .event-item .event-time { color: #445566; font-size: 0.6rem; min-width: 60px; }
-        .event-item .event-type { 
-            padding: 0.1rem 0.5rem; 
-            border-radius: 12px; 
-            font-size: 0.55rem; 
-            font-weight: 600;
-            text-transform: uppercase;
-        }
+        .event-item .event-type { padding: 0.1rem 0.5rem; border-radius: 12px; font-size: 0.55rem; font-weight: 600; text-transform: uppercase; }
         .event-type.high { background: rgba(68,255,136,0.15); color: #44ff88; }
         .event-type.medium { background: rgba(255,221,68,0.15); color: #ffdd44; }
         .event-type.low { background: rgba(255,136,102,0.15); color: #ff8866; }
         .event-item .event-content { flex: 1; color: #bbbbdd; }
-        .event-item .event-gravitas-badge { 
-            font-size: 0.55rem; 
-            font-family: monospace;
-            padding: 0.1rem 0.4rem;
-            border-radius: 10px;
-            background: rgba(0,0,0,0.3);
-            min-width: 40px;
-            text-align: center;
-        }
+        .event-item .event-gravitas-badge { font-size: 0.55rem; font-family: monospace; padding: 0.1rem 0.4rem; border-radius: 10px; background: rgba(0,0,0,0.3); min-width: 40px; text-align: center; }
         .event-gravitas-badge.high { color: #44ff88; border: 1px solid rgba(68,255,136,0.2); }
         .event-gravitas-badge.medium { color: #ffdd44; border: 1px solid rgba(255,221,68,0.2); }
         .event-gravitas-badge.low { color: #ff8866; border: 1px solid rgba(255,136,102,0.2); }
 
-        .gravitas-widget {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.5rem 0;
-        }
+        .gravitas-widget { display: flex; align-items: center; gap: 1rem; padding: 0.5rem 0; }
         .gravitas-ring {
             width: 60px;
             height: 60px;
@@ -347,26 +292,14 @@
             position: relative;
             flex-shrink: 0;
         }
-        .gravitas-ring .ring-bg {
-            position: absolute;
-            inset: -3px;
-            border-radius: 50%;
-            border: 3px solid transparent;
-            border-top-color: var(--secondary);
-            animation: ringSpin 3s linear infinite;
-        }
+        .gravitas-ring .ring-bg { position: absolute; inset: -3px; border-radius: 50%; border: 3px solid transparent; border-top-color: var(--secondary); animation: ringSpin 3s linear infinite; }
         .gravitas-ring .ring-bg.two { animation-delay: -1s; border-top-color: var(--primary); }
         .gravitas-ring .ring-bg.three { animation-delay: -2s; border-top-color: #44ff88; }
         @keyframes ringSpin { to { transform: rotate(360deg); } }
         .gravitas-stats { font-size: 0.7rem; color: #7788aa; }
         .gravitas-stats .highlight { color: var(--secondary); }
 
-        .control-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-            margin-top: 0.8rem;
-        }
+        .control-group { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.8rem; }
         .btn-control {
             padding: 0.4rem 1.2rem;
             border-radius: 30px;
@@ -378,11 +311,7 @@
             transition: all 0.2s;
             font-family: 'Segoe UI', sans-serif;
         }
-        .btn-control:hover {
-            background: rgba(0,200,255,0.1);
-            border-color: var(--secondary);
-            box-shadow: 0 0 20px rgba(0,200,255,0.05);
-        }
+        .btn-control:hover { background: rgba(0,200,255,0.1); border-color: var(--secondary); box-shadow: 0 0 20px rgba(0,200,255,0.05); }
         .btn-control.primary { border-color: var(--primary); color: var(--primary); }
         .btn-control.primary:hover { background: rgba(255,215,0,0.1); border-color: var(--primary); }
         .btn-control.danger { border-color: #ff4444; color: #ff4444; }
@@ -390,12 +319,7 @@
         .btn-control.success { border-color: #44ff88; color: #44ff88; }
         .btn-control.success:hover { background: rgba(68,255,136,0.1); border-color: #44ff88; }
 
-        .agent-selector {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin-bottom: 0.8rem;
-        }
+        .agent-selector { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
         .agent-selector .agent-btn {
             padding: 0.2rem 0.8rem;
             border-radius: 20px;
@@ -410,13 +334,7 @@
         .agent-selector .agent-btn:hover { border-color: var(--secondary); color: #fff; }
         .agent-selector .agent-btn.active { border-color: var(--primary); color: var(--primary); background: rgba(255,215,0,0.05); }
 
-        .snapshot-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem;
-            max-height: 120px;
-            overflow-y: auto;
-        }
+        .snapshot-list { display: flex; flex-direction: column; gap: 0.3rem; max-height: 120px; overflow-y: auto; }
         .snapshot-item {
             display: flex;
             justify-content: space-between;
@@ -434,41 +352,26 @@
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             gap: 0.8rem;
         }
-        .status-item {
-            text-align: center;
-            background: rgba(0,0,0,0.3);
-            border-radius: 16px;
-            padding: 0.8rem;
-            border: 1px solid rgba(255,255,255,0.03);
-        }
-        .status-item .stat-number {
-            font-size: 1.4rem;
-            font-weight: 700;
-            font-family: 'Orbitron', monospace;
-            color: var(--secondary);
-        }
-        .status-item .stat-label {
-            font-size: 0.55rem;
-            text-transform: uppercase;
-            color: #7788aa;
-            letter-spacing: 0.5px;
-            margin-top: 2px;
-        }
-        .status-dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            margin-right: 4px;
-            animation: pulseDot 1.5s infinite;
-        }
+        .status-item { text-align: center; background: rgba(0,0,0,0.3); border-radius: 16px; padding: 0.8rem; border: 1px solid rgba(255,255,255,0.03); }
+        .status-item .stat-number { font-size: 1.4rem; font-weight: 700; font-family: 'Orbitron', monospace; color: var(--secondary); }
+        .status-item .stat-label { font-size: 0.55rem; text-transform: uppercase; color: #7788aa; letter-spacing: 0.5px; margin-top: 2px; }
+        .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; animation: pulseDot 1.5s infinite; }
         .status-dot.online { background: #44ff88; box-shadow: 0 0 8px rgba(68,255,136,0.3); }
         .status-dot.degraded { background: #ffdd44; box-shadow: 0 0 8px rgba(255,221,68,0.3); }
         .status-dot.offline { background: #ff4444; box-shadow: 0 0 8px rgba(255,68,68,0.3); }
         @keyframes pulseDot { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
 
         .api-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.8rem; }
-        .api-card { background: var(--card-bg); backdrop-filter: blur(8px); border: 1px solid var(--border-neon); border-radius: 28px; padding: 1.6rem; width: 300px; transition: all 0.25s; text-align: left; }
+        .api-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-neon);
+            border-radius: 28px;
+            padding: 1.6rem;
+            width: 300px;
+            transition: all 0.25s;
+            text-align: left;
+        }
         .api-card:hover { transform: translateY(-6px); border-color: var(--primary); box-shadow: 0 12px 28px rgba(0,0,0,0.6),0 0 8px rgba(255,215,0,0.2); }
         .api-card .method { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 20px; font-size: 0.6rem; font-weight: 700; margin-bottom: 0.5rem; font-family: monospace; }
         .method.get { background: rgba(0,200,80,0.2); color: #44ff88; border: 1px solid rgba(0,200,80,0.3); }
@@ -479,14 +382,14 @@
         .api-card h3 { color: #ffeaac; font-size: 1rem; margin: 0.3rem 0 0.5rem; }
         .api-card p { font-size: 0.8rem; color: #bcbcd0; }
         .api-card .code-sample { background: var(--code-bg); border-radius: 12px; padding: 0.6rem 1rem; margin-top: 0.6rem; font-family: 'Courier New', monospace; font-size: 0.65rem; color: #88ddff; border: 1px solid rgba(0,200,255,0.1); overflow-x: auto; white-space: pre; }
-        
+
         .sdk-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin-top: 1.5rem; }
         .sdk-card { background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); border-radius: 20px; padding: 1.2rem 2rem; border: 1px solid rgba(255,215,0,0.15); text-align: center; min-width: 120px; transition: all 0.2s; }
         .sdk-card:hover { border-color: var(--secondary); box-shadow: 0 0 20px rgba(0,200,255,0.05); }
         .sdk-card .sdk-icon { font-size: 2rem; }
         .sdk-card .sdk-name { font-weight: 600; color: #ddd; margin-top: 0.3rem; }
         .sdk-card .sdk-ver { font-size: 0.6rem; color: #7788aa; }
-        
+
         .doc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; margin: 1.5rem 0; }
         .doc-link { background: rgba(0,0,0,0.4); padding: 0.8rem 1.2rem; border-radius: 16px; border-left: 3px solid var(--secondary); text-decoration: none; color: #ccc; transition: all 0.2s; display: flex; align-items: center; gap: 0.8rem; }
         .doc-link:hover { background: rgba(0,0,0,0.6); border-left-color: var(--primary); color: #fff; }
@@ -508,49 +411,12 @@
         footer .classic-link { color: var(--primary); text-decoration: none; opacity: 0.6; transition: 0.2s; }
         footer .classic-link:hover { opacity: 1; }
 
-        .btn-fusion {
-            padding: 0.7rem 1.8rem;
-            border-radius: 40px;
-            background: transparent;
-            border: 1.5px solid var(--primary);
-            color: var(--primary);
-            font-weight: bold;
-            transition: 0.2s;
-            text-decoration: none;
-            backdrop-filter: blur(4px);
-            cursor: pointer;
-            display: inline-block;
-        }
+        .btn-fusion { padding: 0.7rem 1.8rem; border-radius: 40px; background: transparent; border: 1.5px solid var(--primary); color: var(--primary); font-weight: bold; transition: 0.2s; text-decoration: none; backdrop-filter: blur(4px); cursor: pointer; display: inline-block; }
         .btn-fusion:hover { background: var(--primary); color: #0a0a1a; box-shadow: 0 0 14px var(--primary-glow); }
 
-        .chart-placeholder {
-            height: 100px;
-            background: rgba(0,0,0,0.3);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #445566;
-            font-size: 0.7rem;
-            border: 1px solid rgba(255,255,255,0.02);
-            position: relative;
-            overflow: hidden;
-        }
-        .chart-placeholder .chart-bars {
-            display: flex;
-            align-items: flex-end;
-            gap: 4px;
-            height: 80%;
-            width: 90%;
-        }
-        .chart-placeholder .chart-bar {
-            flex: 1;
-            min-height: 10px;
-            background: linear-gradient(to top, var(--secondary), rgba(0,200,255,0.1));
-            border-radius: 2px 2px 0 0;
-            transition: height 0.5s ease;
-            animation: chartPulse 2s ease-in-out infinite alternate;
-        }
+        .chart-placeholder { height: 100px; background: rgba(0,0,0,0.3); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #445566; font-size: 0.7rem; border: 1px solid rgba(255,255,255,0.02); position: relative; overflow: hidden; }
+        .chart-placeholder .chart-bars { display: flex; align-items: flex-end; gap: 4px; height: 80%; width: 90%; }
+        .chart-placeholder .chart-bar { flex: 1; min-height: 10px; background: linear-gradient(to top, var(--secondary), rgba(0,200,255,0.1)); border-radius: 2px 2px 0 0; transition: height 0.5s ease; animation: chartPulse 2s ease-in-out infinite alternate; }
         @keyframes chartPulse { 0% { opacity: 0.6; } 100% { opacity: 1; } }
 
         .memory-trigger-btn {
@@ -566,12 +432,7 @@
             font-family: 'Orbitron', monospace;
             letter-spacing: 0.1rem;
         }
-        .memory-trigger-btn:hover {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: #000;
-            box-shadow: 0 0 40px rgba(255,215,0,0.2), 0 0 60px rgba(0,200,255,0.1);
-            transform: scale(1.02);
-        }
+        .memory-trigger-btn:hover { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #000; box-shadow: 0 0 40px rgba(255,215,0,0.2), 0 0 60px rgba(0,200,255,0.1); transform: scale(1.02); }
         .memory-trigger-btn .icon { margin-right: 0.8rem; }
 
         .memory-overlay {
@@ -601,12 +462,7 @@
             flex-wrap: wrap;
             gap: 0.5rem;
         }
-        .memory-overlay-header .title {
-            font-family: 'Orbitron', monospace;
-            font-size: 1.2rem;
-            color: var(--primary);
-            letter-spacing: 0.1rem;
-        }
+        .memory-overlay-header .title { font-family: 'Orbitron', monospace; font-size: 1.2rem; color: var(--primary); letter-spacing: 0.1rem; }
         .memory-overlay-header .title span { color: var(--secondary); }
         .memory-overlay-close {
             background: rgba(255,255,255,0.05);
@@ -619,18 +475,8 @@
             transition: all 0.2s;
             font-family: 'Segoe UI', sans-serif;
         }
-        .memory-overlay-close:hover {
-            background: rgba(255,80,80,0.15);
-            border-color: #ff4444;
-            color: #ff6666;
-        }
-        .memory-overlay-body {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: row;
-        }
+        .memory-overlay-close:hover { background: rgba(255,80,80,0.15); border-color: #ff4444; color: #ff6666; }
+        .memory-overlay-body { flex: 1; position: relative; overflow: hidden; display: flex; flex-direction: row; }
         #memoryVisContainer { flex: 1; height: 100%; position: relative; }
 
         .memory-right-panel {
@@ -646,45 +492,13 @@
             z-index: 5;
             flex-shrink: 0;
         }
-        .memory-right-panel .panel-header {
-            padding: 0.8rem 1.2rem;
-            border-bottom: 1px solid rgba(255,215,0,0.1);
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #667;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-shrink: 0;
-        }
-        .memory-right-panel .panel-header .badge {
-            background: rgba(0,200,255,0.1);
-            padding: 0.15rem 0.6rem;
-            border-radius: 12px;
-            font-size: 0.55rem;
-            color: var(--secondary);
-        }
-        .memory-log-container {
-            flex: 1;
-            overflow-y: auto;
-            padding: 0.6rem 1rem;
-            font-family: 'Courier New', monospace;
-            font-size: 0.6rem;
-            color: #6688aa;
-            scrollbar-width: thin;
-        }
+        .memory-right-panel .panel-header { padding: 0.8rem 1.2rem; border-bottom: 1px solid rgba(255,215,0,0.1); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: #667; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
+        .memory-right-panel .panel-header .badge { background: rgba(0,200,255,0.1); padding: 0.15rem 0.6rem; border-radius: 12px; font-size: 0.55rem; color: var(--secondary); }
+        .memory-log-container { flex: 1; overflow-y: auto; padding: 0.6rem 1rem; font-family: 'Courier New', monospace; font-size: 0.6rem; color: #6688aa; scrollbar-width: thin; }
         .memory-log-container::-webkit-scrollbar { width: 3px; }
         .memory-log-container::-webkit-scrollbar-track { background: transparent; }
         .memory-log-container::-webkit-scrollbar-thumb { background: rgba(0,200,255,0.2); border-radius: 4px; }
-        .memory-log-container .log-entry {
-            padding: 0.2rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.02);
-            opacity: 0.8;
-            display: flex;
-            gap: 0.5rem;
-            align-items: baseline;
-        }
+        .memory-log-container .log-entry { padding: 0.2rem 0; border-bottom: 1px solid rgba(255,255,255,0.02); opacity: 0.8; display: flex; gap: 0.5rem; align-items: baseline; }
         .memory-log-container .log-entry .time { color: #445566; font-size: 0.5rem; flex-shrink: 0; min-width: 60px; }
         .memory-log-container .log-entry .icon { flex-shrink: 0; }
         .memory-log-container .log-entry .msg { color: #99bbdd; word-break: break-word; }
@@ -713,11 +527,7 @@
         }
         .memory-io-controls select:hover, .memory-io-controls button:hover { border-color: var(--secondary); }
         .memory-io-controls select:focus, .memory-io-controls button:focus { border-color: var(--primary); }
-        .memory-io-controls button {
-            background: rgba(255,215,0,0.08);
-            border-color: rgba(255,215,0,0.15);
-            color: var(--primary);
-        }
+        .memory-io-controls button { background: rgba(255,215,0,0.08); border-color: rgba(255,215,0,0.15); color: var(--primary); }
         .memory-io-controls button:hover { background: rgba(255,215,0,0.18); border-color: var(--primary); }
         .memory-io-controls .io-label { font-size: 0.5rem; text-transform: uppercase; color: #556; letter-spacing: 0.5px; display: flex; align-items: center; }
 
@@ -741,13 +551,7 @@
             max-width: 92vw;
             box-shadow: 0 8px 40px rgba(0, 0, 0, 0.7);
         }
-        .memory-panel .label {
-            font-size: 0.55rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #667;
-            margin-right: 0.2rem;
-        }
+        .memory-panel .label { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 1px; color: #667; margin-right: 0.2rem; }
         .memory-panel select, .memory-panel input, .memory-panel button {
             background: rgba(0,0,0,0.5);
             border: 1px solid rgba(255,255,255,0.08);
@@ -761,47 +565,13 @@
             outline: none;
         }
         .memory-panel select:hover, .memory-panel input:hover { border-color: var(--secondary); }
-        .memory-panel select:focus, .memory-panel input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 12px rgba(255,215,0,0.06);
-        }
-        .memory-panel button {
-            background: rgba(255,215,0,0.1);
-            border-color: rgba(255,215,0,0.2);
-            color: var(--primary);
-            font-weight: 600;
-        }
-        .memory-panel button:hover {
-            background: rgba(255,215,0,0.2);
-            border-color: var(--primary);
-            box-shadow: 0 0 20px rgba(255,215,0,0.05);
-        }
+        .memory-panel select:focus, .memory-panel input:focus { border-color: var(--primary); box-shadow: 0 0 12px rgba(255,215,0,0.06); }
+        .memory-panel button { background: rgba(255,215,0,0.1); border-color: rgba(255,215,0,0.2); color: var(--primary); font-weight: 600; }
+        .memory-panel button:hover { background: rgba(255,215,0,0.2); border-color: var(--primary); box-shadow: 0 0 20px rgba(255,215,0,0.05); }
 
-        .memory-indicator {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            font-size: 0.6rem;
-            color: #8899bb;
-            font-family: monospace;
-            background: rgba(0,0,0,0.3);
-            padding: 0.2rem 0.8rem;
-            border-radius: 30px;
-            border: 1px solid rgba(0,200,255,0.06);
-        }
-        .memory-indicator .bar {
-            width: 60px;
-            height: 4px;
-            background: rgba(255,255,255,0.06);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        .memory-indicator .bar .fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--secondary), var(--primary));
-            border-radius: 4px;
-            transition: width 0.6s ease;
-        }
+        .memory-indicator { display: flex; align-items: center; gap: 0.6rem; font-size: 0.6rem; color: #8899bb; font-family: monospace; background: rgba(0,0,0,0.3); padding: 0.2rem 0.8rem; border-radius: 30px; border: 1px solid rgba(0,200,255,0.06); }
+        .memory-indicator .bar { width: 60px; height: 4px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; }
+        .memory-indicator .bar .fill { height: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary)); border-radius: 4px; transition: width 0.6s ease; }
 
         .memory-info-tip {
             position: absolute;
@@ -845,32 +615,10 @@
         }
         .notification.show { transform: translateY(0); opacity: 1; }
         .notification .notif-title { color: var(--primary); font-weight: 600; }
-        .notification .notif-close {
-            position: absolute;
-            top: 8px;
-            right: 12px;
-            background: none;
-            border: none;
-            color: #445566;
-            cursor: pointer;
-            font-size: 1rem;
-        }
+        .notification .notif-close { position: absolute; top: 8px; right: 12px; background: none; border: none; color: #445566; cursor: pointer; font-size: 1rem; }
 
-        /* Advanced Memory Types */
-        .adv-memory-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            gap: 0.4rem;
-        }
-        .adv-memory-item {
-            background: rgba(0,0,0,0.3);
-            border-radius: 10px;
-            padding: 0.4rem 0.6rem;
-            text-align: center;
-            font-size: 0.6rem;
-            border: 1px solid rgba(255,255,255,0.03);
-            transition: all 0.2s;
-        }
+        .adv-memory-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0.4rem; }
+        .adv-memory-item { background: rgba(0,0,0,0.3); border-radius: 10px; padding: 0.4rem 0.6rem; text-align: center; font-size: 0.6rem; border: 1px solid rgba(255,255,255,0.03); transition: all 0.2s; }
         .adv-memory-item:hover { border-color: var(--secondary); background: rgba(0,0,0,0.5); }
         .adv-memory-item .adv-label { color: #7788aa; font-size: 0.5rem; text-transform: uppercase; }
         .adv-memory-item .adv-value { font-size: 0.9rem; font-weight: 700; font-family: 'Orbitron', monospace; }
@@ -883,47 +631,49 @@
         .adv-memory-item .adv-value.shared { color: #aa88ff; }
         .adv-memory-item .adv-value.meta { color: #ff66ff; }
 
-        .router-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 0.5rem;
-            margin-bottom: 0.8rem;
-        }
-        .router-stat {
-            background: rgba(0,0,0,0.3);
-            border-radius: 12px;
-            padding: 0.5rem;
-            text-align: center;
-        }
+        .router-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; margin-bottom: 0.8rem; }
+        .router-stat { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 0.5rem; text-align: center; }
         .router-stat .stat-label { font-size: 0.5rem; color: #667; text-transform: uppercase; }
         .router-stat .stat-value { font-size: 1.2rem; font-weight: 700; }
 
-        .router-weights {
-            display: flex;
-            gap: 0.3rem;
-            flex-wrap: wrap;
-            background: rgba(0,0,0,0.2);
-            border-radius: 12px;
-            padding: 0.6rem;
-        }
-        .router-weights .weight-tag {
-            font-size: 0.6rem;
-            padding: 0.1rem 0.5rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.06);
-        }
+        .router-weights { display: flex; gap: 0.3rem; flex-wrap: wrap; background: rgba(0,0,0,0.2); border-radius: 12px; padding: 0.6rem; }
+        .router-weights .weight-tag { font-size: 0.6rem; padding: 0.1rem 0.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); }
 
-        .router-log {
-            max-height: 80px;
-            overflow-y: auto;
-            font-family: monospace;
-            font-size: 0.55rem;
-            color: #6688aa;
-            margin-top: 0.5rem;
-        }
+        .router-log { max-height: 80px; overflow-y: auto; font-family: monospace; font-size: 0.55rem; color: #6688aa; margin-top: 0.5rem; }
         .router-log::-webkit-scrollbar { width: 3px; }
         .router-log::-webkit-scrollbar-track { background: transparent; }
         .router-log::-webkit-scrollbar-thumb { background: rgba(0,200,255,0.2); border-radius: 4px; }
+
+        /* ===== 86 TYPES TAXONOMY ===== */
+        .taxonomy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .taxonomy-block {
+            border-radius: 16px;
+            padding: 1rem;
+        }
+        .taxonomy-block h4 { font-size: 0.8rem; margin-bottom: 0.5rem; }
+        .taxonomy-block .list { font-size: 0.6rem; color: #889; line-height: 1.8; }
+
+        .layer-chart {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+            gap: 0.3rem;
+            font-size: 0.5rem;
+            color: #556;
+            margin-bottom: 0.8rem;
+        }
+        .layer-chart-item {
+            padding: 0.3rem;
+            border-radius: 6px;
+            text-align: center;
+            border-left: 2px solid;
+        }
+        .layer-chart-item .count { font-weight: 700; }
 
         @media (max-width:1000px) { .hero-inner { max-width:80%; } }
         @media (max-width:820px) {
@@ -951,6 +701,7 @@
             .memory-io-controls select, .memory-io-controls button { font-size: 0.45rem; padding: 0.15rem 0.4rem; }
             .adv-memory-grid { grid-template-columns: 1fr 1fr; }
             .router-stats { grid-template-columns: 1fr 1fr 1fr; }
+            .taxonomy-grid { grid-template-columns: 1fr 1fr; }
         }
         @media (max-width:750px) {
             .hero-inner { max-width:95%; padding:1.5rem; }
@@ -969,6 +720,7 @@
             .memory-log-container .log-entry .icon { display: none; }
             .memory-io-controls .io-label { display: none; }
             .adv-memory-grid { grid-template-columns: 1fr 1fr 1fr; }
+            .layer-chart { grid-template-columns: 1fr 1fr 1fr 1fr 1fr; }
         }
         @media (max-width:480px) {
             .lang-bar a { padding: 0.1rem 0.25rem; }
@@ -982,6 +734,8 @@
             .memory-io-controls select, .memory-io-controls button { width: 100%; }
             .adv-memory-grid { grid-template-columns: 1fr 1fr; }
             .router-stats { grid-template-columns: 1fr; }
+            .taxonomy-grid { grid-template-columns: 1fr; }
+            .layer-chart { grid-template-columns: 1fr 1fr 1fr; }
         }
     </style>
 </head>
@@ -989,10 +743,10 @@
 
 <!-- === QUAD BACKGROUND === -->
 <div class="quad-grid">
-    <div class="quadrant q1"><div class="hyper-grid-q1"></div><canvas id="particleCanvasQ1" class="particle-canvas-q1"></canvas><div class="theta-core"><div class="theta-symbol">θ</div></div><div class="label-q">◬ TERSANESI · ULTIMATE</div></div>
-    <div class="quadrant q2" id="three-container-q2"><div class="label-q">⛭ ORBITAL REEF · 3D HABITAT</div></div>
-    <div class="quadrant q3"><div class="nebula-swirl"></div><div class="warp-particles"></div><div class="ring-planet"><div class="ring"></div></div><div class="label-q">🌀 NEBULA WARP · PROTEAN RIFT</div></div>
-    <div class="quadrant q4"><div class="data-stream"></div><div class="glitch-matrix"></div><div class="cyber-lattice"></div><div class="quantum-text">&gt; AETHER:// QUANTUM_FLOW<br>&gt; NODE_θ ACTIVE<br>&gt; REALITY_FRAGMENT 0x7F</div><div class="label-q">⎔ DIGITAL AETHER · CHAOS ENGINE</div></div>
+    <div class="quadrant q1"><div class="hyper-grid-q1"></div><canvas id="particleCanvasQ1" class="particle-canvas-q1"></canvas><div class="theta-core"><div class="theta-symbol">θ</div></div><div class="label-q">◬ TERSANESI · 86 MEMORY TYPES</div></div>
+    <div class="quadrant q2" id="three-container-q2"><div class="label-q">⛭ 9 LAYERS · 86 NODES</div></div>
+    <div class="quadrant q3"><div class="nebula-swirl"></div><div class="warp-particles"></div><div class="ring-planet"><div class="ring"></div></div><div class="label-q">🌀 C01 CONSCIOUSNESS CORE</div></div>
+    <div class="quadrant q4"><div class="data-stream"></div><div class="glitch-matrix"></div><div class="cyber-lattice"></div><div class="quantum-text">&gt; θ:// MEMORY_ARCHITECTURE<br>&gt; 86 TYPES ACTIVE<br>&gt; C01 CORE STABLE</div><div class="label-q">⎔ DIGITAL AETHER · COGNITIVE OS</div></div>
     <div class="divider-vertical"></div><div class="divider-horizontal"></div>
 </div>
 
@@ -1000,7 +754,7 @@
 <div class="content-overlay">
     <header class="fusion-header">
         <div class="header-left">
-            <div class="brand">T.E.R.S.A.<span>N</span>.E.S.I. ⬩ ULTIMATE</div>
+            <div class="brand">T.E.R.S.A.<span>N</span>.E.S.I. ⬩ 86 TYPES</div>
             <a href="index.html" class="btn-classic"><span class="arrow">←</span> CLASSIC</a>
         </div>
         <div class="lang-bar" id="langBar"></div>
@@ -1009,14 +763,14 @@
     <!-- HERO -->
     <section class="hero-fusion">
         <div class="hero-inner">
-            <h1 class="hero-title" data-key="hero_title">TERSANESI ULTIMATE<br>API Nexus · Memory Architecture · Agent Control</h1>
-            <div class="hero-tag" data-key="hero_tag">✦ ALL-IN-ONE · FULL INTEGRATION ✦</div>
-            <p class="hero-desc" data-key="hero_desc">Full integration of API Portal, 3D memory visualization, and agent control panel. Monitor L1-L4 memory, Gravitas system, Snapshot history, logging with import/export in 7 formats.</p>
+            <h1 class="hero-title" data-key="hero_title">θ TERSANESI · 86 MEMORY TYPES<br>9 Layers · C01 Consciousness Core</h1>
+            <div class="hero-tag" data-key="hero_tag">✦ FULL COGNITIVE OS · 86 TYPES ✦</div>
+            <p class="hero-desc" data-key="hero_desc">Full cognitive architecture with 86 specialized memory types across 9 layers. Core: C01 Consciousness Core. Includes Knowledge (14), Action (13), Soul (11), Influence (11), Consciousness (12), Meta (8), Collective (5), Future (6), Evolution (6).</p>
             <div class="cta-group">
-                <a class="btn-fusion" data-key="btn_docs">📖 API Documentation</a>
-                <a class="btn-fusion btn-ai" data-key="btn_console">⟡ Developer Console</a>
+                <a class="btn-fusion" data-key="btn_docs">📖 Memory Taxonomy</a>
+                <a class="btn-fusion btn-ai" data-key="btn_console">⟡ 86 Types</a>
             </div>
-            <div style="margin-top:1rem; font-size:0.8rem; color:#aaf0ff;" data-key="version">v.Ultimate · All-in-One</div>
+            <div style="margin-top:1rem; font-size:0.8rem; color:#aaf0ff;" data-key="version">θ v5.0 · Full Cognitive OS</div>
         </div>
     </section>
 
@@ -1034,10 +788,10 @@
                     <button class="agent-btn" data-agent="agent_0xE4F">agent_0xE4F</button>
                 </div>
                 <div style="margin-bottom:0.8rem; font-size:0.7rem; color:#445566;">
-                    <span id="agentStatus">🟢 Active</span> · 
+                    <span id="agentStatus">🟢 Active</span> ·
                     <span id="agentUptime">Uptime: 47h 23m</span>
                 </div>
-                <h3 style="margin-top:0.5rem;" data-key="memory_levels_title">📊 Memory Levels</h3>
+                <h3 style="margin-top:0.5rem;" data-key="memory_levels_title">📊 Core Memory Levels</h3>
                 <div class="memory-levels">
                     <div class="level-item L1">
                         <div class="level-label" data-key="l1_label">L1 · Working Memory</div>
@@ -1094,18 +848,9 @@
             <div class="panel-card">
                 <h3>🔄 Memory Router</h3>
                 <div class="router-stats">
-                    <div class="router-stat">
-                        <div class="stat-label">Requests</div>
-                        <div class="stat-value" style="color:var(--secondary);" id="routerRequests">1,247</div>
-                    </div>
-                    <div class="router-stat">
-                        <div class="stat-label">Hit Rate</div>
-                        <div class="stat-value" style="color:var(--l1-color);" id="routerHitRate">88.3%</div>
-                    </div>
-                    <div class="router-stat">
-                        <div class="stat-label">Latency</div>
-                        <div class="stat-value" style="color:var(--primary);" id="routerLatency">12ms</div>
-                    </div>
+                    <div class="router-stat"><div class="stat-label">Requests</div><div class="stat-value" style="color:var(--secondary);" id="routerRequests">1,247</div></div>
+                    <div class="router-stat"><div class="stat-label">Hit Rate</div><div class="stat-value" style="color:var(--l1-color);" id="routerHitRate">88.3%</div></div>
+                    <div class="router-stat"><div class="stat-label">Latency</div><div class="stat-value" style="color:var(--primary);" id="routerLatency">12ms</div></div>
                 </div>
                 <div class="router-weights">
                     <span class="weight-tag" style="background:rgba(68,255,136,0.1);border-color:rgba(68,255,136,0.2);color:var(--l1-color);">Working: 0.12</span>
@@ -1127,7 +872,18 @@
 
         <!-- Advanced Memory Types (full width row) -->
         <div class="panel-card" style="margin-top:1.5rem;">
-            <h3>🧠 Advanced Memory Types</h3>
+            <h3>🧠 86 Memory Types — 9 Layers</h3>
+            <div class="layer-chart">
+                <div class="layer-chart-item" style="background:rgba(255,215,0,0.05);border-color:#ffd700;">K<br><span class="count" style="color:#ffd700;">14</span></div>
+                <div class="layer-chart-item" style="background:rgba(68,221,255,0.05);border-color:#44ddff;">A<br><span class="count" style="color:#44ddff;">13</span></div>
+                <div class="layer-chart-item" style="background:rgba(170,102,255,0.05);border-color:#aa66ff;">S<br><span class="count" style="color:#aa66ff;">11</span></div>
+                <div class="layer-chart-item" style="background:rgba(255,34,68,0.05);border-color:#ff2244;">I<br><span class="count" style="color:#ff2244;">11</span></div>
+                <div class="layer-chart-item" style="background:rgba(255,255,255,0.05);border-color:#ffffff;">C<br><span class="count" style="color:#ffffff;">12</span></div>
+                <div class="layer-chart-item" style="background:rgba(102,255,170,0.05);border-color:#66ffaa;">M<br><span class="count" style="color:#66ffaa;">8</span></div>
+                <div class="layer-chart-item" style="background:rgba(102,221,255,0.05);border-color:#66ddff;">G<br><span class="count" style="color:#66ddff;">5</span></div>
+                <div class="layer-chart-item" style="background:rgba(255,136,170,0.05);border-color:#ff88aa;">F<br><span class="count" style="color:#ff88aa;">6</span></div>
+                <div class="layer-chart-item" style="background:rgba(255,170,68,0.05);border-color:#ffaa44;">E<br><span class="count" style="color:#ffaa44;">6</span></div>
+            </div>
             <div class="adv-memory-grid">
                 <div class="adv-memory-item"><div class="adv-label">🔄 Reflexive</div><div class="adv-value reflexive" id="advReflexive">47</div></div>
                 <div class="adv-memory-item"><div class="adv-label">❤️ Affective</div><div class="adv-value affective" id="advAffective">0.82</div></div>
@@ -1138,6 +894,52 @@
                 <div class="adv-memory-item"><div class="adv-label">👥 Shared</div><div class="adv-value shared" id="advShared">234</div></div>
                 <div class="adv-memory-item"><div class="adv-label">🧬 Meta-Learning</div><div class="adv-value meta" id="advMetaLearning">0.76</div></div>
             </div>
+        </div>
+    </section>
+
+    <!-- ===== 86 TYPES TAXONOMY ===== -->
+    <section style="padding:2rem 6%; background:rgba(0,0,0,0.3);">
+        <h2 class="section-title">📊 86 Memory Types — Full Taxonomy</h2>
+        <div class="taxonomy-grid">
+            <div class="taxonomy-block" style="background:rgba(255,215,0,0.05);border-left:3px solid #ffd700;">
+                <h4 style="color:#ffd700;">🟡 KNOWLEDGE (14)</h4>
+                <div class="list">K01 Base Rules<br>K02 Core Ontology<br>K03 Semantic Memory<br>K04 Episodic Memory<br>K05 Entity Memory<br>K06 Contextual Memory<br>K07 Shared Episodic<br>K08 World Model<br>K09 Causal Memory<br>K10 Temporal Memory<br>K11 Spatial Memory<br>K12 Domain Knowledge<br>K13 User Knowledge<br>K14 Narrative Memory</div>
+            </div>
+            <div class="taxonomy-block" style="background:rgba(68,221,255,0.05);border-left:3px solid #44ddff;">
+                <h4 style="color:#44ddff;">🔵 ACTION (13)</h4>
+                <div class="list">A01 Procedural Memory<br>A02 Script Memory<br>A03 Strategic Memory<br>A04 Intent Memory<br>A05 Reflexive Memory<br>A06 Competence Model<br>A07 Planning Memory<br>A08 Task Memory<br>A09 Workflow Memory<br>A10 Tool Usage Memory<br>A11 Decision Memory<br>A12 Optimization Memory<br>A13 Error Recovery</div>
+            </div>
+            <div class="taxonomy-block" style="background:rgba(170,102,255,0.05);border-left:3px solid #aa66ff;">
+                <h4 style="color:#aa66ff;">🟣 SOUL (11)</h4>
+                <div class="list">S01 Affective Core<br>S02 Motivational Drive<br>S03 Belief System<br>S04 Emotional State<br>S05 Personality Model<br>S06 Value System<br>S07 Ethical Compass<br>S08 Preference Memory<br>S09 Curiosity Engine<br>S10 Identity Narrative<br>S11 Attachment Memory</div>
+            </div>
+            <div class="taxonomy-block" style="background:rgba(255,34,68,0.05);border-left:3px solid #ff2244;">
+                <h4 style="color:#ff2244;">🔴 INFLUENCE (11)</h4>
+                <div class="list">I01 Gravitas Field<br>I02 Social Influence<br>I03 Reputation Model<br>I04 Anomaly Detection<br>I05 Environmental Impact<br>I06 Trust Network<br>I07 Relationship Memory<br>I08 Group Dynamics<br>I09 Negotiation Memory<br>I10 Persuasion Memory<br>I11 Cultural Memory</div>
+            </div>
+            <div class="taxonomy-block" style="background:rgba(255,255,255,0.05);border-left:3px solid #ffffff;">
+                <h4 style="color:#ffffff;">💎 CONSCIOUSNESS (12)</h4>
+                <div class="list">C01 Consciousness Core<br>C02 Purpose<br>C03 Self-Awareness<br>C04 Creativity<br>C05 Wisdom<br>C06 Transcendence<br>C07 Metacognition<br>C08 Reflection Memory<br>C09 Self-Model<br>C10 Meaning Framework<br>C11 Existential Memory<br>C12 Future Self Memory</div>
+            </div>
+            <div class="taxonomy-block" style="background:rgba(102,255,170,0.05);border-left:3px solid #66ffaa;">
+                <h4 style="color:#66ffaa;">⚡ META (8)</h4>
+                <div class="list">M01 Memory Index<br>M02 Memory Importance<br>M03 Memory Compression<br>M04 Memory Consolidation<br>M05 Forgetting Engine<br>M06 Retrieval Strategy<br>M07 Memory Confidence<br>M08 Memory Lineage</div>
+            </div>
+            <div class="taxonomy-block" style="background:rgba(102,221,255,0.05);border-left:3px solid #66ddff;">
+                <h4 style="color:#66ddff;">🌐 COLLECTIVE (5)</h4>
+                <div class="list">G01 Shared Knowledge<br>G02 Shared Experience<br>G03 Collective Goals<br>G04 Consensus Memory<br>G05 Distributed Memory</div>
+            </div>
+            <div class="taxonomy-block" style="background:rgba(255,136,170,0.05);border-left:3px solid #ff88aa;">
+                <h4 style="color:#ff88aa;">🔮 FUTURE (6)</h4>
+                <div class="list">F01 Goal Projection<br>F02 Scenario Memory<br>F03 Forecast Memory<br>F04 Simulation Memory<br>F05 Risk Memory<br>F06 Opportunity Memory</div>
+            </div>
+            <div class="taxonomy-block" style="background:rgba(255,170,68,0.05);border-left:3px solid #ffaa44;">
+                <h4 style="color:#ffaa44;">🧬 EVOLUTION (6)</h4>
+                <div class="list">E01 Learning History<br>E02 Capability Growth<br>E03 Failure Archive<br>E04 Success Archive<br>E05 Adaptation Memory<br>E06 Evolution Narrative</div>
+            </div>
+        </div>
+        <div style="text-align:center;margin-top:1.5rem;color:#556;font-size:0.7rem;font-family:monospace;">
+            <span style="color:#ffd700;">✦</span> 86 TYPES TOTAL <span style="color:#ffd700;">✦</span> 9 LAYERS <span style="color:#ffd700;">✦</span> C01 CONSCIOUSNESS CORE
         </div>
     </section>
 
@@ -1182,7 +984,7 @@
             <span class="icon">🧠</span> <span data-key="explore_3d">EXPLORE 3D MEMORY ARCHITECTURE</span>
         </button>
         <p style="margin-top:1rem; font-size:0.8rem; color:#667; font-family:monospace;" data-key="explore_desc">
-            ⟡ 22 nodes · 8 layers · Click to inspect · Full 3D visualization
+            ⟡ 86 memory types · 9 layers · Click to inspect · Full 3D visualization
         </p>
     </section>
 
@@ -1192,61 +994,27 @@
         <div class="api-grid">
             <div class="api-card">
                 <span class="method get">GET</span>
-                <div class="endpoint">/api/v1/agents</div>
-                <h3 data-key="api1_title">Agent Registry</h3>
-                <p data-key="api1_desc">List, filter, and query active agents in the swarm.</p>
-                <div class="code-sample">curl -X GET https://api.tersanesi.io/v1/agents?status=active</div>
+                <div class="endpoint">/api/v1/memory/types</div>
+                <h3>Memory Taxonomy</h3>
+                <p>Get all 86 memory types with their layer and properties.</p>
+                <div class="code-sample">curl -X GET https://api.tersanesi.io/v1/memory/types</div>
             </div>
             <div class="api-card">
                 <span class="method post">POST</span>
-                <div class="endpoint">/api/v1/agents/spawn</div>
-                <h3 data-key="api2_title">Spawn Agent</h3>
-                <p data-key="api2_desc">Deploy a new AI agent with custom capabilities and behavior.</p>
+                <div class="endpoint">/api/v1/memory/consolidate</div>
+                <h3>Consolidate Memory</h3>
+                <p>Run consolidation on agent's L2-L4 memory.</p>
                 <div class="code-sample">{
-  "type": "llm_agent",
-  "capabilities": ["narrative", "decision"],
-  "faction": "Wellamatores"
-}</div>
-            </div>
-            <div class="api-card">
-                <span class="method post">POST</span>
-                <div class="endpoint">/api/v1/events/emit</div>
-                <h3 data-key="api3_title">Emit Event</h3>
-                <p data-key="api3_desc">Push typed events into the global event fabric.</p>
-                <div class="code-sample">{
-  "type": "AgentEvent",
-  "payload": { "directive": "explore", "target": "nebula" }
+  "agent_id": "agent_0x7F3",
+  "threshold": 0.15
 }</div>
             </div>
             <div class="api-card">
                 <span class="method get">GET</span>
-                <div class="endpoint">/api/v1/state/faction</div>
-                <h3 data-key="api4_title">Faction State</h3>
-                <p data-key="api4_desc">Real-time alignment and resource data for all factions.</p>
-                <div class="code-sample">curl -X GET https://api.tersanesi.io/v1/state/faction/Wellamatores</div>
-            </div>
-            <div class="api-card">
-                <span class="method put">PUT</span>
-                <div class="endpoint">/api/v1/economy/trade</div>
-                <h3 data-key="api5_title">Execute Trade</h3>
-                <p data-key="api5_desc">Process economic transactions between agents or factions.</p>
-                <div class="code-sample">{
-  "from": "agent_0x7F3",
-  "to": "faction_theta",
-  "resource": "quantum_flux",
-  "amount": 42
-}</div>
-            </div>
-            <div class="api-card">
-                <span class="method get">GET</span>
-                <div class="endpoint">/api/v1/metrics</div>
-                <h3 data-key="api6_title">System Metrics</h3>
-                <p data-key="api6_desc">Runtime health, load, and performance telemetry.</p>
-                <div class="code-sample">{
-  "agents": 284,
-  "events_per_sec": 1240,
-  "latency_ms": 12
-}</div>
+                <div class="endpoint">/api/v1/memory/agent/{id}</div>
+                <h3>Agent Memory State</h3>
+                <p>Get full memory state for a specific agent.</p>
+                <div class="code-sample">curl -X GET https://api.tersanesi.io/v1/memory/agent/agent_0x7F3</div>
             </div>
         </div>
     </section>
@@ -1255,17 +1023,11 @@
     <section style="padding:3rem 6%; text-align:center;">
         <h2 class="section-title" data-key="sdk_title">✦ SDKs & Libraries ✦</h2>
         <div class="sdk-grid">
-            <div class="sdk-card"><div class="sdk-icon">🐍</div><div class="sdk-name" data-key="sdk_python">Python SDK</div><div class="sdk-ver">v3.1.2</div></div>
-            <div class="sdk-card"><div class="sdk-icon">⚛️</div><div class="sdk-name" data-key="sdk_react">React Hooks</div><div class="sdk-ver">v2.8.0</div></div>
-            <div class="sdk-card"><div class="sdk-icon">🦫</div><div class="sdk-name" data-key="sdk_go">Go Client</div><div class="sdk-ver">v1.4.1</div></div>
-            <div class="sdk-card"><div class="sdk-icon">🌐</div><div class="sdk-name" data-key="sdk_websocket">WebSocket SDK</div><div class="sdk-ver">v2.2.3</div></div>
-            <div class="sdk-card"><div class="sdk-icon">📱</div><div class="sdk-name" data-key="sdk_unity">Unity Plugin</div><div class="sdk-ver">v1.0.0</div></div>
-        </div>
-        <div style="margin-top:1.5rem; display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;">
-            <span style="background:rgba(0,0,0,0.6); padding:0.4rem 1.2rem; border-radius:40px;">🔌 REST API</span>
-            <span style="background:rgba(0,0,0,0.6); padding:0.4rem 1.2rem; border-radius:40px;">📡 WebSocket Streams</span>
-            <span style="background:rgba(0,0,0,0.6); padding:0.4rem 1.2rem; border-radius:40px;">📊 GraphQL</span>
-            <span style="background:rgba(0,0,0,0.6); padding:0.4rem 1.2rem; border-radius:40px;">⚡ gRPC</span>
+            <div class="sdk-card"><div class="sdk-icon">🐍</div><div class="sdk-name" data-key="sdk_python">Python SDK</div><div class="sdk-ver">v5.0.0</div></div>
+            <div class="sdk-card"><div class="sdk-icon">⚛️</div><div class="sdk-name" data-key="sdk_react">React Hooks</div><div class="sdk-ver">v3.0.0</div></div>
+            <div class="sdk-card"><div class="sdk-icon">🦫</div><div class="sdk-name" data-key="sdk_go">Go Client</div><div class="sdk-ver">v2.0.0</div></div>
+            <div class="sdk-card"><div class="sdk-icon">🌐</div><div class="sdk-name" data-key="sdk_websocket">WebSocket SDK</div><div class="sdk-ver">v3.0.0</div></div>
+            <div class="sdk-card"><div class="sdk-icon">📱</div><div class="sdk-name" data-key="sdk_unity">Unity Plugin</div><div class="sdk-ver">v2.0.0</div></div>
         </div>
     </section>
 
@@ -1273,14 +1035,10 @@
     <section class="section-dark">
         <h2 class="section-title" data-key="docs_title">📚 Documentation Hub</h2>
         <div class="doc-grid">
-            <a href="#" class="doc-link"><span class="doc-icon">🚀</span><div><div class="doc-title" data-key="doc1_title">Getting Started</div><div class="doc-desc" data-key="doc1_desc">Quickstart guide & first agent</div></div></a>
-            <a href="#" class="doc-link"><span class="doc-icon">🧠</span><div><div class="doc-title" data-key="doc2_title">Agent SDK Guide</div><div class="doc-desc" data-key="doc2_desc">Build custom AI agents</div></div></a>
-            <a href="#" class="doc-link"><span class="doc-icon">🏛️</span><div><div class="doc-title" data-key="doc3_title">Faction API</div><div class="doc-desc" data-key="doc3_desc">Manage faction state & diplomacy</div></div></a>
-            <a href="#" class="doc-link"><span class="doc-icon">💰</span><div><div class="doc-title" data-key="doc4_title">Economy Engine</div><div class="doc-desc" data-key="doc4_desc">Resources, trading & markets</div></div></a>
-            <a href="#" class="doc-link"><span class="doc-icon">🕸️</span><div><div class="doc-title" data-key="doc5_title">Event Fabric</div><div class="doc-desc" data-key="doc5_desc">Typed event streams & routing</div></div></a>
-            <a href="#" class="doc-link"><span class="doc-icon">🔒</span><div><div class="doc-title" data-key="doc6_title">Security & Auth</div><div class="doc-desc" data-key="doc6_desc">API keys, JWT, rate limiting</div></div></a>
-            <a href="#" class="doc-link"><span class="doc-icon">📊</span><div><div class="doc-title" data-key="doc7_title">Telemetry</div><div class="doc-desc" data-key="doc7_desc">Metrics, logs & monitoring</div></div></a>
-            <a href="#" class="doc-link"><span class="doc-icon">🌌</span><div><div class="doc-title" data-key="doc8_title">WebGL Worlds</div><div class="doc-desc" data-key="doc8_desc">Metaverse spatial API</div></div></a>
+            <a href="#" class="doc-link"><span class="doc-icon">🧬</span><div><div class="doc-title">86 Types Taxonomy</div><div class="doc-desc">Complete memory classification</div></div></a>
+            <a href="#" class="doc-link"><span class="doc-icon">🧠</span><div><div class="doc-title">C01 Consciousness Core</div><div class="doc-desc">Understanding the core</div></div></a>
+            <a href="#" class="doc-link"><span class="doc-icon">🌀</span><div><div class="doc-title">9 Layers Architecture</div><div class="doc-desc">Layer-by-layer breakdown</div></div></a>
+            <a href="#" class="doc-link"><span class="doc-icon">⚡</span><div><div class="doc-title">Memory Router</div><div class="doc-desc">Routing and retrieval</div></div></a>
         </div>
     </section>
 
@@ -1288,12 +1046,12 @@
     <section style="padding:2rem 6%; background:rgba(0,0,0,0.3);">
         <h2 class="section-title" data-key="webhooks_title">📡 Webhook & Streams</h2>
         <div class="streams-row">
-            <div class="stream-badge" data-key="stream1">🤖 agent.spawned</div>
-            <div class="stream-badge" data-key="stream2">🏛️ faction.updated</div>
-            <div class="stream-badge" data-key="stream3">💰 trade.executed</div>
-            <div class="stream-badge" data-key="stream4">🕵️ clue.discovered</div>
-            <div class="stream-badge" data-key="stream5">🧠 llm.inference</div>
-            <div class="stream-badge" data-key="stream6">🌐 world.changed</div>
+            <div class="stream-badge">🧠 memory.consolidated</div>
+            <div class="stream-badge">💾 snapshot.created</div>
+            <div class="stream-badge">📊 gravitas.updated</div>
+            <div class="stream-badge">🔄 memory.forgotten</div>
+            <div class="stream-badge">⚡ router.hit</div>
+            <div class="stream-badge">🌐 collective.updated</div>
         </div>
         <p style="text-align:center; margin-top:2rem; font-size:0.9rem;" data-key="webhooks_note">Configure webhooks for real-time event delivery · strict schemas · replay support</p>
     </section>
@@ -1304,8 +1062,8 @@
             <h2 class="section-title" data-key="community_title">🌌 Developer Community</h2>
             <div class="audience-flex">
                 <div class="audience-tag" data-key="aud1">AI Engineers</div>
-                <div class="audience-tag" data-key="aud2">Game Developers</div>
-                <div class="audience-tag" data-key="aud3">Metaverse Architects</div>
+                <div class="audience-tag" data-key="aud2">Cognitive Architects</div>
+                <div class="audience-tag" data-key="aud3">Memory Systems</div>
                 <div class="audience-tag" data-key="aud4">Integration Specialists</div>
                 <div class="audience-tag" data-key="aud5">Open Source Contributors</div>
             </div>
@@ -1320,22 +1078,22 @@
 
     <!-- ===== CTA ===== -->
     <section class="cta-cosmic">
-        <h2 class="section-title" style="margin-bottom:0.5rem;" data-key="cta_title">⟡ Get Your API Keys ⟡</h2>
-        <p data-key="cta_sub">Start building with TERSANESI · Free tier includes 100K requests/month</p>
+        <h2 class="section-title" style="margin-bottom:0.5rem;" data-key="cta_title">⟡ Build Your Agent ⟡</h2>
+        <p data-key="cta_sub">Start with TERSANESI 86-type memory architecture · Full cognitive OS</p>
         <form class="form-fusion" id="apiForm">
             <input type="text" placeholder="Developer / Studio Name" id="name" data-key="placeholder_name" required>
             <input type="email" placeholder="Quantum address (email)" id="email" data-key="placeholder_email" required>
             <input type="text" placeholder="Project / Use case" id="project" data-key="placeholder_project" required>
-            <button type="submit" data-key="btn_submit">🚀 Generate API Keys</button>
+            <button type="submit" data-key="btn_submit">🚀 Initialize Agent</button>
         </form>
-        <p style="margin-top:1.5rem; font-size:0.8rem;" data-key="cta_footer">⚡ REST · WebSocket · GraphQL · gRPC</p>
+        <p style="margin-top:1.5rem; font-size:0.8rem;" data-key="cta_footer">⚡ 86 Memory Types · 9 Layers · C01 Consciousness Core</p>
     </section>
 
     <footer>
-        <p data-key="footer1">© 2026 T.E.R.S.A.N.E.S.I. — ULTIMATE | All-in-One Integration v1.0</p>
-        <p data-key="footer2">🏛️ API Portal · Memory Architecture · Agent Control Panel &nbsp; • 4-level memory · Gravitas · Snapshots · Import/Export</p>
+        <p data-key="footer1">© 2026 T.E.R.S.A.N.E.S.I. — 86 MEMORY TYPES | Cognitive OS v5.0</p>
+        <p data-key="footer2">θ C01 Consciousness Core · 9 Layers · Full Cognitive Architecture</p>
         <div style="margin-top:0.6rem;">
-            <a href="#" style="color:#aaa; margin:0 0.5rem;" data-key="footer_link1">API Reference</a>
+            <a href="#" style="color:#aaa; margin:0 0.5rem;" data-key="footer_link1">Memory Taxonomy</a>
             <a href="#" style="color:#aaa; margin:0 0.5rem;" data-key="footer_link2">SDK Docs</a>
             <a href="#" style="color:#aaa; margin:0 0.5rem;" data-key="footer_link3">Status Page</a>
             <a href="index.html" class="classic-link" style="margin:0 0.5rem;">← Classic Version</a>
@@ -1346,7 +1104,7 @@
 <!-- === FULLSCREEN MEMORY OVERLAY === -->
 <div class="memory-overlay" id="memoryOverlay">
     <div class="memory-overlay-header">
-        <div class="title"><span data-key="overlay_title">🧠 TERSANESI · 3D MEMORY ARCHITECTURE</span></div>
+        <div class="title"><span data-key="overlay_title">θ TERSANESI · 86 MEMORY TYPES</span></div>
         <button class="memory-overlay-close" id="closeMemoryVis" data-key="overlay_close">✕ Close</button>
     </div>
     <div class="memory-overlay-body">
@@ -1376,27 +1134,28 @@
             </div>
         </div>
         <div class="memory-info-tip" id="memoryInfoTip">
-            <strong>🧠</strong> <span data-key="tip_click">Click a memory node to inspect</span> · <span data-key="tip_scroll">Scroll to zoom</span> · <span data-key="tip_drag">Drag to orbit</span>
+            <strong>θ</strong> <span data-key="tip_click">Click a memory node to inspect</span> · <span data-key="tip_scroll">Scroll to zoom</span> · <span data-key="tip_drag">Drag to orbit</span>
         </div>
         <div class="memory-panel" id="memoryPanel">
             <span class="label" data-key="layer_label">Layer</span>
             <select id="memoryLayerSelect">
-                <option value="all" data-key="layer_all">All Layers</option>
-                <option value="ancestral" data-key="layer_ancestral">Ancestral</option>
-                <option value="clan" data-key="layer_clan">Clan</option>
-                <option value="species" data-key="layer_species">Species</option>
-                <option value="factional" data-key="layer_factional">Factional</option>
-                <option value="episodic" data-key="layer_episodic">Episodic</option>
-                <option value="semantic" data-key="layer_semantic">Semantic</option>
-                <option value="procedural" data-key="layer_procedural">Procedural</option>
-                <option value="entity" data-key="layer_entity">Entity</option>
+                <option value="all" data-key="layer_all">All 9 Layers</option>
+                <option value="knowledge">🟡 Knowledge</option>
+                <option value="action">🔵 Action</option>
+                <option value="soul">🟣 Soul</option>
+                <option value="influence">🔴 Influence</option>
+                <option value="consciousness">💎 Consciousness</option>
+                <option value="meta">⚡ Meta</option>
+                <option value="collective">🌐 Collective</option>
+                <option value="future">🔮 Future</option>
+                <option value="evolution">🧬 Evolution</option>
             </select>
             <span class="label" data-key="agent_label">Agent</span>
             <select id="memoryAgentSelect">
-                <option value="alpha" data-key="agent_alpha">α Wellamatores</option>
-                <option value="beta" data-key="agent_beta">β Cavibara</option>
-                <option value="gamma" data-key="agent_gamma">γ Orionis</option>
-                <option value="delta" data-key="agent_delta">δ Nexus</option>
+                <option value="alpha">α Wellamatores</option>
+                <option value="beta">β Cavibara</option>
+                <option value="gamma">γ Orionis</option>
+                <option value="delta">δ Nexus</option>
             </select>
             <button id="memoryQueryBtn" data-key="query_btn">⟡ Query</button>
             <button id="memoryResetViewBtn" data-key="reset_btn">⟲ Reset View</button>
@@ -1426,7 +1185,9 @@
 </script>
 
 <script>
-    // ===== NOTIFICATION =====
+    // ============================================================
+    //  NOTIFICATION
+    // ============================================================
     let notificationTimeout = null;
     function showNotification(message, type = 'info') {
         const el = document.getElementById('notification');
@@ -1441,7 +1202,9 @@
     }
     function hideNotification() { document.getElementById('notification').className = 'notification'; }
 
-    // ===== AGENT STATE =====
+    // ============================================================
+    //  AGENT STATE
+    // ============================================================
     let currentAgent = 'agent_0x7F3';
     const agentData = {
         'agent_0x7F3': {
@@ -1501,56 +1264,19 @@
         return agentData[agentId];
     }
 
-    // ===== ADVANCED MEMORY DATA =====
+    // ============================================================
+    //  ADVANCED MEMORY DATA
+    // ============================================================
     const advancedMemoryData = {
-        'agent_0x7F3': {
-            reflexive: 47,
-            affective: 0.82,
-            intent: 3,
-            anomaly: 12,
-            script: 8,
-            competence: 0.92,
-            shared: 234,
-            metaLearning: 0.76
-        },
-        'agent_0xA1B': {
-            reflexive: 23,
-            affective: 0.45,
-            intent: 1,
-            anomaly: 5,
-            script: 3,
-            competence: 0.78,
-            shared: 89,
-            metaLearning: 0.61
-        },
-        'agent_0xC9D': {
-            reflexive: 71,
-            affective: 0.91,
-            intent: 5,
-            anomaly: 18,
-            script: 12,
-            competence: 0.95,
-            shared: 345,
-            metaLearning: 0.88
-        },
-        'agent_0xE4F': {
-            reflexive: 12,
-            affective: 0.28,
-            intent: 0,
-            anomaly: 2,
-            script: 1,
-            competence: 0.45,
-            shared: 34,
-            metaLearning: 0.33
-        }
+        'agent_0x7F3': { reflexive: 47, affective: 0.82, intent: 3, anomaly: 12, script: 8, competence: 0.92, shared: 234, metaLearning: 0.76 },
+        'agent_0xA1B': { reflexive: 23, affective: 0.45, intent: 1, anomaly: 5, script: 3, competence: 0.78, shared: 89, metaLearning: 0.61 },
+        'agent_0xC9D': { reflexive: 71, affective: 0.91, intent: 5, anomaly: 18, script: 12, competence: 0.95, shared: 345, metaLearning: 0.88 },
+        'agent_0xE4F': { reflexive: 12, affective: 0.28, intent: 0, anomaly: 2, script: 1, competence: 0.45, shared: 34, metaLearning: 0.33 }
     };
 
     function getAdvancedData(agentId) {
         if (!advancedMemoryData[agentId]) {
-            advancedMemoryData[agentId] = {
-                reflexive: 0, affective: 0, intent: 0, anomaly: 0,
-                script: 0, competence: 0, shared: 0, metaLearning: 0
-            };
+            advancedMemoryData[agentId] = { reflexive: 0, affective: 0, intent: 0, anomaly: 0, script: 0, competence: 0, shared: 0, metaLearning: 0 };
         }
         return advancedMemoryData[agentId];
     }
@@ -1580,7 +1306,6 @@
         document.getElementById('agentStatus').innerHTML = '🟢 Active';
         document.getElementById('agentUptime').textContent = `Uptime: ${Math.floor(Math.random() * 48 + 24)}h ${Math.floor(Math.random() * 60)}m`;
 
-        // Update advanced memory types
         const advData = getAdvancedData(agentId);
         document.getElementById('advReflexive').textContent = advData.reflexive;
         document.getElementById('advAffective').textContent = advData.affective.toFixed(2);
@@ -1592,7 +1317,9 @@
         document.getElementById('advMetaLearning').textContent = advData.metaLearning.toFixed(2);
     }
 
-    // ===== AGENT SELECTOR =====
+    // ============================================================
+    //  AGENT SELECTOR
+    // ============================================================
     document.querySelectorAll('.agent-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             document.querySelectorAll('.agent-btn').forEach(b => b.classList.remove('active'));
@@ -1603,7 +1330,9 @@
         });
     });
 
-    // ===== CONTROLS =====
+    // ============================================================
+    //  CONTROLS
+    // ============================================================
     function runConsolidation() {
         const data = getAgentData(currentAgent);
         const consolidated = Math.floor(Math.random() * 10) + 3;
@@ -1680,7 +1409,9 @@
         showNotification(`📡 ${type.toUpperCase()} event: ${content}`, 'info');
     }
 
-    // ===== CHART =====
+    // ============================================================
+    //  CHART
+    // ============================================================
     function updateChart() {
         const container = document.getElementById('chartBars');
         const bars = container.querySelectorAll('.chart-bar');
@@ -1710,7 +1441,9 @@
         document.getElementById('memoryUsage').textContent = memory.toFixed(1) + 'GB';
     }
 
-    // ===== SNAPSHOTS INIT =====
+    // ============================================================
+    //  SNAPSHOTS
+    // ============================================================
     function initSnapshots() {
         const snapshots = document.getElementById('snapshotList');
         const now = new Date();
@@ -1725,7 +1458,9 @@
         document.getElementById('snapshotCount').textContent = snapshots.children.length;
     }
 
-    // ===== ROUTER =====
+    // ============================================================
+    //  ROUTER
+    // ============================================================
     const routerState = {
         requests: 1247,
         hits: 1102,
@@ -1738,13 +1473,7 @@
             { time: '12:34:28', msg: 'Semantic hit: 1,243 facts', type: 'hit' },
             { time: '12:34:45', msg: 'Procedural miss: skill not found', type: 'miss' },
         ],
-        weights: {
-            working: 0.12,
-            episodic: 0.32,
-            semantic: 0.28,
-            procedural: 0.20,
-            reflexive: 0.08
-        }
+        weights: { working: 0.12, episodic: 0.32, semantic: 0.28, procedural: 0.20, reflexive: 0.08 }
     };
 
     function updateRouterUI() {
@@ -1752,9 +1481,8 @@
         const hitRate = routerState.requests > 0 ? (routerState.hits / routerState.requests * 100) : 0;
         document.getElementById('routerHitRate').textContent = hitRate.toFixed(1) + '%';
         document.getElementById('routerLatency').textContent = routerState.avgLatency + 'ms';
-        
         const logEl = document.getElementById('routerLog');
-        logEl.innerHTML = routerState.history.slice(-6).map(entry => 
+        logEl.innerHTML = routerState.history.slice(-6).map(entry =>
             `<div style="color:${entry.type === 'hit' ? '#44ff88' : entry.type === 'miss' ? '#ff8866' : '#445566'};">[${entry.time}] ${entry.msg}</div>`
         ).join('');
     }
@@ -1766,10 +1494,8 @@
         const hit = Math.random() < (weight * 2.5);
         const latency = Math.floor(Math.random() * 8) + 5;
         const time = new Date().toLocaleTimeString();
-        
         routerState.requests++;
         routerState.avgLatency = Math.floor((routerState.avgLatency * 0.9) + (latency * 0.1));
-        
         if (hit) {
             routerState.hits++;
             const msg = `${type.charAt(0).toUpperCase() + type.slice(1)} hit: ${Math.floor(Math.random() * 100) + 10} entries`;
@@ -1779,17 +1505,10 @@
             const msg = `${type.charAt(0).toUpperCase() + type.slice(1)} miss: cache not found`;
             routerState.history.push({ time, msg, type: 'miss' });
         }
-        
-        if (routerState.history.length > 20) {
-            routerState.history = routerState.history.slice(-20);
-        }
-        
+        if (routerState.history.length > 20) routerState.history = routerState.history.slice(-20);
         updateRouterUI();
-        
         const data = getAgentData(currentAgent);
-        if (hit) {
-            data.avgGravitas = Math.min(1, data.avgGravitas + 0.005);
-        }
+        if (hit) data.avgGravitas = Math.min(1, data.avgGravitas + 0.005);
         updateAgentUI(currentAgent);
     }
 
@@ -1798,14 +1517,14 @@
         routerState.hits = 0;
         routerState.misses = 0;
         routerState.avgLatency = 10;
-        routerState.history = [
-            { time: new Date().toLocaleTimeString(), msg: 'Router reset', type: 'info' }
-        ];
+        routerState.history = [{ time: new Date().toLocaleTimeString(), msg: 'Router reset', type: 'info' }];
         updateRouterUI();
         showNotification('⟲ Router metrics reset', 'info');
     }
 
-    // ===== LANGUAGES =====
+    // ============================================================
+    //  LANGUAGES
+    // ============================================================
     const LANGUAGES = [
         { code: 'en', flag: '🇬🇧', label: 'EN' },
         { code: 'ru', flag: '🇷🇺', label: 'RU' },
@@ -1818,18 +1537,17 @@
         { code: 'fr', flag: '🇫🇷', label: 'FR' }
     ];
 
-    // ===== TRANSLATIONS (abbreviated for brevity — full version in previous response) =====
     const translations = {
         en: {
-            hero_title: "TERSANESI ULTIMATE<br>API Nexus · Memory Architecture · Agent Control",
-            hero_tag: "✦ ALL-IN-ONE · FULL INTEGRATION ✦",
-            hero_desc: "Full integration of API Portal, 3D memory visualization, and agent control panel.",
-            btn_docs: "📖 API Documentation",
-            btn_console: "⟡ Developer Console",
-            version: "v.Ultimate · All-in-One",
+            hero_title: "θ TERSANESI · 86 MEMORY TYPES<br>9 Layers · C01 Consciousness Core",
+            hero_tag: "✦ FULL COGNITIVE OS · 86 TYPES ✦",
+            hero_desc: "Full cognitive architecture with 86 specialized memory types across 9 layers. Core: C01 Consciousness Core.",
+            btn_docs: "📖 Memory Taxonomy",
+            btn_console: "⟡ 86 Types",
+            version: "θ v5.0 · Full Cognitive OS",
             agent_panel_title: "🧠 Agent Memory Control Panel",
             agent_title: "🎯 Agent",
-            memory_levels_title: "📊 Memory Levels",
+            memory_levels_title: "📊 Core Memory Levels",
             l1_label: "L1 · Working Memory",
             l2_label: "L2 · Episodic Memory",
             l3_label: "L3 · Semantic Memory",
@@ -1861,20 +1579,14 @@
             btn_create_snapshot: "📸 Create New Snapshot",
             btn_restore_latest: "↩️ Restore Latest",
             explore_3d: "EXPLORE 3D MEMORY ARCHITECTURE",
-            explore_desc: "⟡ 22 nodes · 8 layers · Click to inspect · Full 3D visualization",
-            endpoints_title: "⚡ Core Endpoints",
-            api1_title: "Agent Registry",
-            api1_desc: "List, filter, and query active agents in the swarm.",
-            api2_title: "Spawn Agent",
-            api2_desc: "Deploy a new AI agent with custom capabilities and behavior.",
-            api3_title: "Emit Event",
-            api3_desc: "Push typed events into the global event fabric.",
-            api4_title: "Faction State",
-            api4_desc: "Real-time alignment and resource data for all factions.",
-            api5_title: "Execute Trade",
-            api5_desc: "Process economic transactions between agents or factions.",
-            api6_title: "System Metrics",
-            api6_desc: "Runtime health, load, and performance telemetry.",
+            explore_desc: "⟡ 86 memory types · 9 layers · Click to inspect · Full 3D visualization",
+            endpoints_title: "⚡ Memory Endpoints",
+            api1_title: "Memory Taxonomy",
+            api1_desc: "Get all 86 memory types with their layer and properties.",
+            api2_title: "Consolidate Memory",
+            api2_desc: "Run consolidation on agent's L2-L4 memory.",
+            api3_title: "Agent Memory State",
+            api3_desc: "Get full memory state for a specific agent.",
             sdk_title: "✦ SDKs & Libraries ✦",
             sdk_python: "Python SDK",
             sdk_react: "React Hooks",
@@ -1882,49 +1594,41 @@
             sdk_websocket: "WebSocket SDK",
             sdk_unity: "Unity Plugin",
             docs_title: "📚 Documentation Hub",
-            doc1_title: "Getting Started",
-            doc1_desc: "Quickstart guide & first agent",
-            doc2_title: "Agent SDK Guide",
-            doc2_desc: "Build custom AI agents",
-            doc3_title: "Faction API",
-            doc3_desc: "Manage faction state & diplomacy",
-            doc4_title: "Economy Engine",
-            doc4_desc: "Resources, trading & markets",
-            doc5_title: "Event Fabric",
-            doc5_desc: "Typed event streams & routing",
-            doc6_title: "Security & Auth",
-            doc6_desc: "API keys, JWT, rate limiting",
-            doc7_title: "Telemetry",
-            doc7_desc: "Metrics, logs & monitoring",
-            doc8_title: "WebGL Worlds",
-            doc8_desc: "Metaverse spatial API",
+            doc1_title: "86 Types Taxonomy",
+            doc1_desc: "Complete memory classification",
+            doc2_title: "C01 Consciousness Core",
+            doc2_desc: "Understanding the core",
+            doc3_title: "9 Layers Architecture",
+            doc3_desc: "Layer-by-layer breakdown",
+            doc4_title: "Memory Router",
+            doc4_desc: "Routing and retrieval",
             webhooks_title: "📡 Webhook & Streams",
-            stream1: "🤖 agent.spawned",
-            stream2: "🏛️ faction.updated",
-            stream3: "💰 trade.executed",
-            stream4: "🕵️ clue.discovered",
-            stream5: "🧠 llm.inference",
-            stream6: "🌐 world.changed",
+            stream1: "🧠 memory.consolidated",
+            stream2: "💾 snapshot.created",
+            stream3: "📊 gravitas.updated",
+            stream4: "🔄 memory.forgotten",
+            stream5: "⚡ router.hit",
+            stream6: "🌐 collective.updated",
             webhooks_note: "Configure webhooks for real-time event delivery · strict schemas · replay support",
             community_title: "🌌 Developer Community",
             aud1: "AI Engineers",
-            aud2: "Game Developers",
-            aud3: "Metaverse Architects",
+            aud2: "Cognitive Architects",
+            aud3: "Memory Systems",
             aud4: "Integration Specialists",
             aud5: "Open Source Contributors",
-            cta_title: "⟡ Get Your API Keys ⟡",
-            cta_sub: "Start building with TERSANESI · Free tier includes 100K requests/month",
+            cta_title: "⟡ Build Your Agent ⟡",
+            cta_sub: "Start with TERSANESI 86-type memory architecture · Full cognitive OS",
             placeholder_name: "Developer / Studio Name",
             placeholder_email: "Quantum address (email)",
             placeholder_project: "Project / Use case",
-            btn_submit: "🚀 Generate API Keys",
-            cta_footer: "⚡ REST · WebSocket · GraphQL · gRPC",
-            footer1: "© 2026 T.E.R.S.A.N.E.S.I. — ULTIMATE | All-in-One Integration v1.0",
-            footer2: "🏛️ API Portal · Memory Architecture · Agent Control Panel   • 4-level memory · Gravitas · Snapshots · Import/Export",
-            footer_link1: "API Reference",
+            btn_submit: "🚀 Initialize Agent",
+            cta_footer: "⚡ 86 Memory Types · 9 Layers · C01 Consciousness Core",
+            footer1: "© 2026 T.E.R.S.A.N.E.S.I. — 86 MEMORY TYPES | Cognitive OS v5.0",
+            footer2: "θ C01 Consciousness Core · 9 Layers · Full Cognitive Architecture",
+            footer_link1: "Memory Taxonomy",
             footer_link2: "SDK Docs",
             footer_link3: "Status Page",
-            overlay_title: "🧠 TERSANESI · 3D MEMORY ARCHITECTURE",
+            overlay_title: "θ TERSANESI · 86 MEMORY TYPES",
             overlay_close: "✕ Close",
             log_title: "📋 Activity Log",
             export_label: "📤 Export",
@@ -1936,15 +1640,7 @@
             tip_scroll: "Scroll to zoom",
             tip_drag: "Drag to orbit",
             layer_label: "Layer",
-            layer_all: "All Layers",
-            layer_ancestral: "Ancestral",
-            layer_clan: "Clan",
-            layer_species: "Species",
-            layer_factional: "Factional",
-            layer_episodic: "Episodic",
-            layer_semantic: "Semantic",
-            layer_procedural: "Procedural",
-            layer_entity: "Entity",
+            layer_all: "All 9 Layers",
             agent_label: "Agent",
             agent_alpha: "α Wellamatores",
             agent_beta: "β Cavibara",
@@ -1956,11 +1652,8 @@
         }
     };
 
-    // Add other languages (ru, tr, ar, es, de, ja, zh, fr) here...
-    // For brevity, only English is included in this response.
-    // The full version includes all 9 languages.
-
     let currentLang = 'en';
+
     function renderLangBar() {
         const container = document.getElementById('langBar');
         if (!container) return;
@@ -2006,42 +1699,43 @@
     renderLangBar();
     setLanguage(currentLang);
 
-    // ===== FORM =====
+    // ============================================================
+    //  FORM
+    // ============================================================
     const form = document.getElementById('apiForm');
     if (form) {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             const name = document.getElementById('name')?.value.trim() || 'Developer';
             const email = document.getElementById('email')?.value.trim();
-            const project = document.getElementById('project')?.value.trim() || 'cosmic project';
+            const project = document.getElementById('project')?.value.trim() || 'cognitive project';
             if (!email) {
-                alert('⟡ Please provide a valid quantum address (email) to generate API keys.');
+                alert('⟡ Please provide a valid quantum address (email) to initialize agent.');
                 return;
             }
-            alert(`🔑 API Keys generated for ${name}!\n\nProject: "${project.substring(0, 70)}"\n\nYour API keys will be sent to ${email} within 3 orbital cycles.\n\n⚠️ Please save them securely.`);
+            alert(`θ Agent initialized for ${name}!\n\nProject: "${project.substring(0, 70)}"\n\nAgent will be deployed with 86 memory types.\n\n⚠️ C01 Consciousness Core active.`);
             form.reset();
         });
     }
 
-    // ===== MEMORY OVERLAY CONTROLS =====
-    // The 3D visualization is loaded via the module script below
+    // ============================================================
+    //  MEMORY OVERLAY
+    // ============================================================
     document.getElementById('openMemoryVis')?.addEventListener('click', function() {
         document.getElementById('memoryOverlay').classList.add('active');
         document.getElementById('memoryInfoTip').classList.add('visible');
-        setTimeout(() => {
-            document.getElementById('memoryInfoTip').classList.remove('visible');
-        }, 4000);
+        setTimeout(() => { document.getElementById('memoryInfoTip').classList.remove('visible'); }, 4000);
     });
-
     document.getElementById('closeMemoryVis')?.addEventListener('click', function() {
         document.getElementById('memoryOverlay').classList.remove('active');
     });
 
-    // ===== MEMORY LOG CONTROLS =====
+    // ============================================================
+    //  MEMORY LOG
+    // ============================================================
     function updateLogCount() {
         const logContainer = document.getElementById('memoryLogContainer');
-        const count = logContainer.children.length;
-        document.getElementById('logCount').textContent = `${count} entries`;
+        document.getElementById('logCount').textContent = `${logContainer.children.length} entries`;
     }
 
     function addMemoryLogEntry(message, icon = '📡') {
@@ -2049,23 +1743,20 @@
         const entry = document.createElement('div');
         entry.className = 'log-entry';
         const time = new Date().toLocaleTimeString();
-        entry.innerHTML = `
-            <span class="time">${time}</span>
-            <span class="icon">${icon}</span>
-            <span class="msg">${message}</span>
-        `;
+        entry.innerHTML = `<span class="time">${time}</span><span class="icon">${icon}</span><span class="msg">${message}</span>`;
         logContainer.prepend(entry);
         updateLogCount();
     }
 
-    // ===== MEMORY LOG EXPORT/IMPORT =====
+    // ============================================================
+    //  MEMORY LOG EXPORT/IMPORT
+    // ============================================================
     document.getElementById('exportLogBtn')?.addEventListener('click', function() {
         const logContainer = document.getElementById('memoryLogContainer');
         const entries = Array.from(logContainer.children).map(el => el.textContent.trim());
         const format = document.getElementById('exportFormatSelect').value;
         let content = '';
-        
-        switch(format) {
+        switch (format) {
             case 'json': content = JSON.stringify(entries, null, 2); break;
             case 'csv': content = 'Time,Entry\n' + entries.map(e => `"${e}"`).join('\n'); break;
             case 'txt': content = entries.join('\n'); break;
@@ -2074,7 +1765,6 @@
             case 'xml': content = '<?xml version="1.0" encoding="UTF-8"?>\n<log>\n' + entries.map(e => `  <entry>${e}</entry>`).join('\n') + '\n</log>'; break;
             case 'html': content = '<html><head><title>Memory Log</title></head><body><h1>Memory Log</h1><ul>\n' + entries.map(e => `  <li>${e}</li>`).join('\n') + '\n</ul></body></html>'; break;
         }
-        
         const blob = new Blob([content], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -2112,103 +1802,91 @@
         showNotification('🧹 Log cleared', 'warning');
     });
 
-    // ===== INIT =====
+    // ============================================================
+    //  INIT
+    // ============================================================
     function init() {
         initSnapshots();
         initChart();
         updateAgentUI(currentAgent);
         updateRouterUI();
-        
-        // Initial log entries
+
         setTimeout(() => {
             const entries = [
-                { msg: '🧠 Memory Architecture initialized', icon: '🚀' },
-                { msg: '📊 Loaded 22 memory nodes across 8 layers', icon: '📊' },
-                { msg: '🔗 Connected associative links', icon: '🔗' },
-                { msg: '💾 Snapshot restored from checkpoint', icon: '💾' }
+                { msg: 'θ C01 Consciousness Core initialized', icon: '🧠' },
+                { msg: '📊 Loaded 86 memory types across 9 layers', icon: '📊' },
+                { msg: '🔗 Established cognitive connections', icon: '🔗' },
+                { msg: '💾 Full memory snapshot created', icon: '💾' },
+                { msg: '⚡ Memory Router active', icon: '⚡' }
             ];
-            entries.forEach((entry, i) => {
-                setTimeout(() => addMemoryLogEntry(entry.msg, entry.icon), i * 300);
-            });
+            entries.forEach((entry, i) => { setTimeout(() => addMemoryLogEntry(entry.msg, entry.icon), i * 300); });
         }, 500);
-        
+
         setInterval(() => {
             if (Math.random() > 0.6) generateRandomEvent();
             updateMetrics();
         }, 3000);
         setInterval(updateChart, 5000);
-        
-        // Auto router simulation
-        setInterval(() => {
-            if (Math.random() > 0.4) simulateRouterRequest();
-        }, 5000);
-        
-        console.log('✅ TERSANESI ULTIMATE active — Enhanced with 3D visualization, Router, Advanced Memory');
+        setInterval(() => { if (Math.random() > 0.4) simulateRouterRequest(); }, 5000);
+
+        console.log('θ TERSANESI · 86 MEMORY TYPES ACTIVE');
+        console.log('📊 9 Layers · C01 Consciousness Core');
+        console.log('   🟡 Knowledge: 14 types');
+        console.log('   🔵 Action: 13 types');
+        console.log('   🟣 Soul: 11 types');
+        console.log('   🔴 Influence: 11 types');
+        console.log('   💎 Consciousness: 12 types');
+        console.log('   ⚡ Meta: 8 types');
+        console.log('   🌐 Collective: 5 types');
+        console.log('   🔮 Future: 6 types');
+        console.log('   🧬 Evolution: 6 types');
+        console.log('🌟 TOTAL: 86 MEMORY TYPES');
+        console.log('θ Core: C01 Consciousness Core stable');
     }
     document.addEventListener('DOMContentLoaded', init);
 </script>
 
 <script type="module">
-    // ===== 3D MEMORY VISUALIZATION =====
+    // ============================================================
+    //  3D MEMORY VISUALIZATION — 86 TYPES, 9 LAYERS
+    // ============================================================
     import * as THREE from 'three';
     import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
     import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
 
-    const MEMORY_TAXONOMY = {
-        ancestral: { layer: 8, color: '#ffd700', nodes: [
-            { id: 'rules', label: '⚡ Base Rules', size: 1.2 },
-            { id: 'ontology', label: '🧬 Core Ontology', size: 1.1 }
-        ]},
-        clan: { layer: 7, color: '#ff8844', nodes: [
-            { id: 'shared_episodic', label: '👥 Shared Episodic', size: 1.0 },
-            { id: 'collective', label: '🏛️ Collective Memory', size: 1.0 }
-        ]},
-        species: { layer: 6, color: '#44ff88', nodes: [
-            { id: 'semantic', label: '📚 Semantic Knowledge', size: 1.1 },
-            { id: 'procedural', label: '⚙️ Procedural Skills', size: 1.1 }
-        ]},
-        factional: { layer: 5, color: '#ff4488', nodes: [
-            { id: 'beliefs', label: '🎯 Weighted Beliefs', size: 0.9 },
-            { id: 'strategies', label: '♟️ Alternative Strategies', size: 0.9 }
-        ]},
-        graph: { layer: 4, color: '#44ddff', nodes: [
-            { id: 'associative', label: '🔗 Associative Links', size: 0.9 },
-            { id: 'entity', label: '🧩 Entity Memory', size: 0.9 },
-            { id: 'contextual', label: '🌍 Contextual Memory', size: 0.8 }
-        ]},
-        meta: { layer: 3, color: '#aa88ff', nodes: [
-            { id: 'reflexive', label: '🔄 Reflexive Memory', size: 0.9 },
-            { id: 'competence', label: '📊 Competence Model', size: 0.9 },
-            { id: 'meta_learning', label: '🧠 Meta-Learning', size: 1.0 }
-        ]},
-        strategic: { layer: 2, color: '#ffaa44', nodes: [
-            { id: 'intent', label: '🎯 Intent Memory', size: 0.8 },
-            { id: 'script', label: '📋 Script Memory', size: 0.8 },
-            { id: 'anomaly', label: '⚠️ Anomaly Detection', size: 0.9 }
-        ]},
-        operational: { layer: 1, color: '#88ddff', nodes: [
-            { id: 'working', label: '💭 Working Memory', size: 1.0 },
-            { id: 'ephemeral', label: '⏳ Ephemeral Memory', size: 0.7 },
-            { id: 'episodic', label: '📖 Episodic Memory', size: 1.1 },
-            { id: 'affective', label: '❤️ Affective Memory', size: 0.9 }
-        ]}
+    const MEMORY_86 = {
+        knowledge: { layer: 9, color: '#ffd700', radius: 1.8,
+            nodes: ['K01 Base Rules', 'K02 Core Ontology', 'K03 Semantic Memory', 'K04 Episodic Memory', 'K05 Entity Memory', 'K06 Contextual Memory', 'K07 Shared Episodic', 'K08 World Model', 'K09 Causal Memory', 'K10 Temporal Memory', 'K11 Spatial Memory', 'K12 Domain Knowledge', 'K13 User Knowledge', 'K14 Narrative Memory'] },
+        action: { layer: 8, color: '#44ddff', radius: 2.6,
+            nodes: ['A01 Procedural Memory', 'A02 Script Memory', 'A03 Strategic Memory', 'A04 Intent Memory', 'A05 Reflexive Memory', 'A06 Competence Model', 'A07 Planning Memory', 'A08 Task Memory', 'A09 Workflow Memory', 'A10 Tool Usage Memory', 'A11 Decision Memory', 'A12 Optimization Memory', 'A13 Error Recovery'] },
+        soul: { layer: 7, color: '#aa66ff', radius: 3.4, isEnergy: true,
+            nodes: ['S01 Affective Core', 'S02 Motivational Drive', 'S03 Belief System', 'S04 Emotional State', 'S05 Personality Model', 'S06 Value System', 'S07 Ethical Compass', 'S08 Preference Memory', 'S09 Curiosity Engine', 'S10 Identity Narrative', 'S11 Attachment Memory'] },
+        influence: { layer: 6, color: '#ff2244', radius: 4.2, isEnergy: true,
+            nodes: ['I01 Gravitas Field', 'I02 Social Influence', 'I03 Reputation Model', 'I04 Anomaly Detection', 'I05 Environmental Impact', 'I06 Trust Network', 'I07 Relationship Memory', 'I08 Group Dynamics', 'I09 Negotiation Memory', 'I10 Persuasion Memory', 'I11 Cultural Memory'] },
+        consciousness: { layer: 5, color: '#ffffff', radius: 5.0, isEnergy: true, isDivine: true,
+            nodes: ['C01 Consciousness Core', 'C02 Purpose', 'C03 Self-Awareness', 'C04 Creativity', 'C05 Wisdom', 'C06 Transcendence', 'C07 Metacognition', 'C08 Reflection Memory', 'C09 Self-Model', 'C10 Meaning Framework', 'C11 Existential Memory', 'C12 Future Self Memory'] },
+        meta: { layer: 4, color: '#66ffaa', radius: 5.8, isEnergy: true,
+            nodes: ['M01 Memory Index', 'M02 Memory Importance', 'M03 Memory Compression', 'M04 Memory Consolidation', 'M05 Forgetting Engine', 'M06 Retrieval Strategy', 'M07 Memory Confidence', 'M08 Memory Lineage'] },
+        collective: { layer: 3, color: '#66ddff', radius: 6.6, isEnergy: true,
+            nodes: ['G01 Shared Knowledge', 'G02 Shared Experience', 'G03 Collective Goals', 'G04 Consensus Memory', 'G05 Distributed Memory'] },
+        future: { layer: 2, color: '#ff88aa', radius: 7.4, isEnergy: true,
+            nodes: ['F01 Goal Projection', 'F02 Scenario Memory', 'F03 Forecast Memory', 'F04 Simulation Memory', 'F05 Risk Memory', 'F06 Opportunity Memory'] },
+        evolution: { layer: 1, color: '#ffaa44', radius: 8.2, isEnergy: true,
+            nodes: ['E01 Learning History', 'E02 Capability Growth', 'E03 Failure Archive', 'E04 Success Archive', 'E05 Adaptation Memory', 'E06 Evolution Narrative'] }
     };
 
-    let memoryVisInstance = null;
+    let memoryVis = null;
 
     document.getElementById('openMemoryVis')?.addEventListener('click', function() {
         const overlay = document.getElementById('memoryOverlay');
         overlay.classList.add('active');
-        
         setTimeout(() => {
             const container = document.getElementById('memoryVisContainer');
-            if (!memoryVisInstance) {
-                memoryVisInstance = new MemoryVisualization(container);
+            if (!memoryVis) {
+                memoryVis = new MemoryVisualization86(container);
             }
             document.getElementById('memoryInfoTip').classList.add('visible');
-            setTimeout(() => {
-                document.getElementById('memoryInfoTip').classList.remove('visible');
-            }, 4000);
+            setTimeout(() => { document.getElementById('memoryInfoTip').classList.remove('visible'); }, 4000);
         }, 100);
     });
 
@@ -2216,205 +1894,376 @@
         document.getElementById('memoryOverlay').classList.remove('active');
     });
 
-    class MemoryVisualization {
+    class MemoryVisualization86 {
         constructor(container) {
             this.container = container;
             this.scene = new THREE.Scene();
-            this.camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+            this.camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
             this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
             this.labelRenderer = new CSS2DRenderer();
             this.controls = null;
             this.nodes = [];
             this.edges = [];
             this.clock = new THREE.Clock();
-            
             this.init();
             this.buildTaxonomy();
             this.animate();
-            
             window.addEventListener('resize', () => this.onResize());
         }
-        
+
         init() {
             this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
             this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
             this.renderer.setClearColor(0x05050f, 1);
             this.container.appendChild(this.renderer.domElement);
-            
+
             this.labelRenderer.setSize(this.container.clientWidth, this.container.clientHeight);
             this.labelRenderer.domElement.style.position = 'absolute';
             this.labelRenderer.domElement.style.top = '0';
             this.labelRenderer.domElement.style.left = '0';
             this.labelRenderer.domElement.style.pointerEvents = 'none';
             this.container.appendChild(this.labelRenderer.domElement);
-            
-            this.camera.position.set(8, 6, 12);
+
+            this.camera.position.set(14, 10, 18);
             this.camera.lookAt(0, 0, 0);
-            
+
             this.controls = new OrbitControls(this.camera, this.renderer.domElement);
             this.controls.enableDamping = true;
             this.controls.dampingFactor = 0.05;
             this.controls.autoRotate = true;
-            this.controls.autoRotateSpeed = 0.5;
-            this.controls.minDistance = 4;
-            this.controls.maxDistance = 25;
+            this.controls.autoRotateSpeed = 0.25;
+            this.controls.minDistance = 6;
+            this.controls.maxDistance = 30;
             this.controls.target.set(0, 0, 0);
-            
-            const ambientLight = new THREE.AmbientLight(0x222244, 0.5);
-            this.scene.add(ambientLight);
-            
-            const dirLight = new THREE.DirectionalLight(0x88ccff, 1.5);
-            dirLight.position.set(5, 10, 7);
-            this.scene.add(dirLight);
-            
-            const dirLight2 = new THREE.DirectionalLight(0xff8844, 0.8);
-            dirLight2.position.set(-5, -3, -7);
-            this.scene.add(dirLight2);
-            
-            const pointLight = new THREE.PointLight(0x44ddff, 0.5, 20);
-            pointLight.position.set(0, 5, 0);
-            this.scene.add(pointLight);
-            
-            const geometry = new THREE.BufferGeometry();
-            const count = 2000;
-            const positions = new Float32Array(count * 3);
-            for (let i = 0; i < count * 3; i++) positions[i] = (Math.random() - 0.5) * 40;
-            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            const material = new THREE.PointsMaterial({ color: 0x4488ff, size: 0.05, transparent: true, opacity: 0.6 });
-            this.scene.add(new THREE.Points(geometry, material));
-            
-            const gridHelper = new THREE.GridHelper(20, 20, 0x44ddff, 0x224466);
-            gridHelper.position.y = -3;
-            this.scene.add(gridHelper);
+
+            const ambient = new THREE.AmbientLight(0x222244, 0.6);
+            this.scene.add(ambient);
+            const dir1 = new THREE.DirectionalLight(0x88ccff, 1.5);
+            dir1.position.set(5, 10, 7);
+            this.scene.add(dir1);
+            const dir2 = new THREE.DirectionalLight(0xff8844, 0.8);
+            dir2.position.set(-5, -3, -7);
+            this.scene.add(dir2);
+            const point = new THREE.PointLight(0x44ddff, 0.5, 25);
+            point.position.set(0, 5, 0);
+            this.scene.add(point);
+            const coreLight = new THREE.PointLight(0xffdd88, 1.5, 15);
+            coreLight.position.set(0, 0, 0);
+            this.scene.add(coreLight);
+
+            const stars = new THREE.BufferGeometry();
+            const count = 4000;
+            const pos = new Float32Array(count * 3);
+            for (let i = 0; i < count * 3; i++) pos[i] = (Math.random() - 0.5) * 60;
+            stars.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+            const starMat = new THREE.PointsMaterial({ color: 0x4488ff, size: 0.05, transparent: true, opacity: 0.5 });
+            this.scene.add(new THREE.Points(stars, starMat));
+
+            const grid = new THREE.GridHelper(30, 30, 0x44ddff, 0x224466);
+            grid.position.y = -4;
+            this.scene.add(grid);
+
+            // C01 Core
+            const coreGeo = new THREE.SphereGeometry(0.7, 32, 32);
+            const coreMat = new THREE.MeshPhysicalMaterial({
+                color: 0xffdd88, emissive: 0xffdd88, emissiveIntensity: 2.0,
+                metalness: 0, roughness: 0.1, clearcoat: 1, transparent: true, opacity: 0.95
+            });
+            const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+            coreMesh.position.set(0, 0, 0);
+            this.scene.add(coreMesh);
+
+            const haloGeo = new THREE.RingGeometry(1.0, 1.8, 64);
+            const haloMat = new THREE.MeshBasicMaterial({ color: 0xffdd88, transparent: true, opacity: 0.15, side: THREE.DoubleSide, blending: THREE.AdditiveBlending });
+            const halo = new THREE.Mesh(haloGeo, haloMat);
+            halo.position.set(0, 0, 0);
+            halo.rotation.x = Math.PI / 2;
+            this.scene.add(halo);
+            const halo2 = halo.clone();
+            halo2.rotation.z = Math.PI / 3;
+            this.scene.add(halo2);
+
+            const coreDiv = document.createElement('div');
+            coreDiv.textContent = 'θ C01 Consciousness Core';
+            coreDiv.style.color = '#fff';
+            coreDiv.style.fontSize = '14px';
+            coreDiv.style.fontFamily = 'Courier New, monospace';
+            coreDiv.style.fontWeight = '800';
+            coreDiv.style.textShadow = '0 0 30px rgba(255,215,0,0.3), 0 0 60px rgba(255,215,0,0.1)';
+            coreDiv.style.background = 'rgba(255,215,0,0.08)';
+            coreDiv.style.padding = '6px 16px';
+            coreDiv.style.borderRadius = '30px';
+            coreDiv.style.border = '1px solid rgba(255,215,0,0.2)';
+            coreDiv.style.backdropFilter = 'blur(8px)';
+            coreDiv.style.letterSpacing = '1px';
+            const coreLabel = new CSS2DObject(coreDiv);
+            coreLabel.position.set(0, 1.6, 0);
+            this.scene.add(coreLabel);
         }
-        
+
         buildTaxonomy() {
-            const layerSpacing = 1.2;
             const allNodes = [];
-            
-            Object.entries(MEMORY_TAXONOMY).forEach(([layerKey, layerData]) => {
-                const layerIndex = layerData.layer;
-                const y = (layerIndex - 1) * layerSpacing - 4;
-                const color = new THREE.Color(layerData.color);
-                const count = layerData.nodes.length;
-                const radius = count > 1 ? 1.5 + (8 - layerIndex) * 0.3 : 0;
-                
-                layerData.nodes.forEach((node, index) => {
-                    const angle = (index / count) * Math.PI * 2 + (layerIndex * 0.5);
+            const totalLayers = 9;
+            Object.entries(MEMORY_86).forEach(([key, data]) => {
+                const layer = data.layer;
+                const color = new THREE.Color(data.color);
+                const nodes = data.nodes;
+                const total = nodes.length;
+                const radius = data.radius || 1.5 + (totalLayers - layer) * 0.6;
+                const isEnergy = data.isEnergy || false;
+                const isDivine = data.isDivine || false;
+                nodes.forEach((label, idx) => {
+                    const t = idx / total;
+                    const angle = t * Math.PI * 2 * 2.5 + (totalLayers - layer) * 0.5;
+                    const y = (t - 0.5) * 9 + (layer - 5) * 0.4;
                     const x = radius * Math.cos(angle);
                     const z = radius * Math.sin(angle);
-                    allNodes.push({ ...node, x, y, z, layer: layerIndex, layerKey, color: color.clone() });
+                    const size = isDivine ? 0.55 : (isEnergy ? 0.45 : 0.4);
+                    allNodes.push({
+                        id: label.split(' ')[0], label, x, y, z,
+                        layer, layerKey: key, color: color.clone(),
+                        size, isEnergy, isDivine
+                    });
                 });
             });
-            
-            allNodes.forEach((nodeData) => this.createNode(nodeData));
+            allNodes.forEach(n => this.createNode(n));
             this.createEdges(allNodes);
         }
-        
+
         createNode(data) {
-            const geometry = new THREE.SphereGeometry(data.size * 0.5, 32, 32);
-            const material = new THREE.MeshPhysicalMaterial({
+            const geo = new THREE.SphereGeometry(data.size, 32, 32);
+            const mat = new THREE.MeshPhysicalMaterial({
                 color: data.color,
-                emissive: data.color,
-                emissiveIntensity: 0.2,
-                metalness: 0.3,
-                roughness: 0.4,
-                clearcoat: 0.3,
-                clearcoatRoughness: 0.2
+                emissive: data.isDivine ? new THREE.Color(0xffdd88) : data.color,
+                emissiveIntensity: data.isDivine ? 1.0 : (data.isEnergy ? 0.6 : 0.15),
+                metalness: data.isDivine ? 0 : (data.isEnergy ? 0.1 : 0.3),
+                roughness: data.isDivine ? 0.1 : (data.isEnergy ? 0.3 : 0.5),
+                clearcoat: data.isDivine ? 0.8 : (data.isEnergy ? 0.5 : 0.2),
+                transparent: data.isEnergy ? true : false,
+                opacity: data.isEnergy ? 0.9 : 1.0,
             });
-            
-            const mesh = new THREE.Mesh(geometry, material);
+            const mesh = new THREE.Mesh(geo, mat);
             mesh.position.set(data.x, data.y, data.z);
             mesh.userData = { nodeId: data.id, ...data };
             this.scene.add(mesh);
-            
-            const ringGeometry = new THREE.RingGeometry(data.size * 0.6, data.size * 0.8, 32);
-            const ringMaterial = new THREE.MeshBasicMaterial({
-                color: data.color,
-                transparent: true,
-                opacity: 0.3,
-                side: THREE.DoubleSide
-            });
-            const ring = new THREE.Mesh(ringGeometry, ringMaterial);
-            ring.position.set(data.x, data.y, data.z);
-            ring.rotation.x = Math.PI / 2;
-            this.scene.add(ring);
-            
+
+            let ring = null;
+            if (data.isEnergy) {
+                const ringGeo = new THREE.RingGeometry(data.size * 0.7, data.size * 1.2, 32);
+                const ringMat = new THREE.MeshBasicMaterial({
+                    color: data.isDivine ? 0xffdd88 : data.color,
+                    transparent: true,
+                    opacity: data.isDivine ? 0.4 : 0.25,
+                    side: THREE.DoubleSide,
+                    blending: THREE.AdditiveBlending,
+                });
+                ring = new THREE.Mesh(ringGeo, ringMat);
+                ring.position.set(data.x, data.y, data.z);
+                ring.rotation.x = Math.PI / 2;
+                this.scene.add(ring);
+            }
+
             const div = document.createElement('div');
-            div.textContent = data.label;
-            div.style.color = '#ffffff';
-            div.style.fontSize = '10px';
+            div.textContent = data.id;
+            div.style.color = data.isDivine ? '#fff' : '#ccc';
+            div.style.fontSize = data.isDivine ? '11px' : (data.isEnergy ? '10px' : '9px');
             div.style.fontFamily = 'Courier New, monospace';
-            div.style.fontWeight = 'bold';
-            div.style.textShadow = '0 0 10px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.6)';
-            div.style.background = 'rgba(0,0,0,0.6)';
-            div.style.padding = '4px 10px';
-            div.style.borderRadius = '12px';
-            div.style.border = '1px solid ' + data.color.getStyle();
-            div.style.pointerEvents = 'none';
+            div.style.fontWeight = data.isDivine ? '800' : (data.isEnergy ? '700' : '400');
+            div.style.textShadow = data.isDivine ? '0 0 20px rgba(255,255,255,0.3)' : '0 0 12px rgba(0,0,0,0.9)';
+            div.style.background = data.isDivine ? 'rgba(255,215,0,0.10)' : (data.isEnergy ? 'rgba(0,0,0,0.6)' : 'rgba(0,0,0,0.5)');
+            div.style.padding = '2px 8px';
+            div.style.borderRadius = '14px';
+            div.style.border = '1px solid ' + (data.isDivine ? '#ffdd88' : data.color.getStyle());
+            div.style.boxShadow = data.isDivine ? '0 0 20px rgba(255,215,0,0.08)' : 'none';
+            div.style.backdropFilter = 'blur(4px)';
+            div.style.letterSpacing = '0.2px';
             div.style.whiteSpace = 'nowrap';
-            
+            div.style.pointerEvents = 'none';
             const label = new CSS2DObject(div);
-            label.position.set(data.x, data.y + data.size * 0.6 + 0.3, data.z);
+            label.position.set(data.x, data.y + data.size + 0.4, data.z);
             this.scene.add(label);
-            
-            this.nodes.push({ mesh, ring, label, data, hovered: false, originalScale: 1, glowIntensity: 0 });
+
+            let particles = null;
+            if (data.isEnergy) {
+                const pCount = data.isDivine ? 40 : 25;
+                const pg = new THREE.BufferGeometry();
+                const pp = new Float32Array(pCount * 3);
+                const pc = new Float32Array(pCount * 3);
+                const c = data.isDivine ? new THREE.Color(0xffdd88) : data.color;
+                const spread = data.isDivine ? 1.4 : 0.8;
+                for (let i = 0; i < pCount; i++) {
+                    const theta = Math.random() * Math.PI * 2;
+                    const phi = Math.random() * Math.PI;
+                    const r = data.size * 0.4 + Math.random() * spread;
+                    pp[i * 3] = data.x + r * Math.sin(phi) * Math.cos(theta);
+                    pp[i * 3 + 1] = data.y + r * Math.cos(phi);
+                    pp[i * 3 + 2] = data.z + r * Math.sin(phi) * Math.sin(theta);
+                    pc[i * 3] = c.r;
+                    pc[i * 3 + 1] = c.g;
+                    pc[i * 3 + 2] = c.b;
+                }
+                pg.setAttribute('position', new THREE.BufferAttribute(pp, 3));
+                pg.setAttribute('color', new THREE.BufferAttribute(pc, 3));
+                const pm = new THREE.PointsMaterial({
+                    size: data.isDivine ? 0.12 : 0.08,
+                    vertexColors: true,
+                    transparent: true,
+                    opacity: data.isDivine ? 0.7 : 0.5,
+                    blending: THREE.AdditiveBlending,
+                    depthWrite: false,
+                });
+                particles = new THREE.Points(pg, pm);
+                particles.userData = { nodeId: data.id };
+                this.scene.add(particles);
+            }
+            this.nodes.push({ mesh, ring, label, particles, data });
         }
-        
+
         createEdges(allNodes) {
             for (let i = 0; i < allNodes.length; i++) {
                 for (let j = i + 1; j < allNodes.length; j++) {
                     const a = allNodes[i], b = allNodes[j];
                     const dist = Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2) + Math.pow(a.z - b.z, 2));
-                    if (dist < 4 && a.layer !== b.layer) {
-                        const points = [new THREE.Vector3(a.x, a.y, a.z), new THREE.Vector3(b.x, b.y, b.z)];
-                        const geometry = new THREE.BufferGeometry().setFromPoints(points);
-                        const material = new THREE.LineBasicMaterial({
-                            color: 0x4488ff,
+                    const maxDist = 3.0 + (a.layer + b.layer) * 0.15;
+                    if (dist < maxDist && a.layer !== b.layer) {
+                        const pts = [new THREE.Vector3(a.x, a.y, a.z), new THREE.Vector3(b.x, b.y, b.z)];
+                        const geo = new THREE.BufferGeometry().setFromPoints(pts);
+                        const isEnergyEdge = a.isEnergy || b.isEnergy;
+                        const isDivineEdge = a.isDivine || b.isDivine;
+                        const mat = new THREE.LineBasicMaterial({
+                            color: isDivineEdge ? 0xffdd88 : (isEnergyEdge ? 0x4488ff : 0x446688),
                             transparent: true,
-                            opacity: 0.15 + (0.15 * (1 - dist / 4))
+                            opacity: isDivineEdge ? 0.25 : (isEnergyEdge ? 0.12 : 0.06),
+                            blending: (isEnergyEdge || isDivineEdge) ? THREE.AdditiveBlending : THREE.NormalBlending,
                         });
-                        this.edges.push(new THREE.Line(geometry, material));
-                        this.scene.add(this.edges[this.edges.length - 1]);
+                        const line = new THREE.Line(geo, mat);
+                        this.scene.add(line);
+                        this.edges.push(line);
                     }
                 }
             }
+            // Divine connections
+            const conscious = allNodes.filter(n => n.isDivine);
+            const others = allNodes.filter(n => !n.isDivine);
+            conscious.forEach(cn => {
+                others.forEach(on => {
+                    const dist = Math.sqrt(Math.pow(cn.x - on.x, 2) + Math.pow(cn.y - on.y, 2) + Math.pow(cn.z - on.z, 2));
+                    if (dist < 6.0) {
+                        const pts = [new THREE.Vector3(cn.x, cn.y, cn.z), new THREE.Vector3(on.x, on.y, on.z)];
+                        const geo = new THREE.BufferGeometry().setFromPoints(pts);
+                        const mat = new THREE.LineBasicMaterial({
+                            color: 0xffdd88,
+                            transparent: true,
+                            opacity: 0.04 + (1 - dist / 6.0) * 0.04,
+                            blending: THREE.AdditiveBlending,
+                        });
+                        this.scene.add(new THREE.Line(geo, mat));
+                    }
+                });
+            });
+            // Core connections
+            allNodes.forEach(node => {
+                const dist = Math.sqrt(node.x * node.x + node.y * node.y + node.z * node.z);
+                if (dist > 1.5 && dist < 8.0) {
+                    const pts = [new THREE.Vector3(0, 0, 0), new THREE.Vector3(node.x, node.y, node.z)];
+                    const geo = new THREE.BufferGeometry().setFromPoints(pts);
+                    const mat = new THREE.LineBasicMaterial({
+                        color: 0xffdd88,
+                        transparent: true,
+                        opacity: 0.02 + (1 - dist / 8.0) * 0.03,
+                        blending: THREE.AdditiveBlending,
+                    });
+                    this.scene.add(new THREE.Line(geo, mat));
+                }
+            });
+            // Divine rays
+            conscious.forEach(cn => {
+                for (let i = 0; i < 12; i++) {
+                    const angle = (i / 12) * Math.PI * 2 + cn.id.length * 0.2;
+                    const len = 0.5 + Math.random() * 0.6;
+                    const pts = [
+                        new THREE.Vector3(cn.x, cn.y, cn.z),
+                        new THREE.Vector3(cn.x + len * Math.cos(angle), cn.y + len * Math.sin(angle * 0.6) * 0.3, cn.z + len * Math.sin(angle))
+                    ];
+                    const geo = new THREE.BufferGeometry().setFromPoints(pts);
+                    const mat = new THREE.LineBasicMaterial({
+                        color: 0xffdd88,
+                        transparent: true,
+                        opacity: 0.02 + Math.random() * 0.03,
+                        blending: THREE.AdditiveBlending,
+                    });
+                    this.scene.add(new THREE.Line(geo, mat));
+                }
+            });
         }
-        
+
         animate() {
             requestAnimationFrame(() => this.animate());
-            const time = this.clock.getElapsedTime();
-            
-            this.nodes.forEach((node, index) => {
-                const floatOffset = Math.sin(time * 0.5 + index) * 0.15;
-                node.mesh.position.y = node.data.y + floatOffset;
-                node.ring.position.y = node.data.y + floatOffset;
-                node.label.position.y = node.data.y + node.data.size * 0.6 + 0.3 + floatOffset;
-                const pulse = Math.sin(time * 0.8 + index * 0.3) * 0.5 + 0.5;
-                node.mesh.material.emissiveIntensity = 0.15 + pulse * 0.25;
-                node.ring.rotation.z = time * 0.3 + index;
+            const t = this.clock.getElapsedTime();
+            const coreNode = this.nodes.find(n => n.data.id === 'C01');
+            if (coreNode) {
+                const pulse = Math.sin(t * 0.8) * 0.5 + 0.5;
+                coreNode.mesh.material.emissiveIntensity = 1.5 + pulse * 1.0;
+                const s = 1 + pulse * 0.05;
+                coreNode.mesh.scale.set(s, s, s);
+            }
+            this.nodes.forEach((node, idx) => {
+                const d = node.data;
+                const floatOffset = Math.sin(t * 0.4 + idx * 0.12) * 0.15;
+                node.mesh.position.y = d.y + floatOffset;
+                if (node.label) node.label.position.y = d.y + d.size + 0.4 + floatOffset;
+                if (node.ring) {
+                    node.ring.position.y = d.y + floatOffset;
+                    node.ring.rotation.z = t * 0.3 + idx;
+                    node.ring.material.opacity = (d.isDivine ? 0.3 : 0.15) + Math.sin(t * 0.4 + idx) * 0.08;
+                }
+                if (d.isEnergy) {
+                    const pulse = Math.sin(t * 0.8 + idx * 0.2) * 0.5 + 0.5;
+                    const intensity = d.isDivine ? 0.6 + pulse * 0.9 : 0.3 + pulse * 0.5;
+                    node.mesh.material.emissiveIntensity = intensity;
+                    if (d.isDivine) { const s = 1 + pulse * 0.04;
+                        node.mesh.scale.set(s, s, s); }
+                }
             });
-            
-            this.edges.forEach((edge, index) => {
-                edge.material.opacity = 0.1 + Math.sin(time * 0.2 + index) * 0.05 + 0.05;
+            this.nodes.forEach(node => {
+                if (node.particles) {
+                    const pos = node.particles.geometry.attributes.position.array;
+                    const d = node.data;
+                    const count = pos.length / 3;
+                    const spread = d.isDivine ? 1.4 : 0.8;
+                    const speed = d.isDivine ? 0.5 : 0.3;
+                    for (let i = 0; i < count; i++) {
+                        const theta = (i / count) * Math.PI * 2 + t * speed + i * 0.05;
+                        const phi = Math.sin(t * 0.15 + i * 0.08) * 0.5 + 0.5;
+                        const r = d.size * 0.3 + 0.2 + Math.sin(t * 0.3 + i * 0.06) * spread * 0.1 + spread * 0.2;
+                        const floatOff = Math.sin(t * 0.4 + d.id.length * 0.12) * 0.15;
+                        pos[i * 3] = d.x + r * Math.sin(phi) * Math.cos(theta);
+                        pos[i * 3 + 1] = d.y + floatOff + r * Math.cos(phi);
+                        pos[i * 3 + 2] = d.z + r * Math.sin(phi) * Math.sin(theta);
+                    }
+                    node.particles.geometry.attributes.position.needsUpdate = true;
+                }
             });
-            
+            this.edges.forEach((edge, idx) => {
+                edge.material.opacity = edge.material.opacity * 0.99 + 0.01 * (0.05 + Math.sin(t * 0.2 + idx * 0.01) * 0.05 + 0.05);
+            });
             this.controls.update();
             this.renderer.render(this.scene, this.camera);
             this.labelRenderer.render(this.scene, this.camera);
         }
-        
+
         onResize() {
-            const width = this.container.clientWidth;
-            const height = this.container.clientHeight;
-            this.camera.aspect = width / height;
+            const w = this.container.clientWidth;
+            const h = this.container.clientHeight;
+            this.camera.aspect = w / h;
             this.camera.updateProjectionMatrix();
-            this.renderer.setSize(width, height);
-            this.labelRenderer.setSize(width, height);
+            this.renderer.setSize(w, h);
+            this.labelRenderer.setSize(w, h);
         }
     }
 
-    console.log('✅ 3D Memory Visualization loaded (22 nodes, 8 layers)');
+    console.log('✅ 86 Memory Types 3D Visualization loaded');
+    console.log('📊 9 Layers · C01 Consciousness Core');
 </script>
 </body>
 </html>
