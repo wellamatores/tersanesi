@@ -1,5 +1,4 @@
-```markdown
-# θ TERSANESI
+ θ TERSANESI
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub stars](https://img.shields.io/github/stars/wellamatores/tersanesi?style=social)](https://github.com/wellamatores/tersanesi)
@@ -94,12 +93,12 @@ TERSANESI is built on three integrated layers:
 ### Memory Hierarchy
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│  L1 — Working Memory     │  <1ms  │  20–30 events     │
-│  L2 — Episodic Memory    │  events │  Gravitas scoring │
-│  L3 — Semantic Memory    │  graph  │  Hebbian learning │
-│  L4 — Procedural Memory  │  skills │  RL policies      │
-└─────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│  L1 — Working Memory     │  <1ms  │  20–30 events        │
+│  L2 — Episodic Memory    │  events │  Gravitas scoring    │
+│  L3 — Semantic Memory    │  graph  │  Hebbian learning    │
+│  L4 — Procedural Memory  │  skills │  RL policies         │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ### Typed Event Streams
@@ -197,7 +196,7 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 ## 🌌 The Story
 
-Built by **wellamatores** — one developer, one vision, one universe.
+Built by **Yurii Ivan Zhuk** — one developer, one vision, one universe.
 
 > *"Not just a technology. A living organism in persistent worlds."*
 
@@ -223,6 +222,8 @@ If you find this project useful, please consider:
 ---
 
 *Built with ❤️ by TERSANESI — Engineering the memory layer for the AI economy.*
+
+
 
 
 
